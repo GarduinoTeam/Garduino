@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">GarduinoAndroid</string>
+    <string name="app_name">My Devices</string>
+    <string-array name="devicesArray" >
+        <item>Device1</item>
+        <item>Device2</item>
+        <item>Device3</item>
+        <item>Device4</item>
+    </string-array>
 </resources>
