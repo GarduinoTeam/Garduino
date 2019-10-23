@@ -2,9 +2,11 @@ package com.example.garduinoandroid;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,15 +27,16 @@ public class MyListAdapter extends ArrayAdapter {
     }
 
     public View getView(int position, View view, ViewGroup parent) {
+
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.deviceslist, null, true);
 
         Button titleText = (Button) rowView.findViewById(R.id.ButtonDevice);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.ImagePlant);
 
-
         titleText.setText(maintitle[position]);
         imageView.setImageResource(imgid[position]);
+
         return rowView;
     }
 }

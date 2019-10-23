@@ -7,13 +7,19 @@
         android:id="@+id/ImagePlant"
         android:layout_width="50dp"
         android:layout_height="50dp"/>
-        //android:src="@drawable/plant4"
 
     <Button
         android:layout_toRightOf="@+id/ImagePlant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ButtonDevice" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ButtonDevice"
+        android:layout_alignStart="@+id/ButtonDevice"
+        android:layout_alignLeft="@+id/ButtonDevice"
+        android:text="Last irrigation: today at 11:00"/>
     <Switch
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
