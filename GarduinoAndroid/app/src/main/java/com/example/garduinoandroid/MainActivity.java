@@ -2,32 +2,54 @@ package com.example.garduinoandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
-    ImageView imageView;
     String[] labelListItems;
-    Drawable[] imageListItems = new Drawable[4];
+    Integer[] imageView={
+            R.drawable.plant1,R.drawable.plant2,
+            R.drawable.plant3,R.drawable.plant4,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.DeviceList);
-        imageListItems[0] = getResources().getDrawable(R.drawable.plant1);
-        imageListItems[1] = getResources().getDrawable(R.drawable.plant2);
-        imageListItems[2] = getResources().getDrawable(R.drawable.plant3);
-        imageListItems[3] = getResources().getDrawable(R.drawable.plant4);
-        //imageView = (ImageView) findViewById(R.id.ImagePlant);
         labelListItems = getResources().getStringArray(R.array.devicesArray);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.deviceslist,R.id.ItemName, labelListItems);
+
+        final MyListAdapter adapter = new MyListAdapter(this, labelListItems,imageView);
+        listView = (ListView) findViewById(R.id.ListViewActivityMain);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                if (position == 0) {
+                    //code specific to first list item
+                    Toast.makeText(getApplicationContext(), "Place Your First Option Code", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    //code specific to 2nd list item
+                    Toast.makeText(getApplicationContext(), "Place Your Second Option Code", Toast.LENGTH_SHORT).show();
+                } else if (position == 2) {
+
+                    Toast.makeText(getApplicationContext(), "Place Your Third Option Code", Toast.LENGTH_SHORT).show();
+                } else if (position == 3) {
+
+                    Toast.makeText(getApplicationContext(), "Place Your Forth Option Code", Toast.LENGTH_SHORT).show();
+                } else if (position == 4) {
+
+                    Toast.makeText(getApplicationContext(), "Place Your Fifth Option Code", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

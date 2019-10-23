@@ -6,9 +6,10 @@
     tools:context=".MainActivity">
 
 <ListView
-    android:id="@+id/DeviceList"
+    android:id="@+id/ListViewActivityMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     />
 
 </RelativeLayout>
