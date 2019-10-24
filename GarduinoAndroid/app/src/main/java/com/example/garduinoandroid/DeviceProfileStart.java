@@ -7,20 +7,21 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DeviceProfile extends AppCompatActivity implements View.OnClickListener
+public class DeviceProfileStart extends AppCompatActivity implements View.OnClickListener
 {
-    private Button manualIrrigation;
-    private Button settingsButton;
+    private Button cancelIrrigation;
+    private Button settingBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.device_profile);
+        setContentView(R.layout.device_profile_start);
 
-        manualIrrigation = (Button) findViewById(R.id.button1);
-        manualIrrigation.setOnClickListener(this);
+        cancelIrrigation = (Button) findViewById(R.id.btnDPS);
+        cancelIrrigation.setOnClickListener(this);
 
-        settingsButton = (Button) findViewById(R.id.btnSettings);
-        settingsButton.setOnClickListener(this);
+        settingBtn = (Button) findViewById(R.id.btnSettings);
+        settingBtn.setOnClickListener(this);
     }
 
     @Override
@@ -28,8 +29,8 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
         switch (v.getId()) {
 
-            case R.id.button1:
-                Intent intent = new Intent(this, ManualIrrigation.class);
+            case R.id.btnDPS:
+                Intent intent = new Intent(this, DeviceProfile.class);
                 startActivity(intent);
                 break;
 
@@ -43,3 +44,4 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
         }
     }
 }
+

@@ -18,6 +18,9 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".ManualIrrigation"/>
+        <activity android:name=".DeviceProfileStart"/>
+        <activity android:name=".SettingsInformation"/>
+        <activity android:name=".IrrigationRules"/>
     </application>
 
 </manifest>
