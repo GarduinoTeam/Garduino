@@ -1,5 +1,19 @@
 <resources>
+    <!--                     DEVICE_PROFILE && DEVICE_PROFILE_START                              -->
+
     <string name="app_name">My Devices</string>
+    <string name="tv_device_profile_temperature">Temperature: 19ºC</string>
+    <string name="tv_device_profile_moisture">Moisture: 40%</string>
+    <string name="tv_device_profile_soil">Soil: —</string>
+    <string name="tv_device_profile_last_update">( Last Update: Today at 12:40 )</string>
+    <string name="tv_device_profile_remaining_time">Remaining irrigation time: 0h 23min 46s</string>
+
+    <string name="btn_device_profile_manual_irrigation">MANUAL IRRIGATION</string>
+    <string name="btn_device_profile_settings">SETTINGS</string>
+    <string name="btn_device_profile_cancel">CANCEL IRRIGATION</string>
+
+    <!--                                                                     -->
+
     <string-array name="devicesArray" >
         <item>Device1</item>
         <item>Device2</item>

@@ -22,22 +22,22 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Temperature: 19ºC"/>
+        android:text="@string/tv_device_profile_temperature"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Moisture: 40%"/>
+        android:text="@string/tv_device_profile_moisture"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Soil: --"/>
+        android:text="@string/tv_device_profile_soil"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="( Last Update: Today at 12:40 )"
+        android:text="@string/tv_device_profile_last_update"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
@@ -47,7 +47,7 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MANUAL IRRIGATION"
+        android:text="@string/btn_device_profile_manual_irrigation"
         android:textColor="#FFFFFF"
         android:background="#000000"
         android:padding="10dp"
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="SETTINGS"
+        android:text="@string/btn_device_profile_settings"
         android:layout_marginTop="5dp"
         android:background="#000000"
         android:textColor="#FFFFFF"
