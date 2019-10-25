@@ -1,0 +1,24 @@
+\BOOKMARK [0][-]{part.1}{I Sprint 1}{}% 1
+\BOOKMARK [1][-]{section.1}{Requirements}{part.1}% 2
+\BOOKMARK [2][-]{subsection.1.1}{Non-functional requirements}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{Functional requirements}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.3}{List of functionalities and features}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Android app}{subsection.1.3}% 6
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Web service}{subsection.1.3}% 7
+\BOOKMARK [3][-]{subsubsection.1.3.3}{Detection plague script}{subsection.1.3}% 8
+\BOOKMARK [3][-]{subsubsection.1.3.4}{Arduino}{subsection.1.3}% 9
+\BOOKMARK [1][-]{section.2}{Main use cases}{part.1}% 10
+\BOOKMARK [1][-]{section.3}{General architecture}{part.1}% 11
+\BOOKMARK [2][-]{subsection.3.1}{System architecture}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{Arduino/Raspberry pi architecture}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Data model}{part.1}% 14
+\BOOKMARK [1][-]{section.5}{Product backlog}{part.1}% 15
+\BOOKMARK [1][-]{section.6}{Sprint backlog + dedication to each one}{part.1}% 16
+\BOOKMARK [1][-]{section.7}{Main screens desgin mockup}{part.1}% 17
+\BOOKMARK [1][-]{section.8}{Navigation schema between activities}{part.1}% 18
+\BOOKMARK [1][-]{section.9}{Android prototype}{part.1}% 19
+\BOOKMARK [2][-]{subsection.9.1}{Main screenshot files}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.2}{Localization}{section.9}% 21
+\BOOKMARK [2][-]{subsection.9.3}{Domain}{section.9}% 22
+\BOOKMARK [0][-]{part.2}{II Use case diagrams}{}% 23
+\BOOKMARK [1][-]{section.10}{Timing: Advanced iteration of the manufacturing phase}{part.2}% 24
