@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DeviceProfile"/>
+        <activity android:name=".ManualIrrigation"/>
+        <activity android:name=".DeviceProfileStart"/>
+        <activity android:name=".SettingsInformation"/>
+        <activity android:name=".IrrigationRules"/>
     </application>
 
 </manifest>
