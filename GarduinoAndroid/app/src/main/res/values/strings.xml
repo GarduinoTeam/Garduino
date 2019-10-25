@@ -22,10 +22,16 @@
     <string name="btn_manual_irrigation_cancel">CANCEL</string>
     <string name="btn_manual_irrigation_start">START</string>
 
+    <!--                                 SETTINGS INFORMATION                                    -->
 
+    <string name="tv_settings_information_device">Device name</string>
+    <string name="tv_settings_information_frequency">Information refresh frequency</string>
+    <string name="tv_settings_information_hint">Numeric input in seconds</string>
 
+    <string name="btn_settings_information_irrigation_rules">IRRIGATION RULES</string>
+    <string name="btn_settings_information_save">SAVE</string>
 
-
+    <!--                              LIST ITEMS ACTIVITY MAIN                                   -->
 
     <string-array name="devicesArray" >
         <item>Device1</item>
