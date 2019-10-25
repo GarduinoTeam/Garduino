@@ -4,8 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="18dp">
-
+    <RelativeLayout
+        android:id="@+id/irrigationRuleAdded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Irrigation rule name 1"/>
+        <Switch
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
     <Button
+        android:id="@+id/addRule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add rule"
@@ -13,11 +28,11 @@
     />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/saveIrrigationRules"
+        android:layout_width="76dp"
         android:layout_height="wrap_content"
-        android:text="Save"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-    />
+        android:text="Save" />
 
 </RelativeLayout>
