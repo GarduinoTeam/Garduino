@@ -1,0 +1,45 @@
+<resources>
+
+    <!--                     DEVICE_PROFILE && DEVICE_PROFILE_START                              -->
+
+    <string name="app_name">Mis Dispositivos</string>
+
+    <string name="tv_device_profile_temperature">Temperatura: 19ºC</string>
+    <string name="tv_device_profile_moisture">Humedad: 40%</string>
+    <string name="tv_device_profile_soil">Tierra: — </string>
+    <string name="tv_device_profile_last_update">(Última actualización: hoy a las 12:40)</string>
+    <string name="tv_device_profile_remaining_time">Tiempo de riego restante: 0h 23min 46s</string>
+
+    <string name="btn_device_profile_manual_irrigation">RIEGO MANUAL</string>
+    <string name="btn_device_profile_settings">CONFIGURACIÓN</string>
+    <string name="btn_device_profile_cancel">CANCELAR RIEGO</string>
+
+    <!--                                   MANUAL IRRIGATION                                     -->
+
+    <string name="tv_manual_irrigation_title">Riego Manual</string>
+    <string name="tv_manual_irrigation_comment">Especifique la cantidad de tiempo en minutos que desea que funcione el dispositivo de riego:</string>
+    <string name="tv_manual_irrigation_hint">Campo de entrada numérica</string>
+
+    <string name="btn_manual_irrigation_cancel">CANCELAR</string>
+    <string name="btn_manual_irrigation_start">INICIAR</string>
+
+    <!--                                 SETTINGS INFORMATION                                    -->
+
+    <string name="tv_settings_information_device">Nombre del dispositivo</string>
+    <string name="tv_settings_information_frequency">Frecuencia de actualización de información</string>
+    <string name="tv_settings_information_hint">Campo numérico de entrada en segundos</string>
+    <string name="tv_settings_information_hint_device">Nombre del dispositivo 1</string>
+
+
+    <string name="btn_settings_information_irrigation_rules">REGLAS DE RIEGO</string>
+    <string name="btn_settings_information_save">GUARDAR</string>
+
+    <!--                              LIST ITEMS ACTIVITY MAIN                                   -->
+
+    <string-array name="devicesArray" >
+        <item>Dispositivo 1</item>
+        <item>Dispositivo 2</item>
+        <item>Dispositivo 3</item>
+        <item>Dispositivo 4</item>
+    </string-array>
+</resources>

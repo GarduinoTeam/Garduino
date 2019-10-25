@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollView">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dim_18">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="361dp"
+            android:layout_marginBottom="@dimen/dim_10"
+            app:srcCompat="@drawable/plant1"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_dvp_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_device_profile_temperature"/>
+
+        <TextView
+            android:id="@+id/tv_dvp_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_device_profile_moisture"/>
+
+        <TextView
+            android:id="@+id/tv_dvp_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_device_profile_soil"/>
+
+        <TextView
+            android:id="@+id/lastUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_device_profile_last_update"
+            android:layout_marginTop="@dimen/dim_10"
+            android:layout_marginBottom="@dimen/dim_20"
+            android:textAlignment="center"
+            />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_device_profile_manual_irrigation"
+        android:textColor="#FFFFFF"
+        android:background="#000000"
+        android:padding="@dimen/dim_10"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_device_profile_settings"
+        android:layout_marginTop="@dimen/dim_5"
+        android:padding="@dimen/dim_10"
+        android:background="#000000"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="end"/>
+
+</LinearLayout>
+</ScrollView>

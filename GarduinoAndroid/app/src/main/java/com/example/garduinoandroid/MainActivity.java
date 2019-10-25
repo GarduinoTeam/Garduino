@@ -3,53 +3,48 @@ package com.example.garduinoandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     String[] labelListItems;
-    Integer[] imageView={
-            R.drawable.plant1,R.drawable.plant2,
-            R.drawable.plant3,R.drawable.plant4,
-    };
+    ArrayList<Data> dataArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listView = (ListView) findViewById(R.id.listData);
         labelListItems = getResources().getStringArray(R.array.devicesArray);
 
-        final MyListAdapter adapter = new MyListAdapter(this, labelListItems,imageView);
-        listView = (ListView) findViewById(R.id.ListViewActivityMain);
+        dataArrayList = new ArrayList<Data>();
+        dataArrayList.add(new Data(1, labelListItems[0], "Last irrigation: today at 11:00", R.drawable.plant1 ));
+        dataArrayList.add(new Data(2, labelListItems[1], "Last irrigation: today at 09:00", R.drawable.plant2 ));
+        dataArrayList.add(new Data(3, labelListItems[2], "Last irrigation: today at 14:00", R.drawable.plant3 ));
+        dataArrayList.add(new Data(4, labelListItems[3], "Last irrigation: today at 21:00", R.drawable.plant4 ));
+
+        Adapter adapter = new Adapter(getApplicationContext(), dataArrayList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO Auto-generated method stub
-                if (position == 0) {
-                    //code specific to first list item
-                    Toast.makeText(getApplicationContext(), "Place Your First Option Code", Toast.LENGTH_SHORT).show();
-                } else if (position == 1) {
-                    //code specific to 2nd list item
-                    Toast.makeText(getApplicationContext(), "Place Your Second Option Code", Toast.LENGTH_SHORT).show();
-                } else if (position == 2) {
+                Data obj = (Data) parent.getItemAtPosition(position);
 
-                    Toast.makeText(getApplicationContext(), "Place Your Third Option Code", Toast.LENGTH_SHORT).show();
-                } else if (position == 3) {
-
-                    Toast.makeText(getApplicationContext(), "Place Your Forth Option Code", Toast.LENGTH_SHORT).show();
-                } else if (position == 4) {
-
-                    Toast.makeText(getApplicationContext(), "Place Your Fifth Option Code", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(getApplicationContext(), DeviceProfile.class);
+                intent.putExtra("object", (Serializable) obj);
+                startActivity(intent);
             }
         });
+        //Device profile
     }
 }
