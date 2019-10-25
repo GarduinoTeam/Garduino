@@ -28,6 +28,8 @@
     <string name="tv_settings_information_device">Nombre del dispositivo</string>
     <string name="tv_settings_information_frequency">Frecuencia de actualización de información</string>
     <string name="tv_settings_information_hint">Campo numérico de entrada en segundos</string>
+    <string name="tv_settings_information_hint_device">Nombre del dispositivo 1</string>
+
 
     <string name="btn_settings_information_irrigation_rules">REGLAS DE RIEGO</string>
     <string name="btn_settings_information_save">GUARDAR</string>

@@ -29,6 +29,7 @@
     <string name="tv_settings_information_hint">Numeric input in seconds</string>
 
     <string name="btn_settings_information_irrigation_rules">IRRIGATION RULES</string>
+    <string name="tv_settings_information_hint_device">Device name 1</string>
     <string name="btn_settings_information_save">SAVE</string>
 
     <!--                              LIST ITEMS ACTIVITY MAIN                                   -->
