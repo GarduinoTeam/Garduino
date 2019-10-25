@@ -8,13 +8,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="18dp">
+    android:layout_margin="@dimen/dim_18">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="361dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/dim_10"
         app:srcCompat="@drawable/plant1"
 
         />
@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tv_device_profile_last_update"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="@dimen/dim_10"
+        android:layout_marginBottom="@dimen/dim_20"
         android:gravity="center"
         />
 
@@ -50,7 +50,7 @@
         android:text="@string/btn_device_profile_manual_irrigation"
         android:textColor="#FFFFFF"
         android:background="#000000"
-        android:padding="10dp"
+        android:padding="@dimen/dim_10"
         android:layout_gravity="center"
         />
 
@@ -60,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="@string/btn_device_profile_settings"
-        android:layout_marginTop="5dp"
-        android:padding="10dp"
+        android:layout_marginTop="@dimen/dim_5"
+        android:padding="@dimen/dim_10"
         android:background="#000000"
         android:textColor="#FFFFFF"
         />

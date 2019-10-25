@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--                                   DIMENSIONS                                            -->
+
+    <dimen name="dim_10">10dp</dimen>
+    <dimen name="dim_5">5dp</dimen>
+    <dimen name="dim_18">18dp</dimen>
+    <dimen name="dim_20">20dp</dimen>
+    <dimen name="dim_6">6dp</dimen>
+    <dimen name="dim_326">326dp</dimen>
+
 
 </resources>
