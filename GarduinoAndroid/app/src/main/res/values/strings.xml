@@ -2,6 +2,7 @@
     <!--                     DEVICE_PROFILE && DEVICE_PROFILE_START                              -->
 
     <string name="app_name">My Devices</string>
+
     <string name="tv_device_profile_temperature">Temperature: 19ºC</string>
     <string name="tv_device_profile_moisture">Moisture: 40%</string>
     <string name="tv_device_profile_soil">Soil: —</string>
@@ -12,7 +13,19 @@
     <string name="btn_device_profile_settings">SETTINGS</string>
     <string name="btn_device_profile_cancel">CANCEL IRRIGATION</string>
 
-    <!--                                                                     -->
+    <!--                                   MANUAL IRRIGATION                                     -->
+
+    <string name="tv_manual_irrigation_title">Manual Irrigation</string>
+    <string name="tv_manual_irrigation_comment">Specify the amount of time in minutes that you want the irrigation device to work:</string>
+    <string name="tv_manual_irrigation_hint"> Numeric input box</string>
+
+    <string name="btn_manual_irrigation_cancel">CANCEL</string>
+    <string name="btn_manual_irrigation_start">START</string>
+
+
+
+
+
 
     <string-array name="devicesArray" >
         <item>Device1</item>
