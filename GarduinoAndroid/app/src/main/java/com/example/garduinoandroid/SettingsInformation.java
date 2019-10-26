@@ -1,10 +1,13 @@
 package com.example.garduinoandroid;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
@@ -16,6 +19,9 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
+        ((AppCompatActivity)this).getSupportActionBar().setTitle("Device settings");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_information);
 

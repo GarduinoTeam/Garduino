@@ -1,11 +1,14 @@
 package com.example.garduinoandroid;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
@@ -20,6 +23,9 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
+        ((AppCompatActivity)this).getSupportActionBar().setTitle("Manual Irrigation");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_irrigation);
 
