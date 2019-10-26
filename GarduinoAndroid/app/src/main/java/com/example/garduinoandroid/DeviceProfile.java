@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
+
 public class DeviceProfile extends AppCompatActivity implements View.OnClickListener
 {
     private Button manualIrrigation;
     private Button settingsButton;
 
+    Data obj;
     ImageView image;
 
     @Override
@@ -28,11 +31,13 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
         settingsButton = (Button) findViewById(R.id.btnSettings);
         settingsButton.setOnClickListener(this);
+
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            Data obj = (Data) getIntent().getExtras().getSerializable("object");
+            obj = (Data) getIntent().getExtras().getSerializable("object");
             image.setImageResource(obj.getImage());
         }
+
     }
 
     @Override
@@ -42,11 +47,13 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
             case R.id.button1:
                 Intent intent = new Intent(this, ManualIrrigation.class);
+                intent.putExtra("object", (Serializable) obj);
                 startActivity(intent);
                 break;
 
             case R.id.btnSettings:
                 Intent intentSettings = new Intent(this, SettingsInformation.class);
+                intentSettings.putExtra("object", (Serializable) obj);
                 startActivity(intentSettings);
                 break;
 

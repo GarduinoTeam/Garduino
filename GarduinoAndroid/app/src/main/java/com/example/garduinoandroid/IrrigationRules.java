@@ -8,11 +8,15 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
+
 public class IrrigationRules extends AppCompatActivity implements View.OnClickListener
 {
     Button save;
     Button add;
     RelativeLayout irrigationRuleAdded;
+    Data obj;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,10 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         add.setOnClickListener(this);
 
         irrigationRuleAdded = (RelativeLayout) findViewById(R.id.irrigationRuleAdded);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            obj = (Data) getIntent().getExtras().getSerializable("object");
+        }
     }
 
     @Override
@@ -34,6 +42,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             case R.id.saveIrrigationRules:
 
                 Intent intentSave = new Intent(this, SettingsInformation.class);
+                intentSave.putExtra("object", (Serializable) obj);
                 startActivity(intentSave);
                 break;
 

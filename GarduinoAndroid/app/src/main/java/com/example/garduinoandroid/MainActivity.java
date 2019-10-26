@@ -3,6 +3,7 @@ package com.example.garduinoandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.admin.DeviceAdminInfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Data obj = (Data) parent.getItemAtPosition(position);
-
                 Intent intent = new Intent(getApplicationContext(), DeviceProfile.class);
                 intent.putExtra("object", (Serializable) obj);
+                Intent i = new Intent(getApplicationContext(), DeviceProfileStart.class);
+                i.putExtra("object", (Serializable) obj);
                 startActivity(intent);
             }
         });
-        //Device profile
     }
 }
