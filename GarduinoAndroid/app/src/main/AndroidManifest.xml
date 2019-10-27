@@ -23,6 +23,7 @@
         <activity android:name=".IrrigationRules"/>
         <activity android:name=".EditIrrigationRule"/>
         <activity android:name=".TimeConditions"/>
+        <activity android:name=".EditTime"/>
     </application>
 
 </manifest>

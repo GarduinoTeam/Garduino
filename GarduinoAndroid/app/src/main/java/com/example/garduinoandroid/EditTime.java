@@ -10,30 +10,29 @@ import android.widget.Button;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.garduinoandroid.R;
+
 import java.io.Serializable;
 
-public class TimeConditions extends AppCompatActivity implements View.OnClickListener {
+public class EditTime extends AppCompatActivity implements View.OnClickListener{
 
-    Button save;
-    Button startTime;
-    Button endTime;
+    Button ok;
+    Button cancel;
     Data obj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity) this).getSupportActionBar().setTitle("Irrigation rules");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.time_conditions);
+        setContentView(R.layout.edit_time);
 
-        save = (Button) findViewById(R.id.saveTimeCondition);
-        save.setOnClickListener(this);
+        ok = (Button) findViewById(R.id.ok);
+        ok.setOnClickListener(this);
 
-        startTime = (Button) findViewById(R.id.buttonStartTime);
-        startTime.setOnClickListener(this);
-
-        endTime = (Button) findViewById(R.id.buttonEndTime);
-        endTime.setOnClickListener(this);
+        cancel = (Button) findViewById(R.id.cancel);
+        cancel.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
@@ -44,16 +43,11 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.saveTimeCondition:
-                Intent intentSave = new Intent(this, EditIrrigationRule.class);
-                intentSave.putExtra("object", (Serializable) obj);
-                startActivity(intentSave);
-                break;
-            case R.id.buttonStartTime:
-            case R.id.buttonEndTime:
-                Intent intentTime = new Intent(this, EditTime.class);
-                intentTime.putExtra("object", (Serializable) obj);
-                startActivity(intentTime);
+            case R.id.ok:
+            case R.id.cancel:
+                Intent intentSetTime = new Intent(this, TimeConditions.class);
+                intentSetTime.putExtra("object", (Serializable) obj);
+                startActivity(intentSetTime);
                 break;
             default:
                 break;
