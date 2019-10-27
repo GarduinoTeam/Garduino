@@ -15,6 +15,8 @@ import java.io.Serializable;
 
 public class IrrigationRules extends AppCompatActivity implements View.OnClickListener
 {
+    Button rule1;
+    Button rule2;
     Button save;
     Button add;
     RelativeLayout irrigationRuleAdded;
@@ -35,7 +37,13 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         add = (Button) findViewById(R.id.addRule);
         add.setOnClickListener(this);
 
-        irrigationRuleAdded = (RelativeLayout) findViewById(R.id.irrigationRuleAdded);
+        rule1 = (Button) findViewById(R.id.buttonIrrigationRule1);
+        rule1.setOnClickListener(this);
+
+        rule2 = (Button) findViewById(R.id.buttonIrrigationRule2);
+        rule2.setOnClickListener(this);
+
+        irrigationRuleAdded = (RelativeLayout) findViewById(R.id.irrigationRule2);
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
@@ -57,7 +65,11 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             case R.id.addRule:
                 irrigationRuleAdded.setVisibility(View.VISIBLE);
                 break;
-
+            case R.id.buttonIrrigationRule1:
+            case R.id.buttonIrrigationRule2:
+                Intent intentRule = new Intent(this, EditIrrigationRule.class);
+                startActivity(intentRule);
+                break;
             default:
                 break;
         }

@@ -21,6 +21,7 @@
         <activity android:name=".DeviceProfileStart"/>
         <activity android:name=".SettingsInformation"/>
         <activity android:name=".IrrigationRules"/>
+        <activity android:name=".EditIrrigationRule"/>
     </application>
 
 </manifest>
