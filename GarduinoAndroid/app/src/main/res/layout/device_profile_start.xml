@@ -68,7 +68,7 @@
                 android:layout_marginEnd="@dimen/dim_6" />
 
             <Button
-                android:id="@+id/btnSettings"
+                android:id="@+id/btnSettingsStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_device_profile_settings"

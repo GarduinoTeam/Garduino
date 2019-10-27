@@ -19,13 +19,13 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
     private Button cancel;
 
     Data obj;
-    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity)this).getSupportActionBar().setTitle("Manual Irrigation");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_irrigation);
 

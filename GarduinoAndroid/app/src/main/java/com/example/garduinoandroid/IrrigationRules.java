@@ -19,6 +19,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     Button add;
     RelativeLayout irrigationRuleAdded;
     Data obj;
+    Boolean informationBoolean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
+            informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
     }
 
@@ -46,9 +48,9 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.saveIrrigationRules:
-
                 Intent intentSave = new Intent(this, SettingsInformation.class);
                 intentSave.putExtra("object", (Serializable) obj);
+                intentSave.putExtra("btnSettingsDPS", informationBoolean);
                 startActivity(intentSave);
                 break;
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 {
     private Button manualIrrigation;
     private Button settingsButton;
+    boolean settingsDPS;
 
     Data obj;
     ImageView image;
@@ -27,9 +29,13 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity)this).getSupportActionBar().setTitle("Device name");
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_profile);
-
+        settingsDPS = false;
         image = (ImageView) findViewById(R.id.imageView1);
 
         manualIrrigation = (Button) findViewById(R.id.button1);
@@ -47,6 +53,12 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -61,6 +73,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
             case R.id.btnSettings:
                 Intent intentSettings = new Intent(this, SettingsInformation.class);
                 intentSettings.putExtra("object", (Serializable) obj);
+                intentSettings.putExtra("btnSettingsDPS", settingsDPS);
                 startActivity(intentSettings);
                 break;
 
