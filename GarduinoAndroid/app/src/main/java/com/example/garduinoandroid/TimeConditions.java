@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 
-public class EditIrrigationRule extends AppCompatActivity implements View.OnClickListener{
+public class TimeConditions extends AppCompatActivity implements View.OnClickListener {
+
     Button save;
-    Button add;
-    Button time;
+    Button startTime;
+    Button endTime;
     Data obj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,37 +24,34 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity) this).getSupportActionBar().setTitle("Irrigation rules");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_irrigation_rule);
+        setContentView(R.layout.time_conditions);
 
-        save = (Button) findViewById(R.id.saveConditons);
+        save = (Button) findViewById(R.id.saveTimeCondition);
         save.setOnClickListener(this);
 
-        add = (Button) findViewById(R.id.addCondition);
-        add.setOnClickListener(this);
+        startTime = (Button) findViewById(R.id.buttonStartTime);
+        startTime.setOnClickListener(this);
 
-        time = (Button) findViewById(R.id.buttonTimeCondition);
-        time.setOnClickListener(this);
+        endTime = (Button) findViewById(R.id.buttonEndTime);
+        endTime.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
         }
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.saveConditons:
-                Intent intentSave = new Intent(this, IrrigationRules.class);
+            case R.id.saveTimeCondition:
+                Intent intentSave = new Intent(this, EditIrrigationRule.class);
                 intentSave.putExtra("object", (Serializable) obj);
                 startActivity(intentSave);
                 break;
-
-//            case R.id.addCondition:
-//                break;
-            case R.id.buttonTimeCondition:
-                Intent intentTime = new Intent(this, TimeConditions.class);
+            case R.id.buttonStartTime:
+            case R.id.buttonEndTime:
+                Intent intentTime = new Intent(this, EditTime.class);
                 intentTime.putExtra("object", (Serializable) obj);
                 startActivity(intentTime);
                 break;

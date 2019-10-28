@@ -68,6 +68,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             case R.id.buttonIrrigationRule1:
             case R.id.buttonIrrigationRule2:
                 Intent intentRule = new Intent(this, EditIrrigationRule.class);
+                intentRule.putExtra("object", (Serializable) obj);
                 startActivity(intentRule);
                 break;
             default:
