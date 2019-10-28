@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,6 +24,9 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity) this).getSupportActionBar().setTitle("Irrigation rules name");
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_irrigation_rule);
 
@@ -41,6 +45,13 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), IrrigationRules.class);
+        myIntent.putExtra("object", (Serializable) obj);
+        myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
     @Override

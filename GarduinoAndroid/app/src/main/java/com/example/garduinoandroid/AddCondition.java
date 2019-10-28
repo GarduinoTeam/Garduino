@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,6 +22,8 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity) this).getSupportActionBar().setTitle("Add new condition");
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_condition);
 
@@ -33,6 +36,13 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), EditIrrigationRule.class);
+        myIntent.putExtra("object", (Serializable) obj);
+        myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
     @Override
     public void onClick(View v) {

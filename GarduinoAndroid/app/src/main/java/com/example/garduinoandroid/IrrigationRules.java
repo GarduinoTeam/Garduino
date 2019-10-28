@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -54,7 +55,13 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
     }
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), SettingsInformation.class);
+        myIntent.putExtra("object", (Serializable) obj);
+        myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
