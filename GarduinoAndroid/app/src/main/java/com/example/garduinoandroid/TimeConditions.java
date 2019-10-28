@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,6 +26,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity) this).getSupportActionBar().setTitle("Time conditions");
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_conditions);
 
@@ -45,6 +48,13 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), EditIrrigationRule.class);
+        myIntent.putExtra("object", (Serializable) obj);
+        myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
     @Override
