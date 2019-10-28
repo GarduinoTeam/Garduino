@@ -18,6 +18,7 @@ public class EditDate extends AppCompatActivity implements View.OnClickListener 
     Button cancel;
     Data obj;
     Boolean informationBoolean;
+    Boolean addRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class EditDate extends AppCompatActivity implements View.OnClickListener 
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
+            addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
     }
 
@@ -48,6 +50,7 @@ public class EditDate extends AppCompatActivity implements View.OnClickListener 
                 Intent intentSetTime = new Intent(this, TimeConditions.class);
                 intentSetTime.putExtra("object", (Serializable) obj);
                 intentSetTime.putExtra("btnSettingsDPS", informationBoolean);
+                intentSetTime.putExtra("addRule", addRule);
                 startActivity(intentSetTime);
                 break;
             default:

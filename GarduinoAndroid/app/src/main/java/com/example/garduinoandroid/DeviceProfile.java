@@ -23,6 +23,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
     Data obj;
     ImageView image;
+    Boolean addRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             image.setImageResource(obj.getImage());
-
+            addRule = (Boolean) getIntent().getExtras().getSerializable("addRule");
         }
 
     }
@@ -67,6 +68,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
             case R.id.button1:
                 Intent intent = new Intent(this, ManualIrrigation.class);
                 intent.putExtra("object", (Serializable) obj);
+                intent.putExtra("addRule", (Serializable) addRule);
                 startActivity(intent);
                 break;
 
@@ -74,6 +76,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
                 Intent intentSettings = new Intent(this, SettingsInformation.class);
                 intentSettings.putExtra("object", (Serializable) obj);
                 intentSettings.putExtra("btnSettingsDPS", settingsDPS);
+                intentSettings.putExtra("addRule", (Serializable) addRule);
                 startActivity(intentSettings);
                 break;
 
