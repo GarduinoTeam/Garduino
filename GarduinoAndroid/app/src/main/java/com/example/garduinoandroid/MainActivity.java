@@ -1,9 +1,10 @@
 package com.example.garduinoandroid;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Data obj = (Data) parent.getItemAtPosition(position);
-
                 Intent intent = new Intent(getApplicationContext(), DeviceProfile.class);
                 intent.putExtra("object", (Serializable) obj);
+                Intent i = new Intent(getApplicationContext(), DeviceProfileStart.class);
+                i.putExtra("object", (Serializable) obj);
                 startActivity(intent);
             }
         });
-        //Device profile
     }
 }

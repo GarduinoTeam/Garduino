@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -46,6 +48,18 @@ public class Adapter extends BaseAdapter
         ImageView image = (ImageView) view.findViewById(R.id.iv_1);
         TextView title = (TextView) view.findViewById(R.id.tv_title);
         TextView description = (TextView) view.findViewById(R.id.tv_description);
+        Switch sw = (Switch) view.findViewById(R.id.sw_1);
+
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(context, "On", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Off", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         title.setText(listObjects.get(position).getTitle());
         description.setText(listObjects.get(position).getDescription());
