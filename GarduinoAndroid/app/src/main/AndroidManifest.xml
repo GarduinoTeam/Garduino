@@ -25,6 +25,7 @@
         <activity android:name=".TimeConditions"/>
         <activity android:name=".EditTime"/>
         <activity android:name=".EditDate"/>
+        <activity android:name=".AddCondition"/>
     </application>
 
 </manifest>
