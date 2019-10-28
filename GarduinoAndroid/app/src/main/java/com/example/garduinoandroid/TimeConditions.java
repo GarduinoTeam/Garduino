@@ -18,11 +18,12 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     Button startTime;
     Button endTime;
     Data obj;
+    boolean informationBoolean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity) this).getSupportActionBar().setTitle("Irrigation rules");
+        ((AppCompatActivity) this).getSupportActionBar().setTitle("Time conditions");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_conditions);
 
@@ -38,6 +39,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
+            informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
     }
 
@@ -47,12 +49,14 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
             case R.id.saveTimeCondition:
                 Intent intentSave = new Intent(this, EditIrrigationRule.class);
                 intentSave.putExtra("object", (Serializable) obj);
+                intentSave.putExtra("btnSettingsDPS", informationBoolean);
                 startActivity(intentSave);
                 break;
             case R.id.buttonStartTime:
             case R.id.buttonEndTime:
                 Intent intentTime = new Intent(this, EditTime.class);
                 intentTime.putExtra("object", (Serializable) obj);
+                intentTime.putExtra("btnSettingsDPS", informationBoolean);
                 startActivity(intentTime);
                 break;
             default:
