@@ -28,6 +28,10 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity)this).getSupportActionBar().setTitle("Irrigation rules");
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.irrigation_rules);
 
@@ -69,6 +73,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             case R.id.buttonIrrigationRule2:
                 Intent intentRule = new Intent(this, EditIrrigationRule.class);
                 intentRule.putExtra("object", (Serializable) obj);
+                intentRule.putExtra("btnSettingsDPS", informationBoolean);
                 startActivity(intentRule);
                 break;
             default:

@@ -19,12 +19,12 @@ public class EditTime extends AppCompatActivity implements View.OnClickListener{
     Button ok;
     Button cancel;
     Data obj;
-
+    Boolean informationBoolean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity) this).getSupportActionBar().setTitle("Irrigation rules");
+        ((AppCompatActivity) this).getSupportActionBar().setTitle("Time conditions");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_time);
 
@@ -37,6 +37,7 @@ public class EditTime extends AppCompatActivity implements View.OnClickListener{
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
+            informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
         }
     }
 
@@ -47,6 +48,7 @@ public class EditTime extends AppCompatActivity implements View.OnClickListener{
             case R.id.cancel:
                 Intent intentSetTime = new Intent(this, TimeConditions.class);
                 intentSetTime.putExtra("object", (Serializable) obj);
+                intentSetTime.putExtra("btnSettingsDPS", informationBoolean);
                 startActivity(intentSetTime);
                 break;
             default:
