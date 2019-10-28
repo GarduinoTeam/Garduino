@@ -17,6 +17,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     Button save;
     Button startTime;
     Button endTime;
+    Button dates;
     Data obj;
     boolean informationBoolean;
     @Override
@@ -35,6 +36,9 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
         endTime = (Button) findViewById(R.id.buttonEndTime);
         endTime.setOnClickListener(this);
+
+        dates = (Button) findViewById(R.id.dates);
+        dates.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
@@ -58,6 +62,12 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 intentTime.putExtra("object", (Serializable) obj);
                 intentTime.putExtra("btnSettingsDPS", informationBoolean);
                 startActivity(intentTime);
+                break;
+            case R.id.dates:
+                Intent intentDates = new Intent(this, EditDate.class);
+                intentDates.putExtra("object", (Serializable) obj);
+                intentDates.putExtra("btnSettingsDPS", informationBoolean);
+                startActivity(intentDates);
                 break;
             default:
                 break;

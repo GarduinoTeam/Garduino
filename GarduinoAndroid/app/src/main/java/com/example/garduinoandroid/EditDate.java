@@ -10,28 +10,27 @@ import android.widget.Button;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.garduinoandroid.R;
-
 import java.io.Serializable;
 
-public class EditTime extends AppCompatActivity implements View.OnClickListener{
+public class EditDate extends AppCompatActivity implements View.OnClickListener {
 
     Button ok;
     Button cancel;
     Data obj;
     Boolean informationBoolean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
         ((AppCompatActivity) this).getSupportActionBar().setTitle("Time conditions");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_time);
+        setContentView(R.layout.edit_date);
 
-        ok = (Button) findViewById(R.id.okTime);
+        ok = (Button) findViewById(R.id.okDate);
         ok.setOnClickListener(this);
 
-        cancel = (Button) findViewById(R.id.cancelTime);
+        cancel = (Button) findViewById(R.id.cancelDate);
         cancel.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
@@ -44,8 +43,8 @@ public class EditTime extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.okTime:
-            case R.id.cancelTime:
+            case R.id.okDate:
+            case R.id.cancelDate:
                 Intent intentSetTime = new Intent(this, TimeConditions.class);
                 intentSetTime.putExtra("object", (Serializable) obj);
                 intentSetTime.putExtra("btnSettingsDPS", informationBoolean);

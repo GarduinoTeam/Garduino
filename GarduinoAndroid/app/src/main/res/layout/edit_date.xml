@@ -9,11 +9,11 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/clock"
+        app:srcCompat="@drawable/date"
         android:layout_centerHorizontal="true"
         />
     <Button
-        android:id="@+id/okTime"
+        android:id="@+id/okDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -21,11 +21,11 @@
         android:text="Ok"
         />
     <Button
-        android:id="@+id/cancelTime"
+        android:id="@+id/cancelDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/okDate"
+        android:layout_toLeftOf="@+id/okTime"
         android:text="Cancel" />
 
 </RelativeLayout>
