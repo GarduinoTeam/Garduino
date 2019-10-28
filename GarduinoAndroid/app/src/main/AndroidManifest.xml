@@ -24,6 +24,7 @@
         <activity android:name=".EditIrrigationRule"/>
         <activity android:name=".TimeConditions"/>
         <activity android:name=".EditTime"/>
+        <activity android:name=".EditDate"/>
     </application>
 
 </manifest>
