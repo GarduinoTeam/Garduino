@@ -20,7 +20,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     Button endTime;
     Button dates;
     Data obj;
-    boolean informationBoolean;
+    Boolean informationBoolean;
+    Boolean addRule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -47,12 +48,14 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
+            addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
     }
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), EditIrrigationRule.class);
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        myIntent.putExtra("addRule", addRule);
         startActivityForResult(myIntent, 0);
         return true;
     }
@@ -64,6 +67,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 Intent intentSave = new Intent(this, EditIrrigationRule.class);
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
+                intentSave.putExtra("addRule", addRule);
                 startActivity(intentSave);
                 break;
             case R.id.buttonStartTime:
@@ -71,12 +75,14 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 Intent intentTime = new Intent(this, EditTime.class);
                 intentTime.putExtra("object", (Serializable) obj);
                 intentTime.putExtra("btnSettingsDPS", informationBoolean);
+                intentTime.putExtra("addRule", addRule);
                 startActivity(intentTime);
                 break;
             case R.id.dates:
                 Intent intentDates = new Intent(this, EditDate.class);
                 intentDates.putExtra("object", (Serializable) obj);
                 intentDates.putExtra("btnSettingsDPS", informationBoolean);
+                intentDates.putExtra("addRule", addRule);
                 startActivity(intentDates);
                 break;
             default:

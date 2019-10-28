@@ -19,6 +19,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
     Button time;
     Data obj;
     Boolean informationBoolean;
+    Boolean addRule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -43,6 +44,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
+            addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
 
     }
@@ -50,6 +52,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         Intent myIntent = new Intent(getApplicationContext(), IrrigationRules.class);
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        myIntent.putExtra("addRule", addRule);
         startActivityForResult(myIntent, 0);
         return true;
     }
@@ -61,6 +64,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 Intent intentSave = new Intent(this, IrrigationRules.class);
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
+                intentSave.putExtra("addRule", addRule);
                 startActivity(intentSave);
                 break;
 
@@ -68,6 +72,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 Intent intentAdd = new Intent(this, AddCondition.class);
                 intentAdd.putExtra("object", (Serializable) obj);
                 intentAdd.putExtra("btnSettingsDPS", informationBoolean);
+                intentAdd.putExtra("addRule", addRule);
                 startActivity(intentAdd);
                 break;
 
@@ -75,6 +80,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 Intent intentTime = new Intent(this, TimeConditions.class);
                 intentTime.putExtra("object", (Serializable) obj);
                 intentTime.putExtra("btnSettingsDPS", informationBoolean);
+                intentTime.putExtra("addRule", addRule);
                 startActivity(intentTime);
                 break;
             default:

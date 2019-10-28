@@ -22,6 +22,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
     ImageView image;
     Data obj;
     boolean settingsDPS;
+    Boolean addRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
+            addRule = (Boolean) getIntent().getExtras().getSerializable("addRule");
             image.setImageResource(obj.getImage());
         }
     }
@@ -66,6 +68,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
             case R.id.btnDPS:
                 Intent intent = new Intent(this, DeviceProfile.class);
                 intent.putExtra("object", (Serializable) obj);
+                intent.putExtra("addRule", addRule);
                 startActivity(intent);
                 break;
 
@@ -73,6 +76,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                 Intent intentSettings = new Intent(this, SettingsInformation.class);
                 intentSettings.putExtra("object", (Serializable) obj);
                 intentSettings.putExtra("btnSettingsDPS", settingsDPS);
+                intentSettings.putExtra("addRule", addRule);
                 startActivity(intentSettings);
                 break;
 

@@ -18,6 +18,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
     private Button saveIrrigation;
     Data obj;
     Boolean informationBoolean;
+    Boolean addRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
+            addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
     }
 
@@ -48,11 +50,13 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
         if(informationBoolean) {
             Intent myIntent = new Intent(getApplicationContext(), DeviceProfileStart.class);
             myIntent.putExtra("object", (Serializable) obj);
+            myIntent.putExtra("addRule", addRule);
             startActivityForResult(myIntent, 0);
 
         } else {
             Intent myIntent = new Intent(getApplicationContext(), DeviceProfile.class);
             myIntent.putExtra("object", (Serializable) obj);
+            myIntent.putExtra("addRule", addRule);
             startActivityForResult(myIntent, 0);
         }
         return true;
@@ -65,16 +69,19 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                 Intent intent = new Intent(this, IrrigationRules.class);
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("btnSettingsDPS", informationBoolean);
+                intent.putExtra("addRule", addRule);
                 startActivity(intent);
                 break;
             case R.id.saveIrrigation:
                 if(informationBoolean) {
                     Intent intentSave = new Intent(this, DeviceProfileStart.class);
                     intentSave.putExtra("object", (Serializable) obj);
+                    intentSave.putExtra("addRule", addRule);
                     startActivity(intentSave);
                 } else {
                     Intent intentSave = new Intent(this, DeviceProfile.class);
                     intentSave.putExtra("object", (Serializable) obj);
+                    intentSave.putExtra("addRule", addRule);
                     startActivity(intentSave);
                 }
                 break;

@@ -18,6 +18,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
     Button timeCondition;
     Data obj;
     Boolean informationBoolean;
+    Boolean addRule;
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
@@ -34,6 +35,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
+            addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
 
     }
@@ -41,6 +43,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
         Intent myIntent = new Intent(getApplicationContext(), EditIrrigationRule.class);
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        myIntent.putExtra("addRule", addRule);
         startActivityForResult(myIntent, 0);
         return true;
     }
@@ -51,6 +54,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
                 Intent intentTime = new Intent(this, TimeConditions.class);
                 intentTime.putExtra("object", (Serializable) obj);
                 intentTime.putExtra("btnSettingsDPS", informationBoolean);
+                intentTime.putExtra("addRule", addRule);
                 startActivity(intentTime);
                 break;
             default:

@@ -23,6 +23,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     RelativeLayout irrigationRuleAdded;
     Data obj;
     Boolean informationBoolean;
+    Boolean addRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,19 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
+            addRule = (Boolean) getIntent().getExtras().get("addRule");
+        }
+        if (addRule == null){
+            addRule = false;
+        }else if (addRule) {
+            irrigationRuleAdded.setVisibility(View.VISIBLE);
         }
     }
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), SettingsInformation.class);
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
+        myIntent.putExtra("addRule", addRule);
         startActivityForResult(myIntent, 0);
         return true;
     }
@@ -70,17 +78,23 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
                 Intent intentSave = new Intent(this, SettingsInformation.class);
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
+                intentSave.putExtra("addRule", addRule);
                 startActivity(intentSave);
                 break;
 
             case R.id.addRule:
-                irrigationRuleAdded.setVisibility(View.VISIBLE);
+                Intent intentAdd = new Intent(this, CreateRule.class);
+                intentAdd.putExtra("object", (Serializable) obj);
+                intentAdd.putExtra("btnSettingsDPS", informationBoolean);
+                intentAdd.putExtra("addRule", addRule);
+                startActivity(intentAdd);
                 break;
             case R.id.buttonIrrigationRule1:
             case R.id.buttonIrrigationRule2:
                 Intent intentRule = new Intent(this, EditIrrigationRule.class);
                 intentRule.putExtra("object", (Serializable) obj);
                 intentRule.putExtra("btnSettingsDPS", informationBoolean);
+                intentRule.putExtra("addRule", addRule);
                 startActivity(intentRule);
                 break;
             default:
