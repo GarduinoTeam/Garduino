@@ -8,27 +8,27 @@
         android:id="@+id/timeCondition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time condition"
+        android:text="@string/btnTimeConditions"
         android:layout_marginBottom="10dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temperature is higher than"
+        android:text="@string/btnTemperatureH"
         android:layout_marginBottom="10dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temperature is lower than"
+        android:text="@string/btnTemperatureL"
         android:layout_marginBottom="10dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moistness is higher than"
+        android:text="@string/btnMoistnessH"
         android:layout_marginBottom="10dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moistness is lower than"
+        android:text="@string/btnMoistnessL"
         android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

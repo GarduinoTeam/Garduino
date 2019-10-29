@@ -42,4 +42,66 @@
         <item>Dispositivo 3</item>
         <item>Dispositivo 4</item>
     </string-array>
+
+    <!--                              DESCRIPTION ACTIVITY MAIN                                   -->
+
+    <string-array name="descriptionArray">
+        <item>Último riego: hoy a las 11:00</item>
+        <item>Último riego: hoy a las 09:00</item>
+        <item>Último riego: hoy a las 14:00</item>
+        <item>Último riego: hoy a las 21:00</item>
+    </string-array>
+
+    <!--                            IRRIGATION RULE                                              -->
+
+
+    <string name="irrigationText1">Nombre de la regla de riego 1</string>
+    <string name="irrigationText2">Nombre de la regla de riego 2</string>
+    <string name="btnIrrigationAdd">Añadir regla</string>
+    <string name="btnIrrigationSave">Guardar</string>
+
+    <!--                                CREATE RULE                                              -->
+
+    <string name="ruleNameDescription">Nombre de la regla:</string>
+    <string name="ruleName">Nombre de la regla de riego 2</string>
+    <string name="btnRuleNameCancel">Cancelar</string>
+    <string name="btnRuleNameCreate">Crear</string>
+
+    <!--                            EDIT IRRIGATION RULE                                         -->
+
+    <string name="editTemperatureIrrig">Temperatura inferior a:</string>
+    <string name="editTemperatureIrrigC">ºC</string>
+    <string name="btnTimeCondition">Condición de tiempo</string>
+    <string name="btnAddCondition">Añadir condición</string>
+    <string name="btnSaveCondition">Guardar</string>
+
+    <!--                                   ADD CONDITION                                         -->
+
+    <string name="btnTimeConditions">Condición de tiempo</string>
+    <string name="btnTemperatureH">La temperatura es más alta que:</string>
+    <string name="btnTemperatureL">La temperatura es más baja que:</string>
+    <string name="btnMoistnessH">La humedad es más alta que:</string>
+    <string name="btnMoistnessL">La humedad es más baja que:</string>
+
+    <!--                                   EDIT TIME                                             -->
+    <string name="btnOKTime">OK</string>
+    <string name="btnCancelTime">CANCELAR</string>
+
+    <!--                                   EDIT DATE                                             -->
+    <string name="btnOKDate">OK</string>
+    <string name="btnCancelDate">CANCELAR</string>
+
+    <!--                                   TIME CONDITIONS                                         -->
+
+    <string name="btnStartTime">Hora de inicio</string>
+    <string name="btnEndTime">Hora de finalización</string>
+    <string name="btnDays">Días de la semana</string>
+    <string name="btnMonths">Meses del año</string>
+    <string name="btnSpecificDates">Fechas Específicas</string>
+    <string name="btnSaveTimeConditions">Guardar</string>
+    <string name="monthsText">Ene Feb Mar Abr May Jun Jul Ago Sep Oct Nov Dic</string>
+    <string name="daysText">Ln Mt Mc Jv Vn Sa Do</string>
+    <string name="startTimeText">9:00</string>
+    <string name="endTimeText">12:30</string>
+
 </resources>

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:text="Ok"
+        android:text="@string/btnOKTime"
         />
     <Button
         android:id="@+id/cancelTime"
@@ -26,6 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/okDate"
-        android:text="Cancel" />
+        android:text="@string/btnCancelTime" />
 
 </RelativeLayout>
