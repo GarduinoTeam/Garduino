@@ -21,6 +21,12 @@
         <activity android:name=".DeviceProfileStart"/>
         <activity android:name=".SettingsInformation"/>
         <activity android:name=".IrrigationRules"/>
+        <activity android:name=".EditIrrigationRule"/>
+        <activity android:name=".TimeConditions"/>
+        <activity android:name=".EditTime"/>
+        <activity android:name=".EditDate"/>
+        <activity android:name=".AddCondition"/>
+        <activity android:name=".CreateRule"/>
     </application>
 
 </manifest>

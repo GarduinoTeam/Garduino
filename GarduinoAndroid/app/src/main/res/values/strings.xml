@@ -35,9 +35,78 @@
     <!--                              LIST ITEMS ACTIVITY MAIN                                   -->
 
     <string-array name="devicesArray" >
-        <item>Device1</item>
-        <item>Device2</item>
-        <item>Device3</item>
-        <item>Device4</item>
+        <item>Device 1</item>
+        <item>Device 2</item>
+        <item>Device 3</item>
+        <item>Device 4</item>
     </string-array>
+
+    <!--                              DESCRIPTION ACTIVITY MAIN                                   -->
+
+    <string-array name="descriptionArray">
+        <item> Last irrigation: today at 11:00</item>
+        <item>Last irrigation: today at 09:00</item>
+        <item>Last irrigation: today at 14:00</item>
+        <item>Last irrigation: today at 21:00</item>
+    </string-array>
+
+    <!--                               IRRIGATION RULE                                           -->
+
+   <string name="irrigationText1">Irrigation rule name 1</string>
+   <string name="irrigationText2">Irrigation rule name 2</string>
+   <string name="btnIrrigationAdd">Add rule</string>
+   <string name="btnIrrigationSave">Save</string>
+
+    <!--                                CREATE RULE                                              -->
+
+    <string name="ruleNameDescription">Rule name:</string>
+    <string name="ruleName">Irrigation rule name 2</string>
+    <string name="btnRuleNameCancel">Cancel</string>
+    <string name="btnRuleNameCreate">Create</string>
+
+    <!--                            EDIT IRRIGATION RULE                                         -->
+
+    <string name="editTemperatureIrrig">Temperature less than:</string>
+    <string name="editTemperatureIrrigC">ºC</string>
+    <string name="btnTimeCondition">Time condition</string>
+    <string name="btnAddCondition">Add condition</string>
+    <string name="btnSaveCondition">Save</string>
+
+    <!--                                   ADD CONDITION                                         -->
+
+    <string name="btnTimeConditions">Time condition</string>
+    <string name="btnTemperatureH">Temperature is higher than:</string>
+    <string name="btnTemperatureL">Temperature is lower than:</string>
+    <string name="btnMoistnessH">Moistness is higher than:</string>
+    <string name="btnMoistnessL">Moistness is lower than:</string>
+
+    <!--                                   EDIT TIME                                             -->
+    <string name="btnOKTime">OK</string>
+    <string name="btnCancelTime">CANCEL</string>
+
+    <!--                                   EDIT DATE                                             -->
+    <string name="btnOKDate">OK</string>
+    <string name="btnCancelDate">CANCEL</string>
+
+    <!--                                   TIME CONDITIONS                                         -->
+
+    <string name="btnStartTime">Start time</string>
+    <string name="btnEndTime">End time</string>
+    <string name="btnDays">Days of the week</string>
+    <string name="btnMonths">Months of the year</string>
+    <string name="btnSpecificDates">Specific Dates</string>
+    <string name="btnSaveTimeConditions">Save</string>
+    <string name="monthsText">Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</string>
+    <string name="daysText">M T W T F Sa Su</string>
+    <string name="startTimeText">9:00</string>
+    <string name="endTimeText">12:30</string>
+
+    <!--                                   TOOLBAR TITLES                                         -->
+
+    <string name="DeviceProfile">Device name</string>
+    <string name="DeviceProfileStart"></string>
+    <string name="IrrigationRules"></string>
+    <string name="EditDate"></string>
+
+
 </resources>

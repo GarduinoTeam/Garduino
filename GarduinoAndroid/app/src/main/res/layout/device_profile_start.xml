@@ -14,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="361dp"
             android:layout_marginBottom="@dimen/dim_10"
+            android:layout_gravity="center"
             app:srcCompat="@drawable/plant1"
 
             />
@@ -21,7 +22,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_device_profile_temperature"/>
+            android:text="@string/tv_device_profile_temperature" />
 
         <TextView
             android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 android:layout_marginEnd="@dimen/dim_6" />
 
             <Button
-                android:id="@+id/btnSettings"
+                android:id="@+id/btnSettingsStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_device_profile_settings"

@@ -7,95 +7,81 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 
-public class IrrigationRules extends AppCompatActivity implements View.OnClickListener
-{
-    Button rule1;
-    Button rule2;
+public class EditIrrigationRule extends AppCompatActivity implements View.OnClickListener{
     Button save;
     Button add;
-    RelativeLayout irrigationRuleAdded;
+    Button time;
     Data obj;
     Boolean informationBoolean;
     Boolean addRule;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Irrigation rules");
+        ((AppCompatActivity) this).getSupportActionBar().setTitle("Irrigation rules name");
 
         assert getSupportActionBar() != null;   //null check
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.irrigation_rules);
+        setContentView(R.layout.edit_irrigation_rule);
 
-        save = (Button) findViewById(R.id.saveIrrigationRules);
+        save = (Button) findViewById(R.id.saveConditons);
         save.setOnClickListener(this);
 
-        add = (Button) findViewById(R.id.addRule);
+        add = (Button) findViewById(R.id.addCondition);
         add.setOnClickListener(this);
 
-        rule1 = (Button) findViewById(R.id.buttonIrrigationRule1);
-        rule1.setOnClickListener(this);
+        time = (Button) findViewById(R.id.buttonTimeCondition);
+        time.setOnClickListener(this);
 
-        rule2 = (Button) findViewById(R.id.buttonIrrigationRule2);
-        rule2.setOnClickListener(this);
-
-        irrigationRuleAdded = (RelativeLayout) findViewById(R.id.irrigationRule2);
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
             addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
-        if (addRule == null){
-            addRule = false;
-        }else if (addRule) {
-            irrigationRuleAdded.setVisibility(View.VISIBLE);
-        }
+
     }
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), SettingsInformation.class);
+        Intent myIntent = new Intent(getApplicationContext(), IrrigationRules.class);
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
         myIntent.putExtra("addRule", addRule);
         startActivityForResult(myIntent, 0);
         return true;
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
-            case R.id.saveIrrigationRules:
-                Intent intentSave = new Intent(this, SettingsInformation.class);
+            case R.id.saveConditons:
+                Intent intentSave = new Intent(this, IrrigationRules.class);
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
                 intentSave.putExtra("addRule", addRule);
                 startActivity(intentSave);
                 break;
 
-            case R.id.addRule:
-                Intent intentAdd = new Intent(this, CreateRule.class);
+            case R.id.addCondition:
+                Intent intentAdd = new Intent(this, AddCondition.class);
                 intentAdd.putExtra("object", (Serializable) obj);
                 intentAdd.putExtra("btnSettingsDPS", informationBoolean);
                 intentAdd.putExtra("addRule", addRule);
                 startActivity(intentAdd);
                 break;
-            case R.id.buttonIrrigationRule1:
-            case R.id.buttonIrrigationRule2:
-                Intent intentRule = new Intent(this, EditIrrigationRule.class);
-                intentRule.putExtra("object", (Serializable) obj);
-                intentRule.putExtra("btnSettingsDPS", informationBoolean);
-                intentRule.putExtra("addRule", addRule);
-                startActivity(intentRule);
+
+            case R.id.buttonTimeCondition:
+                Intent intentTime = new Intent(this, TimeConditions.class);
+                intentTime.putExtra("object", (Serializable) obj);
+                intentTime.putExtra("btnSettingsDPS", informationBoolean);
+                intentTime.putExtra("addRule", addRule);
+                startActivity(intentTime);
                 break;
             default:
                 break;
