@@ -20,5 +20,3 @@
 \contentsline {subsection}{\numberline {9.1}Main screenshot files}{12}{subsection.9.1}
 \contentsline {subsection}{\numberline {9.2}Localization}{13}{subsection.9.2}
 \contentsline {subsection}{\numberline {9.3}Domain}{14}{subsection.9.3}
-\contentsline {part}{II\hspace {1em}Use case diagrams}{14}{part.2}
-\contentsline {section}{\numberline {10}Timing: Advanced iteration of the manufacturing phase}{14}{section.10}
