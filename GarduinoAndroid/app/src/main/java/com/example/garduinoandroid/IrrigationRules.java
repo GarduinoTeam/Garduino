@@ -24,12 +24,15 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     Data obj;
     Boolean informationBoolean;
     Boolean addRule;
+    String irrigationRules;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        irrigationRules = getResources().getString(R.string.IrrigationRules);
+
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Irrigation rules");
+        ((AppCompatActivity)this).getSupportActionBar().setTitle(irrigationRules);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

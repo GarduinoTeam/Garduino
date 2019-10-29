@@ -22,11 +22,14 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     Data obj;
     Boolean informationBoolean;
     Boolean addRule;
+    String timeConditions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        timeConditions = getResources().getString(R.string.TimeConditions);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity) this).getSupportActionBar().setTitle("Time conditions");
+        ((AppCompatActivity) this).getSupportActionBar().setTitle(timeConditions);
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);

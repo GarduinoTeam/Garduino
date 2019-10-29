@@ -20,12 +20,14 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
 
     Data obj;
     Boolean addRule;
+    String manualIrrigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        manualIrrigation = getResources().getString(R.string.ManualIrrigation);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Manual Irrigation");
+        ((AppCompatActivity)this).getSupportActionBar().setTitle(manualIrrigation);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_irrigation);

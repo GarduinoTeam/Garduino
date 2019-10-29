@@ -104,4 +104,21 @@
     <string name="startTimeText">9:00</string>
     <string name="endTimeText">12:30</string>
 
+    <!--                                   TOOLBAR TITLES                                         -->
+
+    <string name="DeviceProfile">Nombre del Dispositivo</string>
+    <string name="DeviceProfileStart">Nombre del Dispositivo</string>
+    <string name="IrrigationRules">Reglas de Riego</string>
+    <string name="DeviceSettings">Configuración del Dispositivo</string>
+    <string name="ManualIrrigation">Riego Manual</string>
+    <string name="CreateRules">Creación de Reglas</string>
+    <string name="EditIrrigationRules">Nombre de Reglas de Riego</string>
+    <string name="AddCond">Añadir Nueva Condición</string>
+    <string name="TimeConditions">Condiciones de tiempo</string>
+
+
+
+
+
+
 </resources>
