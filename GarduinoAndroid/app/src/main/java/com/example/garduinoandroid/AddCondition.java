@@ -19,10 +19,12 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
     Data obj;
     Boolean informationBoolean;
     Boolean addRule;
+    String addCond;
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        addCond = getResources().getString(R.string.AddCond);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity) this).getSupportActionBar().setTitle("Add new condition");
+        ((AppCompatActivity) this).getSupportActionBar().setTitle(addCond);
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);

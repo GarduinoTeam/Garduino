@@ -24,11 +24,14 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
     boolean settingsDPS;
     Boolean addRule;
 
+    String deviceProfileStart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        deviceProfileStart = getResources().getString(R.string.DeviceProfileStart);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Device name");
+        ((AppCompatActivity)this).getSupportActionBar().setTitle(deviceProfileStart);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button

@@ -19,11 +19,14 @@ public class CreateRule extends AppCompatActivity implements View.OnClickListene
     Boolean addRule;
     Data obj;
     Boolean informationBoolean;
+    String createRule;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        createRule = getResources().getString(R.string.CreateRules);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Create rules");
+        ((AppCompatActivity)this).getSupportActionBar().setTitle(createRule);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_rule);
