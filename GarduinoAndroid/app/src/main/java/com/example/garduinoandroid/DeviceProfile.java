@@ -24,12 +24,14 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
     Data obj;
     ImageView image;
     Boolean addRule;
+    String deviceName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        deviceName = getResources().getString(R.string.DeviceProfile);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Device name");
+        ((AppCompatActivity)this).getSupportActionBar().setTitle(deviceName);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

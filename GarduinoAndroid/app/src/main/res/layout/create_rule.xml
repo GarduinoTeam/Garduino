@@ -13,11 +13,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rule name:"/>
+                android:text="@string/ruleNameDescription"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Irrigation rule name 2"/>
+                android:text="@string/ruleName"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,12 +29,12 @@
         android:id="@+id/cancelRule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"/>
+        android:text="@string/btnRuleNameCancel"/>
     <Button
         android:id="@+id/createRule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create"/>
+        android:text="@string/btnRuleNameCreate"/>
     </LinearLayout>
 
 </RelativeLayout>
