@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.10.26)  30 OCT 2019 15:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.10.26)  30 OCT 2019 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -174,6 +174,10 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
+(/usr/share/texlive/texmf-dist/tex/latex/eurosym/eurosym.sty
+Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
+\@eurobox=\box31
+)
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
@@ -244,8 +248,8 @@ Package: easylist 2014/01/11 v.1.4 Numbered items with a single command.
 \c@List9=\count127
 \c@List10=\count128
 \el@ProgressiveDimension=\dimen136
-\el@CounterBox=\box31
-\el@ControlBox=\box32
+\el@CounterBox=\box32
+\el@ControlBox=\box33
 \el@TotalMargin=\dimen137
 \el@LeftMove=\dimen138
 )
@@ -385,26 +389,26 @@ Package: geometry 2018/04/16 v5.8 Page Geometry
 (./Documentació.aux)
 \openout1 = `Documentació.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count143
 \scratchdimen=\dimen152
-\scratchbox=\box33
+\scratchbox=\box34
 \nofMPsegments=\count144
 \nofMParguments=\count145
 \everyMPshowfont=\toks24
@@ -434,8 +438,8 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box34
-Package hyperref Info: Link coloring OFF on input line 19.
+\AtBeginShipoutBox=\box35
+Package hyperref Info: Link coloring OFF on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -445,9 +449,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count149
 )
-LaTeX Info: Redefining \ref on input line 19.
-LaTeX Info: Redefining \pageref on input line 19.
-LaTeX Info: Redefining \nameref on input line 19.
+LaTeX Info: Redefining \ref on input line 20.
+LaTeX Info: Redefining \pageref on input line 20.
+LaTeX Info: Redefining \nameref on input line 20.
 
 (./Documentació.out) (./Documentació.out)
 \@outlinefile=\write4
@@ -488,16 +492,16 @@ LaTeX Info: Redefining \nameref on input line 19.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<figures/M-UdL.jpg, id=100, 604.8999pt x 476.0184pt>
+<figures/M-UdL.jpg, id=104, 604.8999pt x 476.0184pt>
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 31.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 32.
 (pdftex.def)             Requested size: 181.47136pt x 142.80661pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 48.
+LaTeX Font Info:    Try loading font information for U+msa on input line 43.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 48.
+LaTeX Font Info:    Try loading font information for U+msb on input line 43.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -510,7 +514,7 @@ ocumentació.toc)
 
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 80.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 82.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
 
 
@@ -523,7 +527,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.80 \newpage
+l.82 \newpage
               [1] (./Documentació.lot)
 \tf@lot=\write6
 \openout6 = `Documentació.lot'.
@@ -534,108 +538,120 @@ l.80 \newpage
 
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 85.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 87.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 92--93
 
  []
 
-Excluding 'comment' comment.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 146.
 
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 142.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 146.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 142.
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 151.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 147.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [3]
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 193.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 189.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [4]
-<figures/usecasediagram.png, id=183, 1717.41624pt x 864.22874pt>
+<figures/usecasediagram.png, id=192, 1717.41624pt x 864.22874pt>
 File: figures/usecasediagram.png Graphic file (type png)
 <use figures/usecasediagram.png>
-Package pdftex.def Info: figures/usecasediagram.png  used on input line 198.
+Package pdftex.def Info: figures/usecasediagram.png  used on input line 194.
 (pdftex.def)             Requested size: 548.71965pt x 276.12367pt.
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 202.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 198.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [5 <./figures/usecasediagram.png>]
-<figures/AppArchitecture.png, id=190, 694.595pt x 602.25pt>
+<figures/AppArchitecture.png, id=199, 694.595pt x 602.25pt>
 File: figures/AppArchitecture.png Graphic file (type png)
 <use figures/AppArchitecture.png>
-Package pdftex.def Info: figures/AppArchitecture.png  used on input line 208.
+Package pdftex.def Info: figures/AppArchitecture.png  used on input line 204.
 (pdftex.def)             Requested size: 416.76022pt x 361.35278pt.
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 220.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 216.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [6 <./figures/AppArchitecture.png>]
-<figures/ArduinoArch.png, id=197, 714.67pt x 674.52pt>
+<figures/ArduinoArch.png, id=206, 714.67pt x 674.52pt>
 File: figures/ArduinoArch.png Graphic file (type png)
 <use figures/ArduinoArch.png>
-Package pdftex.def Info: figures/ArduinoArch.png  used on input line 226.
+Package pdftex.def Info: figures/ArduinoArch.png  used on input line 222.
 (pdftex.def)             Requested size: 428.8053pt x 404.71512pt.
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 230.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 226.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [7 <./figures/ArduinoArch.png>]
-<figures/ModelDeDades.png, id=203, 925.4575pt x 730.73pt>
+<figures/ModelDeDades.png, id=212, 925.4575pt x 730.73pt>
 File: figures/ModelDeDades.png Graphic file (type png)
 <use figures/ModelDeDades.png>
-Package pdftex.def Info: figures/ModelDeDades.png  used on input line 236.
+Package pdftex.def Info: figures/ModelDeDades.png  used on input line 232.
 (pdftex.def)             Requested size: 462.72762pt x 365.3641pt.
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 259.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 255.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [8 <./figures/ModelDeDades.png>]
-<figures/backlog.png, id=209, 839.135pt x 785.93625pt>
+<figures/backlog.png, id=218, 839.135pt x 785.93625pt>
 File: figures/backlog.png Graphic file (type png)
 <use figures/backlog.png>
-Package pdftex.def Info: figures/backlog.png  used on input line 266.
+Package pdftex.def Info: figures/backlog.png  used on input line 262.
 (pdftex.def)             Requested size: 503.48488pt x 471.56538pt.
 
-Overfull \hbox (19.78801pt too wide) in paragraph at lines 266--267
+Overfull \hbox (19.78801pt too wide) in paragraph at lines 262--263
  [][] 
  []
 
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 315.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 311.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
 [9 <./figures/backlog.png>]
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 315.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 311.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [10]
+Underfull \hbox (badness 10000) in paragraph at lines 330--331
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 334--335
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 336--337
+Underfull \hbox (badness 10000) in paragraph at lines 368--369
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+File: figures/M-UdL.jpg Graphic file (type jpg)
+<use figures/M-UdL.jpg>
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 369.
+(pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 370--371
 
  []
 
@@ -644,55 +660,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 372--373
 
  []
 
-File: figures/M-UdL.jpg Graphic file (type jpg)
-<use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 373.
-(pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 376--377
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 389--390
+Underfull \hbox (badness 10000) in paragraph at lines 385--386
 
  []
 
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 391.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 387.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
 [12]
-<figures/marketing.png, id=230, 457.71pt x 192.72pt>
+<figures/marketing.png, id=238, 457.71pt x 192.72pt>
 File: figures/marketing.png Graphic file (type png)
 <use figures/marketing.png>
-Package pdftex.def Info: figures/marketing.png  used on input line 396.
+Package pdftex.def Info: figures/marketing.png  used on input line 392.
 (pdftex.def)             Requested size: 457.7089pt x 192.71951pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 422.
 File: figures/M-UdL.jpg Graphic file (type jpg)
 <use figures/M-UdL.jpg>
-Package pdftex.def Info: figures/M-UdL.jpg  used on input line 422.
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 430.
 (pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
  [13 <./figures/marketing.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 422.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 432.
+File: figures/M-UdL.jpg Graphic file (type jpg)
+<use figures/M-UdL.jpg>
+Package pdftex.def Info: figures/M-UdL.jpg  used on input line 432.
+(pdftex.def)             Requested size: 30.24677pt x 23.8023pt.
+ [14]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 432.
  (./Documentació.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 422.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 422.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 432.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 432.
 Package rerunfilecheck Info: File `Documentació.out' has not changed.
-(rerunfilecheck)             Checksum: 5BC04229ED3439DC7AA3DCD872BF63DF;1576.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 422.
+(rerunfilecheck)             Checksum: 0A83A314E6F324B72E5CD772B3E25157;1634.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 432.
  ) 
 Here is how much of TeX's memory you used:
- 9410 strings out of 492615
- 140196 string characters out of 6131389
- 260563 words of memory out of 5000000
- 13124 multiletter control sequences out of 15000+600000
- 13139 words of font info for 49 fonts, out of 8000000 for 9000
+ 9476 strings out of 492615
+ 141141 string characters out of 6131389
+ 260907 words of memory out of 5000000
+ 13182 multiletter control sequences out of 15000+600000
+ 13256 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,15n,96p,431b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -701,11 +708,12 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Documentació.pdf (14 pages, 683835 bytes).
+/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/eurosym/feymr10.pfb>
+Output written on Documentació.pdf (15 pages, 692741 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 239 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 228 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 292 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 236 words of extra memory for PDF output out of 10000 (max. 10000000)
 

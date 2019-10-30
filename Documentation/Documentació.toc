@@ -22,3 +22,4 @@
 \contentsline {subsection}{\numberline {8.3}Mareketing strategy}{11}{subsection.8.3}% 
 \contentsline {subsection}{\numberline {8.4}Monetization strategy}{13}{subsection.8.4}% 
 \contentsline {subsection}{\numberline {8.5}App costs}{13}{subsection.8.5}% 
+\contentsline {subsection}{\numberline {8.6}Analysis}{14}{subsection.8.6}% 
