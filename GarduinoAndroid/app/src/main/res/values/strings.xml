@@ -104,9 +104,18 @@
     <!--                                   TOOLBAR TITLES                                         -->
 
     <string name="DeviceProfile">Device name</string>
-    <string name="DeviceProfileStart"></string>
-    <string name="IrrigationRules"></string>
-    <string name="EditDate"></string>
+    <string name="DeviceProfileStart">Device name</string>
+    <string name="IrrigationRules">Irrigation Rules</string>
+    <string name="DeviceSettings">Device Settings</string>
+    <string name="ManualIrrigation">Manual Irrigation</string>
+    <string name="CreateRules">Create Rules</string>
+    <string name="EditIrrigationRules">Irrigation Rules Name</string>
+    <string name="AddCond">Add New Condition</string>
+    <string name="TimeConditions">Time Conditions</string>
+
+
+
+
 
 
 </resources>

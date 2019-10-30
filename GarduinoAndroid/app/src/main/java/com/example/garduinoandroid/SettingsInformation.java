@@ -19,12 +19,14 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
     Data obj;
     Boolean informationBoolean;
     Boolean addRule;
+    String deviceSettingsName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
+        deviceSettingsName = getResources().getString(R.string.DeviceSettings);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle("Device settings");
+        ((AppCompatActivity)this).getSupportActionBar().setTitle(deviceSettingsName);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
