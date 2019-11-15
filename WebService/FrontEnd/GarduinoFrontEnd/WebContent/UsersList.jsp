@@ -165,7 +165,7 @@
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td><a href="#" class="btn btn-info btn-icon-split"><span class="text">Tiger Nixon</span></a></td>
+                      <td><a href="UserDevices.jsp" class="alert-link btn-icon-split"><span class="text">Tiger Nixon</span></a></td>
                       <td>Edinburgh34</td>
                       <td>tiger@gmail.com</td>
                       <td>65874895</td>
