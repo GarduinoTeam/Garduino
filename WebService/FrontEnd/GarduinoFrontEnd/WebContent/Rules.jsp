@@ -65,7 +65,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item active" href="UserDevices.jsp">Devices</a>     
+            <a class="collapse-item" href="UserDevices.jsp">Devices</a>
+			<a class="collapse-item active" href="Rules.jsp">Rules</a>   
           </div>
         </div>
       </li>
@@ -147,32 +148,32 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Devices</h1>
+          <h1 class="h3 mb-2 text-gray-800">Rules</h1>
           
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Devices Information</h6>
-              <a class="btn btn-success" style="float:right" href="LogIn.jsp">New Device</a>
+              <h6 class="m-0 font-weight-bold text-primary">Rules Information</h6>
+              <a class="btn btn-success" style="float:right" href="LogIn.jsp">New Rule</a>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Image</th>
-                      <th>DeviceName</th>
                       <th>Status</th>
+                      <th>RuleName</th>
+                      <th>Type</th>
                     </tr>
                   </thead>
      
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -181,9 +182,9 @@
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -192,9 +193,9 @@
                     </tr>
                     <tr>
                       <td>3</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -203,9 +204,9 @@
                     </tr>
                     <tr>
                       <td>4</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -214,9 +215,9 @@
                     </tr>
                     <tr>
                       <td>5</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -225,9 +226,9 @@
                     </tr>
                     <tr>
                       <td>6</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -236,9 +237,9 @@
                     </tr>
                     <tr>
                       <td>7</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -247,9 +248,9 @@
                     </tr>
                     <tr>
                       <td>8</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -258,9 +259,9 @@
                     </tr>
                     <tr>
                       <td>9</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -269,9 +270,9 @@
                     </tr>
                     <tr>
                       <td>10</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -280,9 +281,9 @@
                     </tr>
                     <tr>
                       <td>11</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -291,9 +292,9 @@
                     </tr>
                     <tr>
                       <td>12</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -302,9 +303,9 @@
                     </tr>
                     <tr>
                       <td>13</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -313,9 +314,9 @@
                     </tr>
                     <tr>
                       <td>14</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -324,9 +325,9 @@
                     </tr>
                     <tr>
                       <td>15</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -335,9 +336,9 @@
                     </tr>
                     <tr>
                       <td>16</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -346,9 +347,9 @@
                     </tr>
                     <tr>
                       <td>17</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -357,9 +358,9 @@
                     </tr>
                     <tr>
                       <td>18</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -368,9 +369,9 @@
                     </tr>
                     <tr>
                       <td>19</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -379,9 +380,9 @@
                     </tr>
                     <tr>
                       <td>20</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
@@ -390,9 +391,9 @@
                     </tr>
                     <tr>
                       <td>21</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
                       <td>Active</td>
+                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
+                      <td>1</td>
 
                       <td>
                       <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
