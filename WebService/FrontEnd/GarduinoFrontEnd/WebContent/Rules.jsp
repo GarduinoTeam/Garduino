@@ -65,6 +65,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item " href="UsersList.jsp">Users List</a>     
             <a class="collapse-item" href="UserDevices.jsp">Devices</a>
 			<a class="collapse-item active" href="Rules.jsp">Rules</a>   
           </div>
@@ -155,7 +156,7 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Rules Information</h6>
-              <a class="btn btn-success" style="float:right" href="LogIn.jsp">New Rule</a>
+              <a class="btn btn-success" style="float:right" href="NewRule.jsp">New Rule</a>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
