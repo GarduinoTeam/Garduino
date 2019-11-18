@@ -58,10 +58,18 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link" href="UsersList.jsp">
+        <a class="nav-link collapsed" href="UsersList.jsp" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
         </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item " href="UsersList.jsp">Users List</a>     
+            <a class="collapse-item" href="UserDevices.jsp">Devices</a>
+			<a class="collapse-item active" href="Rules.jsp">Rules</a>   
+          </div>
+        </div>
       </li>
 
       <!-- Divider -->
@@ -137,193 +145,40 @@
         </nav>
         <!-- End of Topbar -->
 
-       <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <!-- Begin Page Content -->
+   <div class="container">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Users</h1>
-          
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Users Information</h6>
-              <a class="btn btn-success" style="float:right" href="NewUser.jsp">New User</a>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>UserName</th>
-                      <th>Password</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                    </tr>
-                  </thead>
-     
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td><a href="UserDevices.jsp" class="alert-link btn-icon-split"><span class="text">Tiger Nixon</span></a></td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                      <td>
-                      <a href="EditUser.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>13</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>14</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>15</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>16</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>17</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>19</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>20</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>21</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>  
-                    </tr>
-                  </tbody>
-                </table>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Edit Rule</h1>
               </div>
+              <form class="user">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="ruleName" placeholder="Rule1">
+                </div>
+          
+                <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Active</label>
+                      </div>
+                </div>
+                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                  Save changes
+                </a>
+                <hr>
+              </form>
             </div>
           </div>
-
         </div>
-        <!-- /.container-fluid -->
-
       </div>
+    </div>
+        
       <!-- End of Main Content -->
 
       <!-- Footer -->

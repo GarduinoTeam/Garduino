@@ -176,7 +176,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -187,7 +187,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -198,7 +198,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -209,7 +209,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -220,7 +220,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -231,7 +231,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -242,7 +242,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -253,7 +253,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -264,7 +264,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -275,7 +275,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -286,7 +286,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -297,7 +297,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -308,7 +308,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -319,7 +319,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -330,7 +330,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -341,7 +341,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -352,7 +352,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -363,7 +363,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -374,7 +374,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -385,7 +385,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -396,7 +396,7 @@
                       <td>Active</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
