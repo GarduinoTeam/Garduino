@@ -147,12 +147,12 @@
           <div class="col">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Edit User Account</h1>
               </div>
               <form class="user">
                 <div class="form-group row">
                   <div class="col mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="firstName" placeholder="First Name">
+                    <input type="text" class="form-control form-control-user" id="firstName" placeholder="Tiger Nixon">
                   </div>
                 </div>
                 <div class="form-group">
@@ -167,7 +167,7 @@
                   </div>
                 </div>
                 <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Register Account
+                  Save changes
                 </a>
                 <hr>
               </form>

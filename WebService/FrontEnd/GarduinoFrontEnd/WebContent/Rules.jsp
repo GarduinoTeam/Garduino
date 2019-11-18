@@ -177,7 +177,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -188,7 +188,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -199,7 +199,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -210,7 +210,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -221,7 +221,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -232,7 +232,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -243,7 +243,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -254,7 +254,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -265,7 +265,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -276,7 +276,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -287,7 +287,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -298,7 +298,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -309,7 +309,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -320,7 +320,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -331,7 +331,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -342,7 +342,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -353,7 +353,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -364,7 +364,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -375,7 +375,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -386,7 +386,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
@@ -397,7 +397,7 @@
                       <td>1</td>
 
                       <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
