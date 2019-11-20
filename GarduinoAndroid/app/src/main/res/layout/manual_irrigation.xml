@@ -54,7 +54,8 @@
             android:layout_height="wrap_content"
             android:background="#000000"
             android:text="@string/btn_manual_irrigation_start"
-            android:textColor="#FFFFFF"    android:layout_margin="@dimen/dim_18"
+            android:textColor="#FFFFFF"
+            android:layout_margin="@dimen/dim_18"
 
             />
 

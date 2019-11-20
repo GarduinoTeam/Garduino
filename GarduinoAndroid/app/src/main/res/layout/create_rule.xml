@@ -3,38 +3,50 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="18dp">
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerInParent="true"
         android:id="@+id/ruleName">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/editorLayout">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ruleNameDescription"/>
+                android:text="@string/ruleNameDescription"
+                android:layout_marginBottom="@dimen/dim_5"
+                android:layout_margin="@dimen/dim_18"/>
+
             <EditText
+                android:id="@+id/editTextCR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ruleName"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/ruleName"
-        android:layout_centerInParent="true">
-    <Button
-        android:id="@+id/cancelRule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnRuleNameCancel"/>
-    <Button
-        android:id="@+id/createRule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnRuleNameCreate"/>
-    </LinearLayout>
+                android:text="@string/ruleName"
+                android:layout_marginBottom="@dimen/dim_5"
+                android:layout_margin="@dimen/dim_18"/>
+
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/editorLayout"
+                android:layout_centerInParent="true">
+                <Button
+                    android:id="@+id/cancelRule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnRuleNameCancel"/>
+                <Button
+                    android:id="@+id/createRule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnRuleNameCreate"/>
+            </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

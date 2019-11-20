@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
@@ -44,7 +47,49 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         save.setOnClickListener(this);
 
         add = (Button) findViewById(R.id.addRule);
-        add.setOnClickListener(this);
+        add.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(IrrigationRules.this);
+                View mView = getLayoutInflater().inflate(R.layout.create_rule, null);
+                final EditText EtRule = (EditText) mView.findViewById(R.id.editTextCR);
+                Button buttonCreate = (Button) mView.findViewById(R.id.createRule);
+                Button buttonCancel = (Button) mView.findViewById(R.id.cancelRule);
+
+                buttonCreate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!EtRule.getText().toString().isEmpty()) {
+                            Toast.makeText(IrrigationRules.this, "Name Rule added", Toast.LENGTH_SHORT).show();
+                            addRule = true;
+                            Intent intentCreate = new Intent(getApplication(), IrrigationRules.class);
+                            intentCreate.putExtra("addRule",addRule);
+                            intentCreate.putExtra("object", (Serializable) obj);
+                            intentCreate.putExtra("btnSettingsDPS", informationBoolean);
+                            startActivity(intentCreate);
+                        } else {
+                            Toast.makeText(IrrigationRules.this, "Please fill the field.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentCancel = new Intent(getApplication(), IrrigationRules.class);
+                        intentCancel.putExtra("addRule",addRule);
+                        intentCancel.putExtra("object", (Serializable) obj);
+                        intentCancel.putExtra("btnSettingsDPS", informationBoolean);
+                        startActivity(intentCancel);
+                    }
+                });
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+
+            }
+        });
 
         rule1 = (Button) findViewById(R.id.buttonIrrigationRule1);
         rule1.setOnClickListener(this);
@@ -85,13 +130,13 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
                 startActivity(intentSave);
                 break;
 
-            case R.id.addRule:
-                Intent intentAdd = new Intent(this, CreateRule.class);
-                intentAdd.putExtra("object", (Serializable) obj);
-                intentAdd.putExtra("btnSettingsDPS", informationBoolean);
-                intentAdd.putExtra("addRule", addRule);
-                startActivity(intentAdd);
-                break;
+//            case R.id.addRule:
+//                Intent intentAdd = new Intent(this, CreateRule.class);
+//                intentAdd.putExtra("object", (Serializable) obj);
+//                intentAdd.putExtra("btnSettingsDPS", informationBoolean);
+//                intentAdd.putExtra("addRule", addRule);
+//                startActivity(intentAdd);
+//                break;
             case R.id.buttonIrrigationRule1:
             case R.id.buttonIrrigationRule2:
                 Intent intentRule = new Intent(this, EditIrrigationRule.class);
