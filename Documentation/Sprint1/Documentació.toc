@@ -11,15 +11,15 @@
 \contentsline {section}{\numberline {2}Main use cases}{5}{section.2}% 
 \contentsline {section}{\numberline {3}General architecture}{6}{section.3}% 
 \contentsline {subsection}{\numberline {3.1}System architecture}{6}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2}Arduino/Raspberry pi architecture}{7}{subsection.3.2}% 
-\contentsline {section}{\numberline {4}Data model}{8}{section.4}% 
-\contentsline {section}{\numberline {5}Product backlog + Sprint backlog}{9}{section.5}% 
-\contentsline {section}{\numberline {6}Main screens desgin mockup}{12}{section.6}% 
-\contentsline {section}{\numberline {7}Navigation schema between activities}{12}{section.7}% 
-\contentsline {section}{\numberline {8}Economic viability}{12}{section.8}% 
-\contentsline {subsection}{\numberline {8.1}Who?}{12}{subsection.8.1}% 
-\contentsline {subsection}{\numberline {8.2}How many?}{12}{subsection.8.2}% 
-\contentsline {subsection}{\numberline {8.3}Mareketing strategy}{12}{subsection.8.3}% 
-\contentsline {subsection}{\numberline {8.4}Monetization strategy}{14}{subsection.8.4}% 
-\contentsline {subsection}{\numberline {8.5}App costs}{14}{subsection.8.5}% 
-\contentsline {subsection}{\numberline {8.6}Analysis}{15}{subsection.8.6}% 
+\contentsline {subsection}{\numberline {3.2}Irrigation system architecture}{7}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}Data model}{9}{section.4}% 
+\contentsline {section}{\numberline {5}Product backlog + Sprint backlog}{10}{section.5}% 
+\contentsline {section}{\numberline {6}Main screens desgin mockup}{13}{section.6}% 
+\contentsline {section}{\numberline {7}Navigation schema between activities}{13}{section.7}% 
+\contentsline {section}{\numberline {8}Economic viability}{13}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Who?}{13}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}How many?}{13}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Mareketing strategy}{13}{subsection.8.3}% 
+\contentsline {subsection}{\numberline {8.4}Monetization strategy}{15}{subsection.8.4}% 
+\contentsline {subsection}{\numberline {8.5}App costs}{15}{subsection.8.5}% 
+\contentsline {subsection}{\numberline {8.6}Analysis}{16}{subsection.8.6}% 

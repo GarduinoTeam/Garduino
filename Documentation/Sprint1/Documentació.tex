@@ -135,7 +135,7 @@ This means that we can go on vacation peacefully without having to worry about o
 
 \subsection{Functional requirements}
 \subsection{List of functionalities and features}
-\textit{List of functionalities and features that all services (Android app, web service and Arduino) will accomplish}
+\textit{List of functionalities and features that all services (Android app, web service and Irrigation System) will accomplish}
 
 \subsubsection{Android app}
 \begin{itemize}
@@ -171,19 +171,26 @@ This means that we can go on vacation peacefully without having to worry about o
 
 \subsubsection{Detection plague script}
 \begin{itemize}
-\item \textbf{The pest detection algorithm will have to} be able to perform leaf trimming, and then pass it on to the convolutional neural network.
 
-\item \textbf{The pest detection algorithm will have to}, using an image of a leaf as an input, determine if this is a pest or not.
+\item \textbf{The pest detection algorithm will have to}, using an image of a plant as an input, determine if is contaminated or not.
+
 \end{itemize}
 
-\subsubsection{Arduino}
+\subsubsection{Irrigation system}
 \begin{itemize}
-\item \textbf{The Arduino system will have to} allow communication with the web service.
+\item RPi(\textbf{R}aspberry \textbf{Pi}) 3B (master):
+	\begin{itemize}
+	\item \textbf{The RPi will have to} allow communication with the web service.
+	\item \textbf{The RPi will have to} send/receive data from/to the slaves to perform operations.
+	\end{itemize}
 
-\item \textbf{The Arduino system will have to} allow images to be sent in real time to the web service.
-
-\item \textbf{The Arduino system will have to} allow the data from the humidity, temperature and soil sensors to be captured.
-
+\item NodeMCU ESP8266 (slave):
+	\begin{itemize}
+	\item \textbf{The NodeMCU will have to} be able to send the data to the RPi. 
+	\item \textbf{The NodeMCU will have to} recolect the data from the humidity, temperature and soil sensors.
+	\item \textbf{The NodeMCU will have to} capture and image of the device plant.		
+	\item \textbf{The NodeMCU will have to} control the relay to make irrigation when receives the request from the RPi.
+	\end{itemize}
 \end{itemize}
 
 \newpage
@@ -215,13 +222,37 @@ The architecture of our application is composed by:
 
 \newpage
 
-\subsection{Arduino/Raspberry pi architecture}
-\vspace*{3cm}
+\subsection{Irrigation system architecture}
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.6]{figures/ArduinoArch.png}
+\includegraphics[scale=0.4]{figures/IrrigationSystem.png}
 \caption{Arduino and rapsberry pi architecture}
 \end{figure}
+
+So, we have the following components
+\begin{itemize}
+\item \textbf{Raspberry pi 3B}: We will use this microprocessor to ask the slaves for information about the sensors and the webcam, and then return the call to the web service with all the data.
+
+\item \textbf{NodeMCU ESP8266}: It will act as a device slave, in charge of collecting sensor data, activating irrigation and capturing our plant. This microcontroller will have a wifi module to maintain a wireless communication with the RPi(\textbf{R}aspberry \textbf{Pi}).
+
+\item \textbf{Webcam ESP32}: This module will be in charge of capturing the plant and sending the data to your NodeMCU.
+
+\item \textbf{Relay}: Useful to control a motor, a led strip, or any other module using arduino. The use is sumple, just connect a digital output of our esp8266 to our relay module, and then we can control a power-demanding appliance with the digital signal provided by the esp8266.
+
+\item \textbf{Water pump}: He will be in charge of pumping the water in order to carry out the irrigation correctly.
+
+\item \textbf{Power supply}: Our devices will need a source of energy, in this case we have chosen a power supply of 12V to batteries. In the future it could be exchanged for a solar panel or even make a hybrid between the two depending on the climate.
+
+\item \textbf{Soil moisture sensor}: Measures the volumetric water content in soil. Since the direct gravimetric measurement of free soil moisture requires removing, drying, and weighing of a sample, soil moisture sensors measure the volumetric water content indirectly by using some other property of the soil, such as electrical resistance, dielectric constant, or interaction with neutrons, as a proxy for the moisture content.
+
+\item \textbf{DHT sensor}: This sensor will allow us to simultaneously measure temperature and humidity. We have two types of DHT sensors, DHT11 and DHT22.\\
+
+The DHT11 is a very limited sensor that we can use for training, testing, or in projects that don't really require accurate measurement.\\
+
+The DHT22 has acceptable features for use in real monitoring or logging projects that require medium accuracy.\\ 
+
+In this project we will start implementing the DHT11 version due to its low cost (70 cents).
+\end{itemize}
 
 \newpage
 

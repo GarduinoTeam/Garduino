@@ -1,0 +1,24 @@
+\contentsline {part}{Introduction}{3}{part*.5}% 
+\contentsline {section}{\numberline {1}Product backlog + Sprint backlog}{5}{section.1}% 
+\contentsline {section}{\numberline {2}Requirements}{7}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Non-functional requirements}{7}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Functional requirements}{7}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}List of functionalities and features}{7}{subsection.2.3}% 
+\contentsline {subsubsection}{\numberline {2.3.1}Android app}{7}{subsubsection.2.3.1}% 
+\contentsline {subsubsection}{\numberline {2.3.2}Web service}{8}{subsubsection.2.3.2}% 
+\contentsline {subsubsection}{\numberline {2.3.3}Detection plague script}{8}{subsubsection.2.3.3}% 
+\contentsline {subsection}{\numberline {2.4}Observations}{8}{subsection.2.4}% 
+\contentsline {section}{\numberline {3}Main use cases}{9}{section.3}% 
+\contentsline {section}{\numberline {4}General architecture}{11}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}System architecture}{11}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}RPi/NodeMCU architecture}{12}{subsection.4.2}% 
+\contentsline {section}{\numberline {5}Data model}{14}{section.5}% 
+\contentsline {section}{\numberline {6}Main screens desgin and Navigation}{16}{section.6}% 
+\contentsline {section}{\numberline {7}Financial Factors}{17}{section.7}% 
+\contentsline {section}{\numberline {8}Economic viability}{17}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Who?}{17}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}How many?}{17}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Mareketing strategy}{17}{subsection.8.3}% 
+\contentsline {subsection}{\numberline {8.4}Monetization strategy}{20}{subsection.8.4}% 
+\contentsline {subsection}{\numberline {8.5}App costs}{20}{subsection.8.5}% 
+\contentsline {subsection}{\numberline {8.6}Analysis}{21}{subsection.8.6}% 
