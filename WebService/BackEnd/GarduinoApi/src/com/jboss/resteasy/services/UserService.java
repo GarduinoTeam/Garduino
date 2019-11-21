@@ -40,6 +40,18 @@ public class UserService {
 					if(existUser!=0){
 						return -2;
 					}
+					existUser=0;
+					consulta="SELECT COUNT(id) from garduino.user where email='"+user.getEmail()+"'";
+					strEstat="Connection Established";
+					connection=ds.getConnection();
+					stm= connection.createStatement();
+					rs=stm.executeQuery(consulta);
+					while(rs.next()){
+						existUser=(int)rs.getLong("count");
+					}
+					if(existUser!=0){
+						return -2;
+					}
 					consulta="SELECT id from garduino.user order by id desc limit 1";		
 					strEstat="Connection Established";
 					connection=ds.getConnection();
@@ -52,7 +64,7 @@ public class UserService {
 					System.out.println("\nsql:"+consulta);
 					System.out.println(strEstat);
 
-					consulta="insert into garduino.user (username,password,id,email,phone) values ('"+user.getUsername()+"', '"+user.getPassword()+"',"+id+",'"+user.getEmail()+"','"+user.getPhone()+"')";
+					consulta="insert into garduino.user (username,password,id,email,phone,admin) values ('"+user.getUsername()+"', '"+user.getPassword()+"',"+id+",'"+user.getEmail()+"','"+user.getPhone()+"','"+user.getAdmin()+"')";
 					stm.executeUpdate(consulta);
 
 					
@@ -142,7 +154,7 @@ public class UserService {
 						return -2;
 					}
 
-					consulta="update garduino.user set password = '" +user.getPassword()+"', email = '"+user.getEmail()+"', phone =  '"+user.getPhone()+"'"+ " where id='"+id+"'";
+					consulta="update garduino.user set password = '" +user.getPassword()+"', email = '"+user.getEmail()+"', phone =  '"+user.getPhone()+"'"+ ", admin= '"+user.getAdmin()+"'" +" where id='"+id+"'";
 					System.out.println("\n update:"+consulta);
 					stm.executeUpdate(consulta);
 
@@ -193,12 +205,14 @@ public class UserService {
 						//System.out.println(email);
 						String phone= rs.getString("phone");
 						//System.out.println(phone);
+						int admin=rs.getInt("admin");
 						User user=new User();
 						user.setId(id);
 						user.setUsername(username);
 						user.setPassword(password);
 						user.setEmail(email);
 						user.setPhone(phone);
+						user.setAdmin(admin);
 						users.add(user);
 					}
 
@@ -247,12 +261,14 @@ public class UserService {
 						//System.out.println(email);
 						String phone= rs.getString("phone");
 						//System.out.println(phone);
+						int admin= rs.getInt("admin");
 						user=new User();
 						user.setId(id);
 						user.setUsername(username);
 						user.setPassword(password);
 						user.setEmail(email);
 						user.setPhone(phone);
+						user.setAdmin(admin);
 					}
 
 					

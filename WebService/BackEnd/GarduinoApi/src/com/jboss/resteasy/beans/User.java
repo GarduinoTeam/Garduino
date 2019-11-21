@@ -6,6 +6,7 @@ public class User {
 	private String password;
 	private String email;
 	private String phone;
+	private int admin;
 	public int getId() {
 		return id;
 	}
@@ -35,6 +36,12 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public int getAdmin() {
+		return admin;
+	}
+	public void setAdmin(int admin) {
+		this.admin = admin;
 	}
 
 }

@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.jboss.resteasy.beans.Condition;
 import com.jboss.resteasy.beans.SensorType;
 import com.jboss.resteasy.services.SensorTypeService;
 @Path("/sensortypes")
@@ -36,6 +37,63 @@ public class SensorTypeResource {
 					.status(Status.CREATED)
 					.entity(sensorType)
 					.build();
+		}
+		
+	}
+	@DELETE
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("{id}")
+	public Response deleteSensorType(@PathParam("id") int id){
+		int status=sensorTypeService.deleteSensorType(id);
+		if(status==-1){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}else if(status==-2){
+			return Response.status(Status.NO_CONTENT).build();
+		}else{
+			return Response.status(Status.OK).build();
+		}
+		
+	}
+	@PUT
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("{id}")
+	public Response updateSensorType(@PathParam("id") int id,SensorType sensortype){
+		int status=sensorTypeService.updateSensorType(id,sensortype);
+		if(status==-1){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}else if(status==-2){
+			return Response.status(Status.NOT_FOUND).build();
+		}else{
+			return Response.status(Status.OK).build();
+		}
+	}
+	@GET
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Response getSensorTypes(){
+		List<SensorType> sensorTypes=sensorTypeService.getSensorTypes(); 
+		return Response
+				.status(Status.OK)
+				.entity(sensorTypes)
+				.build();
+	}
+	
+	@GET
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("/{id}")
+	public Response getSensorType(@PathParam("id") int id){
+		SensorType sensorType=sensorTypeService.getSensorType(id);
+		if(sensorType==null){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}else{
+			return Response
+					.status(Status.OK)
+					.entity(sensorType)
+					.build();
+
 		}
 		
 	}
