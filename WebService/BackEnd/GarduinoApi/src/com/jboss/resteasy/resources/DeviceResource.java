@@ -21,13 +21,14 @@ import com.jboss.resteasy.beans.Device;
 import com.jboss.resteasy.services.DeviceService;
 @Path("/devices")
 public class DeviceResource {
+	private String serverHome="C:\\Users\\joanpau\\Desktop\\Servidor Web";
 	private DeviceService myDeviceService=new DeviceService();
 	@POST
 	@Path("/create_device")
 	@Consumes("multipart/form-data")
 	@Produces("application/json")
 	public Response createDevice(@MultipartForm Device form){
-		String fileName="C:\\Users\\joanpau\\Desktop\\Servidor Data\\"+form.getName()+".png";
+		String fileName=serverHome+"\\"+form.getUserId()+"\\"+form.getName()+".png";
 		try {
 			writeFile(form.getImage(), fileName);
 		} catch (IOException e) {

@@ -1,4 +1,5 @@
 package com.jboss.resteasy.services;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,6 +10,7 @@ import javax.sql.DataSource;
 
 import com.jboss.resteasy.beans.User;
 public class UserService {
+	private String serverHome="C:\\Users\\joanpau\\Desktop\\Servidor Web";
 	private static Statement stm;
 	private static Connection connection;
 	private static String consulta;
@@ -66,7 +68,15 @@ public class UserService {
 
 					consulta="insert into garduino.user (username,password,id,email,phone,admin) values ('"+user.getUsername()+"', '"+user.getPassword()+"',"+id+",'"+user.getEmail()+"','"+user.getPhone()+"','"+user.getAdmin()+"')";
 					stm.executeUpdate(consulta);
-
+					String newPath=serverHome+"\\"+id;
+					File file = new File(newPath);
+			        if (!file.exists()) {
+			            if (file.mkdir()) {
+			                System.out.println("Directory is created!");
+			            } else {
+			                System.out.println("Failed to create directory!");
+			            }
+			        }
 					
 					//System.out.println("\nfora:");
 				
@@ -112,8 +122,17 @@ public class UserService {
 
 					consulta="delete from garduino.user where id='"+id+"'";
 					stm.executeUpdate(consulta);
-
 					
+					String newPath=serverHome+"\\"+id;
+					File file = new File(newPath);
+			        if (file.exists()) {
+			           String [] content=file.list();
+			           for(int i=0;i<content.length;i++){
+			        	   File currentFile = new File(file.getPath(),content[i]);
+			        	    currentFile.delete();
+			           }
+			           file.delete();
+			        }
 					//System.out.println("\nfora:");
 				
 					connection.close();
