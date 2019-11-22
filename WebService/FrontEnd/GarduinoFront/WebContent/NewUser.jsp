@@ -137,7 +137,7 @@
         </nav>
         <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
+   <!-- Begin Page Content -->
         <div class="container">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -149,10 +149,10 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
-              <form class="user">
+              <form class="user" method="post" action="CreateUsers">
                 <div class="form-group row">
                   <div class="col mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="firstName" placeholder="First Name">
+                    <input type="text" class="form-control form-control-user" id=""userName"" placeholder="User Name">
                   </div>
                 </div>
                 <div class="form-group">
@@ -166,9 +166,8 @@
                     <input type="text" class="form-control form-control-user" id="phone" placeholder="Phone">
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">
+                
                 <hr>
               </form>
             </div>

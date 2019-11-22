@@ -58,17 +58,23 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="UsersList.jsp" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      <form method="post" action="ListUsers">
+        <div class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          
+       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item " href="UsersList.jsp">Users List</a>     
+            <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             <a class="collapse-item active" href="UserDevices.jsp">Devices</a>     
           </div>
         </div>
+          
+        </div>
+		           
+	    
+        </form>   
       </li>
 
       <!-- Divider -->
