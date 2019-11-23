@@ -5,11 +5,19 @@ import javax.ws.rs.FormParam;
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
 public class Device {
+	private int id;
+	
 	private String name;
 	private String status;
 	private byte[] image;
+	private String imageURL;
 	private int userId;
-
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public byte[] getImage() {
 		return image;
 	}
@@ -21,6 +29,12 @@ public class Device {
 	}
 	public int getUserId() {
 		return userId;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 	@FormParam("image")
