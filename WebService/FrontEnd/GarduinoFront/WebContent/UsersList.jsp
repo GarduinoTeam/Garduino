@@ -168,7 +168,9 @@
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td><a href="UserDevices.jsp" class="alert-link btn-icon-split"><span class="text">Tiger Nixon</span></a></td>
+                      <td><form method="post" action="ListDevices">
+            				<input type="submit" value="Tiger Nixon" class="btn btn-primary">      
+            		  </form></td>
                       <td>Edinburgh34</td>
                       <td>tiger@gmail.com</td>
                       <td>65874895</td>
@@ -179,7 +181,7 @@
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td>Tiger Nixon</td>
+                      <td><a href="UserDevices.jsp" class="alert-link btn-icon-split"><span class="text">Tiger Nixon</span></a></td>
                       <td>Edinburgh34</td>
                       <td>tiger@gmail.com</td>
                       <td>65874895</td>
