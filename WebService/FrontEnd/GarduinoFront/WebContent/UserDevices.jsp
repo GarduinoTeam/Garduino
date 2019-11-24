@@ -178,7 +178,9 @@
                     <tr>
                       <td>1</td>
                       <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
+                      <td><form method="post" action="ListRules">
+            				<input type="submit" value="Device1" class="btn btn-primary">      
+            		  </form></td>
                       <td>Active</td>
 
                       <td>
