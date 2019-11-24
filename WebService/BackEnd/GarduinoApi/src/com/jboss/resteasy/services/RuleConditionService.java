@@ -7,8 +7,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.jboss.resteasy.beans.Rule;
-
-public class RuleService {
+import com.jboss.resteasy.beans.RuleCondition;
+public class RuleConditionService {
 	private static Statement stm;
 	private static Connection connection;
 	private static String consulta;
@@ -16,8 +16,7 @@ public class RuleService {
 	private static InitialContext ctx;
 	private static String strEstat;
 	private static ResultSet rs;
-	
-	public int createRule(Rule rule){
+	public int createRuleCondition(RuleCondition rulecondition){
 		int id=0;
 		try {
 			ctx= new InitialContext();
@@ -29,21 +28,10 @@ public class RuleService {
 					return -1; //Error Connecting The user
 				}
 				else {
-					int existRule=0;
-					consulta="SELECT COUNT(id) from garduino.rule where name='"+rule.getName()+"'";
+			
+					consulta="SELECT id from garduino.rule_condition order by id desc limit 1";		
 					strEstat="Connection Established";
 					connection=ds.getConnection();
-					stm= connection.createStatement();
-					rs=stm.executeQuery(consulta);
-					while(rs.next()){
-						existRule=(int)rs.getLong("count");
-					}
-					if(existRule!=0){
-						return -2;
-					}
-					consulta="SELECT id from garduino.rule order by id desc limit 1";		
-					strEstat="Connection Established";
-					//connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
@@ -53,7 +41,7 @@ public class RuleService {
 					System.out.println("\nsql:"+consulta);
 					System.out.println(strEstat);
 
-					consulta="insert into garduino.rule (id,id_device,status,name,type) values ('"+id+"', '"+rule.getIdDevice()+"',"+rule.getStatus()+",'"+rule.getName()+"','"+rule.getType()+"')";
+					consulta="insert into garduino.rule_condition (id,id_rule,id_condition,condition_value,status) values ('"+id+"', '"+rulecondition.getIdRule()+"',"+rulecondition.getIdCondition()+",'"+rulecondition.getConditionValue()+"','"+rulecondition.getStatus()+"')";
 					stm.executeUpdate(consulta);
 					
 					//System.out.println("\nfora:");
@@ -70,10 +58,8 @@ public class RuleService {
 			
 		}
 		return id;
-		
-		
 	}
-	public int deleteRule(int id){
+	public int deleteRuleCondition(int id){
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -84,20 +70,20 @@ public class RuleService {
 					return -1; //Error Connecting The user
 				}
 				else {
-					int existRule=0;
-					consulta="SELECT COUNT(id) from garduino.rule where id='"+id+"'";
+					int existRuleCondition=0;
+					consulta="SELECT COUNT(id) from garduino.rule_condition where id='"+id+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						existRule=(int)rs.getLong("count");
+						existRuleCondition=(int)rs.getLong("count");
 					}
-					if(existRule==0){
+					if(existRuleCondition==0){
 						return -2;
 					}
 
-					consulta="delete from garduino.rule where id='"+id+"'";
+					consulta="delete from garduino.rule_condition where id='"+id+"'";
 					stm.executeUpdate(consulta);
 					
 					//System.out.println("\nfora:");
@@ -114,8 +100,9 @@ public class RuleService {
 			return -1;
 		}
 		return 0;
+		
 	}
-	public int updateRule(int id,Rule rule){
+	public int updateRuleCondition(int id,RuleCondition rulecondition){
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -126,20 +113,20 @@ public class RuleService {
 					return -1; //Error Connecting The user
 				}
 				else {
-					int existRule=0;
-					consulta="SELECT COUNT(id) from garduino.rule " +"where id='"+id+"'";
+					int existRuleCondition=0;
+					consulta="SELECT COUNT(id) from garduino.rule_condition " +"where id='"+id+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						existRule=(int)rs.getLong("count");
+						existRuleCondition=(int)rs.getLong("count");
 					}
-					if(existRule==0){
+					if(existRuleCondition==0){
 						return -2;
 					}
 
-					consulta="update garduino.rule set status = '" +rule.getStatus()+"'" +" where id='"+id+"'";
+					consulta="update garduino.rule_condition set status = '" +rulecondition.getStatus()+"', condition_value= '"+rulecondition.getConditionValue()+"'" +" where id='"+id+"'";
 					System.out.println("\n update:"+consulta);
 					stm.executeUpdate(consulta);
 
@@ -158,9 +145,10 @@ public class RuleService {
 			return -1;
 		}
 		return 0;
+		
 	}
-	public ArrayList<Rule> getRules(int device_id){
-		ArrayList<Rule> rules=new ArrayList<>();
+	public ArrayList<RuleCondition> getRuleConditions(int rule_id){
+		ArrayList<RuleCondition> ruleconditions=new ArrayList<>();
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -168,11 +156,11 @@ public class RuleService {
 				if(ds==null){
 					strEstat="Getting Error in Connection";
 					System.out.println(strEstat);
-					return rules; //Error Connecting The user
+					return ruleconditions; //Error Connecting The user
 				}
 				else {
 					
-					consulta="select * from garduino.rule where id_device='"+device_id+"'";
+					consulta="select * from garduino.rule_condition where id_rule='"+rule_id+"'";
 					
 					System.out.println(consulta);
 					connection=ds.getConnection();
@@ -180,17 +168,17 @@ public class RuleService {
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
 						int id=rs.getInt("id");
+						int id_rule=rs.getInt("id_rule");
+						int id_condition=rs.getInt("id_condition");
+						int conditionValue=rs.getInt("condition_value");
 						boolean status=rs.getBoolean("status");
-						String name=rs.getString("name");
-						int type=rs.getInt("type");
-						int deviceId=device_id;
-						Rule rule=new Rule();
-						rule.setId(id);
-						rule.setIdDevice(deviceId);
-						rule.setStatus(status);
-						rule.setName(name);
-						rule.setType(type);
-						rules.add(rule);
+						RuleCondition rulecondition=new RuleCondition();
+						rulecondition.setId(id);
+						rulecondition.setIdRule(id_rule);
+						rulecondition.setIdCondition(id_condition);
+						rulecondition.setConditionValue(conditionValue);
+						rulecondition.setStatus(status);
+						ruleconditions.add(rulecondition);
 					}
 
 					
@@ -205,12 +193,13 @@ public class RuleService {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			return rules;
+			return ruleconditions;
 		}
-		return rules;
+		return ruleconditions;
+		
 	}
-	public Rule getRule(int id){
-		Rule rule=null;
+	public RuleCondition getRuleCondition(int id){
+		RuleCondition rulecondition=null;
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -222,22 +211,22 @@ public class RuleService {
 				}
 				else {
 					
-					consulta="select * from garduino.rule where id ='"+id+"'"; 
+					consulta="select * from garduino.rule_condition where id ='"+id+"'"; 
 					System.out.println(consulta);
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
+						int id_rule=rs.getInt("id_rule");
+						int id_condition=rs.getInt("id_condition");
+						int conditionValue=rs.getInt("condition_value");
 						boolean status=rs.getBoolean("status");
-						String name=rs.getString("name");
-						int type=rs.getInt("type");
-						int deviceId=rs.getInt("id_device");
-						rule=new Rule();
-						rule.setId(id);
-						rule.setIdDevice(deviceId);
-						rule.setStatus(status);
-						rule.setName(name);
-						rule.setType(type);
+						rulecondition=new RuleCondition();
+						rulecondition.setId(id);
+						rulecondition.setIdRule(id_rule);
+						rulecondition.setIdCondition(id_condition);
+						rulecondition.setConditionValue(conditionValue);
+						rulecondition.setStatus(status);
 					}
 
 					
@@ -256,8 +245,6 @@ public class RuleService {
 		}
 
 		
-		return rule;
+		return rulecondition;
 	}
-	
-
 }
