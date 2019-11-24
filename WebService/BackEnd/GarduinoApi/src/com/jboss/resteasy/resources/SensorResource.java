@@ -14,12 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-
-import com.jboss.resteasy.beans.Device;
 import com.jboss.resteasy.beans.Sensor;
-import com.jboss.resteasy.beans.User;
 import com.jboss.resteasy.services.SensorService;
 @Path("/sensors")
 public class SensorResource {

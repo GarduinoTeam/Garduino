@@ -91,7 +91,7 @@ public class SensorService {
 						int value=rs.getInt("value");
 						Date date=rs.getTimestamp("date");
 						Sensor sensor=new Sensor();
-						sensor.setId(deviceId);
+						sensor.setId(id);
 						sensor.setSensorType(sensorType);
 						sensor.setDeviceId(deviceId);
 						sensor.setValue(value);
