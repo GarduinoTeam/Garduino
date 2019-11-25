@@ -12,7 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
+import beans.User;
 import jdk.nashorn.api.scripting.JSObject;
 
 /**
@@ -52,26 +58,27 @@ public class CreateUsers extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		
-		
-
-		URL url = new URL("http://localhost:8080/GarduinoApi/users/create_user");
-		//Crete connection
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Accept", "application/json,utf-8");
-		
-		//Let give body
-		conn.setDoOutput(true);
-		//Create body
-		String body = "{username:"+username+",password:"+password+",email:"+email+",phone:"+phone+"}";
-		
-		//Give body
-		try(OutputStream os = conn.getOutputStream()) {
-		    byte[] input = body.getBytes("utf-8");
-		    os.write(input, 0, input.length);           
+		String adminCheck = request.getParameter("adminCheck");
+		int admin=0;
+		if(adminCheck=="on"){
+			admin=1;
+		}else{
+			
+			admin=0;
 		}
-
+		String url="http://localhost:8080/GarduinoApi/users/create_user";
+		Client client= ClientBuilder.newClient();
+		WebTarget target=client.target(url);
+		User user=new User();
+		user.setUsername(username);
+		user.setAdmin(admin);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setPhone(phone);
+		Response res=target.request().post(Entity.json(user));
+		System.out.println(res.getStatus());
+		res.close();
+		
 		
 		try {
 			ServletContext context = getServletContext();

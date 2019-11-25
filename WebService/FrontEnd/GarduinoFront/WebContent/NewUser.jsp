@@ -169,6 +169,12 @@
                     <input type="text" class="form-control form-control-user" name="phone" placeholder="Phone">
                   </div>
                 </div>
+                <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="adminCheck">
+                        <label class="custom-control-label" for="customCheck">is admin</label>
+                      </div>
+                </div>
                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">               
               </form>
               <hr>
