@@ -89,6 +89,7 @@ public class UserResource {
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
+	@Path("/get_users")
 	public Response getUsers(){
 		List<User> users=myUserService.getUsers();
 		return Response
@@ -100,7 +101,7 @@ public class UserResource {
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
-	@Path("/{id}")
+	@Path("get_user/{id}")
 	public Response getUser(@PathParam("id") int id){
 		User user=myUserService.getUser(id);
 		if(user==null){

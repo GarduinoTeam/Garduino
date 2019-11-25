@@ -1,16 +1,14 @@
 package com.jboss.resteasy.services;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.jboss.resteasy.beans.User;
-public class UserService {
-	private String serverHome="C:\\Users\\joanpau\\Desktop\\Servidor Web";
+import com.jboss.resteasy.beans.Rule;
+
+public class RuleService {
 	private static Statement stm;
 	private static Connection connection;
 	private static String consulta;
@@ -18,7 +16,8 @@ public class UserService {
 	private static InitialContext ctx;
 	private static String strEstat;
 	private static ResultSet rs;
-	public int createUser(User user){
+	
+	public int createRule(Rule rule){
 		int id=0;
 		try {
 			ctx= new InitialContext();
@@ -30,33 +29,21 @@ public class UserService {
 					return -1; //Error Connecting The user
 				}
 				else {
-					int existUser=0;
-					consulta="SELECT COUNT(id) from garduino.user where username='"+user.getUsername()+"'";
+					int existRule=0;
+					consulta="SELECT COUNT(id) from garduino.rule where name='"+rule.getName()+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						existUser=(int)rs.getLong("count");
+						existRule=(int)rs.getLong("count");
 					}
-					if(existUser!=0){
+					if(existRule!=0){
 						return -2;
 					}
-					existUser=0;
-					consulta="SELECT COUNT(id) from garduino.user where email='"+user.getEmail()+"'";
+					consulta="SELECT id from garduino.rule order by id desc limit 1";		
 					strEstat="Connection Established";
-					connection=ds.getConnection();
-					stm= connection.createStatement();
-					rs=stm.executeQuery(consulta);
-					while(rs.next()){
-						existUser=(int)rs.getLong("count");
-					}
-					if(existUser!=0){
-						return -2;
-					}
-					consulta="SELECT id from garduino.user order by id desc limit 1";		
-					strEstat="Connection Established";
-					connection=ds.getConnection();
+					//connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
@@ -66,17 +53,8 @@ public class UserService {
 					System.out.println("\nsql:"+consulta);
 					System.out.println(strEstat);
 
-					consulta="insert into garduino.user (username,password,id,email,phone,admin) values ('"+user.getUsername()+"', '"+user.getPassword()+"',"+id+",'"+user.getEmail()+"','"+user.getPhone()+"','"+user.getAdmin()+"')";
+					consulta="insert into garduino.rule (id,id_device,status,name,type) values ('"+id+"', '"+rule.getIdDevice()+"',"+rule.getStatus()+",'"+rule.getName()+"','"+rule.getType()+"')";
 					stm.executeUpdate(consulta);
-					String newPath=serverHome+"\\"+id;
-					File file = new File(newPath);
-			        if (!file.exists()) {
-			            if (file.mkdir()) {
-			                System.out.println("Directory is created!");
-			            } else {
-			                System.out.println("Failed to create directory!");
-			            }
-			        }
 					
 					//System.out.println("\nfora:");
 				
@@ -95,8 +73,7 @@ public class UserService {
 		
 		
 	}
-	public int deleteUser(int id){
-		
+	public int deleteRule(int id){
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -107,32 +84,22 @@ public class UserService {
 					return -1; //Error Connecting The user
 				}
 				else {
-					int existUser=0;
-					consulta="SELECT COUNT(id) from garduino.user where id='"+id+"'";
+					int existRule=0;
+					consulta="SELECT COUNT(id) from garduino.rule where id='"+id+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						existUser=(int)rs.getLong("count");
+						existRule=(int)rs.getLong("count");
 					}
-					if(existUser==0){
+					if(existRule==0){
 						return -2;
 					}
 
-					consulta="delete from garduino.user where id='"+id+"'";
+					consulta="delete from garduino.rule where id='"+id+"'";
 					stm.executeUpdate(consulta);
 					
-					String newPath=serverHome+"\\"+id;
-					File file = new File(newPath);
-			        if (file.exists()) {
-			           String [] content=file.list();
-			           for(int i=0;i<content.length;i++){
-			        	   File currentFile = new File(file.getPath(),content[i]);
-			        	    currentFile.delete();
-			           }
-			           file.delete();
-			        }
 					//System.out.println("\nfora:");
 				
 					connection.close();
@@ -147,9 +114,8 @@ public class UserService {
 			return -1;
 		}
 		return 0;
-		
 	}
-	public int updateUser(int id,User user){
+	public int updateRule(int id,Rule rule){
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -160,20 +126,20 @@ public class UserService {
 					return -1; //Error Connecting The user
 				}
 				else {
-					int existUser=0;
-					consulta="SELECT COUNT(id) from garduino.user " +"where id='"+id+"'";
+					int existRule=0;
+					consulta="SELECT COUNT(id) from garduino.rule " +"where id='"+id+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						existUser=(int)rs.getLong("count");
+						existRule=(int)rs.getLong("count");
 					}
-					if(existUser==0){
+					if(existRule==0){
 						return -2;
 					}
 
-					consulta="update garduino.user set password = '" +user.getPassword()+"', email = '"+user.getEmail()+"', phone =  '"+user.getPhone()+"'"+ ", admin= '"+user.getAdmin()+"'" +" where id='"+id+"'";
+					consulta="update garduino.rule set status = '" +rule.getStatus()+"'" +" where id='"+id+"'";
 					System.out.println("\n update:"+consulta);
 					stm.executeUpdate(consulta);
 
@@ -192,10 +158,9 @@ public class UserService {
 			return -1;
 		}
 		return 0;
-		
 	}
-	public ArrayList<User> getUsers(){
-		ArrayList<User> users=new ArrayList<>();
+	public ArrayList<Rule> getRules(int device_id){
+		ArrayList<Rule> rules=new ArrayList<>();
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -203,36 +168,29 @@ public class UserService {
 				if(ds==null){
 					strEstat="Getting Error in Connection";
 					System.out.println(strEstat);
-					return users; //Error Connecting The user
+					return rules; //Error Connecting The user
 				}
 				else {
 					
-					consulta="select * from garduino.user"; 
+					consulta="select * from garduino.rule where id_device='"+device_id+"'";
+					
 					System.out.println(consulta);
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						//System.out.println("Inside getUsers loop");
-						String username=rs.getString("username");
-						//System.out.println(username);
-						String password=rs.getString("password");
-						//System.out.println(password);
 						int id=rs.getInt("id");
-						//.out.println(id);
-						String email=rs.getString("email");
-						//System.out.println(email);
-						String phone= rs.getString("phone");
-						//System.out.println(phone);
-						int admin=rs.getInt("admin");
-						User user=new User();
-						user.setId(id);
-						user.setUsername(username);
-						user.setPassword(password);
-						user.setEmail(email);
-						user.setPhone(phone);
-						user.setAdmin(admin);
-						users.add(user);
+						boolean status=rs.getBoolean("status");
+						String name=rs.getString("name");
+						int type=rs.getInt("type");
+						int deviceId=device_id;
+						Rule rule=new Rule();
+						rule.setId(id);
+						rule.setIdDevice(deviceId);
+						rule.setStatus(status);
+						rule.setName(name);
+						rule.setType(type);
+						rules.add(rule);
 					}
 
 					
@@ -247,12 +205,12 @@ public class UserService {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			return users;
+			return rules;
 		}
-		return users;
+		return rules;
 	}
-	public User getUser(int id){
-		User user=null;
+	public Rule getRule(int id){
+		Rule rule=null;
 		try {
 			ctx= new InitialContext();
 			if(ctx!=null) {
@@ -264,30 +222,22 @@ public class UserService {
 				}
 				else {
 					
-					consulta="select * from garduino.user where id ='"+id+"'"; 
+					consulta="select * from garduino.rule where id ='"+id+"'"; 
 					System.out.println(consulta);
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
-						//System.out.println("Inside getUsers loop");
-						String username=rs.getString("username");
-						//System.out.println(username);
-						String password=rs.getString("password");
-						//System.out.println(password);
-						//.out.println(id);
-						String email=rs.getString("email");
-						//System.out.println(email);
-						String phone= rs.getString("phone");
-						//System.out.println(phone);
-						int admin= rs.getInt("admin");
-						user=new User();
-						user.setId(id);
-						user.setUsername(username);
-						user.setPassword(password);
-						user.setEmail(email);
-						user.setPhone(phone);
-						user.setAdmin(admin);
+						boolean status=rs.getBoolean("status");
+						String name=rs.getString("name");
+						int type=rs.getInt("type");
+						int deviceId=rs.getInt("id_device");
+						rule=new Rule();
+						rule.setId(id);
+						rule.setIdDevice(deviceId);
+						rule.setStatus(status);
+						rule.setName(name);
+						rule.setType(type);
 					}
 
 					
@@ -306,6 +256,8 @@ public class UserService {
 		}
 
 		
-		return user;
+		return rule;
 	}
+	
+
 }
