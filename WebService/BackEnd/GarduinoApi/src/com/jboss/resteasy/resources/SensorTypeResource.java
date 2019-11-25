@@ -23,6 +23,7 @@ public class SensorTypeResource {
 	@POST
 	@Produces("application/json")
 	@Consumes("application/json")
+	@Path("/create_sensortype")
 	public Response createSensorType(SensorType sensorType){
 		int status= sensorTypeService.createSensorType(sensorType);
 		if(status==-1){
@@ -43,7 +44,7 @@ public class SensorTypeResource {
 	@DELETE
 	@Produces("application/json")
 	@Consumes("application/json")
-	@Path("{id}")
+	@Path("/delete_sensortype/{id}")
 	public Response deleteSensorType(@PathParam("id") int id){
 		int status=sensorTypeService.deleteSensorType(id);
 		if(status==-1){
@@ -58,7 +59,7 @@ public class SensorTypeResource {
 	@PUT
 	@Produces("application/json")
 	@Consumes("application/json")
-	@Path("{id}")
+	@Path("/update_sensortype/{id}")
 	public Response updateSensorType(@PathParam("id") int id,SensorType sensortype){
 		int status=sensorTypeService.updateSensorType(id,sensortype);
 		if(status==-1){
@@ -72,6 +73,7 @@ public class SensorTypeResource {
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
+	@Path("/get_sensortypes")
 	public Response getSensorTypes(){
 		List<SensorType> sensorTypes=sensorTypeService.getSensorTypes(); 
 		return Response
@@ -83,7 +85,7 @@ public class SensorTypeResource {
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
-	@Path("/{id}")
+	@Path("get_sensortype/{id}")
 	public Response getSensorType(@PathParam("id") int id){
 		SensorType sensorType=sensorTypeService.getSensorType(id);
 		if(sensorType==null){

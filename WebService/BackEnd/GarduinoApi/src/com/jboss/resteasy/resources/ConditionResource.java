@@ -72,6 +72,7 @@ public class ConditionResource {
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
+	@Path("/get_conditions")
 	public Response getConditions(){
 		List<Condition> conditions=conditionService.getConditions(); 
 		return Response
@@ -83,7 +84,7 @@ public class ConditionResource {
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
-	@Path("/{id}")
+	@Path("get_condition/{id}")
 	public Response getCondition(@PathParam("id") int id){
 		Condition condition=conditionService.getCondition(id);
 		if(condition==null){
