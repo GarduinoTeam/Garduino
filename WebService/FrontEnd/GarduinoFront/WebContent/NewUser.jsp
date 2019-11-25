@@ -57,11 +57,14 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link" href="UsersList.jsp">
-          <i class="fas fa-fw fa-user"></i>
-          <span>Users</span>
-        </a>
+      <li class="nav-item">
+        <form method="post" action="ListUsers">
+	        <div class="nav-link">
+		        <i class="fas fa-fw fa-user"></i>
+		        <input type="submit" value="Users" class="btn btn-primary">
+		         
+		    </div>
+        </form>
       </li>
 
       <!-- Divider -->
@@ -137,7 +140,7 @@
         </nav>
         <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
+   <!-- Begin Page Content -->
         <div class="container">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -149,28 +152,26 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
-              <form class="user">
+              <form class="user" method="post" action="CreateUsers">
                 <div class="form-group row">
                   <div class="col mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="firstName" placeholder="First Name">
+                    <input type="text" class="form-control form-control-user" name="userName" placeholder="User Name">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email Address">
+                  <input type="email" class="form-control form-control-user" name="email" placeholder="Email Address">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="password" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="phone" placeholder="Phone">
+                    <input type="text" class="form-control form-control-user" name="phone" placeholder="Phone">
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
-                <hr>
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">               
               </form>
+              <hr>
             </div>
           </div>
         </div>

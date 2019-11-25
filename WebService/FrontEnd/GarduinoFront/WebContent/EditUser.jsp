@@ -58,10 +58,12 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link" href="UsersList.jsp">
+      	<form method="post" action="ListUsers">
+        <button type="submit" class="btn" >
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
-        </a>
+        </button>
+        </form>
       </li>
 
       <!-- Divider -->
