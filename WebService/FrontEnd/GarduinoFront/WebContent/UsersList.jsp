@@ -185,16 +185,17 @@
             	  <td><%=users[i].getPhone()%></td>
             	  <td><%=users[i].getAdmin()%></td>
             	  <td>
-                      <a href="EditUser.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+                      
+                      <form method="post" action="EditUsers">
+            	  	  <input type="hidden" value=<%=users[i].getId()%> name="userId">
+                      <input type="submit" class="btn btn-success " value="Edit" >
+                      </form>
                       
                       <form method="post" action="DeleteUsers">
             	  	  <input type="hidden" value=<%=users[i].getId()%> name="userId">
-                      <input type="submit" class="btn btn-danger" value="Delete" >
+                      <input type="submit" class="btn btn-danger " value="Delete" >
                       </form>
-                      
-                      
-                  
-                      
+                                      
                   </td>
                   </tr>
                   <%} %>           
