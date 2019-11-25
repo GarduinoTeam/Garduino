@@ -186,7 +186,15 @@
             	  <td><%=users[i].getAdmin()%></td>
             	  <td>
                       <a href="EditUser.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+                      
+                      <form method="post" action="DeleteUsers">
+            	  	  <input type="hidden" value=<%=users[i].getId()%> name="userId">
+                      <input type="submit" class="btn btn-danger" value="Delete" >
+                      </form>
+                      
+                      
+                  
+                      
                   </td>
                   </tr>
                   <%} %>           

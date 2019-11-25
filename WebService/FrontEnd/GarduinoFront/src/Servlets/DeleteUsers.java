@@ -1,9 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,19 +16,18 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import beans.User;
-import jdk.nashorn.api.scripting.JSObject;
 
 /**
- * Servlet implementation class CreatUsers
+ * Servlet implementation class DeleteUsers
  */
-@WebServlet("/CreateUsers")
-public class CreateUsers extends HttpServlet {
+@WebServlet("/DeleteUsers")
+public class DeleteUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateUsers() {
+    public DeleteUsers() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +35,7 @@ public class CreateUsers extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doFer(request, response);	
 	}
 
@@ -53,32 +49,15 @@ public class CreateUsers extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
+		System.out.println("\nDins del DeleteUsers!");
 		
-		String username = request.getParameter("userName");
-		String password = request.getParameter("password");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String adminCheck = request.getParameter("adminCheck");
-		int admin=0;
-		if(adminCheck=="on"){
-			admin=1;
-		}else{
-			
-			admin=0;
-		}
-		String url="http://localhost:8080/GarduinoApi/users/create_user";
+		String userId = request.getParameter("userId");
+		String url="http://localhost:8080/GarduinoApi/users/delete_user/"+userId;
 		Client client= ClientBuilder.newClient();
 		WebTarget target=client.target(url);
-		User user=new User();
-		user.setUsername(username);
-		user.setAdmin(admin);
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setPhone(phone);
-		Response res=target.request().post(Entity.json(user));
+		Response res=target.request().delete();
 		System.out.println(res.getStatus());
 		res.close();
-		
 		
 		try {
 			ServletContext context = getServletContext();
@@ -87,4 +66,5 @@ public class CreateUsers extends HttpServlet {
 		}
 		catch ( Exception e ) {e.printStackTrace();}
 	}
+
 }
