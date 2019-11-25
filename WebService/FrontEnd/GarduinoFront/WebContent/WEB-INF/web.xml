@@ -44,7 +44,7 @@
     <servlet-name>CreateDevices</servlet-name>
     <url-pattern>/UserDevices</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>ListRules</display-name>
     <servlet-name>ListRules</servlet-name>
@@ -52,6 +52,16 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ListRules</servlet-name>
+    <url-pattern>/Rules</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateRules</display-name>
+    <servlet-name>CreateRules</servlet-name>
+    <jsp-file>/Rules.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateRules</servlet-name>
     <url-pattern>/Rules</url-pattern>
   </servlet-mapping>
 </web-app>
