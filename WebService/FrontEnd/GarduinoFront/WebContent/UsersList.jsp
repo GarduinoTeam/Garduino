@@ -1,3 +1,5 @@
+<%@page import="beans.User" %>
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -146,6 +148,9 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Users</h1>
           
+          
+          <%beans.User[] users = (beans.User[])session.getAttribute("users"); %>
+          
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -162,163 +167,40 @@
                       <th>Password</th>
                       <th>Email</th>
                       <th>Phone</th>
+                      <th>IsAdmin</th>
                     </tr>
                   </thead>
      
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td><form method="post" action="ListDevices">
-            				<input type="submit" value="Tiger Nixon" class="btn btn-primary">      
+                  
+                  <%for(int i=0; i<users.length; i++){ %>
+                  <tr>
+                  <td><%=users[i].getId()%></td>
+                  <td><form method="post" action="ListDevices">
+                  			<input type="hidden" value=<%=users[i].getId()%> name="userId">
+            				<input type="submit" value=<%=users[i].getUsername()%> class="btn btn-primary">      
             		  </form></td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                      <td>
-                      <a href="EditUser.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td><a href="UserDevices.jsp" class="alert-link btn-icon-split"><span class="text">Tiger Nixon</span></a></td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>13</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>14</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>15</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>16</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>17</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>19</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>20</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>
-                    </tr>
-                    <tr>
-                      <td>21</td>
-                      <td>Tiger Nixon</td>
-                      <td>Edinburgh34</td>
-                      <td>tiger@gmail.com</td>
-                      <td>65874895</td>  
-                    </tr>
+            	  <td><%=users[i].getPassword()%></td>
+            	  <td><%=users[i].getEmail()%></td>
+            	  <td><%=users[i].getPhone()%></td>
+            	  <td><%=users[i].getAdmin()%></td>
+            	  <td>
+                      
+                      <form method="post" action="EditUsers">
+            	  	  <input type="hidden" value=<%=users[i].getId()%> name="userId">
+                      <input type="submit" class="btn btn-success " value="Edit" >
+                      </form>
+                      
+                      <form method="post" action="DeleteUsers">
+            	  	  <input type="hidden" value=<%=users[i].getId()%> name="userId">
+                      <input type="submit" class="btn btn-danger " value="Delete" >
+                      </form>
+                                      
+                  </td>
+                  </tr>
+                  <%} %>           
+                               
+                  
                   </tbody>
                 </table>
               </div>

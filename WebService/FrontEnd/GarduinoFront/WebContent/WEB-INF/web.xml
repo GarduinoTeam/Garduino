@@ -16,32 +16,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CreateUsers</display-name>
-    <servlet-name>CreateUsers</servlet-name>
-    <jsp-file>/UsersList.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CreateUsers</servlet-name>
-    <url-pattern>/UsersList</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>ListDevices</display-name>
     <servlet-name>ListDevices</servlet-name>
     <jsp-file>/UserDevices.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListDevices</servlet-name>
-    <url-pattern>/UserDevices</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CreateDevices</display-name>
-    <servlet-name>CreateDevices</servlet-name>
-    <jsp-file>/UserDevices.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CreateDevices</servlet-name>
     <url-pattern>/UserDevices</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -56,12 +36,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CreateRules</display-name>
-    <servlet-name>CreateRules</servlet-name>
-    <jsp-file>/Rules.jsp</jsp-file>
+    <display-name>EditUsers</display-name>
+    <servlet-name>EditUsers</servlet-name>
+    <jsp-file>/EditUser.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CreateRules</servlet-name>
-    <url-pattern>/Rules</url-pattern>
+    <servlet-name>EditUsers</servlet-name>
+    <url-pattern>/EditUser</url-pattern>
   </servlet-mapping>
 </web-app>
