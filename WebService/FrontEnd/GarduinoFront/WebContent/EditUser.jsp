@@ -57,12 +57,13 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-      	<form method="post" action="ListUsers">
-        <button type="submit" class="btn" >
-          <i class="fas fa-fw fa-user"></i>
-          <span>Users</span>
-        </button>
+      <li class="nav-item">
+        <form method="post" action="ListUsers">
+	        <div class="nav-link">
+		        <i class="fas fa-fw fa-user"></i>
+		        <input type="submit" value="Users" class="btn btn-primary">
+		         
+		    </div>
         </form>
       </li>
 
