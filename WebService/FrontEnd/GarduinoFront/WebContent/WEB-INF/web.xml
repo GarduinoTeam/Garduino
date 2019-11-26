@@ -38,10 +38,20 @@
     <description></description>
     <display-name>EditUsers</display-name>
     <servlet-name>EditUsers</servlet-name>
-    <jsp-file>/EditUser.jsp</jsp-file>
+    <jsp-file>/UsersList.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditUsers</servlet-name>
+    <url-pattern>/UsersList</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>GetUser</display-name>
+    <servlet-name>GetUser</servlet-name>
+    <jsp-file>/EditUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUser</servlet-name>
     <url-pattern>/EditUser</url-pattern>
   </servlet-mapping>
 </web-app>

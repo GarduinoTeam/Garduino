@@ -1,3 +1,4 @@
+<%@page import="beans.Device" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -175,239 +176,26 @@
                   </thead>
      
                   <tbody>
+                  	<%beans.Device[] devices = (beans.Device[])session.getAttribute("devices"); %>
+                  	<%for(int i=0; i<devices.length; i++){ %>
+                  	
                     <tr>
-                      <td>1</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
+                      <td><%=devices[i].getId()%></td>
+                      <td><img src=<%=devices[i].getImageURL()%> with="50" height="50"></td>
                       <td><form method="post" action="ListRules">
-            				<input type="submit" value="Device1" class="btn btn-primary">      
+            				<input type="submit" value=<%=devices[i].getName()%> class="btn btn-primary">      
             		  </form></td>
-                      <td>Active</td>
+                      <td><%=devices[i].getStatus()%></td>
 
                       <td>
                       <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
                       <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
                       </td>
                     </tr>
+                    <%} %>
                     <tr>
-                      <td>2</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>13</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>14</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>15</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>16</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>17</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>19</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>20</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>21</td>
-                      <td><img src="img/TomatoTest.jpg" with="50" height="50"></td>
-                      <td><a href="Rules.jsp" class="alert-link btn-icon-split"><span class="text">Device1</span></a></td>
-                      <td>Active</td>
-
-                      <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
+                      
+                    
                   </tbody>
                 </table>
               </div>
