@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,7 +14,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 import javax.xml.rpc.ServiceException;
+
+import beans.User;
 
 /**
  * Servlet implementation class ListUsers
@@ -49,13 +59,26 @@ public class ListUsers extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("\nDins del ListUsers!");
 		
-		
-		URL url = new URL("http://localhost:8080/GarduinoApi/users/getUsers");
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Accept", "application/json");
+		HttpSession session;
+		session=request.getSession(true);
 		
 		
+		String url="http://localhost:8080/GarduinoApi/users/get_users";
+		Client client= ClientBuilder.newClient();
+		WebTarget target=client.target(url);
+		
+		User[] usersList = null;
+		
+		List<User>users=target.request().get(new GenericType<List<User>>(){});
+		usersList = new User[users.size()];
+		for(int i=0;i<users.size();i++){
+			usersList[i]=users.get(i);
+		}
+		//Response res=target.request().post(Entity.json(user));
+		//System.out.println(res.getStatus());
+		//res.close();
+		
+		session.setAttribute("users", usersList);
 		try {
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/UsersList");

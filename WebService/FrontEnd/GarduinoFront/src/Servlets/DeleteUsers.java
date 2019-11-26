@@ -1,9 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,26 +9,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 
-import beans.Device;
 import beans.User;
 
 /**
- * Servlet implementation class ListDevices
+ * Servlet implementation class DeleteUsers
  */
-@WebServlet("/ListDevices")
-public class ListDevices extends HttpServlet {
+@WebServlet("/DeleteUsers")
+public class DeleteUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListDevices() {
+    public DeleteUsers() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,31 +49,19 @@ public class ListDevices extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("\nDins del ListDevices!");		
-		String userId=request.getParameter("userId");
-		System.out.println("List Devices:");
-		System.out.println(userId);
-		String url="http://localhost:8080/GarduinoApi/devices/get_devices?user_id="+userId;
-		HttpSession session;
-		session=request.getSession(true);
+		System.out.println("\nDins del DeleteUsers!");
+		
+		String userId = request.getParameter("userId");
+		String url="http://localhost:8080/GarduinoApi/users/delete_user/"+userId;
 		Client client= ClientBuilder.newClient();
 		WebTarget target=client.target(url);
+		Response res=target.request().delete();
+		System.out.println(res.getStatus());
+		res.close();
 		
-		Device[] devicesList = null;
-		
-		List<Device>devices=target.request().get(new GenericType<List<Device>>(){});
-		devicesList = new Device[devices.size()];
-		for(int i=0;i<devices.size();i++){
-			Device device=devices.get(i);
-			devicesList[i]=device;
-			System.out.println(device.getName());
-			System.out.println(device.getImageURL());
-			
-		}
-		session.setAttribute("devices", devicesList);
 		try {
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/UserDevices");
+			RequestDispatcher rd = context.getRequestDispatcher("/ListUsers");
 			rd.forward(request, response);
 		}
 		catch ( Exception e ) {e.printStackTrace();}

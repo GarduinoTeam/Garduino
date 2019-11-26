@@ -1,3 +1,4 @@
+<%@page import="beans.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -57,12 +58,13 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-      	<form method="post" action="ListUsers">
-        <button type="submit" class="btn" >
-          <i class="fas fa-fw fa-user"></i>
-          <span>Users</span>
-        </button>
+      <li class="nav-item">
+        <form method="post" action="ListUsers">
+	        <div class="nav-link">
+		        <i class="fas fa-fw fa-user"></i>
+		        <input type="submit" value="Users" class="btn btn-primary">
+		         
+		    </div>
         </form>
       </li>
 
@@ -141,7 +143,9 @@
 
         <!-- Begin Page Content -->
         <div class="container">
-
+	 
+	 <%beans.User user = (beans.User)session.getAttribute("user"); %>
+    
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
@@ -151,26 +155,31 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Edit User Account</h1>
               </div>
-              <form class="user">
+              <form class="user" method="post" action="EditUsers">
+              <input  type="hidden" value=<%=user.getId()%> name="userId">
                 <div class="form-group row">
                   <div class="col mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="firstName" placeholder="Tiger Nixon">
+                    <input type="text" class="form-control form-control-user" id="firstName" name="username" value=<%=user.getUsername()%>>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="email" placeholder="Email Address">
+                  <input type="email" class="form-control form-control-user" id="email" name="email" value=<%=user.getEmail()%>>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="password" placeholder="Password">
+                    <input type="password" class="form-control form-control-user" id="password" name="password" value=<%=user.getPassword()%>>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="phone" placeholder="Phone">
+                    <input type="text" class="form-control form-control-user" id="phone" name="phone" value=<%=user.getPhone()%>>
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Save changes
-                </a>
+                <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="adminCheck">
+                        <label class="custom-control-label" for="customCheck">is admin</label>
+                      </div>
+                </div>
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Save Changes">
                 <hr>
               </form>
             </div>
