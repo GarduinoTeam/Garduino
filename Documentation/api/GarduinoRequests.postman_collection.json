@@ -1,0 +1,736 @@
+{
+	"info": {
+		"_postman_id": "03be93b2-625f-4245-89d9-2c3ead207340",
+		"name": "GarduinoRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "http://localhost:8080/GarduinoApi/users/get_user/{{id_user}}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john\",\n    \"password\": \"doe123456\",\n    \"email\": \"john@doe.com\",\n    \"phone\": \"666666666\",\n    \"admin\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/users/get_user/{{id_user}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"users",
+								"get_user",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/users/get_users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 2,\n\t\"startTime\": 1574598307000,\n\t\"status\": \"false\",\n\t\"endTime\": 1674568309000,\n\t\"specificDates\":[\"2019-11-20\", \"2019-11-29\"],\n\t\"idRule\": 2,\n\t\"monthsOfTheYear\":\"111111111111\",\n\t\"daysOfWeek\": \"1010111\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/users/get_users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"users",
+								"get_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/users/delete_user/{{id_user}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/users/delete_user/{{id_user}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"users",
+								"delete_user",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/users/update_user/{{id_user}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"john\",\n    \"password\": \"doe123456\",\n    \"email\": \"john@doe.com\",\n    \"phone\": \"666666666\",\n    \"admin\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/users/update_user/{{id_user}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"users",
+								"update_user",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/users/create_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"john\",\n    \"password\": \"doe123456\",\n    \"email\": \"john@doe.com\",\n    \"phone\": \"666666666\",\n    \"admin\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/users/create_user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"users",
+								"create_user"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Devices",
+			"item": [
+				{
+					"name": "http://localhost:8080/GarduinoApi/devices/images/1/{{id_user}}/{{device_id}}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/devices/images/{{id_user}}/{{device_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"devices",
+								"images",
+								"{{id_user}}",
+								"{{device_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/devices/get_devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/devices/get_devices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"devices",
+								"get_devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/devices/create_device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "name",
+									"value": "Tomatoes",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "DISCONNECTED",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/devices/create_device",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"devices",
+								"create_device"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/devices/delete_device/{{device_id}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/devices/delete_device/{{device_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"devices",
+								"delete_device",
+								"{{device_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Conditions",
+			"item": [
+				{
+					"name": "http://localhost:8080/GarduinoApi/conditions/get_condition/1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":2,\n\t\"startTime\":1574598307000,\n\t\"status\":\"false\",\n\t\"endTime\":1674568309000,\n\t\"specificDates\":[\"1970-01-01\",\"2019-01-01\"],\n\t\"idRule\":2,\n\t\"monthsOfTheYear\":\"111111111111\",\n\t\"daysOfWeek\":\"1010111\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/conditions/get_condition/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"conditions",
+								"get_condition",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/conditions/get_conditions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":2,\n\t\"startTime\":1574598307000,\n\t\"status\":\"false\",\n\t\"endTime\":1674568309000,\n\t\"specificDates\":[\"1970-01-01\",\"2019-01-01\"],\n\t\"idRule\":2,\n\t\"monthsOfTheYear\":\"111111111111\",\n\t\"daysOfWeek\":\"1010111\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/conditions/get_conditions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"conditions",
+								"get_conditions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Rules",
+			"item": [
+				{
+					"name": "http://localhost:8080/GarduinoApi/ruletimeconditions/get_rule_time_condition/2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 2,\n\t\"startTime\" : 1574598307000,\n\t\"status\" : \"false\",\n\t\"endTime\" : 1674568309000,\n\t\"specificDates\" : [\"1970-01-01\", \"2019-01-01\"],\n\t\"idRule\" : 2,\n\t\"monthsOfTheYear\" : \"111111111111\",\n\t\"daysOfWeek\" : \"1010111\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/ruletimeconditions/get_rule_time_condition/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"ruletimeconditions",
+								"get_rule_time_condition",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/ruletimeconditions/create_rule_time_condition",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 2,\n\t\"startTime\" : 1574598307000,\n\t\"status\" : \"true\",\n\t\"endTime\" : 1674568309000,\n\t\"specificDates\" : [\"1970-01-01\", \"2019-01-01\"],\n\t\"idRule\" : 2,\n\t\"monthsOfTheYear\" : \"111111111111\",\n\t\"daysOfWeek\" : \"1010111\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/ruletimeconditions/create_rule_time_condition",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"ruletimeconditions",
+								"create_rule_time_condition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/ruletimeconditions/update_rule_time_condition/1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":2,\n\t\"startTime\":1574598307000,\n\t\"status\":\"true\",\n\t\"endTime\":19000101,\n\t\"specificDates\":[19000101,19000102,19000103,1474594307000,1474594307,15000000],\n\t\"idRule\":2,\n\t\"monthsOfTheYear\":\"111111111111\",\n\t\"daysOfWeek\":\"1010111\"\n\t\n\t\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/ruletimeconditions/update_rule_time_condition/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"ruletimeconditions",
+								"update_rule_time_condition",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/ruletimeconditions/delete_rule_time_condition/1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/ruletimeconditions/delete_rule_time_condition/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"ruletimeconditions",
+								"delete_rule_time_condition",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sensor",
+			"item": [
+				{
+					"name": "http://localhost:8080/GarduinoApi/sensortypes/1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Accelerometer\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/sensortypes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"sensortypes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/sensortypes/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/sensortypes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"sensortypes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/GarduinoApi/sensortypes/4",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c38895bbc059378fb3f96878103788897f8d9577",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/GarduinoApi/sensortypes/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GarduinoApi",
+								"sensortypes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
