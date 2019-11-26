@@ -186,7 +186,7 @@
             	  <td><%=users[i].getAdmin()%></td>
             	  <td>
                       
-                      <form method="post" action="EditUsers">
+                      <form method="post" action="GetUser">
             	  	  <input type="hidden" value=<%=users[i].getId()%> name="userId">
                       <input type="submit" class="btn btn-success " value="Edit" >
                       </form>
