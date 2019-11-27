@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-
+<%String userId = (String)session.getAttribute("userId"); %>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -164,7 +164,10 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Devices Information</h6>
-              <a class="btn btn-success" style="float:right" href="NewDevice.jsp">New Device</a>
+              <form method="post" action="PassNewDeviceId">
+                  			<input type="hidden" value=<%=userId%> name="userId">
+            				<input type="submit" class="btn btn-success" value="New Device" style="float:right" class="btn btn-primary">      
+            	</form>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -186,6 +189,7 @@
                       <td><img src=<%=devices[i].getImageURL()%> with="50" height="50"></td>
                       <td><form method="post" action="ListRules">
                       		<input type="hidden" value=<%=devices[i].getId()%> name="deviceId">
+                      		<input type="hidden" value=<%=devices[i].getUserId()%> name="userId">
             				<input type="submit" value=<%=devices[i].getName()%> class="btn btn-primary">      
             		  </form></td>
                       <td><%=devices[i].getStatus()%></td>

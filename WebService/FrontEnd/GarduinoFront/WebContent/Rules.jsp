@@ -25,6 +25,7 @@
 <body id="page-top">
 	
   <%String deviceId = (String)session.getAttribute("deviceId"); %>
+  <%String userId = (String)session.getAttribute("userId"); %>
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -71,6 +72,7 @@
             <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             </form>  
             <form method="post" action="ListDevices">
+            <input type="hidden" value=<%=userId%> name="userId">
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-100">      
             </form> 
             <form method="post" action="ListRules">
@@ -169,6 +171,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Rules Information</h6>
               <form method="post" action="PassRuleID">
               	<input type="hidden" value=<%=deviceId%> name="deviceId">
+              	<input type="hidden" value=<%=userId%> name="userId">
               	<input type="submit" value="New Rule" class="btn btn-success" style="float:right">
               </form>
             <div class="card-body">
