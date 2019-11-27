@@ -162,7 +162,7 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create a Device!</h1>
               </div>
-              <form class="user" method="post" action="CreateDevices">
+              <form class="user" method="post" action="CreateDevices" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="text" class="form-control form-control-user" id="deviceName" name="deviceName" placeholder="Device Name">
                 </div>
@@ -173,7 +173,11 @@
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
-                <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">    
+                <div class="form-group">
+                    <input type="file" class="form-control form-control-user" id="imageDevice" name="file" placeholder="Device Image">
+                </div>
+                <input type="hidden" value=<%=session.getAttribute("userId")%> name="userId">
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Create Device">    
                 <hr>
               </form>
             </div>

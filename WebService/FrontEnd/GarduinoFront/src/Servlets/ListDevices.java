@@ -59,7 +59,11 @@ public class ListDevices extends HttpServlet {
 		System.out.println(userId);
 		String url="http://localhost:8080/GarduinoApi/devices/get_devices?user_id="+userId;
 		HttpSession session;
-		session=request.getSession(true);
+		session=request.getSession();
+		if(userId==null){
+			userId=(String)session.getAttribute("userId");
+		}
+		session.setAttribute("userId", userId);
 		Client client= ClientBuilder.newClient();
 		WebTarget target=client.target(url);
 		
