@@ -159,11 +159,11 @@
               <input  type="hidden" value=<%=user.getId()%> name="userId">
                 <div class="form-group row">
                   <div class="col mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="firstName" name="username" value=<%=user.getUsername()%>>
+                    <input type="text" disabled class="form-control form-control-user" id="firstName" name="username" value=<%=user.getUsername()%>>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="email" name="email" value=<%=user.getEmail()%>>
+                  <input type="email" class="form-control form-control-user"  id="email" name="email" value=<%=user.getEmail()%>>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">

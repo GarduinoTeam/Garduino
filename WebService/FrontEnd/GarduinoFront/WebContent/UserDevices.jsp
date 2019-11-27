@@ -1,4 +1,5 @@
 <%@page import="beans.Device" %>
+<%@page import="beans.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -63,7 +64,7 @@
        <div class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
-          
+         <%beans.User user = (beans.User)session.getAttribute("user"); %> 
        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
@@ -71,6 +72,7 @@
             <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             </form>  
             <form method="post" action="ListDevices">
+            <input type="hidden" value=<%=session.getAttribute("userId")%> name="userId">
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-400">      
             </form> 
           </div>
@@ -188,8 +190,16 @@
                       <td><%=devices[i].getStatus()%></td>
 
                       <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+                      <form method="post" action="GetDevice">
+                      	<input type="hidden" value=<%=devices[i].getId()%> name="deviceId">
+                      	<input type="hidden" value=<%=devices[i].getUserId()%> name="userId">
+                      	<input type="submit" class="btn btn-success " value="Edit" >
+                      </form>
+                      <form method="post" action="DeleteDevices">
+                      	<input type="hidden" value=<%=devices[i].getId()%> name="deviceId">
+                      	<input type="hidden" value=<%=devices[i].getUserId()%> name="userId">
+                      	<input type="submit" class="btn btn-danger " value="Delete" >
+                      </form>
                       </td>
                     </tr>
                     <%} %>

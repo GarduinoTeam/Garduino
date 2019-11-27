@@ -1,3 +1,4 @@
+<%@page import="beans.Device" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -156,20 +157,24 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Edit Device</h1>
               </div>
-              <form class="user">
+               <%beans.Device device = (beans.Device)session.getAttribute("device"); %>
+              <form class="user" method="post" action="EditDevices" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="deviceName" placeholder="Device1">
+                    <input type="text" class="form-control form-control-user" id="deviceName" name="deviceName" value=<%=device.getName()%>>
                 </div>
           
                <div class="form-group">
                   <div class="custom-control custom-checkbox small">
-                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <input type="checkbox" class="custom-control-input" id="statusCheck">
                     <label class="custom-control-label" for="customCheck">Active</label>
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Save Changes
-                </a>
+                <div class="form-group">
+                    <input type="file" class="form-control form-control-user" id="imageDevice" name="file" placeholder="Device Image">
+                </div>
+                <input type="hidden" value=<%=device.getUserId()%> name="userId">
+                <input type="hidden" value=<%=device.getId()%> name="deviceId">
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Save Changes">
                 <hr>
               </form>
             </div>
