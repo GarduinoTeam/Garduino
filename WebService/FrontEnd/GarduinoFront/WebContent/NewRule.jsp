@@ -60,30 +60,21 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-      
-       <div class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+       <li class="nav-item active">
+        <a class="nav-link collapsed" href="UsersList.jsp" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
-          
-       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <form method="post" action="ListUsers">
-            <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
-            </form>  
-            <form method="post" action="ListDevices">
-            <input type="hidden" value=<%=userId%> name="userId">
-            <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-100">      
-            </form> 
-            <form method="post" action="ListRules">
-            <input type="hidden" value=<%=deviceId%> name="deviceId">
-            <input type="submit" value="Rules" class="btn btn-primary collapse-item bg-gray-400">      
-            </form> 
+            <a class="collapse-item " href="UsersList.jsp">Users List</a>     
+            <a class="collapse-item " href="UserDevices.jsp">Devices</a>     
+            <a class="collapse-item active" href="Rules.jsp">Rules</a>     
           </div>
         </div>
-        </div>
       </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
