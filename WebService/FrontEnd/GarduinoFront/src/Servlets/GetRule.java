@@ -54,6 +54,7 @@ public class GetRule extends HttpServlet {
   		HttpSession session;
   		session=request.getSession(true);
   		
+  		String nameId = request.getParameter("nameId");
   		String ruleId = request.getParameter("ruleId");
   		String deviceId = request.getParameter("deviceId");
   		
@@ -64,7 +65,7 @@ public class GetRule extends HttpServlet {
 
   		session.setAttribute("rule", rule);
   		session.setAttribute("deviceId", deviceId);
-  		
+  		session.setAttribute("nameId", nameId);
   		try {
   			ServletContext context = getServletContext();
   			RequestDispatcher rd = context.getRequestDispatcher("/EditRule");

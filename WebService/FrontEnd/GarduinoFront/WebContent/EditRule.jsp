@@ -25,7 +25,7 @@
 <body id="page-top">
 
   <%String deviceId = (String)session.getAttribute("deviceId"); %>
-
+  <%String userId = (String)session.getAttribute("userId"); %>
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -72,6 +72,7 @@
             <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             </form>  
             <form method="post" action="ListDevices">
+            <input type="hidden" value=<%=userId%> name="userId">
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-100">      
             </form> 
             <form method="post" action="ListRules">
