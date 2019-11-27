@@ -44,7 +44,7 @@
     <servlet-name>EditUsers</servlet-name>
     <url-pattern>/UsersList</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>GetUser</display-name>
     <servlet-name>GetUser</servlet-name>
@@ -53,5 +53,15 @@
   <servlet-mapping>
     <servlet-name>GetUser</servlet-name>
     <url-pattern>/EditUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetDevice</display-name>
+    <servlet-name>GetDevice</servlet-name>
+    <jsp-file>/EditDevice.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDevice</servlet-name>
+    <url-pattern>/EditDevice</url-pattern>
   </servlet-mapping>
 </web-app>

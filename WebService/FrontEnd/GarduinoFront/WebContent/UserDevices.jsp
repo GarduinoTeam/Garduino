@@ -190,8 +190,16 @@
                       <td><%=devices[i].getStatus()%></td>
 
                       <td>
-                      <a href="EditDevice.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+                      <form method="post" action="GetDevice">
+                      	<input type="hidden" value=<%=devices[i].getId()%> name="deviceId">
+                      	<input type="hidden" value=<%=devices[i].getUserId()%> name="userId">
+                      	<input type="submit" class="btn btn-success " value="Edit" >
+                      </form>
+                      <form method="post" action="DeleteDevices">
+                      	<input type="hidden" value=<%=devices[i].getId()%> name="deviceId">
+                      	<input type="hidden" value=<%=devices[i].getUserId()%> name="userId">
+                      	<input type="submit" class="btn btn-danger " value="Delete" >
+                      </form>
                       </td>
                     </tr>
                     <%} %>
