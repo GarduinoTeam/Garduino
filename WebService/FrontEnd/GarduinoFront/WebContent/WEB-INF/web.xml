@@ -56,7 +56,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-
     <display-name>ListConditions</display-name>
     <servlet-name>ListConditions</servlet-name>
     <jsp-file>/Conditions.jsp</jsp-file>
@@ -65,7 +64,7 @@
     <servlet-name>ListConditions</servlet-name>
     <url-pattern>/Conditions</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>PassRuleID</display-name>
     <servlet-name>PassRuleID</servlet-name>
@@ -76,7 +75,6 @@
     <url-pattern>/NewRule</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
     <display-name>GetRule</display-name>
     <servlet-name>GetRule</servlet-name>
     <jsp-file>/EditRule.jsp</jsp-file>
@@ -93,5 +91,15 @@
   <servlet-mapping>
     <servlet-name>GetDevice</servlet-name>
     <url-pattern>/EditDevice</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PassNewDeviceId</display-name>
+    <servlet-name>PassNewDeviceId</servlet-name>
+    <jsp-file>/NewDevice.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PassNewDeviceId</servlet-name>
+    <url-pattern>/PassNewDeviceId</url-pattern>
   </servlet-mapping>
 </web-app>

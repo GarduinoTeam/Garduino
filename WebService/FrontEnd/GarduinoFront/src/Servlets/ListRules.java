@@ -51,15 +51,18 @@ public class ListRules extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("\nDins del ListDevices!");	
-		
+		System.out.println("\nDins del ListRules!");	
+		String userId=request.getParameter("userId");
 		String deviceId=request.getParameter("deviceId");
-		System.out.println("List Devices:");
+		System.out.println("List ListRules!");
 		System.out.println(deviceId);
+		System.out.println(userId);
 		String url="http://localhost:8080/GarduinoApi/rules/get_rules?device_id="+deviceId;
 		
 		HttpSession session;
-		session=request.getSession(true);
+		session=request.getSession();
+		session.setAttribute("userId", userId);
+		
 		
 		Client client= ClientBuilder.newClient();
 		WebTarget target=client.target(url);

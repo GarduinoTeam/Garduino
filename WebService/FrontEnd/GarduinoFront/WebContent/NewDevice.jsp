@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-
+<%String userId = (String)session.getAttribute("userId"); %>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -70,6 +70,7 @@
             <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             </form>  
             <form method="post" action="ListDevices">
+            <input type="hidden" value=<%=userId%> name="userId">
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-400">      
             </form> 
           </div>

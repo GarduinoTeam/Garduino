@@ -10,23 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-
-import beans.User;
 
 /**
- * Servlet implementation class PassRuleID
+ * Servlet implementation class PassNewDeviceId
  */
-@WebServlet("/PassRuleID")
-public class PassRuleID extends HttpServlet {
+@WebServlet("/PassNewDeviceId")
+public class PassNewDeviceId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
+    public PassNewDeviceId() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doFer(request, response);	
 	}
@@ -44,17 +46,14 @@ public class PassRuleID extends HttpServlet {
 		System.out.println("\nDins del PassRuleID!");
 		
 		HttpSession session;
-		session=request.getSession(true);
+		session=request.getSession();
+		
 		String userId = request.getParameter("userId");
-		String deviceId = request.getParameter("deviceId");
-		System.out.println("UserId"+userId);
-		System.out.println("DeviceId"+deviceId);
-		session.setAttribute("deviceId", deviceId);
 		session.setAttribute("userId", userId);
 		
 		try {
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/NewRule");
+			RequestDispatcher rd = context.getRequestDispatcher("/NewDevice");
 			rd.forward(request, response);
 		}
 		catch ( Exception e ) {e.printStackTrace();}
