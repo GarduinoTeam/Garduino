@@ -23,7 +23,8 @@
 </head>
 
 <body id="page-top">
-
+	
+  <%String deviceId = (String)session.getAttribute("deviceId"); %>
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -73,6 +74,7 @@
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-100">      
             </form> 
             <form method="post" action="ListRules">
+            <input type="hidden" value=<%=deviceId%> name="deviceId">
             <input type="submit" value="Rules" class="btn btn-primary collapse-item bg-gray-400">      
             </form> 
           </div>
@@ -158,257 +160,57 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Rules</h1>
-          
-
+                  
+  <%beans.Rule[] rules = (beans.Rule[])session.getAttribute("rules"); %>
+  
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Rules Information</h6>
-              <a class="btn btn-success" style="float:right" href="NewRule.jsp">New Rule</a>
+              <form method="post" action="PassRuleID">
+              	<input type="hidden" value=<%=deviceId%> name="deviceId">
+              	<input type="submit" value="New Rule" class="btn btn-success" style="float:right">
+              </form>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Status</th>
+                      <th>ID</th>         
                       <th>RuleName</th>
+                      <th>DeviceID</th>
+                      <th>Status</th>
                       <th>Type</th>
                     </tr>
                   </thead>
      
                   <tbody>
+                  <%for(int i=0; i<rules.length; i++){ %>
                     <tr>
-                      <td>1</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
+                      <td><%=rules[i].getId()%></td>
+                      <td><form method="post" action="ListConditions">
+                  			<input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
+            				<input type="submit" value=<%=rules[i].getName()%> class="btn btn-primary">      
+            		  </form></td>
+                      <td><%=rules[i].getIdDevice()%></td>
+                      <td><%=rules[i].getStatus()%></td>
+                      <td><%=rules[i].getType()%></td>
                       <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
+                      
+                      <form method="post" action="GetRule">
+                      <input type="hidden" value=<%=deviceId%> name="deviceId">
+            	  	  <input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
+                      <input type="submit" class="btn btn-success " value="Edit" >
+                      </form>
+                      
+                      <form method="post" action="DeleteRules">
+                      <input type="hidden" value=<%=deviceId%> name="deviceId">
+            	  	  <input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
+                      <input type="submit" class="btn btn-danger " value="Delete" >
+                      </form>                
+                  	  </td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>13</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>14</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>15</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>16</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>17</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>19</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>20</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>21</td>
-                      <td>Active</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Rule1</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="EditRule.jsp" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
+                    <%}%>   
                   </tbody>
                 </table>
               </div>

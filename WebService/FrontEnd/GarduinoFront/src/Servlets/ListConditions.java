@@ -17,19 +17,18 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 import beans.Device;
-import beans.Rule;
 
 /**
- * Servlet implementation class ListRules
+ * Servlet implementation class ListConditions
  */
-@WebServlet("/ListRules")
-public class ListRules extends HttpServlet {
+@WebServlet("/ListConditions")
+public class ListConditions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListRules() {
+    public ListConditions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,32 +50,10 @@ public class ListRules extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("\nDins del ListDevices!");	
 		
-		String deviceId=request.getParameter("deviceId");
-		System.out.println("List Devices:");
-		System.out.println(deviceId);
-		String url="http://localhost:8080/GarduinoApi/rules/get_rules?device_id="+deviceId;
-		
-		HttpSession session;
-		session=request.getSession(true);
-		
-		Client client= ClientBuilder.newClient();
-		WebTarget target=client.target(url);
-		
-		Rule[] rulesList = null;
-		
-		List<Rule>rules=target.request().get(new GenericType<List<Rule>>(){});
-		rulesList = new Rule[rules.size()];
-		for(int i=0;i<rules.size();i++){
-			Rule rule=rules.get(i);
-			rulesList[i]=rule;		
-		}
-		session.setAttribute("rules", rulesList);
-		session.setAttribute("deviceId", deviceId);
 		try {
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/Rules");
+			RequestDispatcher rd = context.getRequestDispatcher("/Conditions");
 			rd.forward(request, response);
 		}
 		catch ( Exception e ) {e.printStackTrace();}

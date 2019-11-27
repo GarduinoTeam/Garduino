@@ -1,7 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,29 +13,20 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 
-import beans.Device;
-import beans.Rule;
+import beans.User;
 
 /**
- * Servlet implementation class ListRules
+ * Servlet implementation class PassRuleID
  */
-@WebServlet("/ListRules")
-public class ListRules extends HttpServlet {
+@WebServlet("/PassRuleID")
+public class PassRuleID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListRules() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doFer(request, response);	
 	}
@@ -51,32 +41,17 @@ public class ListRules extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("\nDins del ListDevices!");	
-		
-		String deviceId=request.getParameter("deviceId");
-		System.out.println("List Devices:");
-		System.out.println(deviceId);
-		String url="http://localhost:8080/GarduinoApi/rules/get_rules?device_id="+deviceId;
+		System.out.println("\nDins del PassRuleID!");
 		
 		HttpSession session;
 		session=request.getSession(true);
 		
-		Client client= ClientBuilder.newClient();
-		WebTarget target=client.target(url);
-		
-		Rule[] rulesList = null;
-		
-		List<Rule>rules=target.request().get(new GenericType<List<Rule>>(){});
-		rulesList = new Rule[rules.size()];
-		for(int i=0;i<rules.size();i++){
-			Rule rule=rules.get(i);
-			rulesList[i]=rule;		
-		}
-		session.setAttribute("rules", rulesList);
+		String deviceId = request.getParameter("deviceId");
 		session.setAttribute("deviceId", deviceId);
+		
 		try {
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/Rules");
+			RequestDispatcher rd = context.getRequestDispatcher("/NewRule");
 			rd.forward(request, response);
 		}
 		catch ( Exception e ) {e.printStackTrace();}

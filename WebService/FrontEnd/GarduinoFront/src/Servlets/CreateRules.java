@@ -9,6 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
+
+import beans.Rule;
+import beans.User;
 
 /**
  * Servlet implementation class CreateRules
@@ -46,12 +54,32 @@ public class CreateRules extends HttpServlet {
   		
   		String ruleName = request.getParameter("ruleName");
   		String activeCheck = request.getParameter("activeCheck");
-  		System.out.println(ruleName);
-  		System.out.println(activeCheck);
+  		String deviceId = request.getParameter("deviceId");
+  		String type = request.getParameter("type");
+  		boolean active;
+		if(activeCheck=="on"){
+			active=true;
+		}else{
+			
+			active=false;
+		}
   		
+		String url="http://localhost:8080/GarduinoApi/rules/create_rule";
+		Client client= ClientBuilder.newClient();
+		WebTarget target=client.target(url);
+		
+		Rule rule=new Rule();
+		rule.setIdDevice( Integer.parseInt(deviceId));
+		rule.setName(ruleName);
+		rule.setStatus(active);
+		rule.setType(Integer.parseInt(type));
+		
+		Response res=target.request().post(Entity.json(rule));
+		res.close();
+		
   		try {
 			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/Rules");
+			RequestDispatcher rd = context.getRequestDispatcher("/ListRules");
 			rd.forward(request, response);
 		}
   		catch ( Exception e ) {e.printStackTrace();}
