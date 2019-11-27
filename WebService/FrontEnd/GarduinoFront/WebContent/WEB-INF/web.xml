@@ -75,6 +75,15 @@
     <url-pattern>/NewRule</url-pattern>
   </servlet-mapping>
   <servlet>
+    <display-name>GetRule</display-name>
+    <servlet-name>GetRule</servlet-name>
+    <jsp-file>/EditRule.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetRule</servlet-name>
+    <url-pattern>/EditRule</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>GetDevice</display-name>
     <servlet-name>GetDevice</servlet-name>
     <jsp-file>/EditDevice.jsp</jsp-file>
