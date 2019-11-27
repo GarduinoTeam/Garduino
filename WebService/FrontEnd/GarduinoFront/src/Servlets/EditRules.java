@@ -13,22 +13,22 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.Rule;
-import beans.User;
 
 /**
- * Servlet implementation class CreateRules
+ * Servlet implementation class EditRules
  */
-@WebServlet("/CreateRules")
-public class CreateRules extends HttpServlet {
+@WebServlet("/EditRules")
+public class EditRules extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateRules() {
+    public EditRules() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,8 +50,9 @@ public class CreateRules extends HttpServlet {
   	
   	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
   		// TODO Auto-generated method stub
-  		System.out.println("\nDins del CreateRules!");
+  		System.out.println("\nDins del EditRules!");
   		
+  		String ruleId = request.getParameter("ruleId");
   		String ruleName = request.getParameter("ruleName");
   		String activeCheck = request.getParameter("activeCheck");
   		String deviceId = request.getParameter("deviceId");
@@ -64,19 +65,19 @@ public class CreateRules extends HttpServlet {
 			active=false;
 		}
   		
-		String url="http://localhost:8080/GarduinoApi/rules/create_rule";
+		String url="http://localhost:8080/GarduinoApi/rules/update_rule/"+ruleId;
 		Client client= ClientBuilder.newClient();
 		WebTarget target=client.target(url);
 		
 		Rule rule=new Rule();
+		rule.setId(Integer.parseInt(ruleId));
 		rule.setIdDevice( Integer.parseInt(deviceId));
 		rule.setName(ruleName);
 		rule.setStatus(active);
 		rule.setType(Integer.parseInt(type));
 		
-		Response res=target.request().post(Entity.json(rule));
-		res.close();
-		
+		Response res=target.request(MediaType.APPLICATION_JSON).put(Entity.json(rule));
+		System.out.println(rule.getName());
   		try {
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/ListRules");
@@ -84,5 +85,4 @@ public class CreateRules extends HttpServlet {
 		}
   		catch ( Exception e ) {e.printStackTrace();}
   	}
-
 }

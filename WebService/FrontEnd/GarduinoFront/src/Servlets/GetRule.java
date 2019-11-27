@@ -9,26 +9,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.MediaType;
 
 import beans.Rule;
 import beans.User;
 
 /**
- * Servlet implementation class CreateRules
+ * Servlet implementation class GetRule
  */
-@WebServlet("/CreateRules")
-public class CreateRules extends HttpServlet {
+@WebServlet("/GetRule")
+public class GetRule extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateRules() {
+    public GetRule() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,38 +50,26 @@ public class CreateRules extends HttpServlet {
   	
   	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
   		// TODO Auto-generated method stub
-  		System.out.println("\nDins del CreateRules!");
+  		System.out.println("\nDins del GetRule!");
+  		HttpSession session;
+  		session=request.getSession(true);
   		
-  		String ruleName = request.getParameter("ruleName");
-  		String activeCheck = request.getParameter("activeCheck");
+  		String ruleId = request.getParameter("ruleId");
   		String deviceId = request.getParameter("deviceId");
-  		String type = request.getParameter("type");
-  		boolean active;
-		if(activeCheck=="on"){
-			active=true;
-		}else{
-			
-			active=false;
-		}
   		
-		String url="http://localhost:8080/GarduinoApi/rules/create_rule";
-		Client client= ClientBuilder.newClient();
-		WebTarget target=client.target(url);
-		
-		Rule rule=new Rule();
-		rule.setIdDevice( Integer.parseInt(deviceId));
-		rule.setName(ruleName);
-		rule.setStatus(active);
-		rule.setType(Integer.parseInt(type));
-		
-		Response res=target.request().post(Entity.json(rule));
-		res.close();
-		
+  		String url="http://localhost:8080/GarduinoApi/rules/get_rule/"+ruleId;
+  		Client client= ClientBuilder.newClient();
+  		WebTarget target=client.target(url);
+  		Rule rule=target.request(MediaType.APPLICATION_JSON).get(Rule.class);
+
+  		session.setAttribute("rule", rule);
+  		session.setAttribute("deviceId", deviceId);
+  		
   		try {
-			ServletContext context = getServletContext();
-			RequestDispatcher rd = context.getRequestDispatcher("/ListRules");
-			rd.forward(request, response);
-		}
+  			ServletContext context = getServletContext();
+  			RequestDispatcher rd = context.getRequestDispatcher("/EditRule");
+  			rd.forward(request, response);
+  		}
   		catch ( Exception e ) {e.printStackTrace();}
   	}
 

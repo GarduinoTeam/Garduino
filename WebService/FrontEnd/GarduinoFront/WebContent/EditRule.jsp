@@ -24,6 +24,8 @@
 
 <body id="page-top">
 
+  <%String deviceId = (String)session.getAttribute("deviceId"); %>
+
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -58,17 +60,26 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="UsersList.jsp" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+      
+       <div class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          
+       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item " href="UsersList.jsp">Users List</a>     
-            <a class="collapse-item" href="UserDevices.jsp">Devices</a>
-			<a class="collapse-item active" href="Rules.jsp">Rules</a>   
+            <form method="post" action="ListUsers">
+            <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
+            </form>  
+            <form method="post" action="ListDevices">
+            <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-100">      
+            </form> 
+            <form method="post" action="ListRules">
+            <input type="hidden" value=<%=deviceId%> name="deviceId">
+            <input type="submit" value="Rules" class="btn btn-primary collapse-item bg-gray-400">      
+            </form> 
           </div>
+        </div>
         </div>
       </li>
 
@@ -148,6 +159,8 @@
         <!-- Begin Page Content -->
    <div class="container">
 
+  <%beans.Rule rule = (beans.Rule)session.getAttribute("rule"); %>
+  
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
@@ -157,20 +170,22 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Edit Rule</h1>
               </div>
-              <form class="user">
+              <form class="user" method="post" action="EditRules">
+              	<input type="hidden" value=<%=deviceId%> name="deviceId">
+              	<input type="hidden" value=<%=rule.getId()%> name="ruleId">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="ruleName" placeholder="Rule1">
+                    <input type="text" class="form-control form-control-user" id="ruleName" name="ruleName" value=<%=rule.getName() %>>
                 </div>
-          
+                <div>
+          			<input type="text" class="form-control form-control-user" id="type" name="type" value=<%=rule.getType()%>>
+                </div>
                 <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck">
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Save changes
-                </a>
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">
                 <hr>
               </form>
             </div>

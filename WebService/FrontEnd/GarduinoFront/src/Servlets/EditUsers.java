@@ -60,16 +60,14 @@ public class EditUsers extends HttpServlet {
 		String userId = request.getParameter("userId");
 		System.out.println("User id:" + userId);
 		int admin=0;
-		if(adminCheck=="on"){
+		System.out.println("Edit Users: "+adminCheck);
+		if(adminCheck!=null){
 			admin=1;
-		}else{
-			
-			admin=0;
 		}
 		String url="http://localhost:8080/GarduinoApi/users/update_user/"+userId;
 		Client client= ClientBuilder.newClient();
 		WebTarget target=client.target(url);
-		
+		System.out.println("EditUsers: "+ admin);
 		User user=new User();
 		user.setUsername(username);
 		user.setAdmin(admin);

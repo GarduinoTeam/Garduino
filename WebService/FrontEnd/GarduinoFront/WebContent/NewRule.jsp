@@ -24,6 +24,9 @@
 
 <body id="page-top">
 
+	<%String deviceId = (String)session.getAttribute("deviceId");
+ 	String userId = (String)session.getAttribute("userId"); %>
+  
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -70,9 +73,11 @@
             <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             </form>  
             <form method="post" action="ListDevices">
+            <input type="hidden" value=<%=userId%> name="userId">
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-100">      
             </form> 
             <form method="post" action="ListRules">
+            <input type="hidden" value=<%=deviceId%> name="deviceId">
             <input type="submit" value="Rules" class="btn btn-primary collapse-item bg-gray-400">      
             </form> 
           </div>
@@ -166,10 +171,13 @@
                 <h1 class="h4 text-gray-900 mb-4">Create a Rule!</h1>
               </div>
               <form class="user" method="post" action="CreateRules">
+              	<input type="hidden" value=<%=deviceId%> name="deviceId">
                 <div class="form-group">
                     <input type="text" class="form-control form-control-user" id="ruleName" name="ruleName" placeholder="Rule Name">
                 </div>
-          
+                <div>
+          			<input type="text" class="form-control form-control-user" id="type" name="type" placeholder="Type">
+                </div>
                 <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck">
