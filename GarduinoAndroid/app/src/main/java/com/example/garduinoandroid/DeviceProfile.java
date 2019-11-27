@@ -7,16 +7,19 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import java.io.Serializable;
 
-public class DeviceProfile extends AppCompatActivity implements View.OnClickListener
-{
+public class DeviceProfile extends AppCompatActivity implements View.OnClickListener {
     private Button manualIrrigation;
     private Button settingsButton;
     boolean settingsDPS;
@@ -31,7 +34,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
         ActionBar actionBar = getSupportActionBar();
         deviceName = getResources().getString(R.string.DeviceProfile);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#bebebe")));
-        ((AppCompatActivity)this).getSupportActionBar().setTitle(deviceName);
+        ((AppCompatActivity) this).getSupportActionBar().setTitle(deviceName);
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -42,13 +45,52 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
         image = (ImageView) findViewById(R.id.imageView1);
 
         manualIrrigation = (Button) findViewById(R.id.button1);
-        manualIrrigation.setOnClickListener(this);
+
 
         settingsButton = (Button) findViewById(R.id.btnSettings);
         settingsButton.setOnClickListener(this);
+        manualIrrigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(DeviceProfile.this);
+                View mView = getLayoutInflater().inflate(R.layout.manual_irrigation, null);
+                final EditText numeric = (EditText) mView.findViewById(R.id.numericText);
+                Button buttonStart = (Button) mView.findViewById(R.id.btnMI1);
+                Button buttonCancel = (Button) mView.findViewById(R.id.btnMI2);
+
+                buttonStart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!numeric.getText().toString().isEmpty()) {
+                            Toast.makeText(DeviceProfile.this, "Start Click", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplication(), DeviceProfileStart.class);
+                            intent.putExtra("object", (Serializable) obj);
+                            intent.putExtra("addRule", (Serializable) addRule);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(DeviceProfile.this, "Please fill the field.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentSettings = new Intent(getApplication(), DeviceProfile.class);
+                        intentSettings.putExtra("object", (Serializable) obj);
+                        intentSettings.putExtra("btnSettingsDPS", settingsDPS);
+                        intentSettings.putExtra("addRule", (Serializable) addRule);
+                        startActivity(intentSettings);
+                    }
+                });
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
+        if (bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             image.setImageResource(obj.getImage());
             addRule = (Boolean) getIntent().getExtras().getSerializable("addRule");
@@ -56,7 +98,7 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
@@ -64,26 +106,19 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-
-            case R.id.button1:
-                Intent intent = new Intent(this, ManualIrrigation.class);
-                intent.putExtra("object", (Serializable) obj);
-                intent.putExtra("addRule", (Serializable) addRule);
-                startActivity(intent);
-                break;
 
             case R.id.btnSettings:
                 Intent intentSettings = new Intent(this, SettingsInformation.class);
                 intentSettings.putExtra("object", (Serializable) obj);
                 intentSettings.putExtra("btnSettingsDPS", settingsDPS);
-                intentSettings.putExtra("addRule", (Serializable) addRule);
+                intentSettings.putExtra("addRule", addRule);
                 startActivity(intentSettings);
                 break;
 
             default:
                 break;
         }
+
     }
 }

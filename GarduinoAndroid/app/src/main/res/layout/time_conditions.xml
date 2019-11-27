@@ -13,7 +13,8 @@
             android:id="@+id/buttonStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnStartTime"/>
+            android:text="@string/btnStartTime"
+            android:onClick="showTimeDialog"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +33,8 @@
             android:id="@+id/buttonEndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnEndTime"/>
+            android:text="@string/btnEndTime"
+            android:onClick="showTimeDialog"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +84,8 @@
         android:layout_marginTop="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnSpecificDates"/>
+        android:text="@string/btnSpecificDates"
+        android:onClick="showDateDialog"/>
     <Button
         android:id="@+id/saveTimeCondition"
         android:layout_width="90dp"
