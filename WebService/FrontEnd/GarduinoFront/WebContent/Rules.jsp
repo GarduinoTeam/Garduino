@@ -201,6 +201,7 @@
                       <td>
                       
                       <form method="post" action="GetRule">
+                      <input type="hidden" value=<%=userId%> name="userId">
                       <input type="hidden" value=<%=deviceId%> name="deviceId">
             	  	  <input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
                       <input type="submit" class="btn btn-success " value="Edit" >
