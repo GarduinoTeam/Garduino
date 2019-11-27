@@ -1,4 +1,5 @@
 <%@page import="beans.Device" %>
+<%@page import="beans.User" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -63,7 +64,7 @@
        <div class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
-          
+         <%beans.User user = (beans.User)session.getAttribute("user"); %> 
        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
@@ -71,6 +72,7 @@
             <input type="submit" value="Users List" class="btn btn-primary collapse-item bg-gray-100 ">      
             </form>  
             <form method="post" action="ListDevices">
+            <input type="hidden" value=<%=session.getAttribute("userId")%> name="userId">
             <input type="submit" value="Devices" class="btn btn-primary collapse-item bg-gray-400">      
             </form> 
           </div>

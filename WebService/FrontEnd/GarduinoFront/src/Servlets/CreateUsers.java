@@ -60,11 +60,8 @@ public class CreateUsers extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String adminCheck = request.getParameter("adminCheck");
 		int admin=0;
-		if(adminCheck=="on"){
+		if(adminCheck!=null){
 			admin=1;
-		}else{
-			
-			admin=0;
 		}
 		String url="http://localhost:8080/GarduinoApi/users/create_user";
 		Client client= ClientBuilder.newClient();
