@@ -64,4 +64,15 @@
     <servlet-name>ListConditions</servlet-name>
     <url-pattern>/Conditions</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>PassRuleID</display-name>
+    <servlet-name>PassRuleID</servlet-name>
+    <jsp-file>/NewRule.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PassRuleID</servlet-name>
+    <url-pattern>/NewRule</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

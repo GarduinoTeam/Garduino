@@ -167,7 +167,10 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Rules Information</h6>
-              <a class="btn btn-success" style="float:right" href="NewRule.jsp">New Rule</a>
+              <form method="post" action="PassRuleID">
+              	<input type="hidden" value=<%=deviceId%> name="deviceId">
+              	<input type="submit" value="New Rule" class="btn btn-success" style="float:right">
+              </form>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -195,6 +198,7 @@
                       <td>
                       
                       <form method="post" action="GetRule">
+                      <input type="hidden" value=<%=deviceId%> name="deviceId">
             	  	  <input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
                       <input type="submit" class="btn btn-success " value="Edit" >
                       </form>
