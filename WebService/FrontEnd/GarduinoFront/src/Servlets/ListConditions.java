@@ -17,6 +17,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 
 import beans.Device;
+import beans.Rule;
+import beans.RuleCondition;
 
 /**
  * Servlet implementation class ListConditions
@@ -50,7 +52,28 @@ public class ListConditions extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
+		System.out.println("\nDins del ListCondtitons!");	
+		String ruleId=request.getParameter("ruleId");
+
+		String url="http://localhost:8080/GarduinoApi/ruleconditions/get_rule_conditions?rule_id="+ruleId;
 		
+		HttpSession session;
+		session=request.getSession();
+		session.setAttribute("ruleId", ruleId);
+		
+		
+		Client client= ClientBuilder.newClient();
+		WebTarget target=client.target(url);
+		
+		RuleCondition[] ruleConditionList = null;
+		
+		List<RuleCondition>ruleConditions=target.request().get(new GenericType<List<RuleCondition>>(){});
+		ruleConditionList = new RuleCondition[ruleConditions.size()];
+		for(int i=0;i<ruleConditions.size();i++){
+			RuleCondition Condition=ruleConditions.get(i);
+			ruleConditionList[i]=Condition;		
+		}
+		session.setAttribute("ruleConditions", ruleConditionList);
 		try {
 			ServletContext context = getServletContext();
 			RequestDispatcher rd = context.getRequestDispatcher("/Conditions");
