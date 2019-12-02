@@ -1,3 +1,4 @@
+<%@page import="beans.RuleCondition"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -152,6 +153,7 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Conditions</h1>
           
+		  <%beans.RuleCondition[] ruleConditions = (beans.RuleCondition[])session.getAttribute("ruleConditions"); %>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -164,222 +166,37 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Name</th>
-                      <th>Type</th>
+                      <th>IdRule</th>
+                      <th>IdCondition</th>
+                      <th>ConditionValue</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
      
                   <tbody>
+                   <%for(int i=0; i<ruleConditions.length; i++){ %>
                     <tr>
-                      <td>1</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
+                       <td><%=ruleConditions[i].getId()%></td>
+                      <td><form method="post" action="ConditionInformation">
+            				<input type="submit" value=<%=ruleConditions[i].getId()%> name="ruleConditionId" class="btn btn-primary">      
+            		  </form></td>
+                      <td><%=ruleConditions[i].getIdRule()%></td>
+                      <td><%=ruleConditions[i].getIdCondition()%></td>
+                      <td><%=ruleConditions[i].getConditionValue()%></td>
+                      <td><%=ruleConditions[i].getStatus()%></td>
+                      <td>  
+                      <form method="post" action="GetRuleCondition">
+            	  	  <input type="hidden" value=<%=ruleConditions[i].getId()%> name="ruleConditionId">
+                      <input type="submit" class="btn btn-success " value="Edit" >
+                      </form>
+                      
+                      <form method="post" action="DeleteRuleCondition">
+            	  	  <input type="hidden" value=<%=ruleConditions[i].getId()%> name="ruleConditionId">
+                      <input type="submit" class="btn btn-danger " value="Delete" >
+                      </form>                
+                  	  </td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>13</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>14</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>15</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>16</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>17</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>19</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>20</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>21</td>
-                      <td><a href="Conditions.jsp" class="alert-link btn-icon-split"><span class="text">Time</span></a></td>
-                      <td>1</td>
-
-                      <td>
-                      <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
-                      <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a>
-                      </td>
-                    </tr>
+                   <%}%>  
                   </tbody>
                 </table>
               </div>
