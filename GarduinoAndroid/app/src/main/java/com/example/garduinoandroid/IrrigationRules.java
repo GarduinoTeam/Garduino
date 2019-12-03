@@ -6,8 +6,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -16,11 +18,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class IrrigationRules extends AppCompatActivity implements View.OnClickListener
 {
-    Button rule1;
-    Button rule2;
+    ListView listView;
+    String[] labelListItems;
+    ArrayList<Rule> ruleArrayList;
+
+
     Button save;
     Button add;
     RelativeLayout irrigationRuleAdded;
@@ -42,6 +48,24 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.irrigation_rules);
+
+        //Start ListRules
+        listView = (ListView) findViewById(R.id.listRules);
+
+        labelListItems = getResources().getStringArray(R.array.rulesArray);
+
+        ruleArrayList = new ArrayList<Rule>();
+        ruleArrayList.add(new Rule(1, labelListItems[0]));
+        ruleArrayList.add(new Rule(2, labelListItems[1]));
+        ruleArrayList.add(new Rule(3, labelListItems[2]));
+        ruleArrayList.add(new Rule(4, labelListItems[3]));
+
+        RuleAdapter adapter = new RuleAdapter(getApplicationContext(), ruleArrayList);
+        listView.setAdapter(adapter);
+
+
+        //End ListView
+
 
         save = (Button) findViewById(R.id.saveIrrigationRules);
         save.setOnClickListener(this);
@@ -91,13 +115,6 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        rule1 = (Button) findViewById(R.id.buttonIrrigationRule1);
-        rule1.setOnClickListener(this);
-
-        rule2 = (Button) findViewById(R.id.buttonIrrigationRule2);
-        rule2.setOnClickListener(this);
-
-        irrigationRuleAdded = (RelativeLayout) findViewById(R.id.irrigationRule2);
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
@@ -109,6 +126,19 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         }else if (addRule) {
             irrigationRuleAdded.setVisibility(View.VISIBLE);
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Rule RuleObject = (Rule) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplication(), EditIrrigationRule.class);
+                intent.putExtra("RuleObject", (Serializable) RuleObject);
+                intent.putExtra("object", (Serializable) obj);
+                intent.putExtra("btnSettingsDPS", informationBoolean);
+                startActivity(intent);
+            }
+        });
+
     }
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), SettingsInformation.class);
@@ -137,14 +167,6 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
 //                intentAdd.putExtra("addRule", addRule);
 //                startActivity(intentAdd);
 //                break;
-            case R.id.buttonIrrigationRule1:
-            case R.id.buttonIrrigationRule2:
-                Intent intentRule = new Intent(this, EditIrrigationRule.class);
-                intentRule.putExtra("object", (Serializable) obj);
-                intentRule.putExtra("btnSettingsDPS", informationBoolean);
-                intentRule.putExtra("addRule", addRule);
-                startActivity(intentRule);
-                break;
             default:
                 break;
         }
