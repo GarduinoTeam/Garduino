@@ -50,6 +50,16 @@
         <item>Last irrigation: today at 21:00</item>
     </string-array>
 
+    <!--                              LIST ITEMS RULES                                   -->
+
+    <string-array name="rulesArray" >
+        <item>Rule 1</item>
+        <item>Rule 2</item>
+        <item>Rule 3</item>
+        <item>Rule 4</item>
+    </string-array>
+
+
     <!--                               IRRIGATION RULE                                           -->
 
    <string name="irrigationText1">Irrigation rule name 1</string>
