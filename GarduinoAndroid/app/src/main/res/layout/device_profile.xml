@@ -53,9 +53,12 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_device_profile_manual_irrigation"
         android:textColor="#FFFFFF"
-        android:background="#000000"
+        android:background="@drawable/custom_button"
         android:padding="@dimen/dim_10"
         android:layout_gravity="center"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         />
 
     <Button
@@ -65,9 +68,11 @@
         android:text="@string/btn_device_profile_settings"
         android:layout_marginTop="@dimen/dim_5"
         android:padding="@dimen/dim_10"
-        android:background="#000000"
-        android:textColor="#FFFFFF"
+
+        android:background="@drawable/ic_action_settings"
         android:layout_gravity="end"/>
+    <!--        Sha de treure i posaraho al navbar-->
+
 
 </LinearLayout>
 </ScrollView>
