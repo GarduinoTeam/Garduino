@@ -59,6 +59,16 @@
         <item>Rule 4</item>
     </string-array>
 
+    <!--                              LIST ITEMS CONDITIONS                                 -->
+
+    <string-array name="conditionsArray" >
+        <item>Time condition</item>
+        <item>Temperature is higher than</item>
+        <item>Temperature is lower than</item>
+        <item>Moistness is higher than</item>
+        <item>Moistness is lower than</item>
+    </string-array>
+
 
     <!--                               IRRIGATION RULE                                           -->
 
