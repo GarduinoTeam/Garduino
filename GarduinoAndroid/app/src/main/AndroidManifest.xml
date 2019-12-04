@@ -28,5 +28,5 @@
         <activity android:name=".AddCondition"/>
         <activity android:name=".CreateRule"/>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

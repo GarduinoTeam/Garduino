@@ -3,7 +3,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:layout_marginRight="20dip"
+    android:layout_marginLeft="20dip"
+    android:backgroundTint="@color/colorPrimary"
+    android:background="@drawable/pop_up_radius">
 
     <TextView
         android:id="@+id/tvManualIrrigation1"
@@ -15,8 +19,6 @@
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/dim_5"
         android:layout_margin="@dimen/dim_18"
-
-
         />
 
     <TextView
@@ -38,8 +40,6 @@
         android:inputType="number"
         android:layout_marginBottom="@dimen/dim_20"
         android:layout_margin="@dimen/dim_18"
-
-
         />
 
     <LinearLayout
@@ -52,7 +52,7 @@
             android:id="@+id/btnMI1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:background="@drawable/custom_button"
             android:text="@string/btn_manual_irrigation_start"
             android:textColor="#FFFFFF"
             android:layout_margin="@dimen/dim_18"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dim_10"
-            android:background="#000000"
+            android:background="@drawable/custom_button_cancel"
             android:text="@string/btn_manual_irrigation_cancel"
             android:textColor="#FFFFFF"
             android:layout_margin="@dimen/dim_18"
