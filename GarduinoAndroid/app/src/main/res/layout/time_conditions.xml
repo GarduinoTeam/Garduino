@@ -98,11 +98,11 @@
 
     <Button
         android:id="@+id/saveTimeCondition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:background="@android:drawable/ic_menu_save"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:text="@string/btnSaveTimeConditions" />
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>
