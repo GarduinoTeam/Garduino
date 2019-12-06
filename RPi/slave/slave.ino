@@ -15,6 +15,7 @@
 DHT dht(dht_dpin, DHTTYPE); 
 
 // Update these with values suitable for your network.
+
 const char* ssid = "<wifi_name>";
 const char* password = "<wifi_pass>";
 const char* mqtt_server = "<ip/host>";
@@ -24,9 +25,13 @@ PubSubClient client(espClient);
 
 long lastMsg = 0;
 char msg[50];
-String pub_path = "house/sensors";
-String sub_path = "house";
 
+// Device id = 123
+char* pub_path = "house/response/123";
+char* sub_sensor = "house/sensor/123";
+char* sub_webcam = "house/webcam/123";
+char* sub_irrigate = "house/irrigate/123";
+char* sub_stop_irrigate = "house/stop_irrigate/123";
 
 // ------------ Functions -------------
 
@@ -59,20 +64,42 @@ void callback(char* topic, byte* payload, unsigned int length)
 {
   Serial.print("Message arrived [");
   Serial.print(topic);
-  Serial.print("] ");
-  for (int i = 0; i < length; i++) 
+  Serial.println("] ");
+
+  if(strcmp(topic, sub_sensor) == 0)
   {
-    Serial.print((char)payload[i]);
+    // Send DHT11 data and soil moisture sensor data
+    Serial.println("Proceeding to send sensor data!");
+    snprintf(msg, 50, "Temperature:  %2f and humidity %2f", dht.readTemperature(), dht.readHumidity());
+    client.publish(pub_path, msg); 
   }
-  Serial.println();
-  
-  // Fins no rebre un missatge de la raspi quedat en bucle  
-  Serial.print("Publish message: ");
-  float humidity = dht.readHumidity();
-  float temperature = dht.readTemperature();        
-  snprintf (msg, 50, "Temperature:  %2f and humidity %2f", temperature, humidity);
-  Serial.println(msg);
-  client.publish("house/sensors", msg);
+  else if(strcmp(topic, sub_webcam) == 0)
+  {  
+    // Get webcam data
+    Serial.println("Get webcam data!");
+    // TODO
+    // Communicate with the ESP32 CAM and send image to the RPI
+    snprintf(msg, 50, "Sending webcam data");
+    client.publish(pub_path, msg); 
+  } 
+  else if(strcmp(topic, sub_irrigate) == 0)
+  {       
+    // Irrigate device    
+    Serial.println("Irrigating device!");
+    // TODO
+    // ACTIVATE relee and irrigate the plant
+    snprintf(msg, 50, "Starting irrigation response code: %d", 1);
+    client.publish(pub_path, msg); 
+  }
+  else if(strcmp(topic, sub_stop_irrigate) == 0)
+  {       
+    // Stop Irrigate device    
+    Serial.println("Deactivating device irrigation!");
+    // TODO
+    // DEACTIVATE relee and stop irrigating the plant
+    snprintf(msg, 50, "Stopping irrigation response code: %d", 0);
+    client.publish(pub_path, msg); 
+  }
 }
 
 void reconnect() 
@@ -90,9 +117,12 @@ void reconnect()
     {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish("house/sensors", "Hello Raspi, i am back!");
+      client.publish(pub_path, "Hello Raspi, i am back!");
       // ... and resubscribe
-      client.subscribe("house");
+      client.subscribe(sub_sensor);
+      client.subscribe(sub_webcam);
+      client.subscribe(sub_irrigate);
+      client.subscribe(sub_stop_irrigate);
     } 
     else 
     {
