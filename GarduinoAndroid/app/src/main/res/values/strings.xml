@@ -59,6 +59,35 @@
         <item>Rule 4</item>
     </string-array>
 
+    <!--                              LIST ITEMS CONDITIONS                                 -->
+
+    <string-array name="conditionsArray" >
+        <item>Time condition</item>
+        <item>Temperature is higher than</item>
+        <item>Temperature is lower than</item>
+        <item>Moistness is higher than</item>
+        <item>Moistness is lower than</item>
+    </string-array>
+
+    <!--                              LIST ITEMS TIME CONDITIONS                                 -->
+
+    <string-array name="timeConditionsArray" >
+        <item>Start Time</item>
+        <item>End Time</item>
+        <item>Days Of The Week</item>
+        <item>Months Of The Year</item>
+        <item>Specific dates</item>
+    </string-array>
+
+    <!--                              DESCRIPTION ACTIVITY MAIN                                   -->
+
+    <string-array name="timeConditionsDescriptionArray">
+        <item>9:00</item>
+        <item>12:30</item>
+        <item>M T W T F Sa Su </item>
+        <item>Jan Feb Mar</item>
+        <item> 2/3/2019 </item>
+    </string-array>
 
     <!--                               IRRIGATION RULE                                           -->
 

@@ -121,11 +121,11 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
             addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
-        if (addRule == null){
-            addRule = false;
-        }else if (addRule) {
-            irrigationRuleAdded.setVisibility(View.VISIBLE);
-        }
+//        if (addRule == null){
+//            addRule = false;
+//        }else if (addRule) {
+//            irrigationRuleAdded.setVisibility(View.VISIBLE);
+//        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
