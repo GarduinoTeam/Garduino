@@ -39,7 +39,6 @@ import java.util.HashMap;
 
 public class DeviceProfile extends AppCompatActivity {
     private Button manualIrrigation;
-    private Button settingsButton;
     boolean settingsDPS;
     ArrayList<HashMap<String, String>> informationData;
     String jsonStr;
@@ -118,7 +117,7 @@ public class DeviceProfile extends AppCompatActivity {
         }
 
     }
-
+    // NAVBAR MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -150,6 +149,7 @@ public class DeviceProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // READING AND MANAGING DATA FORM AN ENDPOINT
     private void createList(String jsonStr)
     {
         informationData = new ArrayList<>();
