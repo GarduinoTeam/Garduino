@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +38,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     Boolean informationBoolean;
     Boolean addRule;
     String irrigationRules;
+    RuleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         ruleArrayList.add(new Rule(3, labelListItems[2]));
         ruleArrayList.add(new Rule(4, labelListItems[3]));
 
-        RuleAdapter adapter = new RuleAdapter(getApplicationContext(), ruleArrayList);
+        adapter = new RuleAdapter(getApplicationContext(), ruleArrayList);
         listView.setAdapter(adapter);
 
 
@@ -140,13 +145,55 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
         });
 
     }
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), SettingsInformation.class);
-        myIntent.putExtra("object", (Serializable) obj);
-        myIntent.putExtra("btnSettingsDPS", informationBoolean);
-        myIntent.putExtra("addRule", addRule);
-        startActivityForResult(myIntent, 0);
-        return true;
+
+    // CREATING MENU AND MANAGING MENU OPTIONS
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search name device...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String text) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(TextUtils.isEmpty(newText))
+                {
+                    adapter.filter("");
+                    listView.clearTextFilter();
+                }
+                else {
+                    adapter.filter(newText);
+                }
+                return  true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        int id = item.getItemId();
+
+        if(id == R.id.action_search) return true;
+        else {
+            Intent myIntent = new Intent(getApplicationContext(), SettingsInformation.class);
+            myIntent.putExtra("object", (Serializable) obj);
+            myIntent.putExtra("btnSettingsDPS", informationBoolean);
+            myIntent.putExtra("addRule", addRule);
+            startActivityForResult(myIntent, 0);
+        }
+        return super.onOptionsItemSelected(item);
+
     }
     @Override
     public void onClick(View v) {

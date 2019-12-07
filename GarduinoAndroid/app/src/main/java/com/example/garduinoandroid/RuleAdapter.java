@@ -10,15 +10,37 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RuleAdapter extends BaseAdapter {
     Context context;
     List<Rule> listObjects;
+    ArrayList<Rule> arrayList;
 
     public RuleAdapter(Context context, List<Rule> listObjects) {
         this.context = context;
         this.listObjects = listObjects;
+        this.arrayList = new ArrayList<Rule>();
+        this.arrayList.addAll(listObjects);
+    }
+
+    public void filter(String charText){
+        charText = charText.toLowerCase(Locale.getDefault());
+        listObjects.clear();
+        if (charText.length()==0){
+            listObjects.addAll(arrayList);
+        }
+        else {
+            for (Rule rule : arrayList){
+                if (rule.getTitle().toLowerCase(Locale.getDefault())
+                        .contains(charText)){
+                    listObjects.add(rule);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override
