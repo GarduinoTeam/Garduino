@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,9 +47,6 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         cancelIrrigation = (Button) findViewById(R.id.btnDPS);
         cancelIrrigation.setOnClickListener(this);
 
-        settingBtn = (Button) findViewById(R.id.btnSettingsStart);
-        settingBtn.setOnClickListener(this);
-
         image = (ImageView) findViewById(R.id.imageView);
 
         Bundle bundle = getIntent().getExtras();
@@ -57,11 +57,38 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings, menu);
+        return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_settings:
+                Intent intentSettings = new Intent(this, SettingsInformation.class);
+                intentSettings.putExtra("object", (Serializable) obj);
+                intentSettings.putExtra("btnSettingsDPS", settingsDPS);
+                intentSettings.putExtra("addRule", addRule);
+                startActivity(intentSettings);
+                break;
+
+            case R.id.action_refresh:
+                break;
+            default:
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -73,14 +100,6 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("addRule", addRule);
                 startActivity(intent);
-                break;
-
-            case R.id.btnSettingsStart:
-                Intent intentSettings = new Intent(this, SettingsInformation.class);
-                intentSettings.putExtra("object", (Serializable) obj);
-                intentSettings.putExtra("btnSettingsDPS", settingsDPS);
-                intentSettings.putExtra("addRule", addRule);
-                startActivity(intentSettings);
                 break;
 
             default:

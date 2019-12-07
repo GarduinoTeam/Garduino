@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DeviceProfile extends AppCompatActivity implements View.OnClickListener {
+public class DeviceProfile extends AppCompatActivity {
     private Button manualIrrigation;
     private Button settingsButton;
     boolean settingsDPS;
@@ -67,9 +70,6 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
         manualIrrigation = (Button) findViewById(R.id.button1);
 
-
-        settingsButton = (Button) findViewById(R.id.btnSettings);
-        settingsButton.setOnClickListener(this);
         manualIrrigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,28 +119,35 @@ public class DeviceProfile extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.btnSettings:
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_settings:
                 Intent intentSettings = new Intent(this, SettingsInformation.class);
                 intentSettings.putExtra("object", (Serializable) obj);
                 intentSettings.putExtra("btnSettingsDPS", settingsDPS);
                 intentSettings.putExtra("addRule", addRule);
                 startActivity(intentSettings);
-                break;
+
+            case R.id.action_refresh:
+                return true;
 
             default:
-                break;
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
         }
-
+        return super.onOptionsItemSelected(item);
     }
 
     private void createList(String jsonStr)

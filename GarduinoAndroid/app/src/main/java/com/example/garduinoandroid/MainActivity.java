@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity
     ArrayList<HashMap<String, String>> devicesList;
     Adapter adapter;
 
-
-    SearchView searchView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -67,7 +64,6 @@ public class MainActivity extends AppCompatActivity
         descriptionItems = getResources().getStringArray(R.array.descriptionArray);
 
         dataArrayList = new ArrayList<Data>();
-        ArrayList<Data> filterOutput = new ArrayList<>();
 
         new GetContacts().execute();
 
@@ -77,24 +73,6 @@ public class MainActivity extends AppCompatActivity
         dataArrayList.add(new Data(2, labelListItems[1], descriptionItems[1], R.drawable.plant2 ));
         dataArrayList.add(new Data(3, labelListItems[2], descriptionItems[2], R.drawable.plant3 ));
         dataArrayList.add(new Data(4, labelListItems[3], descriptionItems[0], R.drawable.plant4 ));
-
-//        getData(current_page, "");
-//
-//        Button btnLoadMore = new Button(this);
-//        btnLoadMore.setText("Load More");
-//
-//        listView.addFooterView(btnLoadMore);
-//        btnLoadMore.setOnClickListener();
-//
-//        if(searchView != null)
-//        {
-//            for(Data item: dataArrayList)
-//            {
-//                if(item.getTitle().toLowerCase().startsWith(query.toLowerCase()))
-//                    filterOutput.add(item);
-//            }
-//        }
-//        else filterOutput = dataArrayList;
 
         adapter = new Adapter(getApplicationContext(), dataArrayList);
         listView.setAdapter(adapter);
@@ -152,15 +130,8 @@ public class MainActivity extends AppCompatActivity
     {
         int id = item.getItemId();
 
-        if(id == R.id.action_search){
-//            case R.id.action_settings:
-//                Toast.makeText(getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
-//                return true;
+        if(id == R.id.action_search) return true;
 
-                //Toast.makeText(getApplicationContext(), "Search", Toast.LENGTH_SHORT).show();
-                return true;
-
-        }
         return super.onOptionsItemSelected(item);
 
     }
