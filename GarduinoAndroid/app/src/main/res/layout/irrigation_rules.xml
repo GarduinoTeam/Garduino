@@ -16,7 +16,7 @@
         android:layout_width="61dp"
         android:layout_height="61dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/addimg" />
+        android:background="@drawable/addicon" />
 
     <Button
         android:id="@+id/saveIrrigationRules"
@@ -24,6 +24,6 @@
         android:layout_height="61dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:background="@android:drawable/ic_menu_save" />
+        android:background="@drawable/saveicon" />
 
 </RelativeLayout>

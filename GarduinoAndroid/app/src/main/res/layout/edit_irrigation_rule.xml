@@ -62,16 +62,15 @@
         android:id="@+id/addCondition"
         android:layout_width="61dp"
         android:layout_height="61dp"
-        android:background="@drawable/addimg"
         android:layout_alignParentBottom="true"
-        />
+        android:background="@drawable/addicon" />
 
     <Button
         android:id="@+id/saveConditons"
         android:layout_width="61dp"
         android:layout_height="61dp"
-        android:background="@android:drawable/ic_menu_save"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/saveicon" />
 
 </RelativeLayout>
