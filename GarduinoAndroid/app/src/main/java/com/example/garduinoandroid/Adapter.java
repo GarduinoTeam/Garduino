@@ -11,16 +11,38 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Adapter extends BaseAdapter
 {
     Context context;
     List<Data> listObjects;
+    ArrayList<Data> arrayList;
 
     public Adapter(Context context, List<Data> listObjects) {
         this.context = context;
         this.listObjects = listObjects;
+        this.arrayList = new ArrayList<Data>();
+        this.arrayList.addAll(listObjects);
+    }
+
+    public void filter(String charText){
+        charText = charText.toLowerCase(Locale.getDefault());
+        listObjects.clear();
+        if (charText.length()==0){
+            listObjects.addAll(arrayList);
+        }
+        else {
+            for (Data data : arrayList){
+                if (data.getTitle().toLowerCase(Locale.getDefault())
+                        .contains(charText)){
+                    listObjects.add(data);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override
