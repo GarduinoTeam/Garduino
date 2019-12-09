@@ -99,7 +99,7 @@
     <!--                                CREATE RULE                                              -->
 
     <string name="ruleNameDescription">Rule name:</string>
-    <string name="ruleName">Irrigation rule name 2</string>
+    <string name="ruleName">Irrigation rule name</string>
     <string name="btnRuleNameCancel">Cancel</string>
     <string name="btnRuleNameCreate">Create</string>
 
