@@ -4,94 +4,105 @@
     android:layout_height="match_parent"
     android:layout_margin="18dp">
 
-    <LinearLayout
-        android:id="@+id/startTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/buttonStartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnStartTime"
-            android:onClick="showTimeDialog"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/startTimeText"
-            android:layout_gravity="center"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/endTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/startTime"
-        android:layout_marginTop="18dp">
-        <Button
-            android:id="@+id/buttonEndTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnEndTime"
-            android:onClick="showTimeDialog"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/endTimeText"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+    <ListView
+        android:id="@+id/listTimeCondition"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dim_10" />
 
-    <LinearLayout
-        android:id="@+id/days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/endTime"
-        android:layout_marginTop="18dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnDays"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/daysText"
-            android:layout_gravity="center"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/months"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/days"
-        android:layout_marginTop="18dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btnMonths"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/monthsText"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+<!--    -->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/startTime"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
+<!--        <Button-->
+<!--            android:id="@+id/buttonStartTime"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/btnStartTime"-->
+<!--            android:onClick="showTimeDialog"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/startTimeText"-->
+<!--            android:layout_gravity="center"/>-->
+<!--    </LinearLayout>-->
 
-    <Button
-        android:id="@+id/dates"
-        android:layout_below="@+id/months"
-        android:layout_marginTop="18dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnSpecificDates"
-        android:onClick="showDateDialog"/>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/endTime"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_below="@+id/startTime"-->
+<!--        android:layout_marginTop="18dp">-->
+<!--        <Button-->
+<!--            android:id="@+id/buttonEndTime"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/btnEndTime"-->
+<!--            android:onClick="showTimeDialog"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/endTimeText"-->
+<!--            android:layout_gravity="center"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/days"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_below="@+id/endTime"-->
+<!--        android:layout_marginTop="18dp">-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/btnDays"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/daysText"-->
+<!--            android:layout_gravity="center"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/months"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_below="@+id/days"-->
+<!--        android:layout_marginTop="18dp">-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/btnMonths"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/monthsText"-->
+<!--            android:layout_gravity="center"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/dates"-->
+<!--        android:layout_below="@+id/months"-->
+<!--        android:layout_marginTop="18dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/btnSpecificDates"-->
+<!--        android:onClick="showDateDialog"/>-->
+
     <Button
         android:id="@+id/saveTimeCondition"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/btnSaveTimeConditions" />
+        android:background="@drawable/saveicon" />
+
 
 </RelativeLayout>

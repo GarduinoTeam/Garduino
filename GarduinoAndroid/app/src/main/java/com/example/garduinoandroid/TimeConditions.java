@@ -8,8 +8,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TimeConditions extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -29,6 +32,11 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     Boolean informationBoolean;
     Boolean addRule;
     String timeConditions;
+
+    ListView listView;
+    String[] labelListItems;
+    String[] descriptionItems;
+    ArrayList<TimeCondition> timeConditionArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +51,15 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
         save = (Button) findViewById(R.id.saveTimeCondition);
         save.setOnClickListener(this);
-
-        startTime = (Button) findViewById(R.id.buttonStartTime);
-//        startTime.setOnClickListener(this);
-
-        endTime = (Button) findViewById(R.id.buttonEndTime);
-        //endTime.setOnClickListener(this);
-
-        dates = (Button) findViewById(R.id.dates);
-        //dates.setOnClickListener(this);
+//
+//        startTime = (Button) findViewById(R.id.buttonStartTime);
+////        startTime.setOnClickListener(this);
+//
+//        endTime = (Button) findViewById(R.id.buttonEndTime);
+//        //endTime.setOnClickListener(this);
+//
+//        dates = (Button) findViewById(R.id.dates);
+//        //dates.setOnClickListener(this);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
@@ -59,7 +67,40 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
             addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
+
+        //Start ListRules
+        listView = (ListView) findViewById(R.id.listTimeCondition);
+
+        labelListItems = getResources().getStringArray(R.array.timeConditionsArray);
+        descriptionItems = getResources().getStringArray(R.array.timeConditionsDescriptionArray);
+
+        timeConditionArrayList = new ArrayList<TimeCondition>();
+        timeConditionArrayList.add(new TimeCondition(1, labelListItems[0],descriptionItems[0]));
+        timeConditionArrayList.add(new TimeCondition(2, labelListItems[1],descriptionItems[1]));
+        timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],descriptionItems[2]));
+        timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],descriptionItems[3]));
+        timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],descriptionItems[4]));
+
+        TimeConditionAdapter adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
+        listView.setAdapter(adapter);
+
+        //End ListView
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (id == 1){
+                    showTimeDialog(view);
+                }else if(id == 2){
+                    showTimeDialog(view);
+                }else if(id == 5){
+                    showDateDialog(view);
+                }
+            }
+        });
     }
+
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), EditIrrigationRule.class);
         myIntent.putExtra("object", (Serializable) obj);
@@ -125,6 +166,4 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append("/")
                 .append(year), Toast.LENGTH_LONG).show();
     }
-
-
 }

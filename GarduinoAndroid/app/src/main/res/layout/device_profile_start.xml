@@ -67,18 +67,6 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="@dimen/dim_6" />
 
-            <Button
-                android:id="@+id/btnSettingsStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_device_profile_settings"
-                android:layout_marginTop="5dp"
-                android:background="#000000"
-                android:textColor="#FFFFFF"
-                android:padding="@dimen/dim_5"
-                android:layout_weight="1"
-            />
-<!--            SHA DE POSAR AL NAVBAR SETTINGS-->
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
