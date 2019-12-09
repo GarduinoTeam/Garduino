@@ -21,7 +21,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/editTemperatureIrrigC" />
+                android:text="@string/editTemperatureIrrigC"
+                android:layout_marginRight="@dimen/dim_18"
+                />
 
             <Switch
                 android:layout_width="wrap_content"
@@ -44,7 +46,11 @@
             android:id="@+id/buttonTimeCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnTimeCondition" />
+            android:layout_marginRight="@dimen/dim_18"
+            android:text="@string/btnTimeCondition"
+            android:padding="@dimen/dim_10"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/custom_button"/>
 
         <Switch
             android:layout_width="wrap_content"
@@ -54,18 +60,17 @@
 
     <Button
         android:id="@+id/addCondition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnAddCondition"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
         android:layout_alignParentBottom="true"
-        />
+        android:background="@drawable/addicon" />
 
     <Button
         android:id="@+id/saveConditons"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/btnSaveCondition" />
+        android:background="@drawable/saveicon" />
 
 </RelativeLayout>

@@ -2,6 +2,8 @@ package com.jboss.resteasy.resources;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -83,11 +85,18 @@ public class DeviceResource {
 	@Consumes("application/json")
 	@Path("/get_devices")
 	public Response getDevices(@QueryParam("user_id") int user_id){
+		HashMap<String, List<Device>> devicesMap=new HashMap<>();
 		System.out.println(user_id);
 		List<Device> devices=myDeviceService.getDevices(user_id);
+		List<Device> test=new ArrayList<>();
+		//JSONDevices jsonDevices=new JSONDevices();
+		//jsonDevices.setName("jsonDevicesAdapter");
+		//jsonDevices.setDevices(devices);
+		devicesMap.put("devices", devices);
+		System.out.println("Test Devices");
 		return Response
 				.status(Status.OK)
-				.entity(devices)
+				.entity(devicesMap)
 				.build();
 	}
 	@GET
