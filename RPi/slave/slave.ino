@@ -1,7 +1,7 @@
 /*
  * slave.ino - Code for esp8266 slave to send sensor data to master
  * Created by Roger Truchero, December 6, 2019.
-  */
+ */
 
 // ------------ Definitions -------------
 
@@ -12,19 +12,21 @@
 
 // DHT11 sensor pin conf
 #define dht_dpin D5
+const int sensor_pin = A0;
 DHT dht(dht_dpin, DHTTYPE); 
 
 // Update these with values suitable for your network.
-
+/*
 const char* ssid = "<wifi_name>";
 const char* password = "<wifi_pass>";
 const char* mqtt_server = "<ip/host>";
+*/
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
 long lastMsg = 0;
-char msg[50];
+char msg[100];
 
 // Device id = 123
 char* pub_path = "house/response/123";
@@ -70,7 +72,11 @@ void callback(char* topic, byte* payload, unsigned int length)
   {
     // Send DHT11 data and soil moisture sensor data
     Serial.println("Proceeding to send sensor data!");
-    snprintf(msg, 50, "Temperature:  %2f and humidity %2f", dht.readTemperature(), dht.readHumidity());
+    float temperature = dht.readTemperature();
+    float humidity = dht.readHumidity();
+    float moisture = ( 100.00 - ( (analogRead(sensor_pin)/1023.00) * 100.00 ) );
+    
+    snprintf(msg, 100, "Temperature: %f ºC  Ambient humidity: %f pc  Moisture soil: %f pc", temperature, humidity, moisture);
     client.publish(pub_path, msg); 
   }
   else if(strcmp(topic, sub_webcam) == 0)
