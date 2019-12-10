@@ -121,4 +121,13 @@
     <servlet-name>PassConditionID</servlet-name>
     <url-pattern>/NewRuleCondition</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <display-name>GetRuleCondition</display-name>
+    <servlet-name>GetRuleCondition</servlet-name>
+    <jsp-file>/EditRuleCondition.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetRuleCondition</servlet-name>
+    <url-pattern>/EditRuleCondition</url-pattern>
+  </servlet-mapping>
 </web-app>
