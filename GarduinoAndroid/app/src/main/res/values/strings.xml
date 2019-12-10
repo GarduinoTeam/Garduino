@@ -32,6 +32,38 @@
     <string name="tv_settings_information_hint_device">Device name 1</string>
     <string name="btn_settings_information_save">SAVE</string>
 
+    <!--                              LIST ITEMS conditionLabel                                  -->
+
+    <string-array name="timeConditionLabel" >
+        <item>Time1</item>
+        <item>Time2</item>
+    </string-array>
+
+
+    <!--                              LIST ITEMS conditionLabel                                  -->
+
+    <string-array name="conditionLabel" >
+        <item>Temperature is higher than</item>
+        <item>Temperature is lower than</item>
+        <item>Moistness is higher than</item>
+    </string-array>
+
+    <!--                              LIST ITEMS valueCondition                                   -->
+
+    <string-array name="valueCondition" >
+        <item>12</item>
+        <item>22</item>
+        <item>43</item>
+    </string-array>
+
+    <!--                              LIST ITEMS mesureCondition                                   -->
+
+    <string-array name="measureCondition" >
+        <item>ºC</item>
+        <item>ºC</item>
+        <item>%</item>
+    </string-array>
+
     <!--                              LIST ITEMS ACTIVITY MAIN                                   -->
 
     <string-array name="devicesArray" >
@@ -104,7 +136,8 @@
     <string name="btnRuleNameCreate">Create</string>
 
     <!--                            EDIT IRRIGATION RULE                                         -->
-
+    <string name="environmentalConditions" translatable="false"> Environmental Conditions</string>
+    <string name="timeConditions" translatable="false">Time Conditions</string>
     <string name="editTemperatureIrrig">Temperature less than:</string>
     <string name="editTemperatureIrrigC">ºC</string>
     <string name="btnTimeCondition">Time condition</string>
