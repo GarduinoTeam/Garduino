@@ -1,19 +1,31 @@
 package com.example.garduinoandroid;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Data implements Serializable
 {
     private int id;
     private String title;
     private String description;
-    private int image;
+    private String imagePath;
 
-    public Data(int id, String title, String description, int image) {
+    public Data(int id, String title, String description, String imagePath) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.image = image;
+        this.imagePath = imagePath;
     }
 
     public void setDescription(String description) {
@@ -40,12 +52,12 @@ public class Data implements Serializable
         return title;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public int getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
 }

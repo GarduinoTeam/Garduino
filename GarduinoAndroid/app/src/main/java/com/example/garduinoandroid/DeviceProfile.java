@@ -112,7 +112,7 @@ public class DeviceProfile extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
-            image.setImageResource(obj.getImage());
+            //image.setImageResource(obj.getImage());
             addRule = (Boolean) getIntent().getExtras().getSerializable("addRule");
         }
 

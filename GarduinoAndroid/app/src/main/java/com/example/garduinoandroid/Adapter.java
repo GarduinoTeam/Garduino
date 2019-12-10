@@ -11,9 +11,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class Adapter extends BaseAdapter
 {
@@ -62,15 +66,23 @@ public class Adapter extends BaseAdapter
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
 
-        LayoutInflater inflate = LayoutInflater.from(context);
-        view = inflate.inflate(R.layout.deviceslist, null);
+        if(convertView == null){
+            LayoutInflater inflate = LayoutInflater.from(context);
+            convertView = inflate.inflate(R.layout.deviceslist, null, true);
+        }
 
-        ImageView image = (ImageView) view.findViewById(R.id.iv_1);
-        TextView title = (TextView) view.findViewById(R.id.tv_title);
-        TextView description = (TextView) view.findViewById(R.id.tv_description);
-        Switch sw = (Switch) view.findViewById(R.id.sw_1);
+
+        ImageView image = (ImageView) convertView.findViewById(R.id.iv_1);
+        Picasso.get().load(listObjects.get(position).getImagePath()).transform(new RoundedCornersTransformation(80,5)).into(image);
+
+        TextView title = (TextView) convertView.findViewById(R.id.tv_title);
+        title.setText(listObjects.get(position).getTitle());
+
+        TextView description = (TextView) convertView.findViewById(R.id.tv_description);
+        description.setText(listObjects.get(position).getDescription());
+
+        Switch sw = (Switch) convertView.findViewById(R.id.sw_1);
 
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,10 +95,6 @@ public class Adapter extends BaseAdapter
             }
         });
 
-        title.setText(listObjects.get(position).getTitle());
-        description.setText(listObjects.get(position).getDescription());
-        image.setImageResource(listObjects.get(position).getImage());
-
-        return view;
+        return convertView;
     }
 }
