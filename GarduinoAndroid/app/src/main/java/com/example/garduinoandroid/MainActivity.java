@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new ReadJSON().execute("https://api.androidhive.info/contacts/");
+                new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/devices/get_devices?user_id=1");
             }
         });
         // fill the Array using Call Get Https
@@ -143,25 +143,23 @@ public class MainActivity extends AppCompatActivity
                 JSONObject jsonObject = new JSONObject(jsonStr);
 
                 // Getting JSON Array
-                JSONArray contacts = jsonObject.getJSONArray("contacts");
+                JSONArray contacts = jsonObject.getJSONArray("devices");
 
                 // looping through All Contacts
                 for(int i = 0; i < contacts.length(); i++)
                 {
                     JSONObject c = contacts.getJSONObject(i);
 
-                    String id = c.getString("id");
+                    Integer id = c.getInt("id");
                     String name = c.getString("name");
-                    String email = c.getString("email");
+                    String status = c.getString("status");
+                    String imagePath = c.getString("imageURL");
 
-                    JSONObject phone = c.getJSONObject("phone");
-                    String mobile = phone.getString("mobile");
-                    String home = phone.getString("home");
 
                     ArrayList<Data> contact = new ArrayList<Data>();
 
                     // adding each child node to Arraylist Data
-                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1","40C","20%","2"));
+                    contact.add(new Data(1, name, status, imagePath,"40C","20%","2"));
 
                     // adding contact to devicesList
                     devicesList.addAll(contact);
