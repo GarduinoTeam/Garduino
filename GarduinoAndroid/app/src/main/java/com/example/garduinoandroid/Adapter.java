@@ -72,7 +72,6 @@ public class Adapter extends BaseAdapter
             convertView = inflate.inflate(R.layout.deviceslist, null, true);
         }
 
-
         ImageView image = (ImageView) convertView.findViewById(R.id.iv_1);
         Picasso.get().load(listObjects.get(position).getImagePath()).transform(new RoundedCornersTransformation(80,5)).into(image);
 

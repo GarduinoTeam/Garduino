@@ -1,18 +1,6 @@
 package com.example.garduinoandroid;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.widget.ImageView;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Data implements Serializable
 {
@@ -20,11 +8,17 @@ public class Data implements Serializable
     private String title;
     private String description;
     private String imagePath;
+    private  String temperature;
+    private String moisture;
+    private String soil;
 
-    public Data(int id, String title, String description, String imagePath) {
+    public Data(int id, String title, String description, String imagePath, String temperature, String moisture, String soil) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.temperature = temperature;
+        this.moisture = moisture;
+        this.soil = soil;
         this.imagePath = imagePath;
     }
 
@@ -60,4 +54,22 @@ public class Data implements Serializable
         return imagePath;
     }
 
+    public String getTemperature(){return  temperature;}
+    public String getMoisture(){return  moisture;}
+
+    public void setMoisture(String moisture) {
+        this.moisture = moisture;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+
+    public void setSoil(String soil) {
+        soil = soil;
+    }
+
+    public String getSoil() {
+        return soil;
+    }
 }

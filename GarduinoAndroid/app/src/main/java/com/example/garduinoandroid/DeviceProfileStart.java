@@ -11,11 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +35,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 public class DeviceProfileStart extends AppCompatActivity implements View.OnClickListener
 {
     private Button cancelIrrigation;
-    ArrayList<HashMap<String, String>> informationData;
+    ArrayList<Data> informationData;
     String jsonStr;
 
     ImageView image;
@@ -46,6 +51,10 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
     String deviceProfileStart;
 
     final static String urlContacts = "https://api.androidhive.info/contacts/";
+    private TextView temperature;
+    private TextView moisture;
+    private TextView soil;
+
 
 
     @Override
@@ -66,8 +75,12 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         cancelIrrigation = (Button) findViewById(R.id.btnDPS);
         cancelIrrigation.setOnClickListener(this);
 
-        image = (ImageView) findViewById(R.id.imageView);
-        new GetDataInformation().execute();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new ReadJSON().execute("https://api.androidhive.info/contacts/");
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
@@ -128,7 +141,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
     }
 
     // READING AND MANAGING DATA FORM AN ENDPOINT
-    private void createList(String jsonStr)
+    private ArrayList<Data> createList(String jsonStr)
     {
         informationData = new ArrayList<>();
         if(jsonStr != null)
@@ -152,36 +165,47 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                     String mobile = phone.getString("mobile");
                     String home = phone.getString("home");
 
-                    // tmp hash map for single contact
-                    HashMap<String, String> contact = new HashMap<>();
+                    ArrayList<Data> contact = new ArrayList<Data>();
 
-                    // adding each child node to HashMap key => value
-                    contact.put("id", id);
-                    contact.put("name", name);
-                    contact.put("email", email);
-                    contact.put("mobile", mobile);
-                    contact.put("home", home);
+                    // adding each child node to ArrayList Data
+                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1", "Temperature: 40ºC","Moisture: 20%","Soil: 2"));
 
                     // adding contact to devicesList
-                    informationData.add(contact);
+                    informationData.addAll(contact);
                 }
                 System.out.println(informationData);
+                return informationData;
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else Toast.makeText(this, "Couldn't get json from file", Toast.LENGTH_SHORT).show();
+        return null;
     }
 
-    private class GetDataInformation extends AsyncTask<Void, Void, Void>
+    private class ReadJSON extends AsyncTask<String, Void, String>
     {
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if(jsonStr != null)
-            {
-                createList(jsonStr);
+        protected void onPostExecute(String jsonStr) {
+            ArrayList<Data> result;
+            if (jsonStr != null) {
+                result = createList(jsonStr);
+                image = (ImageView) findViewById(R.id.imageView);
+                temperature = (TextView) findViewById(R.id.tv_dvs_1);
+                moisture = (TextView) findViewById(R.id.tv_dvs_2);
+                soil = (TextView) findViewById(R.id.tv_dvs_3);
+                for (Data dataDevice : result) {
+                    Picasso.get().load(result.get(0).getImagePath()).transform(new RoundedCornersTransformation(80,5)).into(image);
+                    System.out.println(dataDevice.getTitle());
+                    System.out.println(dataDevice.getTemperature());
+//                    System.out.println("***************");
+//                }
+
+                    temperature.setText(dataDevice.getTemperature());
+                    moisture.setText(dataDevice.getMoisture());
+                    soil.setText(dataDevice.getSoil());
+                }
             }
         }
 
@@ -191,58 +215,64 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            HttpURLConnection conn = null;
-            InputStream inputStream = null;
-            InputStreamReader isReader = null;
-            BufferedReader reader = null;
+        protected String doInBackground(String... params) {
+            return readURL(params[0]);
+        }
 
-            try {
-                URL url = new URL(urlContacts);
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
+    }
+    private String readURL(String urlContacts)
+    {
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
+        InputStreamReader isReader = null;
+        BufferedReader reader = null;
 
-                inputStream = conn.getInputStream();
-                StringBuilder buffer = new StringBuilder();
+        try {
+            URL url = new URL(urlContacts);
 
-                if(inputStream == null){
-                    // Nothing to do
-                    return null;
-                }
-                isReader = new InputStreamReader(inputStream);
-                reader = new BufferedReader(isReader);
-                String line;
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
 
-                while((line = reader.readLine()) != null)
-                {
-                    buffer.append(line + "\n");
-                }
+            inputStream = conn.getInputStream();
+            StringBuilder buffer = new StringBuilder();
 
-                if(buffer.length() == 0)
-                {
-                    // Stream was empty. No point in parsing.
-                    return null;
-                }
+            if(inputStream == null){
+                // Nothing to do
+                return null;
+            }
+            isReader = new InputStreamReader(inputStream);
+            reader = new BufferedReader(isReader);
+            String line;
 
-                jsonStr = buffer.toString();
+            while((line = reader.readLine()) != null)
+            {
+                buffer.append(line + "\n");
+            }
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if(conn != null){ conn.disconnect(); }
-                if(reader != null){
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            if(buffer.length() == 0)
+            {
+                // Stream was empty. No point in parsing.
+                return null;
+            }
+
+            jsonStr = buffer.toString();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(conn != null){ conn.disconnect(); }
+            if(reader != null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-            return null;
         }
+        return jsonStr;
     }
 }
 
