@@ -3,60 +3,88 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="18dp">
-
     <LinearLayout
-        android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/editTemperatureIrrig" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/editTemperatureIrrigC"
-                android:layout_marginRight="@dimen/dim_18"
-                />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/environmentalConditions"
+            android:textStyle="bold"
+            android:paddingTop="@dimen/dim_18"/>
+        <ListView
+            android:id="@+id/listEditTextConditions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dim_10" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/timeConditions"
+            android:textStyle="bold"
+            android:paddingTop="@dimen/dim_18"/>
+        <ListView
+            android:id="@+id/listTimeConditons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dim_10" />
     </LinearLayout>
 
 
+<!--    <LinearLayout-->
+<!--        android:id="@+id/temperature"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_centerHorizontal="true">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/editTemperatureIrrig" />-->
 
-    <LinearLayout
-        android:id="@+id/timeCondition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/temperature"
-        android:paddingTop="18dp"
-        android:layout_alignLeft="@+id/temperature">
+<!--            <EditText-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/editTemperatureIrrigC"-->
+<!--                android:layout_marginRight="@dimen/dim_18"-->
+<!--                />-->
 
-        <Button
-            android:id="@+id/buttonTimeCondition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dim_18"
-            android:text="@string/btnTimeCondition"
-            android:padding="@dimen/dim_10"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/custom_button"/>
+<!--            <Switch-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
+<!--    </LinearLayout>-->
+
+
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/timeCondition"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_below="@+id/temperature"-->
+<!--        android:paddingTop="18dp"-->
+<!--        android:layout_alignLeft="@+id/temperature">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/buttonTimeCondition"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="@dimen/dim_18"-->
+<!--            android:text="@string/btnTimeCondition"-->
+<!--            android:padding="@dimen/dim_10"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:background="@drawable/custom_button"/>-->
+
+<!--        <Switch-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            />-->
+<!--    </LinearLayout>-->
 
     <Button
         android:id="@+id/addCondition"

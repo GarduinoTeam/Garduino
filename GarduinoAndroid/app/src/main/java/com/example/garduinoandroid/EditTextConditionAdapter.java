@@ -6,29 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
-
-public class Adapter extends BaseAdapter
+public class EditTextConditionAdapter extends BaseAdapter
 {
     Context context;
-    List<Data> listObjects;
-    ArrayList<Data> arrayList;
+    List<EditTextCondition> listObjects;
+    ArrayList<EditTextCondition> arrayList;
 
-    public Adapter(Context context, List<Data> listObjects) {
+    public EditTextConditionAdapter(Context context, List<EditTextCondition> listObjects) {
         this.context = context;
         this.listObjects = listObjects;
-        this.arrayList = new ArrayList<Data>();
+        this.arrayList = new ArrayList<EditTextCondition>();
         this.arrayList.addAll(listObjects);
     }
 
@@ -39,7 +36,7 @@ public class Adapter extends BaseAdapter
             listObjects.addAll(arrayList);
         }
         else {
-            for (Data data : arrayList){
+            for (EditTextCondition data : arrayList){
                 if (data.getTitle().toLowerCase(Locale.getDefault())
                         .contains(charText)){
                     listObjects.add(data);
@@ -66,23 +63,15 @@ public class Adapter extends BaseAdapter
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
 
-        if(convertView == null){
-            LayoutInflater inflate = LayoutInflater.from(context);
-            convertView = inflate.inflate(R.layout.deviceslist, null, true);
-        }
+        LayoutInflater inflate = LayoutInflater.from(context);
+        view = inflate.inflate(R.layout.edit_condition_list, null);
 
-
-        ImageView image = (ImageView) convertView.findViewById(R.id.iv_1);
-        Picasso.get().load(listObjects.get(position).getImagePath()).transform(new RoundedCornersTransformation(80,5)).into(image);
-
-        TextView title = (TextView) convertView.findViewById(R.id.tv_title);
-        title.setText(listObjects.get(position).getTitle());
-
-        TextView description = (TextView) convertView.findViewById(R.id.tv_description);
-        description.setText(listObjects.get(position).getDescription());
-
-        Switch sw = (Switch) convertView.findViewById(R.id.sw_1);
+        EditText edit = (EditText) view.findViewById(R.id.editTextEditCondition);
+        TextView title = (TextView) view.findViewById(R.id.textVieweEditCondition);
+        TextView measure = (TextView) view.findViewById(R.id.measureEditCondition);
+        Switch sw = (Switch) view.findViewById(R.id.switchEditCondition);
 
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -95,6 +84,10 @@ public class Adapter extends BaseAdapter
             }
         });
 
-        return convertView;
+        title.setText(listObjects.get(position).getTitle());
+        edit.setText(listObjects.get(position).getEdit());
+        measure.setText(listObjects.get(position).getMeasure());
+
+        return view;
     }
 }

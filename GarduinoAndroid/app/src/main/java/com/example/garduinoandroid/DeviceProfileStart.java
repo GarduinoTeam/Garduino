@@ -73,7 +73,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         if(bundle != null) {
             obj = (Data) getIntent().getExtras().getSerializable("object");
             addRule = (Boolean) getIntent().getExtras().getSerializable("addRule");
-            image.setImageResource(obj.getImage());
+            //image.setImageResource(obj.getImage());
         }
     }
 

@@ -3,8 +3,6 @@ package com.example.garduinoandroid;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,11 +11,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -33,21 +29,18 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
 {
-    final static String urlContacts = "https://api.androidhive.info/contacts/";
     String jsonStr;
 
     ListView listView;
     String[] labelListItems;
     String[] descriptionItems;
     ArrayList<Data> dataArrayList;
-    ArrayList<HashMap<String, String>> devicesList;
+    ArrayList<Data> devicesList;
     Adapter adapter;
 
     @Override
@@ -64,18 +57,21 @@ public class MainActivity extends AppCompatActivity
         descriptionItems = getResources().getStringArray(R.array.descriptionArray);
 
         dataArrayList = new ArrayList<Data>();
-
-        new GetContacts().execute();
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new ReadJSON().execute("https://api.androidhive.info/contacts/");
+            }
+        });
         // fill the Array using Call Get Https
 
-        dataArrayList.add(new Data(1, labelListItems[0], descriptionItems[0], R.drawable.plant1 ));
-        dataArrayList.add(new Data(2, labelListItems[1], descriptionItems[1], R.drawable.plant2 ));
-        dataArrayList.add(new Data(3, labelListItems[2], descriptionItems[2], R.drawable.plant3 ));
-        dataArrayList.add(new Data(4, labelListItems[3], descriptionItems[0], R.drawable.plant4 ));
-
-        adapter = new Adapter(getApplicationContext(), dataArrayList);
-        listView.setAdapter(adapter);
+//        dataArrayList.add(new Data(1, labelListItems[0], descriptionItems[0], R.drawable.plant1 ));
+//        dataArrayList.add(new Data(2, labelListItems[1], descriptionItems[1], R.drawable.plant2 ));
+//        dataArrayList.add(new Data(3, labelListItems[2], descriptionItems[2], R.drawable.plant3 ));
+//        dataArrayList.add(new Data(4, labelListItems[3], descriptionItems[0], R.drawable.plant4 ));
+//
+//        adapter = new Adapter(getApplicationContext(), dataArrayList);
+//        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -138,9 +134,9 @@ public class MainActivity extends AppCompatActivity
 
     // CREATING FUNCTIONS AND CLASS IN ORDER TO GET DATA FROM AN ENDPOINT
     // AND MANAGING DATA FROM JSON IN ORDER TO ADAPT TO A LISTVIEW
-    private void createList(String jsonStr)
+    private ArrayList<Data> createList(String jsonStr)
     {
-        devicesList = new ArrayList<>();
+        devicesList = new ArrayList<Data>();
         if(jsonStr != null)
         {
             try {
@@ -163,45 +159,47 @@ public class MainActivity extends AppCompatActivity
                     String home = phone.getString("home");
 
                     // tmp hash map for single contact
-                    HashMap<String, String> contact = new HashMap<>();
+                    ArrayList<Data> contact = new ArrayList<Data>();
 
                     // adding each child node to HashMap key => value
-                    contact.put("id", id);
-                    contact.put("name", name);
-                    contact.put("email", email);
-                    contact.put("mobile", mobile);
-                    contact.put("home", home);
+                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1"));
+                    //System.out.println();
 
                     // adding contact to devicesList
-                    devicesList.add(contact);
+                    devicesList.addAll(contact);
+
                 }
-                System.out.println(devicesList);
+                return devicesList;
+
+               // System.out.println(devicesList);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else Toast.makeText(this, "Couldn't get json from file", Toast.LENGTH_SHORT).show();
+        return null;
     }
 
-//    private void showListView()
-//    {
-//        ListView lv = (ListView) findViewById(R.id.listData);
-//
-//        for (int i = 0; i < 10; i++){
-//            lv.append(((devicesList.get(i)).get("name")) + "\n");
-//        }
-//
-//    }
-
-    private class GetContacts extends AsyncTask<Void, Void, Void>
+    private class ReadJSON extends AsyncTask<String, Integer, String>
     {
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String jsonStr) {
+            ArrayList<Data> result;
+            ArrayList<Data> devices = new ArrayList<Data>();
             if(jsonStr != null)
             {
-                createList(jsonStr);
+                result = createList(jsonStr);
+
+                adapter = new Adapter(getApplicationContext(), result);
+                listView.setAdapter(adapter);
+
+//
+//                for(Data dataDevice: result) {
+//                    System.out.println(dataDevice.getTitle());
+//                    System.out.println("***************");
+//                }
+//
             }
         }
 
@@ -211,57 +209,62 @@ public class MainActivity extends AppCompatActivity
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            HttpURLConnection conn = null;
-            InputStream inputStream = null;
-            InputStreamReader isReader = null;
-            BufferedReader reader = null;
+        protected String doInBackground(String... params) {
+            return readURL(params[0]);
+        }
+    }
 
-            try {
-                URL url = new URL(urlContacts);
+    private String readURL(String urlContacts)
+    {
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
+        InputStreamReader isReader = null;
+        BufferedReader reader = null;
 
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
+        try {
+            URL url = new URL(urlContacts);
 
-                inputStream = conn.getInputStream();
-                StringBuilder buffer = new StringBuilder();
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
 
-                if(inputStream == null){
-                    // Nothing to do
-                    return null;
-                }
-                isReader = new InputStreamReader(inputStream);
-                reader = new BufferedReader(isReader);
-                String line;
+            inputStream = conn.getInputStream();
+            StringBuilder buffer = new StringBuilder();
 
-                while((line = reader.readLine()) != null)
-                {
-                    buffer.append(line + "\n");
-                }
+            if(inputStream == null){
+                // Nothing to do
+                return null;
+            }
+            isReader = new InputStreamReader(inputStream);
+            reader = new BufferedReader(isReader);
+            String line;
 
-                if(buffer.length() == 0)
-                {
-                    // Stream was empty. No point in parsing.
-                    return null;
-                }
+            while((line = reader.readLine()) != null)
+            {
+                buffer.append(line + "\n");
+            }
 
-                jsonStr = buffer.toString();
+            if(buffer.length() == 0)
+            {
+                // Stream was empty. No point in parsing.
+                return null;
+            }
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if(conn != null){ conn.disconnect(); }
-                if(reader != null){
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            jsonStr = buffer.toString();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(conn != null){ conn.disconnect(); }
+            if(reader != null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-            return null;
         }
+        return jsonStr;
     }
 }
