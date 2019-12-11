@@ -188,6 +188,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
         protected void onPreExecute() {
             super.onPreExecute();
         }
+        
 
         @Override
         protected String doInBackground(String... params) {
