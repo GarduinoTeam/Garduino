@@ -158,20 +158,16 @@ public class MainActivity extends AppCompatActivity
                     String mobile = phone.getString("mobile");
                     String home = phone.getString("home");
 
-                    // tmp hash map for single contact
                     ArrayList<Data> contact = new ArrayList<Data>();
 
-                    // adding each child node to HashMap key => value
-                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1"));
-                    //System.out.println();
+                    // adding each child node to Arraylist Data
+                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1","40C","20%","2"));
 
                     // adding contact to devicesList
                     devicesList.addAll(contact);
 
                 }
                 return devicesList;
-
-               // System.out.println(devicesList);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -180,13 +176,12 @@ public class MainActivity extends AppCompatActivity
         return null;
     }
 
-    private class ReadJSON extends AsyncTask<String, Integer, String>
+    private class ReadJSON extends AsyncTask<String, Void, String>
     {
 
         @Override
         protected void onPostExecute(String jsonStr) {
             ArrayList<Data> result;
-            ArrayList<Data> devices = new ArrayList<Data>();
             if(jsonStr != null)
             {
                 result = createList(jsonStr);
@@ -194,12 +189,11 @@ public class MainActivity extends AppCompatActivity
                 adapter = new Adapter(getApplicationContext(), result);
                 listView.setAdapter(adapter);
 
-//
-//                for(Data dataDevice: result) {
-//                    System.out.println(dataDevice.getTitle());
-//                    System.out.println("***************");
-//                }
-//
+                for(Data dataDevice: result) {
+                    System.out.println(dataDevice.getTitle());
+                    System.out.println("***************");
+                }
+
             }
         }
 

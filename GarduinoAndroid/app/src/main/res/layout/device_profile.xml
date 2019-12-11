@@ -16,20 +16,20 @@
             android:layout_height="361dp"
             android:layout_marginBottom="@dimen/dim_10"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/plant1"
+
             />
 
         <TextView
             android:id="@+id/tv_dvp_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_device_profile_temperature"/>
+            />
 
         <TextView
             android:id="@+id/tv_dvp_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_device_profile_moisture"/>
+            />
 
         <TextView
             android:id="@+id/tv_dvp_3"
