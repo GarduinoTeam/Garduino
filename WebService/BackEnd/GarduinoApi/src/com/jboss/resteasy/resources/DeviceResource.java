@@ -22,11 +22,14 @@ import javax.ws.rs.core.Response.Status;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.jboss.resteasy.beans.Device;
+import com.jboss.resteasy.beans.Sensor;
 import com.jboss.resteasy.beans.User;
 import com.jboss.resteasy.services.DeviceService;
+import com.jboss.resteasy.services.SensorService;
 @Path("/devices")
 public class DeviceResource {
 	private DeviceService myDeviceService=new DeviceService();
+	private SensorService mySensorService= new SensorService();
 	@POST
 	@Path("/create_device")
 	@Consumes("multipart/form-data")
@@ -88,6 +91,22 @@ public class DeviceResource {
 		HashMap<String, List<Device>> devicesMap=new HashMap<>();
 		System.out.println(user_id);
 		List<Device> devices=myDeviceService.getDevices(user_id);
+		for(int i=0;i<devices.size();i++){
+			Device device=devices.get(i);
+			List<Sensor>sensors=mySensorService.getSensors(device.getId());
+			for(int j=0;j<sensors.size();j++){
+				Sensor sensor=sensors.get(j);
+				if(sensor.getSensorType()==1){
+					device.setTemperature("Temperature: "+ sensor.getValue()+" ºC");
+				}else if(sensor.getSensorType()==2){
+					device.setHumidity("Humidity: "+sensor.getValue()+" %");
+				}
+				else if(sensor.getSensorType()==3){
+					device.setSoil("Moisture: "+sensor.getValue()+" %");
+				}
+				devices.set(i, device);
+			}
+		}
 		List<Device> test=new ArrayList<>();
 		//JSONDevices jsonDevices=new JSONDevices();
 		//jsonDevices.setName("jsonDevicesAdapter");
@@ -108,6 +127,18 @@ public class DeviceResource {
 		if(device==null){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}else{
+			List<Sensor>sensors=mySensorService.getSensors(device.getId());
+			for(int j=0;j<sensors.size();j++){
+				Sensor sensor=sensors.get(j);
+				if(sensor.getSensorType()==1){
+					device.setTemperature("Temperature: "+ sensor.getValue()+" ºC");
+				}else if(sensor.getSensorType()==2){
+					device.setHumidity("Humidity: "+sensor.getValue()+" %");
+				}
+				else if(sensor.getSensorType()==3){
+					device.setSoil("Moisture: "+sensor.getValue()+" %");
+				}
+			}
 			return Response
 					.status(Status.OK)
 					.entity(device)
