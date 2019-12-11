@@ -12,6 +12,27 @@ public class Device {
 	private byte[] image;
 	private String imageURL;
 	private int userId;
+	private String Temperature;
+	private String Humidity;
+	private String Soil;
+	public String getTemperature() {
+		return Temperature;
+	}
+	public void setTemperature(String temperature) {
+		Temperature = temperature;
+	}
+	public String getHumidity() {
+		return Humidity;
+	}
+	public void setHumidity(String humidity) {
+		Humidity = humidity;
+	}
+	public String getSoil() {
+		return Soil;
+	}
+	public void setSoil(String soil) {
+		Soil = soil;
+	}
 	public int getId() {
 		return id;
 	}

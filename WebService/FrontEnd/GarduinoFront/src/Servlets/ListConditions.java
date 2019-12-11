@@ -54,12 +54,16 @@ public class ListConditions extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("\nDins del ListCondtitons!");	
 		String ruleId=request.getParameter("ruleId");
+		HttpSession session;
+		session=request.getSession();
+		if(ruleId==null){
+			ruleId=(String)session.getAttribute("ruleId");
+		}
+		session.setAttribute("ruleId", ruleId);
+		System.out.println("RuleId:"+ruleId);
 
 		String url="http://localhost:8080/GarduinoApi/ruleconditions/get_rule_conditions?rule_id="+ruleId;
 		
-		HttpSession session;
-		session=request.getSession();
-		session.setAttribute("ruleId", ruleId);
 		
 		
 		Client client= ClientBuilder.newClient();
@@ -71,6 +75,11 @@ public class ListConditions extends HttpServlet {
 		ruleConditionList = new RuleCondition[ruleConditions.size()];
 		for(int i=0;i<ruleConditions.size();i++){
 			RuleCondition Condition=ruleConditions.get(i);
+			System.out.println("Rule Condition id:"+Condition.getId());
+			System.out.println("Rule Condition ruleid:"+Condition.getIdRule());
+			System.out.println("Rule Condition idCondition:"+Condition.getIdCondition());
+			System.out.println("Rule Condition Condition Value:"+Condition.getConditionValue());
+			System.out.println("Rule Condition Status:"+Condition.getStatus());
 			ruleConditionList[i]=Condition;		
 		}
 		session.setAttribute("ruleConditions", ruleConditionList);

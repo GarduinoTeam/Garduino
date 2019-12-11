@@ -158,11 +158,17 @@
                   <h6 class="m-0 font-weight-bold text-primary">Conditions list</h6>
                 </div>
                 <div class="card-body">
+                  <%beans.Condition[] conditions = (beans.Condition[])session.getAttribute("conditions"); %>
+                  <%for(int i=0; i<conditions.length; i++){ %>
+                  <div class="p-3 bg-gray-100">
+                  <form method="post" action="PassConditionID">
+                  			<input type="hidden" value=<%=conditions[i].getId()%> name="conditionId">
+            				<input type="submit" value="<%=conditions[i].getName()%>" class="btn btn-primary">      
+            	  </form>
+            	  </div>
+                  
+                  <%}%>
                   <div class="p-3 bg-gray-100"><a class="collapse-item " href="TimeCondition.jsp">Time condition</a></div>
-                  <div class="p-3 bg-gray-100"><a class="collapse-item " href="TimeCondition.jsp">Temperature is higher than</a></div>
-                  <div class="p-3 bg-gray-100"><a class="collapse-item " href="TimeCondition.jsp">Temperature is lower than</a></div>
-                  <div class="p-3 bg-gray-100"><a class="collapse-item " href="TimeCondition.jsp">Moistness is higher than</a></div>
-                  <div class="p-3 bg-gray-100"><a class="collapse-item " href="TimeCondition.jsp">Moistness is lower than</a></div>
                 </div>
     	</div>
        </div>

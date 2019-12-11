@@ -102,4 +102,32 @@
     <servlet-name>PassNewDeviceId</servlet-name>
     <url-pattern>/PassNewDeviceId</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateConditions</display-name>
+    <servlet-name>CreateConditions</servlet-name>
+    <jsp-file>/NewCondition.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateConditions</servlet-name>
+    <url-pattern>/NewCondition</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>PassConditionID</display-name>
+    <servlet-name>PassConditionID</servlet-name>
+    <jsp-file>/NewRuleCondition.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PassConditionID</servlet-name>
+    <url-pattern>/NewRuleCondition</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>GetRuleCondition</display-name>
+    <servlet-name>GetRuleCondition</servlet-name>
+    <jsp-file>/EditRuleCondition.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetRuleCondition</servlet-name>
+    <url-pattern>/EditRuleCondition</url-pattern>
+  </servlet-mapping>
 </web-app>
