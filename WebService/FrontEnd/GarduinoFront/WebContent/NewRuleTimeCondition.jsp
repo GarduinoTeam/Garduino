@@ -1,4 +1,3 @@
-<%@page import="beans.RuleCondition"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -25,6 +24,11 @@
 
 <body id="page-top">
 
+	<%String deviceId = (String)session.getAttribute("deviceId");
+ 	String userId = (String)session.getAttribute("userId");
+    String conditionId = (String)request.getAttribute("conditionId");%>
+ 	
+  
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -58,7 +62,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+       <li class="nav-item active">
         <a class="nav-link collapsed" href="UsersList.jsp" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user"></i>
           <span>Users</span>
@@ -66,13 +70,13 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item " href="UsersList.jsp">Users List</a> 
-            <a class="collapse-item" href="UserDevices.jsp">Devices</a>
-			<a class="collapse-item" href="Rules.jsp">Rules</a>   
-			<a class="collapse-item active" href="Conditions.jsp">Conditions</a> 
+            <a class="collapse-item " href="UsersList.jsp">Users List</a>     
+            <a class="collapse-item " href="UserDevices.jsp">Devices</a>     
+            <a class="collapse-item active" href="Rules.jsp">Rules</a>     
           </div>
         </div>
       </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -148,98 +152,46 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+   <div class="container">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Conditions</h1>
-          
-		  <%beans.RuleCondition[] ruleConditions = (beans.RuleCondition[])session.getAttribute("ruleConditions"); %>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Rule Conditions</h6>
-              <form method="post" action="CreateConditions">
-              	
-              	<input type="submit" value="New Condition" class="btn btn-success" style="float:right">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Create a Rule Time Condition!</h1>
+              </div>
+              <form class="user" method="post" action="CreateRuleConditions">
+              <input type="hidden" value=<%=conditionId%> name="conditionId">
+                <div class="form-group">
+                	<label  for="startTime">Start Time</label>
+                    <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="startTime" name="startTime" placeholder="Start Time">
+                </div>
+                <div class="form-group">
+                	<label  for="endTime">End Time</label>
+                    <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="endTime" name="endTime" placeholder="End Time">
+                </div>
+                <div class="form-group">
+                	<label  for="days">Days Of Week</label>
+                    <select multiple size="7" id="days" name="days" placeholder="Days of Week"></select>
+                </div>
+                <div class="form-group">
+                      <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="statusCheck">
+                        <label class="custom-control-label" for="customCheck">Active</label>
+                      </div>
+                </div>
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Create Rule Condition">
+                <hr>
               </form>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>IdRule</th>
-                      <th>IdCondition</th>
-                      <th>ConditionValue</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-     
-                  <tbody>
-                   <%for(int i=0; i<ruleConditions.length; i++){ %>
-                    <tr>
-                       <td><%=ruleConditions[i].getId()%></td>
-                      <td><%=ruleConditions[i].getIdRule()%></td>
-                      <td><%=ruleConditions[i].getIdCondition()%></td>
-                      <td><%=ruleConditions[i].getConditionValue()%></td>
-                      <td><%=ruleConditions[i].getStatus()%></td>
-                      <td>  
-                      <form method="post" action="GetRuleCondition">
-            	  	  <input type="hidden" value=<%=ruleConditions[i].getId()%> name="ruleConditionId">
-                      <input type="submit" class="btn btn-success " value="Edit" >
-                      </form>
-                      
-                      <form method="post" action="DeleteRuleCondition">
-            	  	  <input type="hidden" value=<%=ruleConditions[i].getId()%> name="ruleConditionId">
-            	  	  <input type="hidden" value=<%=ruleConditions[i].getIdRule()%> name="ruleId">
-                      <input type="submit" class="btn btn-danger " value="Delete" >
-                      </form>                
-                  	  </td>
-                    </tr>
-                   <%}%>  
-                  </tbody>
-                </table>
-              </div>
-              
             </div>
           </div>
-		
         </div>
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Rule Time Conditions</h6>
-              
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
-                      <th>Days</th>
-                      <th>Months</th>
-                      <th>Specific Date</th>
-                      <th>Status</th>
-                      
-                    </tr>
-                  </thead>
-     
-                  <tbody>
-                    
-                  </tbody>
-                </table>
-              </div>
-              
-            </div>
-          </div>
-		
-        </div>
-        
-        <!-- /.container-fluid -->
-
       </div>
+    </div>
+        
       <!-- End of Main Content -->
 
       <!-- Footer -->
