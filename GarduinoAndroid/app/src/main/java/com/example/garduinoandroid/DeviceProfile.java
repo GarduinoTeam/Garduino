@@ -47,8 +47,6 @@ public class DeviceProfile extends AppCompatActivity {
     ArrayList<Data>informationDevice;
     String jsonStr;
 
-    final static String urlContacts = "https://api.androidhive.info/contacts/";
-
     Data obj;
     ImageView image;
     TextView soil;
