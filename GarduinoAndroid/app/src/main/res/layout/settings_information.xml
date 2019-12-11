@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_si_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_settings_information_device"
@@ -23,16 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tv_settings_information_hint_device"
-            android:layout_marginBottom="@dimen/dim_20"/>
+            android:layout_marginBottom="@dimen/dim_20"
+        />
 
         <TextView
+            android:id="@+id/tv_si_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tv_settings_information_frequency"
             android:textColor="#000000"
             android:textSize="@dimen/dim_20"
             android:textStyle="bold"
-
             />
 
         <EditText
@@ -51,7 +53,6 @@
         android:textColor="#FFFFFF"
         android:padding="@dimen/dim_20"
         android:layout_centerInParent="true"
-
     />
 
 
@@ -62,6 +63,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/saveicon" />
+        android:background="@drawable/saveicon"
+        />
 
 </RelativeLayout>
