@@ -222,6 +222,7 @@ public class DeviceService {
 						device.setStatus(status);
 						device.setImage(new byte[0]);
 						device.setImageURL("http://localhost:8080/GarduinoApi/devices/images/"+user_id+"/"+name);
+						device.setImageAndroidURL("http://10.0.2.2:8080/GarduinoApi/devices/images/"+user_id+"/"+name);
 						device.setUserId(user_id);
 						devices.add(device);
 					}
@@ -274,6 +275,7 @@ public class DeviceService {
 						device.setStatus(status);
 						device.setImage(new byte[0]);
 						device.setImageURL("http://localhost:8080/GarduinoApi/devices/images/"+user_id+"/"+name);
+						device.setImageAndroidURL("http://10.0.2.2:8080/GarduinoApi/devices/images/"+user_id+"/"+name);
 						device.setUserId(user_id);
 					}
 

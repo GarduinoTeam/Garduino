@@ -15,6 +15,13 @@ public class Device {
 	private String Temperature;
 	private String Humidity;
 	private String Soil;
+	private String imageAndroidURL;
+	public String getImageAndroidURL() {
+		return imageAndroidURL;
+	}
+	public void setImageAndroidURL(String imageAndroidURL) {
+		this.imageAndroidURL = imageAndroidURL;
+	}
 	public String getTemperature() {
 		return Temperature;
 	}
