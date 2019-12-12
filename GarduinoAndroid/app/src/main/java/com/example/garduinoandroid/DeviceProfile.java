@@ -65,13 +65,17 @@ public class DeviceProfile extends AppCompatActivity {
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        Bundle datos = this.getIntent().getExtras();
+        final int deviceId = datos.getInt("deviceId");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_profile);
         settingsDPS = false;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new ReadJSON().execute("https://api.androidhive.info/contacts/");
+                new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/devices/get_device/"+deviceId);
             }
         });
         manualIrrigation = (Button) findViewById(R.id.button1);
@@ -163,37 +167,26 @@ public class DeviceProfile extends AppCompatActivity {
         if(jsonStr != null)
         {
             try {
-                JSONObject jsonObject = new JSONObject(jsonStr);
+                    JSONObject jsonObject = new JSONObject(jsonStr);
 
-                // Getting JSON Array
-                JSONArray contacts = jsonObject.getJSONArray("contacts");
-
-                // looping through All Contacts
-                for(int i = 0; i < contacts.length(); i++)
-                {
-                    JSONObject c = contacts.getJSONObject(i);
-
-                    String id = c.getString("id");
-                    String name = c.getString("name");
-                    String email = c.getString("email");
-
-                    JSONObject phone = c.getJSONObject("phone");
-                    String mobile = phone.getString("mobile");
-                    String home = phone.getString("home");
+                    Integer id = jsonObject.getInt("id");
+                    String temperature = jsonObject.getString("temperature");
+                    String soil = jsonObject.getString("soil");
+                    String humidity = jsonObject.getString("humidity");
+                    String imagePath = jsonObject.getString("imageAndroidURL");
 
                     ArrayList<Data> contact = new ArrayList<Data>();
 
                     // adding each child node to ArrayList Data
-                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1", "Temperature: 40ºC","Moisture: 20%","Soil: 2"));
+                    contact.add(new Data(id, null, null, imagePath, temperature, humidity, soil));
 
                     // adding contact to devicesList
                     informationDevice.addAll(contact);
-                }
-                return informationDevice;
-
-            } catch (JSONException e) {
+                } catch (JSONException e) {
                 e.printStackTrace();
             }
+            return informationDevice;
+
         } else Toast.makeText(this, "Couldn't get json from file", Toast.LENGTH_SHORT).show();
         return null;
     }

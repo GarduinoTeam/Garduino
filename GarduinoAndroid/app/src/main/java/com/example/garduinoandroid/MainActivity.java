@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
                 Data obj = (Data) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), DeviceProfile.class);
                 intent.putExtra("object", (Serializable) obj);
+                intent.putExtra("deviceId",  obj.getId());
                 Intent i = new Intent(getApplicationContext(), DeviceProfileStart.class);
                 i.putExtra("object", (Serializable) obj);
                 startActivity(intent);
@@ -153,13 +154,16 @@ public class MainActivity extends AppCompatActivity
                     Integer id = c.getInt("id");
                     String name = c.getString("name");
                     String status = c.getString("status");
-                    String imagePath = c.getString("imageURL");
+                    String imagePath = c.getString("imageAndroidURL");
+                    String temperature = c.getString("temperature");
+                    String soil = c.getString("soil");
+                    String humidity = c.getString("humidity");
 
 
                     ArrayList<Data> contact = new ArrayList<Data>();
 
                     // adding each child node to Arraylist Data
-                    contact.add(new Data(1, name, status, imagePath,"40C","20%","2"));
+                    contact.add(new Data(id, name, status, imagePath,temperature,soil,humidity));
 
                     // adding contact to devicesList
                     devicesList.addAll(contact);
