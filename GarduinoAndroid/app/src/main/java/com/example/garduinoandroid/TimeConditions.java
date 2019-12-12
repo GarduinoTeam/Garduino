@@ -37,6 +37,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     String[] labelListItems;
     String[] descriptionItems;
     ArrayList<TimeCondition> timeConditionArrayList;
+    int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,9 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_conditions);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
 
         save = (Button) findViewById(R.id.saveTimeCondition);
         save.setOnClickListener(this);
@@ -106,6 +110,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
         myIntent.putExtra("addRule", addRule);
+        myIntent.putExtra("deviceId",  deviceId);
         startActivityForResult(myIntent, 0);
         return true;
     }
@@ -118,6 +123,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
                 intentSave.putExtra("addRule", addRule);
+                intentSave.putExtra("deviceId",  deviceId);
                 startActivity(intentSave);
                 break;
            // case R.id.buttonStartTime:

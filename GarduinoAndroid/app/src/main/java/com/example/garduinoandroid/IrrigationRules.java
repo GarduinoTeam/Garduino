@@ -39,6 +39,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     Boolean addRule;
     String irrigationRules;
     RuleAdapter adapter;
+    int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,9 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.irrigation_rules);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
 
         //Start ListRules
         listView = (ListView) findViewById(R.id.listRules);
@@ -95,6 +99,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
                             intentCreate.putExtra("addRule",addRule);
                             intentCreate.putExtra("object", (Serializable) obj);
                             intentCreate.putExtra("btnSettingsDPS", informationBoolean);
+                            intentCreate.putExtra("deviceId",  deviceId);
                             startActivity(intentCreate);
                         } else {
                             Toast.makeText(IrrigationRules.this, "Please fill the field.", Toast.LENGTH_SHORT).show();
@@ -109,6 +114,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
                         intentCancel.putExtra("addRule",addRule);
                         intentCancel.putExtra("object", (Serializable) obj);
                         intentCancel.putExtra("btnSettingsDPS", informationBoolean);
+                        intentCancel.putExtra("deviceId",  deviceId);
                         startActivity(intentCancel);
                     }
                 });
@@ -140,6 +146,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
                 intent.putExtra("RuleObject", (Serializable) RuleObject);
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("btnSettingsDPS", informationBoolean);
+                intent.putExtra("deviceId",  deviceId);
                 startActivity(intent);
             }
         });
@@ -190,6 +197,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             myIntent.putExtra("object", (Serializable) obj);
             myIntent.putExtra("btnSettingsDPS", informationBoolean);
             myIntent.putExtra("addRule", addRule);
+            myIntent.putExtra("deviceId",  deviceId);
             startActivityForResult(myIntent, 0);
         }
         return super.onOptionsItemSelected(item);
@@ -204,6 +212,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
                 intentSave.putExtra("addRule", addRule);
+                intentSave.putExtra("deviceId",  deviceId);
                 startActivity(intentSave);
                 break;
 

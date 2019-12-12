@@ -21,6 +21,7 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
     Data obj;
     Boolean addRule;
     String manualIrrigation;
+    int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,10 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manual_irrigation);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
+
 
         start = (Button) findViewById(R.id.btnMI1);
         start.setOnClickListener(this);
@@ -55,6 +60,7 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
                 Intent intentStart = new Intent(this, DeviceProfileStart.class);
                 intentStart.putExtra("object", (Serializable) obj);
                 intentStart.putExtra("addRule", addRule);
+                intentStart.putExtra("deviceId", deviceId);
                 startActivity(intentStart);
                 break;
 
@@ -62,6 +68,7 @@ public class ManualIrrigation extends AppCompatActivity implements View.OnClickL
                 Intent intentCancel = new Intent(this, DeviceProfile.class);
                 intentCancel.putExtra("object", (Serializable) obj);
                 intentCancel.putExtra("addRule", addRule);
+                intentCancel.putExtra("deviceId", deviceId);
                 startActivity(intentCancel);
                 break;
 

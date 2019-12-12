@@ -191,10 +191,10 @@ public class MainActivity extends AppCompatActivity
                 adapter = new Adapter(getApplicationContext(), result);
                 listView.setAdapter(adapter);
 
-                for(Data dataDevice: result) {
-                    System.out.println(dataDevice.getTitle());
-                    System.out.println("***************");
-                }
+//                for(Data dataDevice: result) {
+//                    System.out.println(dataDevice.getTitle());
+//                    System.out.println("***************");
+//                }
 
             }
         }

@@ -54,6 +54,7 @@ public class DeviceProfile extends AppCompatActivity {
     TextView temperature;
     Boolean addRule;
     String deviceName;
+    int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class DeviceProfile extends AppCompatActivity {
 
 
         Bundle datos = this.getIntent().getExtras();
-        final int deviceId = datos.getInt("deviceId");
+        deviceId = datos.getInt("deviceId");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_profile);
@@ -97,6 +98,7 @@ public class DeviceProfile extends AppCompatActivity {
                             Intent intent = new Intent(getApplication(), DeviceProfileStart.class);
                             intent.putExtra("object", (Serializable) obj);
                             intent.putExtra("addRule", (Serializable) addRule);
+                            intent.putExtra("deviceId",  deviceId);
                             startActivity(intent);
                         } else {
                             Toast.makeText(DeviceProfile.this, "Please fill the field.", Toast.LENGTH_SHORT).show();
@@ -111,6 +113,8 @@ public class DeviceProfile extends AppCompatActivity {
 //                        intentSettings.putExtra("object", (Serializable) obj);
 //                        intentSettings.putExtra("btnSettingsDPS", settingsDPS);
                         intentSettings.putExtra("addRule", (Serializable) addRule);
+                        intentSettings.putExtra("deviceId",  deviceId);
+
                         startActivity(intentSettings);
                     }
                 });
@@ -148,6 +152,7 @@ public class DeviceProfile extends AppCompatActivity {
                 intentSettings.putExtra("object", (Serializable) obj);
                 intentSettings.putExtra("btnSettingsDPS", settingsDPS);
                 intentSettings.putExtra("addRule", addRule);
+                intentSettings.putExtra("deviceId",  deviceId);
                 startActivity(intentSettings);
 
             case R.id.action_refresh:
