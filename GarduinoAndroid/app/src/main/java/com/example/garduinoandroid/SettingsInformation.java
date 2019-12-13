@@ -5,9 +5,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -43,6 +46,8 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
     ArrayList<Data> informationDevice;
     TextView nameDevice;
     String jsonStr;
+    final static String urlPost = "http://quiet-waters-1228.herokuapp.com/echo";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             }
         });
 
+
         irrigationRules = (Button) findViewById(R.id.irrigationRules);
         irrigationRules.setOnClickListener(this);
 
@@ -76,6 +82,17 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             informationBoolean = (Boolean) getIntent().getExtras().get("btnSettingsDPS");
             addRule = (Boolean) getIntent().getExtras().get("addRule");
         }
+    }
+
+    public void verValor(View v)
+    {
+        EditText edit = (EditText)findViewById(R.id.et_ds_1);
+        EditText edit2 = (EditText) findViewById(R.id.et_ds_2);
+        String result = edit.getText().toString();
+        String numericResult = edit2.getText().toString();
+        Log.d("TAG:",result);
+        Log.d("TAG:",numericResult);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -112,8 +129,12 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                     startActivity(intentSave);
                 } else {
                     Intent intentSave = new Intent(this, DeviceProfile.class);
-                    intentSave.putExtra("object", (Serializable) obj);
-                    intentSave.putExtra("addRule", addRule);
+//                    intentSave.putExtra("object", (Serializable) obj);
+//                    intentSave.putExtra("addRule", addRule);
+                    // ************************* Fer el post aqui ********************************** Crear classe Async i posarho al onclick com a new ..execute();
+                    verValor(v);
+                    DoPostTask task = new DoPostTask();
+                    task.execute(new String(urlPost));
                     startActivity(intentSave);
                 }
                 break;
@@ -189,6 +210,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             super.onPreExecute();
         }
 
+
         @Override
         protected String doInBackground(String... params) {
             return readURL(params[0]);
@@ -248,5 +270,60 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             }
         }
         return jsonStr;
+    }
+    private class DoPostTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+
+            HttpURLConnection conn = null;
+            InputStream inputStream = null;
+            InputStreamReader inputReader = null;
+            BufferedReader reader = null;
+
+            for (String url : urls) {
+                try {
+                    URL myUrl = new URL(url);
+                    conn = (HttpURLConnection) myUrl.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-type", "application/json");
+
+                    String input = "{\"code\":12, \"name\":\"george\"}";
+
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.getBytes());
+                    os.flush();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        inputStream = conn.getInputStream();
+                        inputReader = new InputStreamReader(inputStream);
+                        BufferedReader buffer = new BufferedReader(inputReader);
+
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            System.out.println(response);
+            return response;
+        }
     }
 }
