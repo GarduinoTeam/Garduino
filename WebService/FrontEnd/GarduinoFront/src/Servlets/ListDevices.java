@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -68,8 +69,10 @@ public class ListDevices extends HttpServlet {
 		WebTarget target=client.target(url);
 		
 		Device[] devicesList = null;
-		
-		List<Device>devices=target.request().get(new GenericType<List<Device>>(){});
+		HashMap<String,List<Device>> devicesHashMap=new HashMap<>();
+		devicesHashMap=target.request().get(new GenericType<HashMap<String,List<Device>>>(){});
+		List<Device>devices=devicesHashMap.get("devices");
+		//List<Device>devices=target.request().get(new GenericType<List<Device>>(){});
 		devicesList = new Device[devices.size()];
 		for(int i=0;i<devices.size();i++){
 			Device device=devices.get(i);

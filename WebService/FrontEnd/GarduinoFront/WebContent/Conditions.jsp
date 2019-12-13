@@ -158,8 +158,11 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Conditions Information</h6>
-              <a class="btn btn-success" style="float:right" href="NewCondition.jsp">New Condition</a>
+              <h6 class="m-0 font-weight-bold text-primary">Rule Conditions</h6>
+              <form method="post" action="CreateConditions">
+              	
+              	<input type="submit" value="New Condition" class="btn btn-success" style="float:right">
+              </form>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -177,9 +180,6 @@
                    <%for(int i=0; i<ruleConditions.length; i++){ %>
                     <tr>
                        <td><%=ruleConditions[i].getId()%></td>
-                      <td><form method="post" action="ConditionInformation">
-            				<input type="submit" value=<%=ruleConditions[i].getId()%> name="ruleConditionId" class="btn btn-primary">      
-            		  </form></td>
                       <td><%=ruleConditions[i].getIdRule()%></td>
                       <td><%=ruleConditions[i].getIdCondition()%></td>
                       <td><%=ruleConditions[i].getConditionValue()%></td>
@@ -192,6 +192,7 @@
                       
                       <form method="post" action="DeleteRuleCondition">
             	  	  <input type="hidden" value=<%=ruleConditions[i].getId()%> name="ruleConditionId">
+            	  	  <input type="hidden" value=<%=ruleConditions[i].getIdRule()%> name="ruleId">
                       <input type="submit" class="btn btn-danger " value="Delete" >
                       </form>                
                   	  </td>
@@ -200,10 +201,42 @@
                   </tbody>
                 </table>
               </div>
+              
             </div>
           </div>
-
+		
         </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Rule Time Conditions</h6>
+              
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>Days</th>
+                      <th>Months</th>
+                      <th>Specific Date</th>
+                      <th>Status</th>
+                      
+                    </tr>
+                  </thead>
+     
+                  <tbody>
+                    
+                  </tbody>
+                </table>
+              </div>
+              
+            </div>
+          </div>
+		
+        </div>
+        
         <!-- /.container-fluid -->
 
       </div>

@@ -52,7 +52,7 @@ public class SensorResource {
 	@Produces("application/json")
 	@Consumes("application/json")
 	@Path("/get_sensors")
-	public Response getDevices(@QueryParam("device_id") int device_id){
+	public Response getSensors(@QueryParam("device_id") int device_id){
 		System.out.println(device_id);
 		if(device_id==0){
 			return Response

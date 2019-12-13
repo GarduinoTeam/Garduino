@@ -1,4 +1,5 @@
 package com.jboss.resteasy.resources;
+import java.util.HashMap;
 import java.util.List;
 
 //import javax.enterprise.context.RequestScoped;
@@ -74,10 +75,12 @@ public class ConditionResource {
 	@Consumes("application/json")
 	@Path("/get_conditions")
 	public Response getConditions(){
+		HashMap<String,List<Condition>> conditionsMap=new HashMap<>();
 		List<Condition> conditions=conditionService.getConditions(); 
+		conditionsMap.put("conditions", conditions);
 		return Response
 				.status(Status.OK)
-				.entity(conditions)
+				.entity(conditionsMap)
 				.build();
 	}
 	
