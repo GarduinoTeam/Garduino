@@ -54,7 +54,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
     private TextView temperature;
     private TextView moisture;
     private TextView soil;
-
+    int deviceId;
 
 
     @Override
@@ -70,6 +70,9 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_profile_start);
 
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
+
         settingsDPS = true;
 
         cancelIrrigation = (Button) findViewById(R.id.btnDPS);
@@ -78,7 +81,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new ReadJSON().execute("https://api.androidhive.info/contacts/");
+                new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/devices/get_device/"+deviceId);
             }
         });
 
@@ -109,6 +112,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                 intentSettings.putExtra("object", (Serializable) obj);
                 intentSettings.putExtra("btnSettingsDPS", settingsDPS);
                 intentSettings.putExtra("addRule", addRule);
+                intentSettings.putExtra("deviceId", deviceId);
                 startActivity(intentSettings);
                 break;
 
@@ -132,6 +136,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                 Intent intent = new Intent(this, DeviceProfile.class);
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("addRule", addRule);
+                intent.putExtra("deviceId", deviceId);
                 startActivity(intent);
                 break;
 
@@ -149,36 +154,24 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
             try {
                 JSONObject jsonObject = new JSONObject(jsonStr);
 
-                // Getting JSON Array
-                JSONArray contacts = jsonObject.getJSONArray("contacts");
+                Integer id = jsonObject.getInt("id");
+                String temperature = jsonObject.getString("temperature");
+                String soil = jsonObject.getString("soil");
+                String humidity = jsonObject.getString("humidity");
+                String imagePath = jsonObject.getString("imageAndroidURL");
 
-                // looping through All Contacts
-                for(int i = 0; i < contacts.length(); i++)
-                {
-                    JSONObject c = contacts.getJSONObject(i);
+                ArrayList<Data> contact = new ArrayList<Data>();
 
-                    String id = c.getString("id");
-                    String name = c.getString("name");
-                    String email = c.getString("email");
+                // adding each child node to ArrayList Data
+                contact.add(new Data(id, null, null, imagePath, temperature, humidity, soil));
 
-                    JSONObject phone = c.getJSONObject("phone");
-                    String mobile = phone.getString("mobile");
-                    String home = phone.getString("home");
-
-                    ArrayList<Data> contact = new ArrayList<Data>();
-
-                    // adding each child node to ArrayList Data
-                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1", "Temperature: 40ºC","Moisture: 20%","Soil: 2"));
-
-                    // adding contact to devicesList
-                    informationData.addAll(contact);
-                }
-                System.out.println(informationData);
-                return informationData;
-
+                // adding contact to devicesList
+                informationData.addAll(contact);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            return informationData;
+
         } else Toast.makeText(this, "Couldn't get json from file", Toast.LENGTH_SHORT).show();
         return null;
     }
