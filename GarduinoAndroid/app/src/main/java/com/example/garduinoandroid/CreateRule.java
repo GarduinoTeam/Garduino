@@ -20,6 +20,7 @@ public class CreateRule extends AppCompatActivity implements View.OnClickListene
     Data obj;
     Boolean informationBoolean;
     String createRule;
+    int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,9 @@ public class CreateRule extends AppCompatActivity implements View.OnClickListene
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_rule);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
 
         create = (Button) findViewById(R.id.createRule);
         create.setOnClickListener(this);
@@ -63,6 +67,7 @@ public class CreateRule extends AppCompatActivity implements View.OnClickListene
                 intentCancel.putExtra("addRule",addRule);
                 intentCancel.putExtra("object", (Serializable) obj);
                 intentCancel.putExtra("btnSettingsDPS", informationBoolean);
+                intentCancel.putExtra("deviceId",  deviceId);
                 startActivity(intentCancel);
                 break;
 
