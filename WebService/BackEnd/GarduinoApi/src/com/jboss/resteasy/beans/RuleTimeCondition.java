@@ -6,8 +6,8 @@ public class RuleTimeCondition {
 	private int id;
 	private int idRule;
 	private boolean status;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private String monthsOfTheYear;
 	private String daysOfWeek;
 	private Date [] specificDates;
@@ -29,16 +29,16 @@ public class RuleTimeCondition {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	public String getMonthsOfTheYear() {
