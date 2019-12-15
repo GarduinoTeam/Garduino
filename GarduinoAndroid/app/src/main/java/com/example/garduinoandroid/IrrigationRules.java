@@ -57,6 +57,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     int deviceId;
     final static String urlPost = "http://10.0.2.2:8080/GarduinoApi/rules/create_rule";
     String newName;
+    int ruleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,11 +176,13 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Rule RuleObject = (Rule) parent.getItemAtPosition(position);
+                ruleId = RuleObject.getId();
                 Intent intent = new Intent(getApplication(), EditIrrigationRule.class);
                 intent.putExtra("RuleObject", (Serializable) RuleObject);
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("btnSettingsDPS", informationBoolean);
                 intent.putExtra("deviceId",  deviceId);
+                intent.putExtra("ruleId",  ruleId);
                 startActivity(intent);
             }
         });
@@ -303,7 +306,6 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
 
                     Integer id = c.getInt("id");
                     String name = c.getString("name");
-
 
                     ArrayList<Rule> contact = new ArrayList<Rule>();
 
