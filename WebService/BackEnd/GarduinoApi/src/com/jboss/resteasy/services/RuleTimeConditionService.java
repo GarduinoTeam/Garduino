@@ -53,8 +53,8 @@ public class RuleTimeConditionService {
 					pst.setInt(1, id);
 					pst.setInt(2, ruletimecondition.getIdRule());
 					pst.setBoolean(3,ruletimecondition.getStatus());
-					pst.setDate(4, ruletimecondition.getStartTime());
-					pst.setDate(5, ruletimecondition.getEndTime());
+					pst.setString(4, ruletimecondition.getStartTime());
+					pst.setString(5, ruletimecondition.getEndTime());
 					pst.setString(6, ruletimecondition.getMonthsOfTheYear());
 					pst.setString(7, ruletimecondition.getDaysOfWeek());
 					pst.setArray(8, dateArray);
@@ -152,8 +152,8 @@ public class RuleTimeConditionService {
 					pst.setBoolean(1, ruletimecondition.getStatus());
 					pst.setString(2, ruletimecondition.getMonthsOfTheYear());
 					pst.setString(3, ruletimecondition.getDaysOfWeek());
-					pst.setDate(4, ruletimecondition.getStartTime());
-					pst.setDate(5, ruletimecondition.getEndTime());
+					pst.setString(4, ruletimecondition.getStartTime());
+					pst.setString(5, ruletimecondition.getEndTime());
 					pst.setArray(6, dateArray);
 					pst.setInt(7, id);
 					//stm.executeUpdate(consulta);
@@ -202,8 +202,8 @@ public class RuleTimeConditionService {
 						String daysOfWeek=rs.getString("days_of_week");
 						Array array=rs.getArray("specific_dates");
 						Date[] specificDates=(Date[])array.getArray();
-						Date start_time=rs.getDate("start_time");
-						Date end_time=rs.getDate("end_time");
+						String start_time=rs.getString("start_time");
+						String end_time=rs.getString("end_time");
 						RuleTimeCondition ruletimecondition=new RuleTimeCondition();
 						ruletimecondition.setId(id);
 						ruletimecondition.setIdRule(idRule);
@@ -258,8 +258,8 @@ public class RuleTimeConditionService {
 						String daysOfWeek=rs.getString("days_of_week");
 						Array array=rs.getArray("specific_dates");
 						Date[] specificDates=(Date[])array.getArray();
-						Date start_time=rs.getDate("start_time");
-						Date end_time=rs.getDate("end_time");
+						String start_time=rs.getString("start_time");
+						String end_time=rs.getString("end_time");
 						ruletimecondition=new RuleTimeCondition();
 						ruletimecondition.setId(id);
 						ruletimecondition.setIdRule(idRule);
