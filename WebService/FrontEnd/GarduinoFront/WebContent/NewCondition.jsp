@@ -168,7 +168,7 @@
             	  </div>
                   
                   <%}%>
-                  <div class="p-3 bg-gray-100"><a class="collapse-item " href="TimeCondition.jsp">Time condition</a></div>
+                  <div class="p-3 bg-gray-100"><a class="collapse-item " href="NewRuleTimeCondition.jsp">Time condition</a></div>
                 </div>
     	</div>
        </div>
