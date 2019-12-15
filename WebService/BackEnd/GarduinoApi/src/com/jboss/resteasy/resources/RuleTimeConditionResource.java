@@ -1,5 +1,6 @@
 package com.jboss.resteasy.resources;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -84,10 +85,12 @@ public class RuleTimeConditionResource {
 					.status(Status.BAD_REQUEST)
 					.build();
 		}else{
+			HashMap<String, List<RuleTimeCondition>> hashMapRuleTimeConditions=new HashMap<>();
 			List<RuleTimeCondition> ruletimeconditions=myRuleTimeConditionService.getRuleTimeConditions(rule_id);
+			hashMapRuleTimeConditions.put("ruletimeconditions", ruletimeconditions);
 			return Response
 					.status(Status.OK)
-					.entity(ruletimeconditions)
+					.entity(hashMapRuleTimeConditions)
 					.build();
 		}
 		

@@ -78,27 +78,27 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
 
         listView = (ListView) findViewById(R.id.listRules);
 
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                new ReadJSON().execute("http://10.0.2.2:8080//GarduinoApi/rules/get_rules?device_id="+deviceId);
-//            }
-//        });
+        runOnUiThread(new Runnable() {
+            @Override
+           public void run() {
+                new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/rules/get_rules?device_id="+deviceId);
+            }
+        });
 
 
 //        //Start ListRules
-        listView = (ListView) findViewById(R.id.listRules);
-
-        labelListItems = getResources().getStringArray(R.array.rulesArray);
-
-        ruleArrayList = new ArrayList<Rule>();
-        ruleArrayList.add(new Rule(1, labelListItems[0]));
-        ruleArrayList.add(new Rule(2, labelListItems[1]));
-        ruleArrayList.add(new Rule(3, labelListItems[2]));
-        ruleArrayList.add(new Rule(4, labelListItems[3]));
-
-        adapter = new RuleAdapter(getApplicationContext(), ruleArrayList);
-        listView.setAdapter(adapter);
+//        listView = (ListView) findViewById(R.id.listRules);
+//
+//        labelListItems = getResources().getStringArray(R.array.rulesArray);
+//
+//        ruleArrayList = new ArrayList<Rule>();
+//        ruleArrayList.add(new Rule(1, labelListItems[0]));
+//        ruleArrayList.add(new Rule(2, labelListItems[1]));
+//        ruleArrayList.add(new Rule(3, labelListItems[2]));
+//        ruleArrayList.add(new Rule(4, labelListItems[3]));
+//
+//        adapter = new RuleAdapter(getApplicationContext(), ruleArrayList);
+//        listView.setAdapter(adapter);
 //
 //
 //        //End ListView
@@ -296,7 +296,6 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
 
                 // Getting JSON Array
                 JSONArray contacts = jsonObject.getJSONArray("rules");
-
                 // looping through All Contacts
                 for(int i = 0; i < contacts.length(); i++)
                 {

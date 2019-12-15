@@ -1,4 +1,5 @@
 package com.jboss.resteasy.resources;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -85,10 +86,12 @@ public class RuleResource {
 					.status(Status.BAD_REQUEST)
 					.build();
 		}else{
+			HashMap<String,List<Rule>> rulesHashMap=new HashMap<>();
 			List<Rule> rules=myRuleService.getRules(device_id);
+			rulesHashMap.put("rules", rules);
 			return Response
 					.status(Status.OK)
-					.entity(rules)
+					.entity(rulesHashMap)
 					.build();
 		}
 		
