@@ -192,7 +192,6 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                     String conditionValue = c.getString("conditionValue");
                     String name = c.getString("name");
                     String measure = c.getString("measure");
-                    ruleId = id;
 
                     ArrayList<EditTextCondition> contact = new ArrayList<EditTextCondition>();
 
