@@ -83,6 +83,20 @@ public class DeviceResource {
 			return Response.status(Status.OK).build();
 		}
 	}
+	@PUT
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Path("/update_device/{id}")
+	public Response updateDeviceAndroid(@PathParam("id") int id, Device device){
+		int status=myDeviceService.updateDeviceAndroid(id, device);
+		if(status==-1){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}else if(status==-2){
+			return Response.status(Status.NOT_FOUND).build();
+		}else{
+			return Response.status(Status.OK).build();
+		}
+	}
 	@GET
 	@Produces("application/json")
 	@Consumes("application/json")
