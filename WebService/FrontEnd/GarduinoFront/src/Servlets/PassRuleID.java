@@ -44,7 +44,7 @@ public class PassRuleID extends HttpServlet {
 		System.out.println("\nDins del PassRuleID!");
 		
 		HttpSession session;
-		session=request.getSession(true);
+		session=request.getSession();
 		String userId = request.getParameter("userId");
 		String deviceId = request.getParameter("deviceId");
 		System.out.println("UserId"+userId);

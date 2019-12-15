@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -70,8 +71,9 @@ public class ListConditions extends HttpServlet {
 		WebTarget target=client.target(url);
 		
 		RuleCondition[] ruleConditionList = null;
-		
-		List<RuleCondition>ruleConditions=target.request().get(new GenericType<List<RuleCondition>>(){});
+		HashMap<String,List<RuleCondition>> ruleConditionsHashMap=new HashMap<>();
+		ruleConditionsHashMap=target.request().get(new GenericType<HashMap<String,List<RuleCondition>>>(){});
+		List<RuleCondition>ruleConditions=ruleConditionsHashMap.get("ruleconditions");
 		ruleConditionList = new RuleCondition[ruleConditions.size()];
 		for(int i=0;i<ruleConditions.size();i++){
 			RuleCondition Condition=ruleConditions.get(i);
