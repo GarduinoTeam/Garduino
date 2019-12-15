@@ -19,7 +19,10 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/jquery.datepick.css"> 
+  <script type="text/javascript" src="js/jquery.plugin.js"></script> 
+  <script type="text/javascript" src="js/jquery.datepick.js"></script>
 </head>
 
 <body id="page-top">
@@ -163,7 +166,7 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create a Rule Time Condition!</h1>
               </div>
-              <form class="user" method="post" action="CreateRuleConditions">
+              <form class="user" method="post" action="CreateNewRuleTimeCondition">
               <input type="hidden" value=<%=conditionId%> name="conditionId">
                 <div class="form-group">
                 	<label  for="startTime">Start Time</label>
@@ -173,9 +176,84 @@
                 	<label  for="endTime">End Time</label>
                     <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="endTime" name="endTime" placeholder="End Time">
                 </div>
+                <label  for="days">Days of the Week</label>
+                <div class="form-group" id="days">
+                	<label class="checkbox-inline">
+      					<input type="checkbox" name="Mo" >Mo
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Tu" >Tu
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Wed"  >Wed
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Th" >Th
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Fr" >Fr
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Sa" >Sa
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Su" >Su
+    				</label>
+    				
+                    
+                </div>
+                 <label  for="months">Months of the Year</label>
+                <div class="form-group" id="months">
+                	<label class="checkbox-inline">
+      					<input type="checkbox" name="Jan" >Jan
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Feb" >Feb
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Mar" >Mar
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Apr" >Apr
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="May" >May
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Jun" >Jun
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Jul" >Jul
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Aug" >Aug
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Sep" >Sep
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Oct" >Oct
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Nov" >Nov
+    				</label>
+    				<label class="checkbox-inline">
+      					<input type="checkbox" name="Dec" >Dec
+    				</label>
+    				
+                    
+                </div>
+                
                 <div class="form-group">
-                	<label  for="days">Days Of Week</label>
-                    <select multiple size="7" id="days" name="days" placeholder="Days of Week"></select>
+                	<p>Specific Date<input type="text" id="datepick" name="date"></p>
+					<br/>
+					<h4 id="selectedDtaeVal"></h4>
+					<script>
+					$(function() {
+    
+    					$("#datepick").datepick();
+					});
+					</script>
                 </div>
                 <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -183,8 +261,9 @@
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
-                <input type="submit" class="btn btn-primary btn-user btn-block" value="Create Rule Condition">
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Create Rule Time Condition">
                 <hr>
+                
               </form>
             </div>
           </div>
@@ -234,22 +313,7 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+ 
 
 </body>
 
