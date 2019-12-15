@@ -149,23 +149,34 @@ public class DeviceService {
 				}
 				else {
 					int existDevice=0;
-					consulta="SELECT COUNT(id) from garduino.device " +"where id='"+id+"'";
+					consulta="SELECT * from garduino.device " +"where id='"+id+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
 					rs=stm.executeQuery(consulta);
+					String storedName=null;
 					while(rs.next()){
-						existDevice=(int)rs.getLong("count");
+						//System.out.println("Inside getUsers loop");
+						String name=rs.getString("name");
+						//int id=rs.getInt("id");
+						storedName=name;
+						
 					}
-					if(existDevice==0){
+					if(storedName==null){
 						return -2;
 					}
 
-					consulta="update garduino.device set status = '" +device.getStatus()+"'"+"where id='"+id+"'";
+					consulta="update garduino.device set status = '" +device.getStatus()+"',"+"name='"+device.getName()+"'"+"where id='"+id+"'";
 					System.out.println("\n update:"+consulta);
 					stm.executeUpdate(consulta);
-
+					String storedFileName=serverHome+"\\"+device.getUserId()+"\\"+storedName+".png";
 					String fileName=serverHome+"\\"+device.getUserId()+"\\"+device.getName()+".png";
+					File file = new File(storedFileName);
+			        if (file.exists()) {
+			        	System.out.println(storedFileName);
+			           file.delete();
+			           System.out.println("File deleted");
+			        }
 					try {
 						writeFile(device.getImage(), fileName);
 					} catch (IOException e) {
@@ -187,6 +198,63 @@ public class DeviceService {
 		}
 		return 0;
 		
+	}
+	public int updateDeviceAndroid(int id,Device device){
+		try {
+			ctx= new InitialContext();
+			if(ctx!=null) {
+				ds=(DataSource) ctx.lookup("java:jboss/PostgresXA");
+				if(ds==null){
+					strEstat="Getting Error in Connection";
+					System.out.println(strEstat);
+					return -1; //Error Connecting The user
+				}
+				else {
+					int existDevice=0;
+					consulta="SELECT * from garduino.device " +"where id='"+id+"'";
+					strEstat="Connection Established";
+					connection=ds.getConnection();
+					stm= connection.createStatement();
+					rs=stm.executeQuery(consulta);
+					String storedName=null;
+					while(rs.next()){
+						//System.out.println("Inside getUsers loop");
+						String name=rs.getString("name");
+						//int id=rs.getInt("id");
+						storedName=name;
+						
+					}
+					if(storedName==null){
+						return -2;
+					}
+
+					consulta="update garduino.device set status = '" +device.getStatus()+"',"+"name='"+device.getName()+"'"+"where id='"+id+"'";
+					System.out.println("\n update:"+consulta);
+					stm.executeUpdate(consulta);
+					String storedFileName=serverHome+"\\"+device.getUserId()+"\\"+storedName+".png";
+					String fileName=serverHome+"\\"+device.getUserId()+"\\"+device.getName()+".png";
+					File file = new File(storedFileName);
+					File newFile=new File(fileName);
+			        if (file.exists()) {
+			        	System.out.println(storedFileName);
+			           if(file.renameTo(newFile)){
+			        	   System.out.println("File Name updated");
+			           }
+			           
+			        }
+					//System.out.println("\nfora:");
+					connection.close();
+					stm.close();
+					//stm.close();				
+					}
+				
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 0;
 	}
 	public ArrayList<Device> getDevices(int user_id){
 		ArrayList<Device> devices=new ArrayList<>();
