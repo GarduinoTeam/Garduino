@@ -87,6 +87,40 @@ public class RuleConditionResource {
 		}else{
 			HashMap<String,List<RuleCondition>> hashMapRuleConditions=new HashMap<>();
 			List<RuleCondition> ruleconditions=myRuleConditionService.getRuleConditions(rule_id);
+			for(int i=0;i<ruleconditions.size();i++){
+				RuleCondition ruleCondition=ruleconditions.get(i);
+				String name="";
+				String measure="";
+				if(ruleCondition.getIdCondition()==1){
+					name="The temperature is higher than";
+					ruleCondition.setName(name);
+					ruleCondition.setMeasure("ºC");
+				}else if(ruleCondition.getIdCondition()==2){
+					name="The temperature is lower than";
+					ruleCondition.setName(name);
+					ruleCondition.setMeasure("ºC");
+					
+				}else if(ruleCondition.getIdCondition()==3){
+					name="The humidity is higher than"+ruleCondition.getConditionValue()+" %";
+					ruleCondition.setName(name);
+					ruleCondition.setMeasure("%");
+				}else if(ruleCondition.getIdCondition()==4){
+					name="The humidity is lower than";
+					ruleCondition.setName(name);
+					ruleCondition.setMeasure("%");
+				}
+				else if(ruleCondition.getIdCondition()==5){
+					name="The moistness is higher than";
+					ruleCondition.setName(name);
+					ruleCondition.setMeasure("%");
+				}
+				else if(ruleCondition.getIdCondition()==6){
+					name="The moistness is lower than";
+					ruleCondition.setName(name);
+					ruleCondition.setMeasure("%");
+				}
+				ruleconditions.set(i, ruleCondition);
+			}
 			hashMapRuleConditions.put("ruleconditions", ruleconditions);
 			return Response
 					.status(Status.OK)
@@ -100,13 +134,43 @@ public class RuleConditionResource {
 	@Consumes("application/json")
 	@Path("/get_rule_condition/{id}")
 	public Response getRuleCondition(@PathParam("id") int id){
-		RuleCondition rulecondition=myRuleConditionService.getRuleCondition(id);
-		if(rulecondition==null){
+		RuleCondition ruleCondition=myRuleConditionService.getRuleCondition(id);
+		if(ruleCondition==null){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}else{
+			String name="";
+			String measure="";
+			if(ruleCondition.getIdCondition()==1){
+				name="The temperature is higher than";
+				ruleCondition.setName(name);
+				ruleCondition.setMeasure("ºC");
+			}else if(ruleCondition.getIdCondition()==2){
+				name="The temperature is lower than";
+				ruleCondition.setName(name);
+				ruleCondition.setMeasure("ºC");
+				
+			}else if(ruleCondition.getIdCondition()==3){
+				name="The humidity is higher than"+ruleCondition.getConditionValue()+" %";
+				ruleCondition.setName(name);
+				ruleCondition.setMeasure("%");
+			}else if(ruleCondition.getIdCondition()==4){
+				name="The humidity is lower than";
+				ruleCondition.setName(name);
+				ruleCondition.setMeasure("%");
+			}
+			else if(ruleCondition.getIdCondition()==5){
+				name="The moistness is higher than";
+				ruleCondition.setName(name);
+				ruleCondition.setMeasure("%");
+			}
+			else if(ruleCondition.getIdCondition()==6){
+				name="The moistness is lower than";
+				ruleCondition.setName(name);
+				ruleCondition.setMeasure("%");
+			}
 			return Response
 					.status(Status.OK)
-					.entity(rulecondition)
+					.entity(ruleCondition)
 					.build();
 
 		}
