@@ -46,8 +46,8 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
     ArrayList<Data> informationDevice;
     TextView nameDevice;
     String jsonStr;
+    int deviceId;
     final static String urlPost = "http://quiet-waters-1228.herokuapp.com/echo";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,9 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_information);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
 
         runOnUiThread(new Runnable() {
             @Override
@@ -100,12 +103,14 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             Intent myIntent = new Intent(getApplicationContext(), DeviceProfileStart.class);
             myIntent.putExtra("object", (Serializable) obj);
             myIntent.putExtra("addRule", addRule);
+            myIntent.putExtra("deviceId",  deviceId);
             startActivityForResult(myIntent, 0);
 
         } else {
             Intent myIntent = new Intent(getApplicationContext(), DeviceProfile.class);
             myIntent.putExtra("object", (Serializable) obj);
             myIntent.putExtra("addRule", addRule);
+            myIntent.putExtra("deviceId",  deviceId);
             startActivityForResult(myIntent, 0);
         }
         return true;
@@ -119,6 +124,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("btnSettingsDPS", informationBoolean);
                 intent.putExtra("addRule", addRule);
+                intent.putExtra("deviceId",  deviceId);
                 startActivity(intent);
                 break;
             case R.id.saveIrrigation:
@@ -126,15 +132,22 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                     Intent intentSave = new Intent(this, DeviceProfileStart.class);
                     intentSave.putExtra("object", (Serializable) obj);
                     intentSave.putExtra("addRule", addRule);
+                    intentSave.putExtra("deviceId",  deviceId);
                     startActivity(intentSave);
                 } else {
                     Intent intentSave = new Intent(this, DeviceProfile.class);
+
+                    intentSave.putExtra("object", (Serializable) obj);
+                    intentSave.putExtra("addRule", addRule);
+                    intentSave.putExtra("deviceId",  deviceId);
+
 //                    intentSave.putExtra("object", (Serializable) obj);
 //                    intentSave.putExtra("addRule", addRule);
                     // ************************* Fer el post aqui ********************************** Crear classe Async i posarho al onclick com a new ..execute();
                     verValor(v);
                     DoPostTask task = new DoPostTask();
                     task.execute(new String(urlPost));
+
                     startActivity(intentSave);
                 }
                 break;

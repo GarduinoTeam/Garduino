@@ -38,6 +38,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
     Boolean informationBoolean;
     Boolean addRule;
     String irrigationRules;
+    int deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,9 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_irrigation_rule);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
 
         save = (Button) findViewById(R.id.saveConditons);
         save.setOnClickListener(this);
@@ -105,6 +109,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 intent.putExtra("timeCondition", (Serializable) timeCondition);
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("btnSettingsDPS", informationBoolean);
+                intent.putExtra("deviceId",  deviceId);
                 startActivity(intent);
             }
         });
@@ -116,6 +121,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
         myIntent.putExtra("addRule", addRule);
+        myIntent.putExtra("deviceId",  deviceId);
         startActivityForResult(myIntent, 0);
         return true;
     }
@@ -128,6 +134,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 intentSave.putExtra("object", (Serializable) obj);
                 intentSave.putExtra("btnSettingsDPS", informationBoolean);
                 intentSave.putExtra("addRule", addRule);
+                intentSave.putExtra("deviceId",  deviceId);
                 startActivity(intentSave);
                 break;
 
@@ -136,6 +143,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 intentAdd.putExtra("object", (Serializable) obj);
                 intentAdd.putExtra("btnSettingsDPS", informationBoolean);
                 intentAdd.putExtra("addRule", addRule);
+                intentAdd.putExtra("deviceId",  deviceId);
                 startActivity(intentAdd);
                 break;
 

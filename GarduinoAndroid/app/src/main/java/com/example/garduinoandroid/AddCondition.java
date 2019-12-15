@@ -27,6 +27,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
     Boolean informationBoolean;
     Boolean addRule;
     String addCond;
+    int deviceId;
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
         addCond = getResources().getString(R.string.AddCond);
@@ -36,6 +37,9 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_condition);
+
+        Bundle datos = this.getIntent().getExtras();
+        deviceId = datos.getInt("deviceId");
 
 //        timeCondition = (Button) findViewById(R.id.timeCondition);
 //        timeCondition.setOnClickListener(this);
@@ -73,6 +77,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("ConditionObject", (Serializable) ConditionObject);
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("btnSettingsDPS", informationBoolean);
+                intent.putExtra("deviceId",  deviceId);
                 startActivity(intent);
             }
         });
@@ -84,6 +89,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
         myIntent.putExtra("object", (Serializable) obj);
         myIntent.putExtra("btnSettingsDPS", informationBoolean);
         myIntent.putExtra("addRule", addRule);
+        myIntent.putExtra("deviceId",  deviceId);
         startActivityForResult(myIntent, 0);
         return true;
     }
