@@ -1,7 +1,6 @@
 package com.example.garduinoandroid;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,25 +17,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class EditTextConditionAdapter extends BaseAdapter
-{
+public class TimeAdapter extends BaseAdapter {
     Context context;
-    List<EditTextCondition> listObjects;
-    ArrayList<EditTextCondition> arrayList;
+    List<Rule> listObjects;
+    ArrayList<Rule> arrayList;
 
-
-
-    public EditTextConditionAdapter(Context context, List<EditTextCondition> listObjects) {
+    public TimeAdapter(Context context, List<Rule> listObjects) {
         this.context = context;
         this.listObjects = listObjects;
-        this.arrayList = new ArrayList<EditTextCondition>();
+        this.arrayList = new ArrayList<Rule>();
         this.arrayList.addAll(listObjects);
     }
 
@@ -51,10 +42,10 @@ public class EditTextConditionAdapter extends BaseAdapter
             listObjects.addAll(arrayList);
         }
         else {
-            for (EditTextCondition data : arrayList){
-                if (data.getTitle().toLowerCase(Locale.getDefault())
+            for (Rule rule : arrayList){
+                if (rule.getTitle().toLowerCase(Locale.getDefault())
                         .contains(charText)){
-                    listObjects.add(data);
+                    listObjects.add(rule);
                 }
             }
         }
@@ -81,13 +72,12 @@ public class EditTextConditionAdapter extends BaseAdapter
         View view;
 
         LayoutInflater inflate = LayoutInflater.from(context);
-        view = inflate.inflate(R.layout.edit_condition_list, null);
+        view = inflate.inflate(R.layout.rules_list, null);
 
-        EditText edit = (EditText) view.findViewById(R.id.editTextEditCondition);
-        TextView title = (TextView) view.findViewById(R.id.textVieweEditCondition);
-        TextView measure = (TextView) view.findViewById(R.id.measureEditCondition);
-        Switch sw = (Switch) view.findViewById(R.id.switchEditCondition);
-        Button bt = (Button) view.findViewById(R.id.deleteCondition);
+        TextView title = (TextView) view.findViewById(R.id.textIrrigationRule);
+        Switch sw = (Switch) view.findViewById(R.id.RuleActive);
+        Button bt = (Button) view.findViewById(R.id.deleteRules);
+        bt.setTag(position);
 
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -99,12 +89,13 @@ public class EditTextConditionAdapter extends BaseAdapter
                 }
             }
         });
+
         if(bt != null) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     long itemId = getItemId(position);
-                    String urlDelete = "http://10.0.2.2:8080/GarduinoApi/ruleconditions/delete_rule_condition/"+itemId;
+                    String urlDelete = "";
                     DoDeleteTask task = new DoDeleteTask();
                     listObjects.remove(position);
                     task.execute(new String(urlDelete));
@@ -113,9 +104,6 @@ public class EditTextConditionAdapter extends BaseAdapter
         }
 
         title.setText(listObjects.get(position).getTitle());
-        edit.setText(listObjects.get(position).getEdit());
-        measure.setText(listObjects.get(position).getMeasure());
-
         return view;
     }
     private class DoDeleteTask extends AsyncTask<String, Void, String> {
@@ -178,7 +166,7 @@ public class EditTextConditionAdapter extends BaseAdapter
         }
     }
 
-    private void update(List<EditTextCondition> newlist)
+    private void update(List<Rule> newlist)
     {
         //listObjects.addAll(newlist);
         this.notifyDataSetChanged();
