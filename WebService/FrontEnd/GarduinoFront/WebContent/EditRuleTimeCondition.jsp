@@ -1,8 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@page import="beans.RuleTimeCondition"%>
 <!DOCTYPE html>
 <html lang="en">
-
+ <%RuleTimeCondition ruleTimeCondition = (RuleTimeCondition)session.getAttribute("ruleTimeCondition");
+ boolean status;
+ status=ruleTimeCondition.getStatus();
+ /*Days of the Week*/
+ boolean mo=false;
+ boolean tu=false;
+ boolean wed=false;
+ boolean th=false;
+ boolean fr=false;
+ boolean sa=false;
+ boolean su=false;
+ boolean jan=false;boolean feb=false;boolean mar=false;boolean apr=false;
+ boolean may=false;boolean jun=false;boolean jul=false;boolean aug=false;
+ boolean sep=false;boolean oct=false;boolean nov=false;boolean dec=false;
+ /*Months of the Year*/
+ /*Check days of the Week*/
+ String days=ruleTimeCondition.getDaysOfWeek();
+ if(days.charAt(0)=='1'){
+	 mo=true;
+ }
+ if(days.charAt(1)=='1'){
+	 tu=true;
+ }
+ if(days.charAt(2)=='1'){
+	 wed=true;
+ }
+ if(days.charAt(3)=='1'){
+	 th=true;
+ }
+ if(days.charAt(4)=='1'){
+	 fr=true;
+ }
+ if(days.charAt(5)=='1'){
+	 sa=true;
+ }
+ if(days.charAt(6)=='1'){
+	 su=true;
+ }
+ /*Check Days of The Year*/
+ %>
 <head>
 
   <meta charset="utf-8">
@@ -164,40 +204,90 @@
           <div class="col">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create a Rule Time Condition!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Edit a Rule Time Condition!</h1>
               </div>
               <form class="user" method="post" action="CreateNewRuleTimeCondition">
               <input type="hidden" value=<%=conditionId%> name="conditionId">
                 <div class="form-group">
                 	<label  for="startTime">Start Time</label>
-                    <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="startTime" name="startTime" placeholder="Start Time">
+                    <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="startTime" name="startTime" placeholder="Start Time" value=<%=ruleTimeCondition.getStartTime()%>>
                 </div>
                 <div class="form-group">
                 	<label  for="endTime">End Time</label>
-                    <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="endTime" name="endTime" placeholder="End Time">
+                    <input type="time" class="form-control form-control-user" min="00:00" max="23:59" id="endTime" name="endTime" placeholder="End Time" value=<%=ruleTimeCondition.getEndTime()%>>
                 </div>
                 <label  for="days">Days of the Week</label>
                 <div class="form-group" id="days">
                 	<label class="checkbox-inline">
+                	 <%
+                      if(mo){
+                      %>
+                      <input type="checkbox" name="Mo" checked >Mo
+                       <%}else{ %>
       					<input type="checkbox" name="Mo" >Mo
+      					<%} %>
     				</label>
     				<label class="checkbox-inline">
+    					<%
+                      	if(tu){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Tu" checked >Tu
+                      	<%}else{ %>
       					<input type="checkbox" name="Tu" >Tu
+      					<%} %>
     				</label>
     				<label class="checkbox-inline">
+    					<%
+                      	if(wed){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Wed" checked  >Wed
+                      	<%}else{ %>
       					<input type="checkbox" name="Wed"  >Wed
+      					<%} %>
     				</label>
     				<label class="checkbox-inline">
+    					<%
+                      	if(th){
+                      		
+                      	%>
+      					<input type="checkbox" name="Th" checked >Th
+      					<%}else{ %>
       					<input type="checkbox" name="Th" >Th
+      					<%} %>
     				</label>
     				<label class="checkbox-inline">
+    					<%
+                      	if(fr){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Fr" checked >Fr
+      					
+      					<%}else{ %>
       					<input type="checkbox" name="Fr" >Fr
+      					<%} %>
     				</label>
     				<label class="checkbox-inline">
+    					<%
+                      	if(sa){
+                      		
+                      	%>
+      					<input type="checkbox" name="Sa" checked >Sa
+      					<%}else{ %>
       					<input type="checkbox" name="Sa" >Sa
+      					<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
+    					<%
+                      	if(su){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Su" checked >Su
+                      	<%}else{ %>
       					<input type="checkbox" name="Su" >Su
+      					<%} %>
     				</label>
     				
                     
@@ -261,7 +351,7 @@
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
-                <input type="submit" class="btn btn-primary btn-user btn-block" value="Create Rule Time Condition">
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Edit Rule Time Condition">
                 <hr>
                 
               </form>
