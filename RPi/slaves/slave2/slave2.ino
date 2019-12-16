@@ -1,7 +1,7 @@
 /*
  * slave.ino - Code for esp8266 slave to send sensor data to master
  * Created by Roger Truchero, December 6, 2019.
- */
+  */
 
 // ------------ Definitions -------------
 
@@ -28,12 +28,12 @@ PubSubClient client(espClient);
 long lastMsg = 0;
 char msg[100];
 
-// Device id = 123
-char* pub_path = "house/response/123";
-char* sub_sensor = "house/sensor/123";
-char* sub_webcam = "house/webcam/123";
-char* sub_irrigate = "house/irrigate/123";
-char* sub_stop_irrigate = "house/stop_irrigate/123";
+// Device id = 124
+char* pub_path = "house/response/124";
+char* sub_sensor = "house/sensor/124";
+char* sub_webcam = "house/webcam/124";
+char* sub_irrigate = "house/irrigate/124";
+char* sub_stop_irrigate = "house/stop_irrigate/124";
 
 // ------------ Functions -------------
 
@@ -87,24 +87,6 @@ void callback(char* topic, byte* payload, unsigned int length)
     // Communicate with the ESP32 CAM and send image to the RPI
     snprintf(msg, 50, "Sending webcam data");
     client.publish(pub_path, msg); 
-  } 
-  else if(strcmp(topic, sub_irrigate) == 0)
-  {       
-    // Irrigate device    
-    Serial.println("Irrigating device!");
-    // TODO
-    // ACTIVATE relee and irrigate the plant
-    snprintf(msg, 50, "Starting irrigation response code: %d", 1);
-    client.publish(pub_path, msg); 
-  }
-  else if(strcmp(topic, sub_stop_irrigate) == 0)
-  {       
-    // Stop Irrigate device    
-    Serial.println("Deactivating device irrigation!");
-    // TODO
-    // DEACTIVATE relee and stop irrigating the plant
-    snprintf(msg, 50, "Stopping irrigation response code: %d", 0);
-    client.publish(pub_path, msg); 
   }
 }
 
@@ -123,7 +105,7 @@ void reconnect()
     {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish(pub_path, "Hello Raspi, i am back!");
+      client.publish(pub_path, "Hello Raspi, i am the sensor node mcu!");
       // ... and resubscribe
       client.subscribe(sub_sensor);
       client.subscribe(sub_webcam);
