@@ -39,7 +39,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
     ArrayList<EditTextCondition> conditionArrayList;
     EditTextConditionAdapter adapter;
 
-    RuleAdapter adapterTime;
+    TimeAdapter adapterTime;
     ListView listViewEdit;
     ArrayList<Rule> timeConditonArrayList;
     String[] labelListTimeCondition;
@@ -121,7 +121,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         timeConditonArrayList.add(new Rule(1, labelListTimeCondition[0]));
         timeConditonArrayList.add(new Rule(2, labelListTimeCondition[1]));
 
-        adapterTime = new RuleAdapter(getApplicationContext(), timeConditonArrayList);
+        adapterTime = new TimeAdapter(getApplicationContext(), timeConditonArrayList);
         listViewTime.setAdapter(adapterTime);
 
         listViewTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
