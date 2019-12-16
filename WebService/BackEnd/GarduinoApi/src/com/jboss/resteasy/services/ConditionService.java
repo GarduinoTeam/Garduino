@@ -53,7 +53,8 @@ public class ConditionService {
 					System.out.println("\nsql:"+consulta);
 					System.out.println(strEstat);
 
-					consulta="insert into garduino.condition (id,name) values ('"+id+"', '"+condition.getName()+"')";
+					consulta="insert into garduino.condition (id,name,measure) values ('"+id+"', '"+condition.getName()+"',"+"'"+condition.getMeasure()+"')";
+					System.out.println(consulta);
 					stm.executeUpdate(consulta);
 
 					
@@ -141,7 +142,7 @@ public class ConditionService {
 						return -2;
 					}
 
-					consulta="update garduino.condition set name = '" +condition.getName()+ "' where id='"+id+"'";
+					consulta="update garduino.condition set name = '" +condition.getName()+"',measure='"+condition.getMeasure()+"'"+ " where id='"+id+"'";
 					System.out.println("\n update:"+consulta);
 					stm.executeUpdate(consulta);
 
@@ -182,9 +183,11 @@ public class ConditionService {
 					while(rs.next()){
 						String name=rs.getString("name");
 						int id=rs.getInt("id");
+						String measure=rs.getString("measure");
 						Condition condition=new Condition();
 						condition.setId(id);
 						condition.setName(name);
+						condition.setMeasure(measure);
 						conditions.add(condition);
 					}
 
@@ -224,9 +227,11 @@ public class ConditionService {
 					rs=stm.executeQuery(consulta);
 					while(rs.next()){
 						String name=rs.getString("name");
+						String measure=rs.getString("measure");
 						condition=new Condition();
 						condition.setId(id);
 						condition.setName(name);
+						condition.setMeasure(measure);
 					}
 
 					

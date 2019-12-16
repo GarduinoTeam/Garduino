@@ -20,6 +20,7 @@ import javax.ws.rs.core.GenericType;
 import beans.Device;
 import beans.Rule;
 import beans.RuleCondition;
+import beans.RuleTimeCondition;
 
 /**
  * Servlet implementation class ListConditions
@@ -84,6 +85,21 @@ public class ListConditions extends HttpServlet {
 			System.out.println("Rule Condition Status:"+Condition.getStatus());
 			ruleConditionList[i]=Condition;		
 		}
+		
+		
+		//RuleTimeCondition [] ruleTimeConditionList=null;
+		url="http://localhost:8080/GarduinoApi/ruletimeconditions/get_rule_time_conditions?rule_id="+ruleId;
+		client= ClientBuilder.newClient();
+		target=client.target(url);
+		HashMap<String,List<RuleTimeCondition>> ruleTimeConditionHashMap=new HashMap<>();
+		ruleTimeConditionHashMap=target.request().get(new GenericType<HashMap<String,List<RuleTimeCondition>>>(){});
+		List<RuleTimeCondition>ruleTimeConditionList=ruleTimeConditionHashMap.get("ruletimeconditions");
+		RuleTimeCondition[] ruleTimeConditions=new RuleTimeCondition[ruleTimeConditionList.size()];
+		for(int i=0;i<ruleTimeConditionList.size();i++){
+			RuleTimeCondition ruleTimeCondition=ruleTimeConditionList.get(i);
+			ruleTimeConditions[i]=ruleTimeCondition;
+		}
+		session.setAttribute("ruleTimeConditions", ruleTimeConditions);
 		session.setAttribute("ruleConditions", ruleConditionList);
 		try {
 			ServletContext context = getServletContext();

@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -17,6 +18,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import beans.RuleCondition;
+import beans.RuleTimeCondition;
 
 /**
  * Servlet implementation class CreateNewRuleTimeCondition
@@ -53,9 +55,9 @@ public class CreateNewRuleTimeCondition extends HttpServlet {
 		System.out.println("\nDins del CreateNewRuleTimeConditions!");
 		HttpSession session;
 		session=request.getSession();
-		//String url="http://localhost:8080/GarduinoApi/ruleconditions/create_rule_condition";
-		//Client client= ClientBuilder.newClient();
-		//WebTarget target=client.target(url);
+		String url="http://localhost:8080/GarduinoApi/ruletimeconditions/create_rule_time_condition";
+		Client client= ClientBuilder.newClient();
+		WebTarget target=client.target(url);
 		String ruleId=(String) session.getAttribute("ruleId");
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
@@ -149,7 +151,20 @@ public class CreateNewRuleTimeCondition extends HttpServlet {
 		
 		request.setAttribute("ruleId", ruleId);
 		session.setAttribute("ruleId", ruleId);
-	    
+		
+		RuleTimeCondition ruleTimeCondition=new RuleTimeCondition();
+		ruleTimeCondition.setStartTime(startTime);
+		ruleTimeCondition.setEndTime(endTime);
+		ruleTimeCondition.setDaysOfWeek(days);
+		ruleTimeCondition.setMonthsOfTheYear(months);
+		ruleTimeCondition.setIdRule(Integer.parseInt(ruleId));
+		ruleTimeCondition.setStatus(status);
+		Date [] specificDates=new Date[1];
+		specificDates[0]=Date.valueOf(dateString);
+		ruleTimeCondition.setSpecificDates(specificDates);
+		Response res=target.request().post(Entity.json(ruleTimeCondition));
+		System.out.println(res.getStatus());
+		res.close();
 	    
 	    
 		try {
