@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@page import="beans.RuleTimeCondition"%>
+     <%@page import="java.sql.Date"%>
 <!DOCTYPE html>
 <html lang="en">
  <%RuleTimeCondition ruleTimeCondition = (RuleTimeCondition)session.getAttribute("ruleTimeCondition");
@@ -17,6 +18,7 @@
  boolean jan=false;boolean feb=false;boolean mar=false;boolean apr=false;
  boolean may=false;boolean jun=false;boolean jul=false;boolean aug=false;
  boolean sep=false;boolean oct=false;boolean nov=false;boolean dec=false;
+ Date sepecificDate=ruleTimeCondition.getSpecificDates()[0];
  /*Months of the Year*/
  /*Check days of the Week*/
  String days=ruleTimeCondition.getDaysOfWeek();
@@ -41,7 +43,45 @@
  if(days.charAt(6)=='1'){
 	 su=true;
  }
+ String months=ruleTimeCondition.getMonthsOfTheYear();
+ if(months.charAt(0)=='1'){
+	 jan=true;
+ }
+ if(months.charAt(1)=='1'){
+	 feb=true;
+ }
+ if(months.charAt(2)=='1'){
+	 mar=true;
+ }
+ if(months.charAt(3)=='1'){
+	 apr=true;
+ }
+ if(months.charAt(4)=='1'){
+	 may=true;
+ }
+ if(months.charAt(5)=='1'){
+	 jun=true;
+ }
+ if(months.charAt(6)=='1'){
+	 jul=true;
+ }
+ if(months.charAt(7)=='1'){
+	 aug=true;
+ }
+ if(months.charAt(8)=='1'){
+	 sep=true;
+ }
+ if(months.charAt(9)=='1'){
+	 oct=true;
+ }
+ if(months.charAt(10)=='1'){
+	 nov=true;
+ }
+ if(months.charAt(11)=='1'){
+	 dec=true;
+ }
  /*Check Days of The Year*/
+ 
  %>
 <head>
 
@@ -206,7 +246,7 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Edit a Rule Time Condition!</h1>
               </div>
-              <form class="user" method="post" action="CreateNewRuleTimeCondition">
+              <form class="user" method="post" action="EditRuleTimeConditions">
               <input type="hidden" value=<%=conditionId%> name="conditionId">
                 <div class="form-group">
                 	<label  for="startTime">Start Time</label>
@@ -295,40 +335,133 @@
                  <label  for="months">Months of the Year</label>
                 <div class="form-group" id="months">
                 	<label class="checkbox-inline">
-      					<input type="checkbox" name="Jan" >Jan
+                		<%
+                      	if(jan){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Jan"  checked  >Jan
+                      	<%}else{ %>
+      					<input type="checkbox" name="Jan"  >Jan
+      					<%} %>
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Feb" >Feb
+    					<%
+                      	if(feb){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Feb" checked >Feb
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Feb" >Feb
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Mar" >Mar
+    					<%
+                      	if(mar){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Mar" checked >Mar
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Mar" >Mar
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Apr" >Apr
+    					<%
+                      	if(apr){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Apr" checked >Apr
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Apr" >Apr
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="May" >May
+    					<%
+                      	if(may){
+                      		
+                      	%>
+                      	<input type="checkbox" name="May" checked >May
+                      	<%}else{ %>
+                      	<input type="checkbox" name="May" >May
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Jun" >Jun
+    					<%
+                      	if(jun){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Jun" checked >Jun
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Jun" >Jun
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Jul" >Jul
+    					<%
+                      	if(jul){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Jul" checked >Jul
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Jul" >Jul
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Aug" >Aug
+    					<%
+                      	if(aug){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Aug" checked >Aug
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Aug" >Aug
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Sep" >Sep
+    					<%
+                      	if(sep){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Sep" checked >Sep
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Sep" >Sep
+                      	<%} %>
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Oct" >Oct
+    					<%
+                      	if(oct){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Oct" checked >Oct
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Oct" >Oct
+                      	<%} %>
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Nov" >Nov
+    					<%
+                      	if(nov){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Nov" checked >Nov
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Nov" >Nov
+                      	<%} %>
+      					
     				</label>
     				<label class="checkbox-inline">
-      					<input type="checkbox" name="Dec" >Dec
+    					<%
+                      	if(dec){
+                      		
+                      	%>
+                      	<input type="checkbox" name="Dec" checked>Dec
+                      	<%}else{ %>
+                      	<input type="checkbox" name="Dec" >Dec
+                      	<%} %>
+      					
     				</label>
     				
                     
@@ -341,16 +474,24 @@
 					<script>
 					$(function() {
     
-    					$("#datepick").datepick({dateFormat: 'yyyy-mm-dd'});
+    					$("#datepick").datepick({defaultDate:new Date(<%=sepecificDate.getYear()+1900%>,<%=sepecificDate.getMonth()%>,<%=sepecificDate.getDate()%>),dateFormat: 'yyyy-mm-dd',selectDefaultDate: true});
 					});
 					</script>
                 </div>
                 <div class="form-group">
                       <div class="custom-control custom-checkbox small">
+                      <%
+                      if(status){
+                      %>
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="statusCheck" checked>
+                        <%}else{ %>
                         <input type="checkbox" class="custom-control-input" id="customCheck" name="statusCheck">
+                        <%} %>
+                        
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
+                <input type="hidden" value=<%=ruleTimeCondition.getId()%> name="ruleTimeConditionId">
                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Edit Rule Time Condition">
                 <hr>
                 
