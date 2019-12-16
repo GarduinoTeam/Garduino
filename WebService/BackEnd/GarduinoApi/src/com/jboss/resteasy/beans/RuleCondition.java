@@ -5,6 +5,9 @@ public class RuleCondition {
 	private int idRule;
 	private int idCondition;
 	private int conditionValue;
+	private String name;
+	private String measure;
+	
 	private boolean status;
 	public int getId() {
 		return id;
@@ -35,6 +38,18 @@ public class RuleCondition {
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMeasure() {
+		return measure;
+	}
+	public void setMeasure(String measure) {
+		this.measure = measure;
 	}
 
 }

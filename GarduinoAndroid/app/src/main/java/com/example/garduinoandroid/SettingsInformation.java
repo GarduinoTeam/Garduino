@@ -47,7 +47,8 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
     TextView nameDevice;
     String jsonStr;
     int deviceId;
-    final static String urlPost = "http://quiet-waters-1228.herokuapp.com/echo";
+    static String urlPut;
+    String newName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,8 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
 
         Bundle datos = this.getIntent().getExtras();
         deviceId = datos.getInt("deviceId");
+
+        urlPut = "http://10.0.2.2:8080/GarduinoApi/devices/update_device/"+deviceId;
 
         runOnUiThread(new Runnable() {
             @Override
@@ -145,8 +148,10 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
 //                    intentSave.putExtra("addRule", addRule);
                     // ************************* Fer el post aqui ********************************** Crear classe Async i posarho al onclick com a new ..execute();
                     verValor(v);
+                    EditText edit = (EditText)findViewById(R.id.et_ds_1);
+                    newName =  edit.getText().toString();
                     DoPostTask task = new DoPostTask();
-                    task.execute(new String(urlPost));
+                    task.execute(new String(urlPut));
 
                     startActivity(intentSave);
                 }
@@ -299,12 +304,12 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                 try {
                     URL myUrl = new URL(url);
                     conn = (HttpURLConnection) myUrl.openConnection();
-                    conn.setRequestMethod("POST");
+                    conn.setRequestMethod("PUT");
                     conn.setDoOutput(true);
                     conn.setRequestProperty("Accept", "application/json");
                     conn.setRequestProperty("Content-type", "application/json");
 
-                    String input = "{\"code\":12, \"name\":\"george\"}";
+                    String input = "{\"userId\":1, \"status\":\"DISCONNECTED\",\"name\":\""+newName+"\"}";
 
                     OutputStream os = conn.getOutputStream();
                     os.write(input.getBytes());

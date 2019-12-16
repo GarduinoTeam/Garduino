@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -68,8 +69,9 @@ public class ListRules extends HttpServlet {
 		WebTarget target=client.target(url);
 		
 		Rule[] rulesList = null;
-		
-		List<Rule>rules=target.request().get(new GenericType<List<Rule>>(){});
+		HashMap<String,List<Rule>> rulesHashMap=new HashMap<>();
+		rulesHashMap=target.request().get(new GenericType<HashMap<String,List<Rule>>>(){});
+		List<Rule>rules=rulesHashMap.get("rules");
 		rulesList = new Rule[rules.size()];
 		for(int i=0;i<rules.size();i++){
 			Rule rule=rules.get(i);
