@@ -116,7 +116,7 @@ public class DeviceResource {
 					device.setHumidity("Humidity: "+sensor.getValue()+" %");
 				}
 				else if(sensor.getSensorType()==3){
-					device.setSoil("Moisture: "+sensor.getValue()+" %");
+					device.setSoil("Soil / moisture: "+sensor.getValue()+" %");
 				}
 				devices.set(i, device);
 			}
@@ -150,7 +150,7 @@ public class DeviceResource {
 					device.setHumidity("Humidity: "+sensor.getValue()+" %");
 				}
 				else if(sensor.getSensorType()==3){
-					device.setSoil("Moisture: "+sensor.getValue()+" %");
+					device.setSoil("Soil / moisture: "+sensor.getValue()+" %");
 				}
 			}
 			return Response
