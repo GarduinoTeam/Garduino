@@ -1,4 +1,5 @@
 <%@page import="beans.RuleCondition"%>
+<%@page import="beans.RuleTimeCondition"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -154,7 +155,7 @@
           <h1 class="h3 mb-2 text-gray-800">Conditions</h1>
           
 		  <%beans.RuleCondition[] ruleConditions = (beans.RuleCondition[])session.getAttribute("ruleConditions"); %>
-
+		  <%beans.RuleTimeCondition[] ruleTimeConditions = (beans.RuleTimeCondition[])session.getAttribute("ruleTimeConditions"); %>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -227,7 +228,30 @@
                   </thead>
      
                   <tbody>
-                    
+                    <%for(int i=0; i<ruleTimeConditions.length; i++){ %>
+                    <tr>
+                    	 <td><%=ruleTimeConditions[i].getId()%></td>
+                      	<td><%=ruleTimeConditions[i].getStartTime()%></td>
+                     	<td><%=ruleTimeConditions[i].getEndTime()%></td>
+                      	<td><%=ruleTimeConditions[i].getDaysOfWeek()%></td>
+                      	<td><%=ruleTimeConditions[i].getMonthsOfTheYear()%></td>
+                      	<td><%=ruleTimeConditions[i].getSpecificDates()[0]%></td>
+                      	<td><%=ruleTimeConditions[i].getStatus()%></td>
+                      	<td>
+                      	<form method="post" action="GetRuleTimeCondition">
+            	  	  		<input type="hidden" value=<%=ruleTimeConditions[i].getId()%> name="ruleTimeConditionId">
+                      		<input type="submit" class="btn btn-success " value="Edit" >
+                      	</form>
+                      
+                      <form method="post" action="DeleteRuleTimeCondition">
+            	  	  <input type="hidden" value=<%=ruleTimeConditions[i].getId()%> name="ruleTimeConditionId">
+            	  	  <input type="hidden" value=<%=ruleTimeConditions[i].getIdRule()%> name="ruleId">
+                      <input type="submit" class="btn btn-danger " value="Delete" >
+                      </form>                
+                  	  </td>
+                  	</tr>
+                     <%}%>
+                      
                   </tbody>
                 </table>
               </div>

@@ -17,20 +17,19 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import beans.RuleCondition;
 import beans.RuleTimeCondition;
 
 /**
- * Servlet implementation class CreateNewRuleTimeCondition
+ * Servlet implementation class EditRuleTimeConditions
  */
-@WebServlet("/CreateNewRuleTimeCondition")
-public class CreateNewRuleTimeCondition extends HttpServlet {
+@WebServlet("/EditRuleTimeConditions")
+public class EditRuleTimeConditions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateNewRuleTimeCondition() {
+    public EditRuleTimeConditions() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,12 +51,9 @@ public class CreateNewRuleTimeCondition extends HttpServlet {
 	
 	public void doFer(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("\nDins del CreateNewRuleTimeConditions!");
+		System.out.println("\nDins del EditNewRuleTimeConditions!");
 		HttpSession session;
 		session=request.getSession();
-		String url="http://localhost:8080/GarduinoApi/ruletimeconditions/create_rule_time_condition";
-		Client client= ClientBuilder.newClient();
-		WebTarget target=client.target(url);
 		String ruleId=(String) session.getAttribute("ruleId");
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
@@ -71,6 +67,10 @@ public class CreateNewRuleTimeCondition extends HttpServlet {
 		String dateString=request.getParameter("date");
 		System.out.println("Start Time:"+startTime);
 		System.out.println("End Time:"+endTime);
+		String ruleTimeConditionId=request.getParameter("ruleTimeConditionId");
+		String url="http://localhost:8080/GarduinoApi/ruletimeconditions/update_rule_time_condition/"+ruleTimeConditionId;
+		Client client= ClientBuilder.newClient();
+		WebTarget target=client.target(url);
 		//days
 		if(request.getParameter("Mo")!=null){
 			mo="1";
@@ -162,9 +162,9 @@ public class CreateNewRuleTimeCondition extends HttpServlet {
 		Date [] specificDates=new Date[1];
 		specificDates[0]=Date.valueOf(dateString);
 		ruleTimeCondition.setSpecificDates(specificDates);
-		Response res=target.request().post(Entity.json(ruleTimeCondition));
-		System.out.println(res.getStatus());
-		res.close();
+		Response res=target.request().put(Entity.json(ruleTimeCondition));
+		//System.out.println(res.getStatus());
+		//res.close();
 	    
 	    
 		try {
@@ -174,5 +174,4 @@ public class CreateNewRuleTimeCondition extends HttpServlet {
 		}
 		catch ( Exception e ) {e.printStackTrace();}
 	}
-
 }

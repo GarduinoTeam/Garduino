@@ -130,4 +130,13 @@
     <servlet-name>GetRuleCondition</servlet-name>
     <url-pattern>/EditRuleCondition</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <display-name>GetRuleTimeCondition</display-name>
+    <servlet-name>GetRuleTimeCondition</servlet-name>
+    <jsp-file>/EditRuleTimeCondition.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetRuleTimeCondition</servlet-name>
+    <url-pattern>/EditRuleTimeCondition</url-pattern>
+  </servlet-mapping>
 </web-app>
