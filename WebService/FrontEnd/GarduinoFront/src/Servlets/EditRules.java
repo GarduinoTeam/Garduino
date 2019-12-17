@@ -57,13 +57,11 @@ public class EditRules extends HttpServlet {
   		String activeCheck = request.getParameter("activeCheck");
   		String deviceId = request.getParameter("deviceId");
   		String type = request.getParameter("type");
-  		boolean active;
-		if(activeCheck=="on"){
+  		boolean active=false;
+		if(activeCheck!=null){
 			active=true;
-		}else{
-			
-			active=false;
 		}
+		System.out.println("Status of the Rule:"+active);
   		
 		String url="http://localhost:8080/GarduinoApi/rules/update_rule/"+ruleId;
 		Client client= ClientBuilder.newClient();
