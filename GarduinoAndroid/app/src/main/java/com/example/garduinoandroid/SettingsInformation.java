@@ -49,6 +49,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
     int deviceId;
     static String urlPut;
     String newName;
+    EditText edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,14 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
 
         Bundle datos = this.getIntent().getExtras();
         deviceId = datos.getInt("deviceId");
+        edit =  (EditText)findViewById(R.id.et_ds_1);
 
         urlPut = "http://10.0.2.2:8080/GarduinoApi/devices/update_device/"+deviceId;
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new ReadJSON().execute("https://api.androidhive.info/contacts/");
+                new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/devices/get_device/"+deviceId);
             }
         });
 
@@ -136,7 +138,8 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                     intentSave.putExtra("object", (Serializable) obj);
                     intentSave.putExtra("addRule", addRule);
                     intentSave.putExtra("deviceId",  deviceId);
-                    startActivity(intentSave);
+                    SaveDevice(intentSave);
+
                 } else {
                     Intent intentSave = new Intent(this, DeviceProfile.class);
 
@@ -147,13 +150,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
 //                    intentSave.putExtra("object", (Serializable) obj);
 //                    intentSave.putExtra("addRule", addRule);
                     // ************************* Fer el post aqui ********************************** Crear classe Async i posarho al onclick com a new ..execute();
-                    verValor(v);
-                    EditText edit = (EditText)findViewById(R.id.et_ds_1);
-                    newName =  edit.getText().toString();
-                    DoPostTask task = new DoPostTask();
-                    task.execute(new String(urlPut));
-
-                    startActivity(intentSave);
+                    SaveDevice(intentSave);
                 }
                 break;
             default:
@@ -161,9 +158,21 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void SaveDevice(Intent intentSave){
+
+        if(edit.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Give a name for your device.", Toast.LENGTH_SHORT).show();
+        } else {
+            newName =  edit.getText().toString();
+            DoPostTask task = new DoPostTask();
+            task.execute(new String(urlPut));
+            startActivity(intentSave);
+        }
+    }
+
 
     // READING AND MANAGING DATA FORM AN ENDPOINT
-    private ArrayList<Data> createList(String jsonStr)
+    private String createList(String jsonStr)
     {
         informationDevice = new ArrayList<Data>();
         if(jsonStr != null)
@@ -171,31 +180,10 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             try {
                 JSONObject jsonObject = new JSONObject(jsonStr);
 
-                // Getting JSON Array
-                JSONArray contacts = jsonObject.getJSONArray("contacts");
+                String id = jsonObject.getString("id");
+                String name = jsonObject.getString("name");
 
-                // looping through All Contacts
-                for(int i = 0; i < contacts.length(); i++)
-                {
-                    JSONObject c = contacts.getJSONObject(i);
-
-                    String id = c.getString("id");
-                    String name = c.getString("name");
-                    String email = c.getString("email");
-
-                    JSONObject phone = c.getJSONObject("phone");
-                    String mobile = phone.getString("mobile");
-                    String home = phone.getString("home");
-
-                    ArrayList<Data> contact = new ArrayList<Data>();
-
-                    // adding each child node to ArrayList Data
-                    contact.add(new Data(1, name, email, "https://img-cdn.hipertextual.com/files/2019/03/hipertextual-whatsapp-permitira-realizar-busqueda-inversa-imagenes-recibidas-combatir-fake-news-2019852284.jpg?strip=all&lossy=1&quality=57&resize=740%2C490&ssl=1", "Temperature: 40ºC","Moisture: 20%","Soil: 2"));
-
-                    // adding contact to devicesList
-                    informationDevice.addAll(contact);
-                }
-                return informationDevice;
+                return name;
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -211,15 +199,8 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
         protected void onPostExecute(String jsonStr) {
             ArrayList<Data> result;
             if (jsonStr != null) {
-                result = createList(jsonStr);
-                nameDevice = (TextView) findViewById(R.id.tv_si_1);
-
-                for (Data dataDevice : result) {
-                    System.out.println(dataDevice.getTitle());
-//                }
-
-                    nameDevice.setText(dataDevice.getTitle());
-                }
+                String name = createList(jsonStr);
+                edit.setText(name);
             }
         }
 
@@ -308,7 +289,6 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
                     conn.setDoOutput(true);
                     conn.setRequestProperty("Accept", "application/json");
                     conn.setRequestProperty("Content-type", "application/json");
-
                     String input = "{\"userId\":1, \"status\":\"DISCONNECTED\",\"name\":\""+newName+"\"}";
 
                     OutputStream os = conn.getOutputStream();
