@@ -164,7 +164,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Give a name for your device.", Toast.LENGTH_SHORT).show();
         } else {
             newName =  edit.getText().toString();
-            DoPostTask task = new DoPostTask();
+            DoPutTask task = new DoPutTask();
             task.execute(new String(urlPut));
             startActivity(intentSave);
         }
@@ -270,7 +270,7 @@ public class SettingsInformation extends AppCompatActivity implements View.OnCli
         }
         return jsonStr;
     }
-    private class DoPostTask extends AsyncTask<String, Void, String> {
+    private class DoPutTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
