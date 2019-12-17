@@ -244,7 +244,7 @@
                       	</form>
                       
                       <form method="post" action="DeleteRuleTimeCondition">
-            	  	  <input type="hidden" value=<%=ruleTimeConditions[i].getId()%> name="ruleConditionId">
+            	  	  <input type="hidden" value=<%=ruleTimeConditions[i].getId()%> name="ruleTimeConditionId">
             	  	  <input type="hidden" value=<%=ruleTimeConditions[i].getIdRule()%> name="ruleId">
                       <input type="submit" class="btn btn-danger " value="Delete" >
                       </form>                

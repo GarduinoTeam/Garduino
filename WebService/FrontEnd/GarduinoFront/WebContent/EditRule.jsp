@@ -150,7 +150,9 @@
         <!-- Begin Page Content -->
    <div class="container">
 
-  <%beans.Rule rule = (beans.Rule)session.getAttribute("rule"); %>
+  <%beans.Rule rule = (beans.Rule)session.getAttribute("rule"); 
+   boolean status=rule.getStatus();
+  %>
   
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
@@ -172,7 +174,14 @@
                 </div>
                 <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck">
+                      <%
+                      if(status){
+                      %>
+                      <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck" checked>
+                      <%}else{ %>
+                      <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck">
+                       <%} %>
+                        
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
