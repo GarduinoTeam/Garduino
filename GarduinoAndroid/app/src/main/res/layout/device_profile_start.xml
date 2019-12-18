@@ -11,7 +11,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+            android:layout_width="361dp"
             android:layout_height="361dp"
             android:layout_marginBottom="@dimen/dim_10"
             android:layout_gravity="center"
@@ -38,7 +38,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_device_profile_last_update"
             android:layout_marginTop="@dimen/dim_10"
             android:layout_marginBottom="@dimen/dim_20"
             android:gravity="center"

@@ -78,8 +78,8 @@ public class Adapter extends BaseAdapter
         TextView title = (TextView) convertView.findViewById(R.id.tv_title);
         title.setText(listObjects.get(position).getTitle());
 
-        TextView description = (TextView) convertView.findViewById(R.id.tv_description);
-        description.setText(listObjects.get(position).getDescription());
+       /* TextView description = (TextView) convertView.findViewById(R.id.tv_description);
+        description.setText(listObjects.get(position).getDescription());*/
 
         Switch sw = (Switch) convertView.findViewById(R.id.sw_1);
 
