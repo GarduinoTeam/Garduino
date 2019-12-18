@@ -177,8 +177,8 @@
                   <tr>
                   <td><%=users[i].getId()%></td>
                   <td><form method="post" action="ListDevices">
-                  			<input type="hidden" value=<%=users[i].getId()%> name="userId">
-            				<input type="submit" value=<%=users[i].getUsername()%> class="btn btn-primary">      
+                  			<input type="hidden" value="<%=users[i].getId()%>" name="userId">
+            				<input type="submit" value="<%=users[i].getUsername()%>" class="btn btn-primary">      
             		  </form></td>
             	  <td><%=users[i].getPassword()%></td>
             	  <td><%=users[i].getEmail()%></td>

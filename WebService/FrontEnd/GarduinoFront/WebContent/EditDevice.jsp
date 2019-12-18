@@ -160,7 +160,7 @@
                <%beans.Device device = (beans.Device)session.getAttribute("device"); %>
               <form class="user" method="post" action="EditDevices" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="deviceName" name="deviceName" value=<%=device.getName()%>>
+                    <input type="text" class="form-control form-control-user" id="deviceName" name="deviceName" value="<%=device.getName()%>">
                 </div>
           
                <div class="form-group">
@@ -172,8 +172,8 @@
                 <div class="form-group">
                     <input type="file" class="form-control form-control-user" id="imageDevice" name="file" placeholder="Device Image">
                 </div>
-                <input type="hidden" value=<%=device.getUserId()%> name="userId">
-                <input type="hidden" value=<%=device.getId()%> name="deviceId">
+                <input type="hidden" value="<%=device.getUserId()%>" name="userId">
+                <input type="hidden" value="<%=device.getId()%>" name="deviceId">
                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Save Changes">
                 <hr>
               </form>

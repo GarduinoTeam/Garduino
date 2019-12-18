@@ -159,8 +159,8 @@
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Rules Information</h6>
               <form method="post" action="PassRuleID">
-              	<input type="hidden" value=<%=deviceId%> name="deviceId">
-              	<input type="hidden" value=<%=userId%> name="userId">
+              	<input type="hidden" value="<%=deviceId%>" name="deviceId">
+              	<input type="hidden" value="<%=userId%>" name="userId">
               	<input type="submit" value="New Rule" class="btn btn-success" style="float:right">
               </form>
             <div class="card-body">
@@ -181,8 +181,8 @@
                     <tr>
                       <td><%=rules[i].getId()%></td>
                       <td><form method="post" action="ListConditions">
-                  			<input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
-            				<input type="submit" value=<%=rules[i].getName()%> class="btn btn-primary">      
+                  			<input type="hidden" value="<%=rules[i].getId()%>" name="ruleId">
+            				<input type="submit" value="<%=rules[i].getName()%>" class="btn btn-primary">      
             		  </form></td>
                       <td><%=rules[i].getIdDevice()%></td>
                       <td><%=rules[i].getStatus()%></td>
@@ -190,15 +190,15 @@
                       <td>
                       
                       <form method="post" action="GetRule">
-                      <input type="hidden" value=<%=userId%> name="userId">
-                      <input type="hidden" value=<%=deviceId%> name="deviceId">
-            	  	  <input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
+                      <input type="hidden" value="<%=userId%>" name="userId">
+                      <input type="hidden" value="<%=deviceId%>" name="deviceId">
+            	  	  <input type="hidden" value="<%=rules[i].getId()%>" name="ruleId">
                       <input type="submit" class="btn btn-success " value="Edit" >
                       </form>
                       
                       <form method="post" action="DeleteRules">
-                      <input type="hidden" value=<%=deviceId%> name="deviceId">
-            	  	  <input type="hidden" value=<%=rules[i].getId()%> name="ruleId">
+                      <input type="hidden" value="<%=deviceId%>" name="deviceId">
+            	  	  <input type="hidden" value="<%=rules[i].getId()%>" name="ruleId">
                       <input type="submit" class="btn btn-danger " value="Delete" >
                       </form>                
                   	  </td>
