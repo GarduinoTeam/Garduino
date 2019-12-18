@@ -156,21 +156,21 @@
                 <h1 class="h4 text-gray-900 mb-4">Edit User Account</h1>
               </div>
               <form class="user" method="post" action="EditUsers">
-              <input  type="hidden" value=<%=user.getId()%> name="userId">
+              <input  type="hidden" value="<%=user.getId()%>" name="userId">
                 <div class="form-group row">
                   <div class="col mb-3 mb-sm-0">
-                    <input type="text" disabled class="form-control form-control-user" id="firstName" name="username" value=<%=user.getUsername()%>>
+                    <input type="text" disabled class="form-control form-control-user" id="firstName" name="username" value="<%=user.getUsername()%>">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user"  id="email" name="email" value=<%=user.getEmail()%>>
+                  <input type="email" class="form-control form-control-user"  id="email" name="email" value="<%=user.getEmail()%>">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="password" name="password" value=<%=user.getPassword()%>>
+                    <input type="password" class="form-control form-control-user" id="password" name="password" value="<%=user.getPassword()%>">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="phone" name="phone" value=<%=user.getPhone()%>>
+                    <input type="text" class="form-control form-control-user" id="phone" name="phone" value="<%=user.getPhone()%>">
                   </div>
                 </div>
                 <div class="form-group">

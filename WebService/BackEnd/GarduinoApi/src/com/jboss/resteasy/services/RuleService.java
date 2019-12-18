@@ -30,7 +30,7 @@ public class RuleService {
 				}
 				else {
 					int existRule=0;
-					consulta="SELECT COUNT(id) from garduino.rule where name='"+rule.getName()+"'";
+					consulta="SELECT COUNT(id) from garduino.rule where name='"+rule.getName()+"' and id_device='"+rule.getIdDevice()+"'";
 					strEstat="Connection Established";
 					connection=ds.getConnection();
 					stm= connection.createStatement();
@@ -139,7 +139,7 @@ public class RuleService {
 						return -2;
 					}
 
-					consulta="update garduino.rule set status = '" +rule.getStatus()+"'" +" where id='"+id+"'";
+					consulta="update garduino.rule set status = '" +rule.getStatus()+"',name='"+rule.getName()+"'"+" where id='"+id+"'";
 					System.out.println("\n update:"+consulta);
 					stm.executeUpdate(consulta);
 

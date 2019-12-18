@@ -150,7 +150,9 @@
         <!-- Begin Page Content -->
    <div class="container">
 
-  <%beans.Rule rule = (beans.Rule)session.getAttribute("rule"); %>
+  <%beans.Rule rule = (beans.Rule)session.getAttribute("rule"); 
+   boolean status=rule.getStatus();
+  %>
   
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
@@ -162,21 +164,28 @@
                 <h1 class="h4 text-gray-900 mb-4">Edit Rule</h1>
               </div>
               <form class="user" method="post" action="EditRules">
-              	<input type="hidden" value=<%=deviceId%> name="deviceId">
-              	<input type="hidden" value=<%=rule.getId()%> name="ruleId">
+              	<input type="hidden" value="<%=deviceId%>" name="deviceId">
+              	<input type="hidden" value="<%=rule.getId()%>" name="ruleId">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="ruleName" name="ruleName" value=<%=rule.getName() %>>
+                    <input type="text" class="form-control form-control-user" id="ruleName" name="ruleName" value="<%=rule.getName() %>">
                 </div>
                 <div>
-          			<input type="text" class="form-control form-control-user" id="type" name="type" value=<%=rule.getType()%>>
+          			<input type="text" class="form-control form-control-user" id="type" name="type" value="<%=rule.getType()%>">
                 </div>
                 <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck">
+                      <%
+                      if(status){
+                      %>
+                      <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck" checked>
+                      <%}else{ %>
+                      <input type="checkbox" class="custom-control-input" id="customCheck" name="activeCheck">
+                       <%} %>
+                        
                         <label class="custom-control-label" for="customCheck">Active</label>
                       </div>
                 </div>
-                <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="Edit Rule">
                 <hr>
               </form>
             </div>

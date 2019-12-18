@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -39,6 +41,8 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
     ArrayList<EditTextCondition> conditionArrayList;
     EditTextConditionAdapter adapter;
 
+    ArrayList<EditTextCondition> EditResult;
+
     TimeAdapter adapterTime;
     ListView listViewEdit;
     ArrayList<Rule> timeConditonArrayList;
@@ -53,7 +57,9 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
     String irrigationRules;
     int deviceId;
     int ruleId;
-
+    static String urlPut;
+    EditText edit;
+    String newValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -70,7 +76,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         deviceId = datos.getInt("deviceId");
         ruleId = datos.getInt("ruleId");
         listViewEdit = (ListView) findViewById(R.id.listEditTextConditions);
-
+        //edit = (EditText) findViewById(R.id.editTextEditCondition);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -146,12 +152,12 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
 
         @Override
         protected void onPostExecute(String jsonStr) {
-            ArrayList<EditTextCondition> result;
+
             if(jsonStr != null)
             {
-                result = createList(jsonStr);
+                EditResult = createList(jsonStr);
 
-                adapter = new EditTextConditionAdapter(getApplicationContext(), result);
+                adapter = new EditTextConditionAdapter(getApplicationContext(), EditResult);
                 listViewEdit.setAdapter(adapter);
 
 //                for(Data dataDevice: result) {
@@ -277,6 +283,92 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         return true;
     }
 
+       private void SaveRule(Intent intentSave) {
+
+           for (int i = 0; i < EditResult.size(); i++) {
+               int conditionValue = Integer.parseInt(EditResult.get(i).getEdit());
+               int itemId = EditResult.get(i).getId();
+
+               String urlPut = "http://10.0.2.2:8080/GarduinoApi/ruleconditions/update_rule_condition/"+itemId;
+               DoPutTask task = new DoPutTask(conditionValue);
+               task.execute(new String(urlPut));
+
+               startActivity(intentSave);
+//
+//               if(edit.getText().toString().isEmpty()){
+//                   Toast.makeText(this, "Give values for all the rules.", Toast.LENGTH_SHORT).show();
+//               }else{
+//                   int itemId = EditResult.get(i).getId();
+//
+//                   String urlPut = "http://10.0.2.2:8080/GarduinoApi/ruleconditions/update_rule_condition/"+itemId;
+//                   DoPutTask task = new DoPutTask(conditionValue);
+//                   task.execute(new String(urlPut));
+//
+//                   startActivity(intentSave);
+//               }
+
+           }
+       }
+
+    private class DoPutTask extends AsyncTask<String, Void, String> {
+
+        int conditionValue;
+        DoPutTask(int conditionValue){
+            this.conditionValue = conditionValue;
+        }
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+
+            HttpURLConnection conn = null;
+            InputStream inputStream = null;
+            InputStreamReader inputReader = null;
+            BufferedReader reader = null;
+
+            for (String url : urls) {
+                try {
+                    URL myUrl = new URL(url);
+                    conn = (HttpURLConnection) myUrl.openConnection();
+                    conn.setRequestMethod("PUT");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-type", "application/json");
+                    String input = "{\"conditionValue\":"+ conditionValue +"}";
+
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.getBytes());
+                    os.flush();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        inputStream = conn.getInputStream();
+                        inputReader = new InputStreamReader(inputStream);
+                        BufferedReader buffer = new BufferedReader(inputReader);
+
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            System.out.println(response);
+            return response;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -287,8 +379,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 intentSave.putExtra("addRule", addRule);
                 intentSave.putExtra("deviceId",  deviceId);
                 intentSave.putExtra("ruleId",  ruleId);
-
-                startActivity(intentSave);
+                SaveRule(intentSave);
                 break;
 
             case R.id.addCondition:

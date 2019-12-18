@@ -3,6 +3,8 @@ package com.example.garduinoandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +38,7 @@ public class EditTextConditionAdapter extends BaseAdapter
     Context context;
     List<EditTextCondition> listObjects;
     ArrayList<EditTextCondition> arrayList;
-
+    Button saveButton;
 
 
     public EditTextConditionAdapter(Context context, List<EditTextCondition> listObjects) {
@@ -82,8 +86,9 @@ public class EditTextConditionAdapter extends BaseAdapter
 
         LayoutInflater inflate = LayoutInflater.from(context);
         view = inflate.inflate(R.layout.edit_condition_list, null);
+//        saveButton = (Button) view.findViewById(R.id.saveConditons);
 
-        EditText edit = (EditText) view.findViewById(R.id.editTextEditCondition);
+        final EditText edit = (EditText) view.findViewById(R.id.editTextEditCondition);
         TextView title = (TextView) view.findViewById(R.id.textVieweEditCondition);
         TextView measure = (TextView) view.findViewById(R.id.measureEditCondition);
         Switch sw = (Switch) view.findViewById(R.id.switchEditCondition);
@@ -112,12 +117,47 @@ public class EditTextConditionAdapter extends BaseAdapter
             });
         }
 
+        ViewHolder viewHolder = new ViewHolder();
+        viewHolder.editText = edit;
+        view.setTag(viewHolder);
+
+        ViewHolder holder = (ViewHolder) view.getTag();
+        if (holder.textWatcher != null)
+            holder.editText.removeTextChangedListener(holder.textWatcher);
+
+
+        holder.textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                listObjects.get(position).setEdit(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
+
+        holder.editText.addTextChangedListener(holder.textWatcher);
+
         title.setText(listObjects.get(position).getTitle());
         edit.setText(listObjects.get(position).getEdit());
         measure.setText(listObjects.get(position).getMeasure());
 
         return view;
     }
+
+    static class ViewHolder {
+        public EditText editText;
+        public TextWatcher textWatcher;
+    }
+
+
+
+
     private class DoDeleteTask extends AsyncTask<String, Void, String> {
 
         @Override

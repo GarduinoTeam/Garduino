@@ -251,7 +251,7 @@
 					<script>
 					$(function() {
     
-    					$("#datepick").datepick();
+    					$("#datepick").datepick({dateFormat: 'yyyy-mm-dd'});
 					});
 					</script>
                 </div>
