@@ -179,11 +179,11 @@
                   	
                     <tr>
                       <td><%=devices[i].getId()%></td>
-                      <td><img src=<%=devices[i].getImageURL()%> with="50" height="50"></td>
+                      <td><img src="<%=devices[i].getImageURL()%>" with="50" height="50"></td>
                       <td><form method="post" action="ListRules">
                       		<input type="hidden" value=<%=devices[i].getId()%> name="deviceId">
                       		<input type="hidden" value=<%=devices[i].getUserId()%> name="userId">
-            				<input type="submit" value=<%=devices[i].getName()%> class="btn btn-primary">      
+            				<input type="submit" value="<%=devices[i].getName()%>" class="btn btn-primary">      
             		  </form></td>
                       <td><%=devices[i].getStatus()%></td>
 
