@@ -18,7 +18,6 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry} 
 
-
 \begin{document}
 \begin{titlepage}
 
@@ -94,13 +93,21 @@ Gerard Donaire Alos  & Roger Truchero Visa \\
 \part*{Sprint 3}
 \part*{Introduction}
 \addcontentsline{toc}{part}{Introduction}
-This document highlights the main advances and aspects of work relevant to the second sprint of the development of the Garduino project. 
+This document highlights the main advances and aspects of work relevant to the third sprint of the development of the Garduino project. 
 \\ \\
 This second iteration of the development of the project is mainly focused on the backend and frontend of the application, as well as the administration of users and the database. 
 \\ \\
 As such, the main aspects of the progress and changes in the project, as well as the requirements of the resulting sprint, product backlog and sprint backlog will be presented. 
 \\ \\
 As a result of this sprint, the general architecture of the application, a database model and a navigation scheme of the different screens and their internal relationship will be presented, both for the part of the web application and for the part of the Android application. Finally, it will offer a greater degree of deepening in financial factors and economic feasibility study.
+\section{Software Installation}
+\begin{itemize}
+    \item Android Studio 3.5.2
+    \item JBOSS with WildFly 10.0
+    \item Pgadmin 4
+    \item PostgreSQL 12.0.1
+    \item Arduino 1.8.9
+\end{itemize}
 
 %% User stories
 \begin{table}[htbp]
@@ -162,33 +169,26 @@ Create, modify, delete, list own condition rules     & User        & MEDIUM   & 
 \end{tabular}
 \caption{Product Backlog explicit table}
 \end{table}
-The following issues have been added to the Product Backlog for the Sprint 3: 
-\begin{itemize}
-    \item Create, modify, delete, list own devices
-    \item Create, modify, delete, list own rules
-    \item Create, modify, delete, list own condition rules
-\end{itemize}
 \begin{table}[htbp]
 \begin{tabular}{|l|l|l|l|} 
 \hline
-Event                                                & Trigger     & Priority & Weight \\ \hline \hline
-Software Installation                                & Users       & HIGH     & 10     \\ \hline
-Configure DataSource                                 & Users       & MEDIUM   & 10     \\ \hline
-Define Operations Api Rest                           & Users       & LOW      & 10     \\ \hline
-Api Rest Implementation                              & Users/Admin & MEDIUM   & 26     \\ \hline
-Implement DataBase Class                             & Users       & MEDIUM   & 8      \\ \hline
-Configure WildFly to JBOSS                           & Users       & MEDIUM   & 2      \\ \hline
-Create DB Schema and Tables                          & Users       & MEDIUM   & 20     \\ \hline
-Arduino Budget Analysis                              & Admin       & LOW      & 10     \\ \hline
-Pop Up Screens Android                               & Users       & MEDIUM   & 20     \\ \hline
-Pass Android Screen TimeConditionRules to ListView   & Users       & MEDIUM   & 10     \\ \hline
-Create, modify, delete, list users                   & Admin       & MEDIUM   & 5      \\ \hline
-Create, modify, delete, list devices                 & Admin       & MEDIUM   & 5      \\ \hline
-Frontend screens and functionalities                 & Admin       & MEDIUM   & 5      \\ \hline
-Create, modify, delete, list rules                   & Admin       & MEDIUM   & 5      \\ \hline
-Create, modify, delete, list condition rules         & Admin       & MEDIUM   & 5      \\ \hline
-Documentation Sprint 3                               & Team        & HIGH     & 21     \\ \hline
-Prepare the slides and the presentation              & Team        & HIGH     & 8      \\ \hline
+Event                                                   & Trigger     & Priority & Weight \\ \hline \hline
+Define certain functionalities for the API              & User/Admin       & HIGH     & 13     \\ \hline
+Understand how to connect the app with the API          & User      & HIGH   & 20     \\ \hline
+Web part of time conditions settings                    & Admin      & MEDIUM      & 25     \\ \hline
+Pass Android screen to ListView timeCondition rules     & User       & LOW   & 8     \\ \hline
+Frontend part of the condition settings                 & Admin       & LOW   & 9     \\ \hline
+Changing the JSON format of WS                          & Admin       & MEDIUM   & 9     \\ \hline
+Implement GETs and POSTs                                & Admin       & HIGH   & 13     \\ \hline
+Implementation of search systems                        & User       & LOW      & 13     \\ \hline
+Navbar with functionalities and icons                   & User       & LOW   & 13     \\ \hline
+Button style definition                                 & User       & LOW   & 5     \\ \hline
+List views for time conditions                          & Admin       & MEDIUM   & 10      \\ \hline
+List views for regular conditions                       & Admin       & MEDIUM   & 5      \\ \hline
+List views for rules                                    & Admin       & MEDIUM   & 13      \\ \hline
+RPI server                                              & Admin       & HIGH   & 20      \\ \hline
+Slave functionalities                                   & Team       & HIGH   & 10      \\ \hline
+Raspberry Pi and NodeMCU implementation                 & Team   & HIGH     & 35     \\ \hline
 \end{tabular}
 \caption{Sprint 3 Backlog explicit table}
 \end{table}
@@ -233,7 +233,7 @@ Prepare the slides and the presentation              & Team        & HIGH     & 
 
 \subsection{Functional requirements}
 \subsection{List of functionalities and features}
-\textit{List of functionalities and features that all services (Android app, web service and Arduino) will accomplish}
+\textit{List of functionalities and features that all services (Android app, web service and Irrigation System) will accomplish}
 
 \subsubsection{Android app}
 \begin{itemize}
@@ -269,21 +269,30 @@ Prepare the slides and the presentation              & Team        & HIGH     & 
 
 \subsubsection{Detection plague script}
 \begin{itemize}
-
-\item \textbf{The pest detection algorithm will have to}, using an image of a leaf as an input, determine if this is a pest or not.
+\item \textbf{The pest detection algorithm will have to}, using an image of a plant as an input, determine if is contaminated or not.
 \end{itemize}
 
-\subsubsection{Arduino}
 \begin{itemize}
-\item \textbf{The Arduino system will have to} allow communication with the web service.
+\item RPi(\textbf{R}aspberry \textbf{Pi}) 3B (master):
+	\begin{itemize}
+	\item \textbf{The RPi will have to} allow communication with the web service.
+	\item \textbf{The RPi will have to} send/receive data from/to the slaves to perform operations.
+	\end{itemize}
 
-\item \textbf{The Arduino system will have to} allow images to be sent in real time to the web service.
-
-\item \textbf{The Arduino system will have to} allow the data from the humidity, temperature and soil sensors to be captured.
-
+\item NodeMCU ESP8266 (slave):
+	\begin{itemize}
+	\item \textbf{The NodeMCU will have to} be able to send the data to the RPi. 
+	\item \textbf{The NodeMCU will have to} recolect the data from the humidity, temperature and soil sensors.
+	\item \textbf{The NodeMCU will have to} capture and image of the device plant.		
+	\item \textbf{The NodeMCU will have to} control the relay to make irrigation when receives the request from the RPi.
+	\end{itemize}
 \end{itemize}
-\vspace{1cm}
-\textit{The leaf trimming algorithm requirement has been removed because the system will have a model that will already have the capabilities to process the whole image of the plant without the need of trimming it.} 
+
+\subsection{Observations}
+\begin{itemize}
+\item The leaf trimming algorithm requirement has been removed because the system will have a model that will already have the capabilities to process the whole image of the plant without the need of trimming it
+\item The arduino/rpi architecture has been replaced by a master/slave architecture using RPi like a master and NodeMCU slaves.
+\end{itemize}
 
 \newpage
 
@@ -294,11 +303,9 @@ Prepare the slides and the presentation              & Team        & HIGH     & 
 \caption{Application use cases diagram}
 \label{figure2}
 \end{figure} \newpage\leavevmode \\
-En la \textcolor{blue}{Figure \ref{figure2}}, se muestran los siguientes actores: el usuario, el web service, el Rpi y el Admin.\newline\newline
-El usuario podrá loggearse, pedir que se muestren sus instalaciones y editarlas. Además, también podrá monitorizar sus propias instalaciones. Asimismo, podrá crear, modificar, eliminar y listar tanto sus reglas como condiciones de riego. Con el objetivo de regar, el usuario podrá regar sus instalaciones manualmente y con condiciones de riego. Todas estas funcionalidades son recibidas por el Web Service el cual esperará las peticiones que se hagan desde la aplicación Android y este pedirá la información necesaria a la Rpi para poder dar dicha información a la parte Android y en consecuencia mostrarla. \newline\newline
-El admin podrá loggearse, pedir que se muestren todas las instalaciones así como crearlas, modificarlas y eliminarlas. Además, también podrá monitorizarlas. A continuación, podrá crear, modificar, eliminar y listar todas las reglas, condiciones de riego y usuarios. Con el objetivo de regar, el admin podrá regar todas las instalaciones manualmente y con condiciones de riego. Todas estas funcionalidades son recibidas por el Web Service el cual esperará las peticiones que se hagan desde el frontend de la parte web y éste pedirá la información necesaria a la Rpi para poder dar dicha información a la parte del frontend y en consecuencia mostrarla.   
-\newline\newline
-En relación al Sprint anterior, hemos decidido cambiar la parte de Arduino por la de Rpi porque al arduino tendríamos que conectar muchos componentes // TO DO
+ Figure \textcolor{blue}{ \ref{figure2}} shows the following actors: the user, the web service, the Rpi and the Admin.\newline\newline
+The user will be able to log in, ask for their installations to be shown and edit them. He can also monitor his own installations. They can also create, modify, delete and list both their rules and irrigation conditions. In order to irrigate, the user will be able to irrigate their facilities manually and with irrigation conditions. All these functionalities are received by the Web Service which will wait for the requests that are made from the Android application and this one will ask for the necessary information to the Rpi to be able to give this information to the Android part and consequently to show it. \newline\newline
+The admin will be able to logge, request that all the installations are shown as well as to create them, to modify them and to eliminate them. He can also monitor them. You can then create, modify, delete and list all rules, irrigation conditions and users. In order to water, the admin will be able to water all installations manually and with watering conditions. All these functionalities are received by the Web Service which will wait for the requests that are made from the frontend of the web part and it will request the necessary information to the Rpi to be able to give this information to the part of the frontend and consequently to show it.   
 \newpage
 
 \section{General architecture}
@@ -311,21 +318,50 @@ En relación al Sprint anterior, hemos decidido cambiar la parte de Arduino por 
 
 The architecture of our application is composed by:
 \begin{itemize}
-\item \textbf{Android App}: Graphical interface, in charge of collecting the data entered by the user.
-\item \textbf{Web Service}: Makes middleware of the application. It manages requests between the Android app and the Arduino/Raspberry pi, the database, ...
-\item \textbf{Arduino/Raspberry pi}: Device that will be in charge of the irrigation of each environment (gardening, flowerpot, ...).
-\item \textbf{Database}: Manage all the data of the application, user credentials, register all requests, device info, ...
+\item \textbf{Android App}: Graphical interface, in charge of collecting the data entered by the user. We are doing it using Android Studio.
+\item \textbf{Web Service}: Makes middleware of the application. It manages requests between the Android app and the RPi/NodeMCU, the database, the frontend ...
+\begin{itemize}
+    \item \textbf{Frontend:} Graphical interface used by the web application administrator to perform operations against the backend of the webservice and monitor the status of each user's devices, thus allowing absolute control of the data to be given to the administrator.
+    \item \textbf{Backend:} It is in charge of communicating with the android application, frontend and Rpi, receiving your requests, processing the data and preparing a response. It will act as the middleware of our system and therefore, will have more computational load.
+\end{itemize}
+\item \textbf{RPi/NodeMCU}: Device that will be in charge of the irrigation of each environment (gardening, flowerpot, ...).
+\item \textbf{Database}: Manage all the data of the application, user credentials, register all requests, device info, ... 
 \end{itemize}
 
 \newpage
 
-\subsection{Arduino/Raspberry pi architecture}
-\vspace*{3cm}
+\subsection{RPi/NodeMCU architecture}
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.6]{ArduinoArch.png}
+\includegraphics[scale=0.4]{IrrigationSystem.png}
 \caption{Arduino and rapsberry pi architecture}
 \end{figure}
+
+
+So, we have the following components
+\begin{itemize}
+\item \textbf{Raspberry pi 3B}: We will use this microprocessor to ask the slaves for information about the sensors and the webcam, and then return the call to the web service with all the data.
+
+\item \textbf{NodeMCU ESP8266}: It will act as a device slave, in charge of collecting sensor data, activating irrigation and capturing our plant. This microcontroller will have a wifi module to maintain a wireless communication with the RPi(\textbf{R}aspberry \textbf{Pi}).
+
+\item \textbf{Webcam ESP32}: This module will be in charge of capturing the plant and sending the data to your NodeMCU.
+
+\item \textbf{Relay}: Useful to control a motor, a led strip, or any other module using arduino. The use is sumple, just connect a digital output of our esp8266 to our relay module, and then we can control a power-demanding appliance with the digital signal provided by the esp8266.
+
+\item \textbf{Water pump}: He will be in charge of pumping the water in order to carry out the irrigation correctly.
+
+\item \textbf{Power supply}: Our devices will need a source of energy, in this case we have chosen a power supply of 12V to batteries. In the future it could be exchanged for a solar panel or even make a hybrid between the two depending on the climate.
+
+\item \textbf{Soil moisture sensor}: Measures the volumetric water content in soil. Since the direct gravimetric measurement of free soil moisture requires removing, drying, and weighing of a sample, soil moisture sensors measure the volumetric water content indirectly by using some other property of the soil, such as electrical resistance, dielectric constant, or interaction with neutrons, as a proxy for the moisture content.
+
+\item \textbf{DHT sensor}: This sensor will allow us to simultaneously measure temperature and humidity. We have two types of DHT sensors, DHT11 and DHT22.\\
+
+The DHT11 is a very limited sensor that we can use for training, testing, or in projects that don't really require accurate measurement.\\
+
+The DHT22 has acceptable features for use in real monitoring or logging projects that require medium accuracy.\\ 
+
+In this project we will start implementing the DHT11 version due to its low cost (70 cents).
+\end{itemize}
 
 \newpage
 
@@ -360,150 +396,66 @@ In this data model diagram we can see how our data is structured and related wit
 \item \textbf{Condition}: It stores the different conditions which are: Temperature is lower than,Temperature is greater than, Humidity is lower than,  Humidity is greater than, Soil is lower than, Soil is greater than.
 \end{itemize}
 
+We have made some changes regarding the data model of the previous sprint in:
+\begin{itemize}
+    \item Added field \textit{admin} (int) in User.
+    \item Added fields \textit{image} (image), \textit{default\_rule} (int) and \textit{status rule} (bool) in Device.
+    \item Removed field \textit{type} (int) in Condition and added \textit{measure} (String).
+    \item Fields \textit{start\_time} and \textit{end\_time} in RuleTimeCondition switched their type from date to String.\\ \textit{specific\_dates} switched from String to date array.
+\end{itemize}
 \newpage
 
-\section{Main screens desgin and Navigation}
+\section{Main screens design and navigation}
 %% Navigation schema between activities
 \begin{itemize}
-\item Link Android Design:\newline\newline \textcolor{blue}{\href{https://drive.google.com/file/d/1GWvJHmUxLQVg-ns894TZreQi0Cy9rv79/view?usp=sharing}{Click here: Android Screens Navigation}}
+\item Link Android Design:\newline\newline \textcolor{blue}{\href{https://drive.google.com/open?id=1366cBxw7umuTSoKkzeMvzVouD4csthgp}{Click here: Android Screens Navigation}}
 
 \item Brief explanation of the different screens in the Android application: 
-\\ \\Introducció
-On screen 1, a list of the different devices available in the user's installation is shown. You can see the last photograph taken by the system, as well as the last date and time of irrigation. As such, the user can activate and deactivate the system for that particular device by means of a switch, or enter the panel of that particular device by pressing on the rest of the box pertinent to that device. 
 \\ \\
-Screen 2 shows the control panel for a particular device. The last image obtained by the system, temperature, humidity and soil can be consulted. 
-You can see the last time and date the data was updated. A manual irrigation can be started and the configuration of the device can be accessed.
-\\ \\
-Screen 3 shows the pop-up relevant to the operation of a manual irrigation. You can enter a numerical amount on how long the irrigation will last, and you are given the option of initializing the irrigation or canceling it.
-\\ \\
-Screen 4 shows the control panel of a device when there is a manual irrigation in progress. It indicates how much irrigation time is left, and offers the option of cancelling it instantaneously. 
-\\ \\
-Screen 5 shows the configuration menu of a device. It offers the option to change its name, change the frequency of updating information and access to a panel to modify the irrigation rules. All changes will be saved when you press the save button. 
-\\ \\
-Screen 6 shows the configuration panel of a device's irrigation ruleset. It shows the list of rules, which can be activated and deactivated by means of a switch, and these can be modified by clicking on them. It shows the option to add new rules and the option to save changes.
-\\ \\
-Screen 7 shows the irrigation rule creation screen. You can choose its name, confirm its creation and cancel it. This screen will be converted to a pop-up in the near future of the development of the project. 
-\\ \\
-Screen 8 shows the configuration panel of the irrigation rules of a device after a new irrigation rule has been created. The internal configuration of this can now be accessed and modified by clicking on its name. 
-\\ \\
-Screen 9 shows the configuration panel of an irrigation rule. This will consist of various conditions, which can be activated and deactivated through the use of a switch. It offers the option to modify the parameters of the conditions, as well as to create a new one and save the changes in that irrigation rule. 
-\\ \\
-Screen 10 shows the screen to add a new condition. It shows the different types of conditions that are available. 
-\\ \\
-Screen 11 shows the configuration of a time condition. It shows the various options for which the condition will be active: start and end time of the days it will be active, configuration by days of the week, by months in which it will be active, and specific dates in which the time condition will be active. 
-\\ \\
-Screen 12 shows the modification of one of the parameters related to the time of a time condition (start time and end time). The specific times can be selected by specifying them in a clock. 
-\\ \\
-Screen 13 shows the modification of the parameters relative to the specific dates in which the time condition will operate. The specific days can be chosen by means of a calendar. 
-\\ \\
-As an improvement of the previous prototype, some screens have been changed by the pop-ups corresponding to these in order to streamline navigation and maintain an awareness of the location between the various screens on which the user navigates at all times. 
+The initial screen shows the list of available devices, being possible to consult their previous information, as well as to activate and deactivate them. 
 
-\item Link Web Design:
+When you click on a device from the list, the application takes you to its management panel. In it, we can view detailed information, access its configuration and activate manual irrigation. If we activate manual irrigation, we will be given a pop-up with the option of specifying for how long we want the irrigation to take place. If there is a current irrigation, the panel will show the remaining irrigation time and the option to cancel it. 
+
+By accessing the device configuration, the user is allowed to change the name of the device and the frequency of updating the sensor information, as well as save the changes and access the configuration of irrigation rules. 
+
+If you access the watering rule panel, a list of all current rules will be displayed, and you will be able to activate, deactivate, delete and modify them. In addition, you can add new watering rules to the list and save your changes.  
+
+If you enter the internal configuration of a rule, you will be shown the conditions that make up the rule. All of them can be activated, deactivated, deleted and modified. The value of the condition will depend on its type. You can change the changes and add new conditions. 
+
+The conditions can be sensor related or time related. Weather conditions offer a number of options to specify at which time intervals they will be met. Those options related to dates will offer a calendar to the user, where he can specify the desired days, and those related to hours and minutes will offer a clock for the same. 
+
+The improvements over the previous sprint are reflected in the style and layout, having added the use of buttons and screen designs more sophisticated, aesthetic and intuitive. 
+
+\item Link Web Design:\newline\newline
+ \textcolor{blue}{\href{https://drive.google.com/open?id=1O2AmtC1dJX7Pf473Isi73ArwLkCy9E7a}{Click here: Web Screens Navigation}}
+ \item Brief explanation of the different screens in the Web application: 
+\\ \\
+Screen 1 shows information about the statistics of our application like RPI petitions, available server ram, cpu, ...
+\\ \\
+Screen 2 shows the control panel in order to list, create, edit or eliminate users.
+
+\\ \\
+Screen 3 shows the control panel related to the operation of creating a user. Admin have to enter: user name, email, password and phone.
+\\ \\
+Screen 4 shows the control panel related to the operation of editing a user account. Admin can modify whatever he wants (username, email, password and phone). 
+\\ \\
+Screen 5 shows the control panel related to the devices for each user in order to list, create, edit or eliminate devices. 
+\\ \\
+Screen 6 shows the control panel related to the operation of creating a device.
+\\ \\
+Screen 7 shows the control panel related to the operation of editing a device.
+\\ \\
+Screen 8 shows the control panel related to the conditions of a rule in order to list, create, edit or eliminate conditions.
+\\ \\
+Screen 9 shows the control panel related to the operation of creating a condition.
+\\ \\
+Screen 10 shows the control panel in order to list, create, edit or eliminate rules.
+\\ \\
+Screen 11 shows the control panel related to the operation of editing a rule.
+\\ \\
+Screen 12 shows the control panel related to the operation of creating a rule.
+
 \end{itemize}
 \section{Financial Factors}
-\section{Economic viability}
-\subsection{Who?}
-The customer profile should be the one interested in controlling the irrigation and the health of the plants in your house in a comfortable, efficient and automated way. The population segment defined as target audience is broad and determined by these very simple conditions. \\
-
-It can be focused both on private gardening and on a larger scale. Volume limits are set by the customer's business model or personal use. \\
-
-Likewise, the company bets on the provision to distributors and garden shops, as well as the direct provision to individuals.\\
-
-It will begin marketing the product in the area of Catalonia, where it will be made known to local distributors and will provide support in installation, configuration and maintenance to customers. 
-\subsection{How many?}
-An incremental and exponential progress of the user base is estimated as a function of the increase in the company's resources as a result of the successful marketing and expansion of the product. As such, it is estimated that some representative figures of success in the first year are: 
-
-\begin{itemize}
-\item To have marketed and installed and to have in maintenance 100 devices in particular. 
-\item To have established supply agreements with 2 distributors. 
-\end{itemize}
-A significant potential progression would be:
-\begin{table}[htbp]
-\centering
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-\textbf{} & \textbf{Year 1} & \textbf{Year 2} & \textbf{Year 3} & \textbf{Year 4} & \textbf{Year 5} \\
-\hline \hline
-Particularities & 100 & 250 & 500 & 1000 & 2000 \\
-\hline
-Distributors & 2 & 4 & 6 & 8 & 10 \\
-\hline
-\end{tabular}
-\caption{Table of potential marketing progression}
-\end{table}
-
-\subsection{Mareketing strategy}
-The main comunication Garduino objectives are:
-\begin{itemize}
-\item Promote the notoriety of the brand and/or product marketed among the target audience.
-\item Promote knowledge of product attributes, characteristics and performance, as well as competitive differentiation with respect to the same product market.
-\item Establish and strengthen a connection between company and target audience, carrying out different strategies to familiarize and bring the user closer to the brand and product in marketing.
-\item To constitute, with regard to the potential client, one of the alternatives of the market to contemplate when acquiring a product of the nature of the article in question.
-\end{itemize}
-
-The public of interest is understood to be the group of publics or audiences targeted by a marketing campaign. It should be noted that we can differentiate between primary and secondary audiences, depending on whether or not they are involved as potential end consumers.\\
-
-As such, it has established a profile of primary interest audience of the characteristics described in the section "Who"?\\ 
-
-The communication techniques used for the promotion and diffusion of brand and product will be the following:\\
-\begin{itemize}
-\item \textbf{Advertising in conventional media}: transmission of the advertising message through advertisements and programmed messages in media such as television, radio...
-\item \textbf{Sales promotion}: alterations in the sales lot or in the price of the product in order to attract consumers.
-\item \textbf{Fairs and exhibitions}: Participation and presence in fairs and exhibitions to make oneself known or to collaborate in the transmission of a message. 
-\item \textbf{Sponsorship}: Association with other initiatives, businesses, causes and figures in order to carry out an exhibition of the brand in certain contexts, as well as to carry out an exploitation of the image associated with the activity in question, and to try to carry out a commercial exploitation of activities derived from the event.
-\item \textbf{Personal sale}: Presential presentation and sale of the commercial to the client of the product in a physical space. This technique is usually carried out in commercial spaces, by means of informative and/or exhibition stands where the product is presented to the client and it is a question of negotiating a closing of sales with the same one. 
-\item \textbf{Website}: Use of an informative web space where relevant company information can be announced, as well as support for online sales and subscription to other types of digital communications.
-\item \textbf{Blogs}: Use of web spaces structured through a system of publication of articles and news over time, which can allow different degrees of participation by users, and through which it is intended to capture an interest in the user and redirect traffic to the main website or digital content that presents information on products that may be of interest to the potential consumer.
-\item \textbf{Social networks}: Use of social network platforms to maintain a system of communication and promotion with the user, in addition to being a powerful tool for the approach and contact with it.
-\item \textbf{E-mailing}: newsletter system that transmits information and advertising relevant to the brand and product through e-mail. 
-\end{itemize}
-\vspace{0.6in}
-The communication model presented by Garduino is the multiphase model. This communication model not only involves commercials and experts or opinion leaders as influential and diffusion figures, but it will be the target public itself that will assume a role of active participation within the communicative process. These will act as "ambassadors" of a product, brand, good, service...\\ 
-
-\newpage
-
-This model manifests itself strongly in the growing digital and social network environments, and the search for the implementation of this kind of model by companies is evident in the incitement for the user to participate in one of the dissemination campaigns through these environments. It is also considered that this strategy will be based on the principles of inbound marketing:\\
-\begin{figure}[hbtp]
-\centering
-\includegraphics[scale=1]{marketing.png}
-\caption{Inbound marketing scheme}
-\end{figure}
-
-\subsection{Monetization strategy}
-The main sources of revenue for the business model will be: 
-\begin{itemize}
-\item Sale of the software to individuals
-\item Sale of the software to distributors
-\item Sale of the devices to private individuals
-\item Sale of devices to suppliers
-\item Installation service
-\item Maintenance service
-\item Special customization service
-\end{itemize}
-
-\subsection{App costs}
-\begin{itemize}
-\item \textbf{App type}: app for the management and monitoring of irrigation and pest control installations. 
-\item \textbf{App platform}: Android (potentially IOS, in the future)
-Coding: The start-up partners will act as developers of the project software. 
-\item \textbf{Features}: Configuration of the installed devices, live monitoring, notification system for events such as detection of anomalies/pests...
-\item \textbf{UI Design \& Graphics}: The interface design of the app must be intuitive and user-friendly, while covering a high degree of customization options for irrigation systems. 
-\item \textbf{Marketing}: The stipulated communication campaign will be followed, whose investment will be proportional to the level of income generated at each moment of the life phase of the product. 
-\item \textbf{Operational costs}: Costs for the Arduino parts of the prototypes, electricity costs and maintenance of the computers with which the project is programmed. 
-\end{itemize}
-
-\subsection{Analysis}
-\begin{table}[htbp]
-\centering
-\begin{tabular}{|l||l|l|l|l|l|}
-\hline
-\textbf{} & \textbf{Year 1} & \textbf{Year 2} & \textbf{Year 3} & \textbf{Year 4} & \textbf{Year 5} \\ \hline \hline
-Income & 20.000\euro{} & 50.000\euro{} & 100.000\euro{} & 200.000\euro{} & 400.000\euro{} \\ \hline
-Expenses & 35.000\euro{} & 65.000\euro{} & 65.000\euro{} & 115.000\euro{} & 215.000\euro{} \\ \hline
-Benefit & -15.000\euro{} & -15.000\euro{} & 35.000\euro{} & 85.000\euro{} & 185.000\euro{} \\ \hline
-\end{tabular}
-\caption{Table of economic analysis}
-\end{table}
-
+The financial factors analysis is present in the Market and economic study document.
 \end{document}
-
