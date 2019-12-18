@@ -11,11 +11,12 @@ Created on Mon Dec  9 19:54:22 2019
 from threading import Thread
 from jsonsocket import Server
 import subprocess
+import datetime
 
 ###############################################################################
 
 host = "192.168.43.181"
-port = 12348
+port = 12345
     
 # List of all accepted device and operations for that raspberry pi
 accepted_devices = [ 123, 124 ]
@@ -58,20 +59,35 @@ def threaded_func(server, dev):
         server.accept()
         data = server.recv()
         # If accepted device ( {device_1}, {device_2}, ...)
-        print(":threaded_func device_id: " + str(data["device_id"]))
+        print "{0} => RCV: data: {1}".format(datetime.datetime.now(), data)
         if data["device_id"] in accepted_devices:
             device_id = str(data["device_id"])
             # If accepted operation (sensor, webcam, irrigate, stop_irrigate)
             if data["operation"] in accepted_operations:
                 operation = data["operation"]
                 path = main_path + operation + "/" + device_id
-                subprocess.call(["mosquitto_pub", "-h", "localhost", "-t", "house/" + operation + "/" + device_id, "-m", ""])
-                server.send({ "response" : path })  
+                params = ["mosquitto_pub", "-h", "localhost", "-t", "house/" + operation + "/" + device_id, "-m", ""]
+                rc = run_command(params)
+                #output = subprocess.Popen(params, stdout = subprocess.PIPE ).communicate()[0]
+                print "{0} => SND: output: {1}".format(datetime.datetime.now(), rc)
+                server.send({ "response" : rc })
                     
             else:
                 server.send({ "response" : "invalid operation " +  data })
         else:
             server.send({ "response" : "invalid device " +  data })
+
+def run_command(params):
+    process = subprocess.Popen(params, stdout=subprocess.PIPE)
+    while True:
+        output = process.stdout.readline()
+        if output == '' and process.poll() is not None:
+            break
+        if output:
+            print "output: " + output.strip()
+    rc = process.poll()
+    print "Return code: " + str(rc)
+    return rc
 
 # Main function
 def main():

@@ -10,26 +10,35 @@ Created on Mon Dec  9 21:04:12 2019
 
 from jsonsocket import Client
 import time
+import datetime
 
 host = "192.168.43.181"
-port = 12348
+port = 12345
 
-accepted_operations = [ "sensor", "webcam", "irrigate", "stop_irrigate" ] # For testing
+#accepted_operations = [ "sensor", "webcam", "irrigate", "stop_irrigate" ] # For testing
 
 while True:
-    for operation in accepted_operations:    
+    data=raw_input("Introduce operation and your device_id: ")
+    data = data.split(" ")
+    if(len(data) == 2):        
+        operation = data[0]
+        device_id = int(data[1])
         client = Client()
-        
-        client.connect(host, port).send({ "device_id" : 123, "operation" : operation, "rule_id" : "",  })
+        to_send = { "device_id" : device_id, "operation" : operation, "rule_id" : ""}
+        print "{0} => SND: device_id: {1} operation: {2}".format(datetime.datetime.now(), device_id, operation)
+        client.connect(host, port).send(to_send)
         response = client.recv()
-        print response
+        print "{0} => RCV: {1}".format(datetime.datetime.now(), response)
         client.close()
-        time.sleep(4)
+    else:
+        print("Introduced invalid parameters. You should do it like this: sensor 123")
 
 # python client.py {device_id} {operation} {rule_id} {id} {args}
 
+
+
 # rule_conditions: python client.py {device_id} {operation} {id} {rule_id} {} 
-rules = {
+"""rules = {
     "123" : {
         "1" : { # AND
             "rule_conditions" : { # AND
@@ -42,10 +51,4 @@ rules = {
             }
         }
     }
-}
-
-# rule_time_condition -> IRRIGATE
-# rule_conditions -> Compliment de totes per fer el irrigate
-            
-
-# 
+}"""
