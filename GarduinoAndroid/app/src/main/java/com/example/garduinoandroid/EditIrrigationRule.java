@@ -46,6 +46,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
     TimeAdapter adapterTime;
     ListView listViewEdit;
     ArrayList<Rule> timeConditonArrayList;
+    ArrayList<Rule> TimeConditionsRules;
     String[] labelListTimeCondition;
 
     Button save;
@@ -76,11 +77,19 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         deviceId = datos.getInt("deviceId");
         ruleId = datos.getInt("ruleId");
         listViewEdit = (ListView) findViewById(R.id.listEditTextConditions);
+        listViewTime = (ListView) findViewById(R.id.listTimeConditons);
         //edit = (EditText) findViewById(R.id.editTextEditCondition);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/ruleconditions/get_rule_conditions?rule_id="+ruleId);
+            }
+        });
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new ReadJSONTime().execute("http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/get_rule_time_conditions?rule_id="+ruleId);
             }
         });
 
@@ -119,17 +128,17 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
         //End ListView
 
         //Start ListTimeConditions
-        listViewTime = (ListView) findViewById(R.id.listTimeConditons);
-
-        labelListTimeCondition = getResources().getStringArray(R.array.timeConditionLabel);
-
-        timeConditonArrayList = new ArrayList<Rule>();
-        timeConditonArrayList.add(new Rule(1, labelListTimeCondition[0]));
-        timeConditonArrayList.add(new Rule(2, labelListTimeCondition[1]));
-
-        adapterTime = new TimeAdapter(getApplicationContext(), timeConditonArrayList);
-        listViewTime.setAdapter(adapterTime);
-
+//        listViewTime = (ListView) findViewById(R.id.listTimeConditons);
+//
+//        labelListTimeCondition = getResources().getStringArray(R.array.timeConditionLabel);
+//
+//        timeConditonArrayList = new ArrayList<Rule>();
+//        timeConditonArrayList.add(new Rule(1, labelListTimeCondition[0]));
+//        timeConditonArrayList.add(new Rule(2, labelListTimeCondition[1]));
+//
+//        adapterTime = new TimeAdapter(getApplicationContext(), timeConditonArrayList);
+//        listViewTime.setAdapter(adapterTime);
+//
         listViewTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -140,6 +149,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 intent.putExtra("btnSettingsDPS", informationBoolean);
                 intent.putExtra("deviceId",  deviceId);
                 intent.putExtra("ruleId",  ruleId);
+                intent.putExtra("TimecOonditionId",timeCondition.getId());
 
                 startActivity(intent);
             }
@@ -159,6 +169,38 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
 
                 adapter = new EditTextConditionAdapter(getApplicationContext(), EditResult);
                 listViewEdit.setAdapter(adapter);
+
+//                for(Data dataDevice: result) {
+//                    System.out.println(dataDevice.getTitle());
+//                    System.out.println("***************");
+//                }
+
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return readURL(params[0]);
+        }
+    }
+
+    private class ReadJSONTime extends AsyncTask<String, Void, String>
+    {
+
+        @Override
+        protected void onPostExecute(String jsonStr) {
+
+            if(jsonStr != null)
+            {
+                TimeConditionsRules = createTimeList(jsonStr);
+
+                adapterTime = new TimeAdapter(getApplicationContext(), TimeConditionsRules);
+                listViewTime.setAdapter(adapterTime);
 
 //                for(Data dataDevice: result) {
 //                    System.out.println(dataDevice.getTitle());
@@ -209,6 +251,42 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
 
                 }
                 return conditionArrayList;
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else Toast.makeText(this, "Couldn't get json from file", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+
+    private ArrayList<Rule> createTimeList(String jsonStr)
+    {
+        timeConditonArrayList = new ArrayList<Rule>();
+        if(jsonStr != null)
+        {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonStr);
+
+                // Getting JSON Array
+                JSONArray contacts = jsonObject.getJSONArray("ruletimeconditions");
+                // looping through All Contacts
+                for(int i = 0; i < contacts.length(); i++)
+                {
+                    JSONObject c = contacts.getJSONObject(i);
+
+                    Integer id = c.getInt("id");
+                    String name = "Start time: " + c.getString("startTime");
+
+                    ArrayList<Rule> contact = new ArrayList<Rule>();
+
+                    // adding each child node to Arraylist Data
+                    contact.add(new Rule(id, name));
+
+                    // adding contact to ruleArrayList
+                    timeConditonArrayList.addAll(contact);
+
+                }
+                return timeConditonArrayList;
 
             } catch (JSONException e) {
                 e.printStackTrace();
