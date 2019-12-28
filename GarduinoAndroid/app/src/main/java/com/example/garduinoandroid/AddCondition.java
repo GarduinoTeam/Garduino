@@ -29,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AddCondition extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,6 +48,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
     ConditionAdapter adapter;
     Condition conditionToCreate;
     final static String urlPost = "http://10.0.2.2:8080/GarduinoApi/ruleconditions/create_rule_condition";
+    final static String urlTimePost = "http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/create_rule_time_condition";
 
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -109,10 +111,15 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("deviceId",  deviceId);
                 intent.putExtra("ruleId",  ruleId);
 
-                conditionToCreate = ConditionObject;
-                DoPostTask task = new DoPostTask();
-                task.execute(new String(urlPost));
-
+                if (ConditionObject.getId() == 0){
+                    //Create time condition
+                    DoPostTaskTime task = new DoPostTaskTime();
+                    task.execute(new String(urlTimePost));
+                }else{
+                    conditionToCreate = ConditionObject;
+                    DoPostTask task = new DoPostTask();
+                    task.execute(new String(urlPost));
+                }
 
                 startActivity(intent);
             }
@@ -120,6 +127,65 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
+    private class DoPostTaskTime extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+
+            HttpURLConnection conn = null;
+            InputStream inputStream = null;
+            InputStreamReader inputReader = null;
+            BufferedReader reader = null;
+
+            for (String url : urls) {
+                try {
+                    URL myUrl = new URL(url);
+                    conn = (HttpURLConnection) myUrl.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-type", "application/json");
+
+                    String input = "{\"idRule\":"+ruleId+", \"status\":"+true+", \"startTime\":\"00:00\", \"endTime\":\"00:00\", \"daysOfWeek\":\"0000000\", \"monthsOfTheYear\":\"000000000000\", \"specificDates\":\"2020-01-01\"}";
+                    System.out.println(input);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.getBytes());
+                    os.flush();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        inputStream = conn.getInputStream();
+                        inputReader = new InputStreamReader(inputStream);
+                        BufferedReader buffer = new BufferedReader(inputReader);
+
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            System.out.println(response);
+            return response;
+        }
+    }
+
+
 
     private class DoPostTask extends AsyncTask<String, Void, String> {
 
@@ -187,9 +253,11 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
             if(jsonStr != null)
             {
                 result = createList(jsonStr);
+                result.add(new Condition(0,"Time condition"));
 
                 adapter = new ConditionAdapter(getApplicationContext(), result);
                 listView.setAdapter(adapter);
+
 
 //                for(Data dataDevice: result) {
 //                    System.out.println(dataDevice.getTitle());
