@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +20,23 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class TimeConditions extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     Button save;
-    Button startTime;
-    Button endTime;
+    String startTime;
+    String endTime;
+    String time;
+    String date;
     Button dates;
     Data obj;
     Boolean informationBoolean;
@@ -39,6 +49,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     ArrayList<TimeCondition> timeConditionArrayList;
     int deviceId;
     int ruleId;
+    int timeConditionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         Bundle datos = this.getIntent().getExtras();
         deviceId = datos.getInt("deviceId");
         ruleId = datos.getInt("ruleId");
+        timeConditionId = datos.getInt("TimeConditionId");
 
         save = (Button) findViewById(R.id.saveTimeCondition);
         save.setOnClickListener(this);
@@ -128,6 +140,11 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 intentSave.putExtra("addRule", addRule);
                 intentSave.putExtra("deviceId",  deviceId);
                 intentSave.putExtra("ruleId",  ruleId);
+
+//                String urlPut = "http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/update_rule_time_condition/"+timeConditionId;
+//                DoPutTask task = new DoPutTask();
+//                task.execute(new String(urlPut));
+
                 startActivity(intentSave);
                 break;
            // case R.id.buttonStartTime:
@@ -150,6 +167,62 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    private class DoPutTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+
+            HttpURLConnection conn = null;
+            InputStream inputStream = null;
+            InputStreamReader inputReader = null;
+            BufferedReader reader = null;
+
+            for (String url : urls) {
+                try {
+                    URL myUrl = new URL(url);
+                    conn = (HttpURLConnection) myUrl.openConnection();
+                    conn.setRequestMethod("PUT");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-type", "application/json");
+                    //String input = "{\"startTime\":"+ startTime +"\"endTime\":}";
+                    String input = "{\"specificDates\":"+ date +":}";
+
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.getBytes());
+                    os.flush();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        inputStream = conn.getInputStream();
+                        inputReader = new InputStreamReader(inputStream);
+                        BufferedReader buffer = new BufferedReader(inputReader);
+
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            System.out.println(response);
+            return response;
+        }
+    }
+
     public void showTimeDialog(View view){
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -161,6 +234,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(hourOfDay)
                 .append(":")
                 .append(minute), Toast.LENGTH_LONG).show();
+        time = hourOfDay+":"+minute;
     }
 
     public void showDateDialog(View view){
@@ -175,5 +249,6 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(month+1)
                 .append("/")
                 .append(year), Toast.LENGTH_LONG).show();
+        date = year + "-" + month + "-" + dayOfMonth;
     }
 }

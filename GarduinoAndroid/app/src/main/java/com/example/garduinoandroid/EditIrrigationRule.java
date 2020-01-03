@@ -149,7 +149,7 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
                 intent.putExtra("btnSettingsDPS", informationBoolean);
                 intent.putExtra("deviceId",  deviceId);
                 intent.putExtra("ruleId",  ruleId);
-                intent.putExtra("TimecOonditionId",timeCondition.getId());
+                intent.putExtra("TimeConditionId",timeCondition.getId());
 
                 startActivity(intent);
             }
