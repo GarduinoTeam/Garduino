@@ -20,6 +20,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,14 +31,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class TimeConditions extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     Button save;
+    String jsonStr;
+
     String startTime;
     String endTime;
+    String monthsOfTheYear;
+    String daysOfWeeK;
+    String specificDates;
+
     String time;
     String date;
     Button dates;
@@ -69,7 +80,15 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
         save = (Button) findViewById(R.id.saveTimeCondition);
         save.setOnClickListener(this);
-//
+
+        listView = (ListView) findViewById(R.id.listTimeCondition);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new ReadJSON().execute("http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/get_rule_time_condition/"+timeConditionId);
+            }
+        });
+
 //        startTime = (Button) findViewById(R.id.buttonStartTime);
 ////        startTime.setOnClickListener(this);
 //
@@ -87,20 +106,20 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         }
 
         //Start ListRules
-        listView = (ListView) findViewById(R.id.listTimeCondition);
+        //listView = (ListView) findViewById(R.id.listTimeCondition);
 
-        labelListItems = getResources().getStringArray(R.array.timeConditionsArray);
-        descriptionItems = getResources().getStringArray(R.array.timeConditionsDescriptionArray);
-
-        timeConditionArrayList = new ArrayList<TimeCondition>();
-        timeConditionArrayList.add(new TimeCondition(1, labelListItems[0],descriptionItems[0]));
-        timeConditionArrayList.add(new TimeCondition(2, labelListItems[1],descriptionItems[1]));
-        timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],descriptionItems[2]));
-        timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],descriptionItems[3]));
-        timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],descriptionItems[4]));
-
-        TimeConditionAdapter adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
-        listView.setAdapter(adapter);
+//        labelListItems = getResources().getStringArray(R.array.timeConditionsArray);
+//        descriptionItems = getResources().getStringArray(R.array.timeConditionsDescriptionArray);
+//
+//        timeConditionArrayList = new ArrayList<TimeCondition>();
+//        timeConditionArrayList.add(new TimeCondition(1, labelListItems[0],descriptionItems[0]));
+//        timeConditionArrayList.add(new TimeCondition(2, labelListItems[1],descriptionItems[1]));
+//        timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],descriptionItems[2]));
+//        timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],descriptionItems[3]));
+//        timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],descriptionItems[4]));
+//
+//        TimeConditionAdapter adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
+//        listView.setAdapter(adapter);
 
         //End ListView
 
@@ -118,6 +137,117 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
+    private class ReadJSON extends AsyncTask<String, Void, String>
+    {
+
+        @Override
+        protected void onPostExecute(String jsonStr) {
+
+            if(jsonStr != null)
+            {
+                GetElements(jsonStr);
+
+                labelListItems = getResources().getStringArray(R.array.timeConditionsArray);
+                descriptionItems = getResources().getStringArray(R.array.timeConditionsDescriptionArray);
+
+                timeConditionArrayList = new ArrayList<TimeCondition>();
+                timeConditionArrayList.add(new TimeCondition(1, labelListItems[0],startTime));
+                timeConditionArrayList.add(new TimeCondition(2, labelListItems[1],endTime));
+                timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],""));
+                timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],""));
+                timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],specificDates));
+
+                TimeConditionAdapter adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
+                listView.setAdapter(adapter);
+
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return readURL(params[0]);
+        }
+    }
+
+    private String readURL(String urlContacts)
+    {
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
+        InputStreamReader isReader = null;
+        BufferedReader reader = null;
+
+        try {
+            URL url = new URL(urlContacts);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            inputStream = conn.getInputStream();
+            StringBuilder buffer = new StringBuilder();
+
+            if(inputStream == null){
+                // Nothing to do
+                return null;
+            }
+            isReader = new InputStreamReader(inputStream);
+            reader = new BufferedReader(isReader);
+            String line;
+
+            while((line = reader.readLine()) != null)
+            {
+                buffer.append(line + "\n");
+            }
+
+            if(buffer.length() == 0)
+            {
+                // Stream was empty. No point in parsing.
+                return null;
+            }
+
+            jsonStr = buffer.toString();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(conn != null){ conn.disconnect(); }
+            if(reader != null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return jsonStr;
+    }
+
+
+    private void GetElements(String jsonStr)
+    {
+        if(jsonStr != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonStr);
+
+                startTime = jsonObject.getString("startTime");
+                endTime = jsonObject.getString("endTime");
+                //monthsOfTheYear = jsonObject.getString("monthsOfTheYear");
+                //daysOfWeeK = jsonObject.getString("daysOfWeeK");
+                specificDates = jsonObject.getString("specificDates");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), EditIrrigationRule.class);
