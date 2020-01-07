@@ -45,6 +45,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     String monthsOfTheYear;
     String daysOfWeeK;
     String specificDates;
+    Boolean start = true;
 
     String time;
     String date;
@@ -61,6 +62,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     int deviceId;
     int ruleId;
     int timeConditionId;
+
+    TimeConditionAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +131,10 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (id == 1){
+                    start = true;
                     showTimeDialog(view);
                 }else if(id == 2){
+                    start = false;
                     showTimeDialog(view);
                 }else if(id == 5){
                     showDateDialog(view);
@@ -158,7 +163,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],""));
                 timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],specificDates));
 
-                TimeConditionAdapter adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
+                adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
                 listView.setAdapter(adapter);
 
             }
@@ -271,9 +276,9 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 intentSave.putExtra("deviceId",  deviceId);
                 intentSave.putExtra("ruleId",  ruleId);
 
-//                String urlPut = "http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/update_rule_time_condition/"+timeConditionId;
-//                DoPutTask task = new DoPutTask();
-//                task.execute(new String(urlPut));
+                String urlPut = "http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/update_rule_time_condition/"+timeConditionId;
+                DoPutTask task = new DoPutTask();
+                task.execute(new String(urlPut));
 
                 startActivity(intentSave);
                 break;
@@ -317,7 +322,10 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                     conn.setRequestProperty("Accept", "application/json");
                     conn.setRequestProperty("Content-type", "application/json");
                     //String input = "{\"startTime\":"+ startTime +"\"endTime\":}";
-                    String input = "{\"specificDates\":"+ date +":}";
+                    //String input = "{\"startTime\":\"08:00\",\"endTime\":\"09:00\",\"monthsOfTheYear\":\"000000000000\",\"daysOfWeek\":\"0000000\",\"specificDates\":[\"2020-5-15\"]}";
+
+                    String input = "{\"startTime\":\""+startTime+"\",\"endTime\":\""+endTime+"\",\"monthsOfTheYear\":\"000000000000\",\"daysOfWeek\":\"0000000\",\"specificDates\":"+specificDates+"}";
+
 
                     OutputStream os = conn.getOutputStream();
                     os.write(input.getBytes());
@@ -364,7 +372,11 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(hourOfDay)
                 .append(":")
                 .append(minute), Toast.LENGTH_LONG).show();
-        time = hourOfDay+":"+minute;
+        if(start) {
+            startTime = hourOfDay + ":" + minute;
+        }else  {
+            endTime = hourOfDay + ":" + minute;
+        }
     }
 
     public void showDateDialog(View view){
@@ -379,6 +391,6 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(month+1)
                 .append("/")
                 .append(year), Toast.LENGTH_LONG).show();
-        date = year + "-" + month + "-" + dayOfMonth;
+        specificDates = "[\"" + year + "-" + month+1 + "-" + dayOfMonth + "\"]";
     }
 }
