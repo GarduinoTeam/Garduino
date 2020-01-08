@@ -42,10 +42,12 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
     String startTime;
     String endTime;
-    String monthsOfTheYear;
-    String daysOfWeeK;
+    String monthsOfTheYear = "";
+    String daysOfWeeK = "";
     String specificDates;
     Boolean start = true;
+    String[] monthsList = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Septiembre","Octubre","Noviembre","Diciembre"};
+    String[] weekList = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
 
     String time;
     String date;
@@ -159,8 +161,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 timeConditionArrayList = new ArrayList<TimeCondition>();
                 timeConditionArrayList.add(new TimeCondition(1, labelListItems[0],startTime));
                 timeConditionArrayList.add(new TimeCondition(2, labelListItems[1],endTime));
-                timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],""));
-                timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],""));
+                timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],daysOfWeeK));
+                timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],monthsOfTheYear));
                 timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],specificDates));
 
                 adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
@@ -243,9 +245,23 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
                 startTime = jsonObject.getString("startTime");
                 endTime = jsonObject.getString("endTime");
-                //monthsOfTheYear = jsonObject.getString("monthsOfTheYear");
-                //daysOfWeeK = jsonObject.getString("daysOfWeeK");
+
+                //System.out.println(jsonObject.getString("daysOfWeeK"));
+                String months = jsonObject.getString("monthsOfTheYear");
+                String weeks = jsonObject.getString("daysOfWeek");
                 specificDates = jsonObject.getString("specificDates");
+
+                for (int i=0;i<months.length()-1;i++){
+                    if(months.charAt(i) == '1'){
+                        monthsOfTheYear = monthsOfTheYear + " " +monthsList[i];
+                    }
+                }
+
+                for (int i=0;i<weeks.length()-1;i++){
+                    if(weeks.charAt(i) == '1'){
+                        daysOfWeeK = daysOfWeeK + " " +weekList[i];
+                    }
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -391,6 +407,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(month+1)
                 .append("/")
                 .append(year), Toast.LENGTH_LONG).show();
-        specificDates = "[\"" + year + "-" + month+1 + "-" + dayOfMonth + "\"]";
+        specificDates = "[\"" + String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(dayOfMonth) + "\"]";
+        System.out.println(specificDates);
     }
 }
