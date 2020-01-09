@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -56,6 +57,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
     private TextView soil;
     int deviceId;
 
+    static String urlPost = "http://10.0.2.2:8080/GarduinoApi/operations/stop_irrigate";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +139,9 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                 intent.putExtra("object", (Serializable) obj);
                 intent.putExtra("addRule", addRule);
                 intent.putExtra("deviceId", deviceId);
+
+                DoPostTaskStopIrrigate task = new DoPostTaskStopIrrigate();
+                task.execute(new String(urlPost));
                 startActivity(intent);
                 break;
 
@@ -266,6 +271,64 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
             }
         }
         return jsonStr;
+    }
+
+    private class DoPostTaskStopIrrigate extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+
+            HttpURLConnection conn = null;
+            InputStream inputStream = null;
+            InputStreamReader inputReader = null;
+            BufferedReader reader = null;
+
+            for (String url : urls) {
+                try {
+                    URL myUrl = new URL(url);
+                    conn = (HttpURLConnection) myUrl.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-type", "application/json");
+
+
+                    String input = "{\"device_id\": \"123\"}";
+
+                    System.out.println(input);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.getBytes());
+                    os.flush();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        inputStream = conn.getInputStream();
+                        inputReader = new InputStreamReader(inputStream);
+                        BufferedReader buffer = new BufferedReader(inputReader);
+
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            System.out.println(response);
+            return response;
+        }
     }
 }
 

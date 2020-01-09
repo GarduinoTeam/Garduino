@@ -109,7 +109,7 @@ public class DeviceProfile extends AppCompatActivity {
                             intent.putExtra("addRule", (Serializable) addRule);
                             intent.putExtra("deviceId",  deviceId);
 
-                            DoPostTask task = new DoPostTask();
+                            DoPostTaskIrrigate task = new DoPostTaskIrrigate();
                             task.execute(new String(urlPost));
                             startActivity(intent);
                         } else {
@@ -302,7 +302,7 @@ public class DeviceProfile extends AppCompatActivity {
         }
         return jsonStr;
     }
-    private class DoPostTask extends AsyncTask<String, Void, String> {
+    private class DoPostTaskIrrigate extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
