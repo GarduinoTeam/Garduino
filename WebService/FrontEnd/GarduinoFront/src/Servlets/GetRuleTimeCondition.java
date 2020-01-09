@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -60,8 +61,12 @@ public class GetRuleTimeCondition extends HttpServlet {
 		WebTarget target=client.target(url);
 		RuleTimeCondition ruleTimeCondition=target.request(MediaType.APPLICATION_JSON).get(RuleTimeCondition.class);
 		//res.close();
-		int year=ruleTimeCondition.getSpecificDates()[0].getYear();
-		System.out.println(year);
+		Date specificDate=ruleTimeCondition.getSpecificDates()[0];
+		if(specificDate!=null){
+			int year=ruleTimeCondition.getSpecificDates()[0].getYear();
+			System.out.println(year);
+		}
+		
 		session.setAttribute("ruleTimeCondition", ruleTimeCondition);
 		
 		try {
