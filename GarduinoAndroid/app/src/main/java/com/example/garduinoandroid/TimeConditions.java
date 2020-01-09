@@ -1,7 +1,9 @@
 package com.example.garduinoandroid;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,7 +22,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +35,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TimeConditions extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -46,8 +49,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     String daysOfWeeK = "";
     String specificDates;
     Boolean start = true;
-    String[] monthsList = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Septiembre","Octubre","Noviembre","Diciembre"};
-    String[] weekList = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
+    private final String[] MONTHSLIST = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Septiembre","Octubre","Noviembre","Diciembre"};
+    private final String[] WEEKLIST = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
 
     String time;
     String date;
@@ -66,6 +69,9 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     int timeConditionId;
 
     TimeConditionAdapter adapter;
+
+    boolean[] checkedItemsWeek = new boolean[WEEKLIST.length];
+    boolean[] checkedItemsMonth = new boolean[MONTHSLIST.length];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +144,10 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 }else if(id == 2){
                     start = false;
                     showTimeDialog(view);
+                }else if(id == 3){
+                    showWeekDialog();
+                }else if(id == 4){
+                    showMonthDialog();
                 }else if(id == 5){
                     showDateDialog(view);
                 }
@@ -253,13 +263,13 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
                 for (int i=0;i<months.length()-1;i++){
                     if(months.charAt(i) == '1'){
-                        monthsOfTheYear = monthsOfTheYear + " " +monthsList[i];
+                        monthsOfTheYear = monthsOfTheYear + " " + MONTHSLIST[i];
                     }
                 }
 
                 for (int i=0;i<weeks.length()-1;i++){
                     if(weeks.charAt(i) == '1'){
-                        daysOfWeeK = daysOfWeeK + " " +weekList[i];
+                        daysOfWeeK = daysOfWeeK + " " + WEEKLIST[i];
                     }
                 }
 
@@ -410,4 +420,95 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         specificDates = "[\"" + String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(dayOfMonth) + "\"]";
         System.out.println(specificDates);
     }
+
+    public void showWeekDialog(){
+        final ArrayList<String> daysChoosen = new ArrayList<String>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimeConditions.this);
+        // convert DAYSWEEK Array to List
+        final List<String> weekList = Arrays.asList(WEEKLIST);
+        builder.setTitle("Selecciona los días");
+        builder.setMultiChoiceItems(WEEKLIST, checkedItemsWeek, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                // update current focused item's checked status
+                checkedItemsWeek[which] = isChecked;
+                // get the current focused item
+                String currentItem = weekList.get(which);
+                // notify the current action
+                Toast.makeText(TimeConditions.this, currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for (int i = 0; i < checkedItemsWeek.length; i++) {
+                    boolean checked = checkedItemsWeek[i];
+                    System.out.println(checkedItemsWeek[i]);
+                    if (checked) {
+                        daysChoosen.add(weekList.get(i));
+                    }
+                }
+                System.out.println(daysChoosen);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void showMonthDialog(){
+        final ArrayList<String> mothsChoosen = new ArrayList<String>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimeConditions.this);
+        // convert MONTH Array to List
+        final List<String> monthList = Arrays.asList(MONTHSLIST);
+        builder.setTitle("Selecciona los meses")
+                .setMultiChoiceItems(MONTHSLIST, checkedItemsMonth, new DialogInterface.OnMultiChoiceClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked)
+                    {
+                        // update current focused item's checked status
+                        checkedItemsMonth[which] = isChecked;
+                        // get the current focused item
+                        String currentItem = monthList.get(which);
+                        // notify the current action
+                        Toast.makeText(TimeConditions.this, currentItem +" " + isChecked, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        for (int i = 0; i < checkedItemsMonth.length; i++)
+                        {
+                            boolean checked = checkedItemsMonth[i];
+                            System.out.println(checkedItemsMonth[i]);
+                            if (checked){
+                                mothsChoosen.add(monthList.get(i));
+                            }
+                        }
+                        System.out.println(mothsChoosen);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }
