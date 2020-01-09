@@ -1,7 +1,9 @@
 package com.example.garduinoandroid;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,7 +22,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +35,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TimeConditions extends AppCompatActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
@@ -42,10 +45,14 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
     String startTime;
     String endTime;
-    String monthsOfTheYear;
-    String daysOfWeeK;
+    String monthsOfTheYear = "";
+    String monthsOfTheYearNum;
+    String daysOfWeeK = "";
+    String daysOfWeeKNum;
     String specificDates;
     Boolean start = true;
+    private final String[] MONTHSLIST = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+    private final String[] WEEKLIST = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
 
     String time;
     String date;
@@ -64,6 +71,9 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     int timeConditionId;
 
     TimeConditionAdapter adapter;
+
+    boolean[] checkedItemsWeek = new boolean[WEEKLIST.length];
+    boolean[] checkedItemsMonth = new boolean[MONTHSLIST.length];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +146,10 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 }else if(id == 2){
                     start = false;
                     showTimeDialog(view);
+                }else if(id == 3){
+                    showWeekDialog();
+                }else if(id == 4){
+                    showMonthDialog();
                 }else if(id == 5){
                     showDateDialog(view);
                 }
@@ -159,8 +173,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 timeConditionArrayList = new ArrayList<TimeCondition>();
                 timeConditionArrayList.add(new TimeCondition(1, labelListItems[0],startTime));
                 timeConditionArrayList.add(new TimeCondition(2, labelListItems[1],endTime));
-                timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],""));
-                timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],""));
+                timeConditionArrayList.add(new TimeCondition(3, labelListItems[2],daysOfWeeK));
+                timeConditionArrayList.add(new TimeCondition(4, labelListItems[3],monthsOfTheYear));
                 timeConditionArrayList.add(new TimeCondition(5, labelListItems[4],specificDates));
 
                 adapter = new TimeConditionAdapter(getApplicationContext(), timeConditionArrayList);
@@ -243,9 +257,14 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
 
                 startTime = jsonObject.getString("startTime");
                 endTime = jsonObject.getString("endTime");
-                //monthsOfTheYear = jsonObject.getString("monthsOfTheYear");
-                //daysOfWeeK = jsonObject.getString("daysOfWeeK");
+
+                //System.out.println(jsonObject.getString("daysOfWeeK"));
+                monthsOfTheYearNum = jsonObject.getString("monthsOfTheYear");
+                daysOfWeeKNum = jsonObject.getString("daysOfWeek");
                 specificDates = jsonObject.getString("specificDates");
+
+                numToMonths();
+                numToDays();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -324,7 +343,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                     //String input = "{\"startTime\":"+ startTime +"\"endTime\":}";
                     //String input = "{\"startTime\":\"08:00\",\"endTime\":\"09:00\",\"monthsOfTheYear\":\"000000000000\",\"daysOfWeek\":\"0000000\",\"specificDates\":[\"2020-5-15\"]}";
 
-                    String input = "{\"startTime\":\""+startTime+"\",\"endTime\":\""+endTime+"\",\"monthsOfTheYear\":\"000000000000\",\"daysOfWeek\":\"0000000\",\"specificDates\":"+specificDates+"}";
+                    String input = "{\"startTime\":\""+startTime+"\",\"endTime\":\""+endTime+"\",\"monthsOfTheYear\":\""+monthsOfTheYearNum+"\",\"daysOfWeek\":\""+daysOfWeeKNum+"\",\"specificDates\":"+specificDates+"}";
 
 
                     OutputStream os = conn.getOutputStream();
@@ -374,8 +393,10 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(minute), Toast.LENGTH_LONG).show();
         if(start) {
             startTime = hourOfDay + ":" + minute;
+            modifyAdapterValue(0,startTime);
         }else  {
             endTime = hourOfDay + ":" + minute;
+            modifyAdapterValue(1,endTime);
         }
     }
 
@@ -391,6 +412,177 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(month+1)
                 .append("/")
                 .append(year), Toast.LENGTH_LONG).show();
-        specificDates = "[\"" + year + "-" + month+1 + "-" + dayOfMonth + "\"]";
+        specificDates = "[\"" + String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(dayOfMonth) + "\"]";
+        modifyAdapterValue(4,specificDates);
+        System.out.println(specificDates);
     }
+
+    public void showWeekDialog(){
+        final ArrayList<String> daysChoosen = new ArrayList<String>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimeConditions.this);
+        // convert DAYSWEEK Array to List
+        final List<String> weekList = Arrays.asList(WEEKLIST);
+        builder.setTitle("Selecciona los días");
+        builder.setMultiChoiceItems(WEEKLIST, checkedItemsWeek, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                // update current focused item's checked status
+                checkedItemsWeek[which] = isChecked;
+                // get the current focused item
+                String currentItem = weekList.get(which);
+                // notify the current action
+                Toast.makeText(TimeConditions.this, currentItem + " " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for (int i = 0; i < checkedItemsWeek.length; i++) {
+                    boolean checked = checkedItemsWeek[i];
+                    System.out.println(checkedItemsWeek[i]);
+                    if (checked) {
+                        daysChoosen.add(weekList.get(i));
+                    }
+                }
+                daysToNum(daysChoosen);
+                numToDays();
+                System.out.println(daysChoosen);
+                modifyAdapterValue(2,daysOfWeeK);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void showMonthDialog(){
+        final ArrayList<String> mothsChoosen = new ArrayList<String>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimeConditions.this);
+        // convert MONTH Array to List
+        final List<String> monthList = Arrays.asList(MONTHSLIST);
+        builder.setTitle("Selecciona los meses")
+                .setMultiChoiceItems(MONTHSLIST, checkedItemsMonth, new DialogInterface.OnMultiChoiceClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked)
+                    {
+                        // update current focused item's checked status
+                        checkedItemsMonth[which] = isChecked;
+                        // get the current focused item
+                        String currentItem = monthList.get(which);
+                        // notify the current action
+                        Toast.makeText(TimeConditions.this, currentItem +" " + isChecked, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        for (int i = 0; i < checkedItemsMonth.length; i++)
+                        {
+                            boolean checked = checkedItemsMonth[i];
+                            System.out.println(checkedItemsMonth[i]);
+                            if (checked){
+                                mothsChoosen.add(monthList.get(i));
+                            }
+                        }
+                        System.out.println(mothsChoosen);
+                        mothToNum(mothsChoosen);
+                        numToMonths();
+                        modifyAdapterValue(3,monthsOfTheYear);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void daysToNum(ArrayList<String> daysChoosen){
+        String daysActualized="";
+        boolean actualized = false;
+        for (int i=0; i<WEEKLIST.length; i++){
+
+            actualized = false;
+
+            for (int j=0; j<daysChoosen.size(); j++){
+                if(WEEKLIST[i] == daysChoosen.get(j)){
+                    daysActualized = daysActualized + "1";
+                    actualized=true;
+                }
+            }
+
+            if(!actualized){
+                daysActualized = daysActualized + "0";
+            }
+        }
+        daysOfWeeKNum = daysActualized;
+        System.out.println(daysOfWeeKNum);
+
+    }
+    private void mothToNum(ArrayList<String> mothsChoosen){
+        String monthsActualized="";
+        boolean actualized = false;
+        for (int i=0; i<MONTHSLIST.length; i++){
+
+            actualized = false;
+
+            for (int j=0; j<mothsChoosen.size(); j++){
+                if(MONTHSLIST[i] == mothsChoosen.get(j)){
+                    monthsActualized = monthsActualized + "1";
+                    actualized=true;
+                }
+            }
+
+            if(!actualized){
+                monthsActualized = monthsActualized + "0";
+            }
+        }
+        monthsOfTheYearNum = monthsActualized;
+        System.out.println(monthsOfTheYearNum);
+
+    }
+
+    private void numToDays(){
+        daysOfWeeK = "";
+        for (int i=0;i<daysOfWeeKNum.length();i++){
+            if(daysOfWeeKNum.charAt(i) == '1'){
+                daysOfWeeK = daysOfWeeK + " " + WEEKLIST[i];
+            }
+        }
+    }
+
+    private void numToMonths(){
+        monthsOfTheYear = "";
+        for (int i=0;i<monthsOfTheYearNum.length();i++){
+            if(monthsOfTheYearNum.charAt(i) == '1'){
+                monthsOfTheYear = monthsOfTheYear + " " + MONTHSLIST[i];
+            }
+        }
+    }
+
+    private void modifyAdapterValue(int position,String value){
+        TimeCondition object = (TimeCondition) adapter.getItem(position);
+        System.out.println(object.getDescription());
+        object.setDescription(value);
+        listView.setAdapter(adapter);
+        System.out.println(object.getDescription());
+    }
+
+
 }

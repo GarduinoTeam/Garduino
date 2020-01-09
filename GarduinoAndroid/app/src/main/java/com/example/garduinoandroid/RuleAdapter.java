@@ -1,24 +1,36 @@
 package com.example.garduinoandroid;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,12 +42,17 @@ public class RuleAdapter extends BaseAdapter {
     Context context;
     List<Rule> listObjects;
     ArrayList<Rule> arrayList;
+    IrrigationRules irrigationRule;
+    View popUpDeleteView;
 
-    public RuleAdapter(Context context, List<Rule> listObjects) {
+
+    public RuleAdapter(Context context, List<Rule> listObjects, IrrigationRules irrigationRule, View popUpDeleteView) {
         this.context = context;
         this.listObjects = listObjects;
         this.arrayList = new ArrayList<Rule>();
         this.arrayList.addAll(listObjects);
+        this.irrigationRule = irrigationRule;
+        this.popUpDeleteView = popUpDeleteView;
     }
 
     public void filter(String charText){
@@ -99,9 +116,9 @@ public class RuleAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     long itemId = getItemId(position);
                     String urlDelete = "http://10.0.2.2:8080/GarduinoApi/rules/delete_rule/"+itemId;
-                    DoDeleteTask task = new DoDeleteTask();
-                    listObjects.remove(position);
-                    task.execute(new String(urlDelete));
+                    System.out.println("_____Delete____");
+                    DeletePopUp popup = new DeletePopUp();
+                    popup.showPopUp(irrigationRule,popUpDeleteView, RuleAdapter.this, position, urlDelete);
                 }
             });
         }
@@ -173,5 +190,11 @@ public class RuleAdapter extends BaseAdapter {
     {
         //listObjects.addAll(newlist);
         this.notifyDataSetChanged();
+    }
+
+    public void doPositiveClick(int position, String urlDelete){
+        DoDeleteTask task = new DoDeleteTask();
+        listObjects.remove(position);
+        task.execute(new String(urlDelete));
     }
 }
