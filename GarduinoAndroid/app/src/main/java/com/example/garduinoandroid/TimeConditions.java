@@ -263,17 +263,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 daysOfWeeKNum = jsonObject.getString("daysOfWeek");
                 specificDates = jsonObject.getString("specificDates");
 
-                for (int i=0;i<monthsOfTheYearNum.length();i++){
-                    if(monthsOfTheYearNum.charAt(i) == '1'){
-                        monthsOfTheYear = monthsOfTheYear + " " + MONTHSLIST[i];
-                    }
-                }
-
-                for (int i=0;i<daysOfWeeKNum.length();i++){
-                    if(daysOfWeeKNum.charAt(i) == '1'){
-                        daysOfWeeK = daysOfWeeK + " " + WEEKLIST[i];
-                    }
-                }
+                numToMonths();
+                numToDays();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -402,8 +393,10 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append(minute), Toast.LENGTH_LONG).show();
         if(start) {
             startTime = hourOfDay + ":" + minute;
+            modifyAdapterValue(0,startTime);
         }else  {
             endTime = hourOfDay + ":" + minute;
+            modifyAdapterValue(1,endTime);
         }
     }
 
@@ -420,6 +413,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 .append("/")
                 .append(year), Toast.LENGTH_LONG).show();
         specificDates = "[\"" + String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(dayOfMonth) + "\"]";
+        modifyAdapterValue(4,specificDates);
         System.out.println(specificDates);
     }
 
@@ -451,7 +445,9 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 daysToNum(daysChoosen);
+                numToDays();
                 System.out.println(daysChoosen);
+                modifyAdapterValue(2,daysOfWeeK);
                 dialog.dismiss();
             }
         });
@@ -499,6 +495,8 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                         }
                         System.out.println(mothsChoosen);
                         mothToNum(mothsChoosen);
+                        numToMonths();
+                        modifyAdapterValue(3,monthsOfTheYear);
                         dialog.dismiss();
                     }
                 })
@@ -558,6 +556,32 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         monthsOfTheYearNum = monthsActualized;
         System.out.println(monthsOfTheYearNum);
 
+    }
+
+    private void numToDays(){
+        daysOfWeeK = "";
+        for (int i=0;i<daysOfWeeKNum.length();i++){
+            if(daysOfWeeKNum.charAt(i) == '1'){
+                daysOfWeeK = daysOfWeeK + " " + WEEKLIST[i];
+            }
+        }
+    }
+
+    private void numToMonths(){
+        monthsOfTheYear = "";
+        for (int i=0;i<monthsOfTheYearNum.length();i++){
+            if(monthsOfTheYearNum.charAt(i) == '1'){
+                monthsOfTheYear = monthsOfTheYear + " " + MONTHSLIST[i];
+            }
+        }
+    }
+
+    private void modifyAdapterValue(int position,String value){
+        TimeCondition object = (TimeCondition) adapter.getItem(position);
+        System.out.println(object.getDescription());
+        object.setDescription(value);
+        listView.setAdapter(adapter);
+        System.out.println(object.getDescription());
     }
 
 
