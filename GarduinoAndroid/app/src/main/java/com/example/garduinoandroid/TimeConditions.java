@@ -46,10 +46,12 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
     String startTime;
     String endTime;
     String monthsOfTheYear = "";
+    String monthsOfTheYearNum;
     String daysOfWeeK = "";
+    String daysOfWeeKNum;
     String specificDates;
     Boolean start = true;
-    private final String[] MONTHSLIST = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Septiembre","Octubre","Noviembre","Diciembre"};
+    private final String[] MONTHSLIST = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
     private final String[] WEEKLIST = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo"};
 
     String time;
@@ -257,18 +259,18 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                 endTime = jsonObject.getString("endTime");
 
                 //System.out.println(jsonObject.getString("daysOfWeeK"));
-                String months = jsonObject.getString("monthsOfTheYear");
-                String weeks = jsonObject.getString("daysOfWeek");
+                monthsOfTheYearNum = jsonObject.getString("monthsOfTheYear");
+                daysOfWeeKNum = jsonObject.getString("daysOfWeek");
                 specificDates = jsonObject.getString("specificDates");
 
-                for (int i=0;i<months.length()-1;i++){
-                    if(months.charAt(i) == '1'){
+                for (int i=0;i<monthsOfTheYearNum.length();i++){
+                    if(monthsOfTheYearNum.charAt(i) == '1'){
                         monthsOfTheYear = monthsOfTheYear + " " + MONTHSLIST[i];
                     }
                 }
 
-                for (int i=0;i<weeks.length()-1;i++){
-                    if(weeks.charAt(i) == '1'){
+                for (int i=0;i<daysOfWeeKNum.length();i++){
+                    if(daysOfWeeKNum.charAt(i) == '1'){
                         daysOfWeeK = daysOfWeeK + " " + WEEKLIST[i];
                     }
                 }
@@ -350,7 +352,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                     //String input = "{\"startTime\":"+ startTime +"\"endTime\":}";
                     //String input = "{\"startTime\":\"08:00\",\"endTime\":\"09:00\",\"monthsOfTheYear\":\"000000000000\",\"daysOfWeek\":\"0000000\",\"specificDates\":[\"2020-5-15\"]}";
 
-                    String input = "{\"startTime\":\""+startTime+"\",\"endTime\":\""+endTime+"\",\"monthsOfTheYear\":\"000000000000\",\"daysOfWeek\":\"0000000\",\"specificDates\":"+specificDates+"}";
+                    String input = "{\"startTime\":\""+startTime+"\",\"endTime\":\""+endTime+"\",\"monthsOfTheYear\":\""+monthsOfTheYearNum+"\",\"daysOfWeek\":\""+daysOfWeeKNum+"\",\"specificDates\":"+specificDates+"}";
 
 
                     OutputStream os = conn.getOutputStream();
@@ -448,6 +450,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                         daysChoosen.add(weekList.get(i));
                     }
                 }
+                daysToNum(daysChoosen);
                 System.out.println(daysChoosen);
                 dialog.dismiss();
             }
@@ -495,6 +498,7 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                         System.out.println(mothsChoosen);
+                        mothToNum(mothsChoosen);
                         dialog.dismiss();
                     }
                 })
@@ -510,5 +514,51 @@ public class TimeConditions extends AppCompatActivity implements View.OnClickLis
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    private void daysToNum(ArrayList<String> daysChoosen){
+        String daysActualized="";
+        boolean actualized = false;
+        for (int i=0; i<WEEKLIST.length; i++){
+
+            actualized = false;
+
+            for (int j=0; j<daysChoosen.size(); j++){
+                if(WEEKLIST[i] == daysChoosen.get(j)){
+                    daysActualized = daysActualized + "1";
+                    actualized=true;
+                }
+            }
+
+            if(!actualized){
+                daysActualized = daysActualized + "0";
+            }
+        }
+        daysOfWeeKNum = daysActualized;
+        System.out.println(daysOfWeeKNum);
+
+    }
+    private void mothToNum(ArrayList<String> mothsChoosen){
+        String monthsActualized="";
+        boolean actualized = false;
+        for (int i=0; i<MONTHSLIST.length; i++){
+
+            actualized = false;
+
+            for (int j=0; j<mothsChoosen.size(); j++){
+                if(MONTHSLIST[i] == mothsChoosen.get(j)){
+                    monthsActualized = monthsActualized + "1";
+                    actualized=true;
+                }
+            }
+
+            if(!actualized){
+                monthsActualized = monthsActualized + "0";
+            }
+        }
+        monthsOfTheYearNum = monthsActualized;
+        System.out.println(monthsOfTheYearNum);
+
+    }
+
 
 }
