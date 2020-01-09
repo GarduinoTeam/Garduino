@@ -149,7 +149,7 @@ public class AddCondition extends AppCompatActivity implements View.OnClickListe
                     conn.setRequestProperty("Accept", "application/json");
                     conn.setRequestProperty("Content-type", "application/json");
 
-                    String input = "{\"idRule\":"+ruleId+", \"status\":"+true+", \"startTime\":\"00:00\", \"endTime\":\"00:00\", \"daysOfWeek\":\"0000000\", \"monthsOfTheYear\":\"000000000000\", \"specificDates\":[\"2019-12-31\"]}";
+                    String input = "{\"idRule\":"+ruleId+", \"status\":"+true+", \"startTime\":\"00:00\", \"endTime\":\"00:00\", \"daysOfWeek\":\"0000000\", \"monthsOfTheYear\":\"000000000000\", \"specificDates\":[]}";
                     System.out.println(input);
                     OutputStream os = conn.getOutputStream();
                     os.write(input.getBytes());
