@@ -95,7 +95,7 @@ public class TimeAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     long itemId = getItemId(position);
-                    String urlDelete = "";
+                    String urlDelete = "http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/delete_rule_time_condition/"+itemId;
                     DoDeleteTask task = new DoDeleteTask();
                     listObjects.remove(position);
                     task.execute(new String(urlDelete));

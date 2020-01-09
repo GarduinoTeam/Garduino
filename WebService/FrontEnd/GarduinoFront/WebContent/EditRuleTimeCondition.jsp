@@ -471,11 +471,28 @@
                 	<p>Specific Date<input type="text" id="datepick" name="date"></p>
 					<br/>
 					<h4 id="selectedDtaeVal"></h4>
+					
 					<script>
+					<%
+                  	if(sepecificDate!=null){
+                  		
+                  	%>
 					$(function() {
     
     					$("#datepick").datepick({defaultDate:new Date(<%=sepecificDate.getYear()+1900%>,<%=sepecificDate.getMonth()%>,<%=sepecificDate.getDate()%>),dateFormat: 'yyyy-mm-dd',selectDefaultDate: true});
 					});
+					<%
+                  	}else{
+                  		
+                  	%>
+                  	$(function() {
+                  	    
+    					$("#datepick").datepick({dateFormat: 'yyyy-mm-dd'});
+					});
+                  	<%
+                  	}
+                  		
+                  	%>
 					</script>
                 </div>
                 <div class="form-group">
