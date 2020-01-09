@@ -12,13 +12,13 @@ from jsonsocket import Client
 import time
 import datetime
 
-host = "192.168.43.181"
+host = "192.168.43.70"
 port = 12345
 
 #accepted_operations = [ "sensor", "webcam", "irrigate", "stop_irrigate" ] # For testing
 
 while True:
-    data=raw_input("Introduce operation and your device_id: ")
+    data = raw_input("Introduce operation and your device_id: ")
     data = data.split(" ")
     if(len(data) == 2):        
         operation = data[0]

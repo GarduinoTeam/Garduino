@@ -160,7 +160,10 @@ public class EditRuleTimeConditions extends HttpServlet {
 		ruleTimeCondition.setIdRule(Integer.parseInt(ruleId));
 		ruleTimeCondition.setStatus(status);
 		Date [] specificDates=new Date[1];
-		specificDates[0]=Date.valueOf(dateString);
+		if(dateString.compareTo("")!=0){
+			System.out.println("The specific Date is selected"+dateString);
+			specificDates[0]=Date.valueOf(dateString);
+		}
 		ruleTimeCondition.setSpecificDates(specificDates);
 		Response res=target.request().put(Entity.json(ruleTimeCondition));
 		//System.out.println(res.getStatus());
