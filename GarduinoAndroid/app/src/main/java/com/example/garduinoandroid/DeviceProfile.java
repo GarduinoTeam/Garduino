@@ -323,7 +323,7 @@ public class DeviceProfile extends AppCompatActivity {
                     conn.setRequestProperty("Content-type", "application/json");
 
 
-                    String input = "{\"device_id\": \"123\", \"irrigationTime\":\""+time+"\"}";
+                    String input = "{\"device_id\": \""+deviceId+"\", \"irrigationTime\":\""+time+"\"}";
 
                     System.out.println(input);
                     OutputStream os = conn.getOutputStream();

@@ -50,4 +50,64 @@ public class DeletePopUp extends AppCompatActivity {
         });
 
     }
+    public void showPopUpEnviromentalCondition(final EditIrrigationRule context, final View mView, final EditTextConditionAdapter adapter, final int position, final String urlDelete){
+        System.out.println("*******ShowPopUP********");
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context).setCancelable(false);
+        //View mView = getLayoutInflater().inflate(R.layout.delete_pop_up, null);
+        Button buttonYes = (Button) mView.findViewById(R.id.btnyes);
+        Button buttonNo = (Button) mView.findViewById(R.id.btnno);
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("*******YesPopUP********");
+                adapter.doPositiveClick(position,urlDelete);
+                dialog.dismiss();
+                ((ViewGroup)mView.getParent()).removeView(mView);
+            }
+        });
+
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                ((ViewGroup)mView.getParent()).removeView(mView);
+            }
+        });
+
+    }
+    public void showPopUpTimeCondition(final EditIrrigationRule context, final View mView, final TimeAdapter adapter, final int position, final String urlDelete){
+        System.out.println("*******ShowPopUP********");
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context).setCancelable(false);
+        //View mView = getLayoutInflater().inflate(R.layout.delete_pop_up, null);
+        Button buttonYes = (Button) mView.findViewById(R.id.btnyes);
+        Button buttonNo = (Button) mView.findViewById(R.id.btnno);
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("*******YesPopUP********");
+                adapter.doPositiveClick(position,urlDelete);
+                dialog.dismiss();
+                ((ViewGroup)mView.getParent()).removeView(mView);
+            }
+        });
+
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                ((ViewGroup)mView.getParent()).removeView(mView);
+            }
+        });
+
+    }
 }
