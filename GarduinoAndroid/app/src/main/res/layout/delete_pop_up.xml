@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:layout_marginRight="20dip"
     android:layout_marginLeft="20dip"
-    android:backgroundTint="@color/colorPrimary"
+    android:backgroundTint="#79f7cf"
     android:background="@drawable/pop_up_radius">
 
     <TextView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button"
             android:text="yes"
-            android:textColor="#FFFFFF"
+            android:textColor="#ffffff"
             android:layout_margin="@dimen/dim_18"
 
             />
@@ -46,7 +46,7 @@
             android:layout_marginLeft="@dimen/dim_10"
             android:background="@drawable/custom_button_cancel"
             android:text="no"
-            android:textColor="#FFFFFF"
+            android:textColor="#ffffff"
             android:layout_margin="@dimen/dim_18"
 
             />
