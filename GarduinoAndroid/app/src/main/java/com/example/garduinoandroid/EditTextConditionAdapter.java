@@ -39,13 +39,17 @@ public class EditTextConditionAdapter extends BaseAdapter
     List<EditTextCondition> listObjects;
     ArrayList<EditTextCondition> arrayList;
     Button saveButton;
+    EditIrrigationRule editIrrigationRule;
+    View popUpDeleteView;
 
 
-    public EditTextConditionAdapter(Context context, List<EditTextCondition> listObjects) {
+    public EditTextConditionAdapter(Context context, List<EditTextCondition> listObjects, EditIrrigationRule editIrrigationRule, View popUpDeleteView) {
         this.context = context;
         this.listObjects = listObjects;
         this.arrayList = new ArrayList<EditTextCondition>();
         this.arrayList.addAll(listObjects);
+        this.editIrrigationRule = editIrrigationRule;
+        this.popUpDeleteView = popUpDeleteView;
     }
 
     public void filter(String charText){
@@ -110,9 +114,11 @@ public class EditTextConditionAdapter extends BaseAdapter
                 public void onClick(View v) {
                     long itemId = getItemId(position);
                     String urlDelete = "http://10.0.2.2:8080/GarduinoApi/ruleconditions/delete_rule_condition/"+itemId;
-                    DoDeleteTask task = new DoDeleteTask();
-                    listObjects.remove(position);
-                    task.execute(new String(urlDelete));
+                    DeletePopUp popup = new DeletePopUp();
+                    popup.showPopUpEnviromentalCondition(editIrrigationRule, popUpDeleteView, EditTextConditionAdapter.this, position, urlDelete);
+//                    DoDeleteTask task = new DoDeleteTask();
+//                    listObjects.remove(position);
+//                    task.execute(new String(urlDelete));
                 }
             });
         }
@@ -222,5 +228,11 @@ public class EditTextConditionAdapter extends BaseAdapter
     {
         //listObjects.addAll(newlist);
         this.notifyDataSetChanged();
+    }
+
+    public void doPositiveClick(int position, String urlDelete){
+        DoDeleteTask task = new DoDeleteTask();
+        listObjects.remove(position);
+        task.execute(new String(urlDelete));
     }
 }

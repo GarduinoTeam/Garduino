@@ -27,12 +27,16 @@ public class TimeAdapter extends BaseAdapter {
     Context context;
     List<Rule> listObjects;
     ArrayList<Rule> arrayList;
+    EditIrrigationRule editIrrigationRule;
+    View popUpDeleteView;
 
-    public TimeAdapter(Context context, List<Rule> listObjects) {
+    public TimeAdapter(Context context, List<Rule> listObjects, EditIrrigationRule editIrrigationRule, View popUpDeleteView) {
         this.context = context;
         this.listObjects = listObjects;
         this.arrayList = new ArrayList<Rule>();
         this.arrayList.addAll(listObjects);
+        this.editIrrigationRule = editIrrigationRule;
+        this.popUpDeleteView = popUpDeleteView;
     }
 
     public void filter(String charText){
@@ -96,9 +100,11 @@ public class TimeAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     long itemId = getItemId(position);
                     String urlDelete = "http://10.0.2.2:8080/GarduinoApi/ruletimeconditions/delete_rule_time_condition/"+itemId;
-                    DoDeleteTask task = new DoDeleteTask();
-                    listObjects.remove(position);
-                    task.execute(new String(urlDelete));
+                    DeletePopUp popup = new DeletePopUp();
+                    popup.showPopUpTimeCondition(editIrrigationRule, popUpDeleteView, TimeAdapter.this, position, urlDelete);
+//                    DoDeleteTask task = new DoDeleteTask();
+//                    listObjects.remove(position);
+//                    task.execute(new String(urlDelete));
                 }
             });
         }
@@ -170,5 +176,11 @@ public class TimeAdapter extends BaseAdapter {
     {
         //listObjects.addAll(newlist);
         this.notifyDataSetChanged();
+    }
+
+    public void doPositiveClick(int position, String urlDelete){
+        DoDeleteTask task = new DoDeleteTask();
+        listObjects.remove(position);
+        task.execute(new String(urlDelete));
     }
 }

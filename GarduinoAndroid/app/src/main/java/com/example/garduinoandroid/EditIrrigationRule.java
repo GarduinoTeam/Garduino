@@ -166,8 +166,8 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
             if(jsonStr != null)
             {
                 EditResult = createList(jsonStr);
-
-                adapter = new EditTextConditionAdapter(getApplicationContext(), EditResult);
+                View popUpDeleteView = getLayoutInflater().inflate(R.layout.delete_pop_up, null);
+                adapter = new EditTextConditionAdapter(getApplicationContext(), EditResult, EditIrrigationRule.this, popUpDeleteView);
                 listViewEdit.setAdapter(adapter);
 
 //                for(Data dataDevice: result) {
@@ -198,8 +198,8 @@ public class EditIrrigationRule extends AppCompatActivity implements View.OnClic
             if(jsonStr != null)
             {
                 TimeConditionsRules = createTimeList(jsonStr);
-
-                adapterTime = new TimeAdapter(getApplicationContext(), TimeConditionsRules);
+                View popUpDeleteView = getLayoutInflater().inflate(R.layout.delete_pop_up, null);
+                adapterTime = new TimeAdapter(getApplicationContext(), TimeConditionsRules, EditIrrigationRule.this, popUpDeleteView);
                 listViewTime.setAdapter(adapterTime);
 
 //                for(Data dataDevice: result) {

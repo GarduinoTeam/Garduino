@@ -294,7 +294,7 @@ public class DeviceProfileStart extends AppCompatActivity implements View.OnClic
                     conn.setRequestProperty("Content-type", "application/json");
 
 
-                    String input = "{\"device_id\": \"123\"}";
+                    String input = "{\"device_id\": \""+deviceId+"\"}";
 
                     System.out.println(input);
                     OutputStream os = conn.getOutputStream();
