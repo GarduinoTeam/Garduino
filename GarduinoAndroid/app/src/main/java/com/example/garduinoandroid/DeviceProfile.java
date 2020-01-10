@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -40,6 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
+import static java.lang.Integer.parseInt;
 
 public class DeviceProfile extends AppCompatActivity {
     private Button manualIrrigation;
@@ -55,7 +58,9 @@ public class DeviceProfile extends AppCompatActivity {
     Boolean addRule;
     String deviceName;
     int deviceId;
+    int time;
 
+    static String urlPost = "http://10.0.2.2:8080/GarduinoApi/operations/irrigate";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -69,6 +74,7 @@ public class DeviceProfile extends AppCompatActivity {
 
         Bundle datos = this.getIntent().getExtras();
         deviceId = datos.getInt("deviceId");
+        time = datos.getInt("time");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_profile);
@@ -87,6 +93,7 @@ public class DeviceProfile extends AppCompatActivity {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(DeviceProfile.this);
                 View mView = getLayoutInflater().inflate(R.layout.manual_irrigation, null);
                 final EditText numeric = (EditText) mView.findViewById(R.id.numericText);
+
                 Button buttonStart = (Button) mView.findViewById(R.id.btnMI1);
                 Button buttonCancel = (Button) mView.findViewById(R.id.btnMI2);
 
@@ -95,10 +102,15 @@ public class DeviceProfile extends AppCompatActivity {
                     public void onClick(View v) {
                         if (!numeric.getText().toString().isEmpty()) {
                             Toast.makeText(DeviceProfile.this, "Start Click", Toast.LENGTH_SHORT).show();
+                            time = Integer.parseInt(String.valueOf(numeric.getText()));
                             Intent intent = new Intent(getApplication(), DeviceProfileStart.class);
                             intent.putExtra("object", (Serializable) obj);
+                            intent.putExtra("time", time);
                             intent.putExtra("addRule", (Serializable) addRule);
                             intent.putExtra("deviceId",  deviceId);
+
+                            DoPostTaskIrrigate task = new DoPostTaskIrrigate();
+                            task.execute(new String(urlPost));
                             startActivity(intent);
                         } else {
                             Toast.makeText(DeviceProfile.this, "Please fill the field.", Toast.LENGTH_SHORT).show();
@@ -110,10 +122,11 @@ public class DeviceProfile extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intentSettings = new Intent(getApplication(), DeviceProfile.class);
-//                        intentSettings.putExtra("object", (Serializable) obj);
-//                        intentSettings.putExtra("btnSettingsDPS", settingsDPS);
+                        intentSettings.putExtra("object", (Serializable) obj);
+                        intentSettings.putExtra("btnSettingsDPS", settingsDPS);
                         intentSettings.putExtra("addRule", (Serializable) addRule);
                         intentSettings.putExtra("deviceId",  deviceId);
+
 
                         startActivity(intentSettings);
                     }
@@ -289,4 +302,63 @@ public class DeviceProfile extends AppCompatActivity {
         }
         return jsonStr;
     }
+    private class DoPostTaskIrrigate extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+
+            HttpURLConnection conn = null;
+            InputStream inputStream = null;
+            InputStreamReader inputReader = null;
+            BufferedReader reader = null;
+
+            for (String url : urls) {
+                try {
+                    URL myUrl = new URL(url);
+                    conn = (HttpURLConnection) myUrl.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setRequestProperty("Content-type", "application/json");
+
+
+                    String input = "{\"device_id\": \""+deviceId+"\", \"irrigationTime\":\""+time+"\",\"name\":\"irrigate\"}";
+
+                    System.out.println(input);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.getBytes());
+                    os.flush();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        inputStream = conn.getInputStream();
+                        inputReader = new InputStreamReader(inputStream);
+                        BufferedReader buffer = new BufferedReader(inputReader);
+
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            System.out.println(response);
+            return response;
+        }
+    }
+
 }
+

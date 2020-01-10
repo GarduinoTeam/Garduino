@@ -59,6 +59,7 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
     String newName;
     int ruleId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionBar = getSupportActionBar();
@@ -263,9 +264,10 @@ public class IrrigationRules extends AppCompatActivity implements View.OnClickLi
             ArrayList<Rule> result;
             if(jsonStr != null)
             {
-                result = createList(jsonStr);
 
-                adapter = new RuleAdapter(getApplicationContext(), result);
+                result = createList(jsonStr);
+                View popUpDeleteView = getLayoutInflater().inflate(R.layout.delete_pop_up, null);
+                adapter = new RuleAdapter(getApplicationContext(), result, IrrigationRules.this, popUpDeleteView);
                 listView.setAdapter(adapter);
 
 //                for(Data dataDevice: result) {
