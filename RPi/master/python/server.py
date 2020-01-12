@@ -9,8 +9,9 @@ from threading import Thread
 #                                       Global variables
 # ----------------------------------------------------------------------------------------------
 
-# List of all accepted device and operations for that raspberry pi
-accepted_devices = { '123', '124' }
+# List of all accepted device and operations for that raspberry pi 
+# and a boolean to know if it's irrigating
+accepted_devices = { '123' : 0 , '124' : 0 }
 accepted_operations = [ 'sensor', 'webcam', 'irrigate', 'stop_irrigate', 'create_device', 'delete_device', 'list_devices' ]
 
 # Irrigation paths
@@ -89,6 +90,7 @@ def irrigate_thread_func(irrigation_time, device_id):
     # MQTT irrigate 
     params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/irrigate' + '/' + device_id, '-m', '']  
     rc = run_command(params)
+    accepted_devices[device_id] = 1
 
     start_time = time.time()
     end_time = start_time + irrigation_time * 60
@@ -97,10 +99,11 @@ def irrigate_thread_func(irrigation_time, device_id):
 
     while(end_time > time.time()):
         time.sleep(5)
-    
+
     # MQTT stop_irrigate
     params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/stop_irrigate' + '/' + device_id, '-m', '']  
     rc = run_command(params)                      
+    accepted_devices[device_id] = 0
 
     print('{0} => start_time: {1} end_time: {2} device_id: {3} info: stopping irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
     return 0
@@ -155,7 +158,7 @@ def run_server(HOST, PORT):
                     device_id = data['device_id']
 
                     # Irrigate operation                    
-                    if operation == 'irrigate' and device_id in accepted_devices:
+                    if operation == 'irrigate' and device_id in accepted_devices.keys():
                         irrigation_time = int(data['irrigation_time'])
                         thread = Thread(target = irrigate_thread_func, args = (irrigation_time, device_id))
                         thread.start()
@@ -174,20 +177,20 @@ def run_server(HOST, PORT):
 
                     # Create device operation
                     elif operation == 'create_device':
-                        accepted_devices.add(device_id)
-                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices))
-                        _send(conn, { 'response' : ' '.join(map(str, accepted_devices)) })
+                        accepted_devices[device_id] = 0
+                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices.keys()))
+                        _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
                     # Delete device operation
                     elif operation == 'delete_device':
-                        accepted_devices.remove(device_id)
-                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices))                        
-                        _send(conn, { 'response' : ' '.join(map(str, accepted_devices)) })
+                        accepted_devices.pop(device_id)
+                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices.keys()))                        
+                        _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
                     # List devices operation
                     elif operation == 'list_devices':
                         print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices))
-                        _send(conn, { 'response' : ' '.join(map(str, accepted_devices)) })
+                        _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
                     # Create rule operation
                     elif operation == 'create_rule':
