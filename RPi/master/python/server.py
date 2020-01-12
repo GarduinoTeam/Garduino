@@ -3,6 +3,8 @@ import subprocess
 import datetime
 import time
 import sys
+import base64
+import random
 from threading import Thread
 
 # ----------------------------------------------------------------------------------------------
@@ -11,8 +13,8 @@ from threading import Thread
 
 # List of all accepted device and operations for that raspberry pi 
 # and a boolean to know if it's irrigating
-accepted_devices = { '123' : 0 , '124' : 0 }
-accepted_operations = [ 'sensor', 'webcam', 'irrigate', 'stop_irrigate', 'create_device', 'delete_device', 'list_devices', 'create_rule' ]
+accepted_devices = { '13' : 0, '123' : 0 , '124' : 0 }
+accepted_operations = [ 'sensor', 'webcam', 'irrigate', 'stop_irrigate', 'create_device', 'delete_device', 'list_devices', 'create_rule', 'delete_rule', 'delete_rule_condition', 'delete_rule_time_condition' ]
 
 # Irrigation paths
 main_path = 'house/'
@@ -76,12 +78,22 @@ def _send(conn, data):
 
 
 # ----------------------------------------------------------------------------------------------
-#                                       Debug functions
+#                                       Auxiliar functions
 # ----------------------------------------------------------------------------------------------
 
+# Function to do debug
 def debug(line):
-    with open('server.log', 'a+') as file:  # Use file to refer to the file object
+    with open('logs/server.log', 'a+') as file:  # Use file to refer to the file object
         file.write(line + '\n')
+
+# Select random image path
+def get_image_name():
+    image_path = '../../../PlagueDetection/test_images/'
+    images = [ 'apple_black_rot.jpg', 'apple_healthy.jpg', 'corn_cercospora_leaf_spot.jpg', 'blueberry_healthy.jpg' ]
+    #debug('{0} => image_path: {1}'.format(datetime.datetime.now(), image_path + random.choice(images)))
+
+    return image_path + random.choice(images)
+
 
 # ----------------------------------------------------------------------------------------------
 #                                       Thread functions
@@ -117,6 +129,7 @@ def irrigate_thread_func(irrigation_time, device_id):
     debug('{0} => start_time: {1} end_time: {2} device_id: {3} info: stopping irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
     return 0
 
+
 # ----------------------------------------------------------------------------------------------
 #                                       Run functions
 # ----------------------------------------------------------------------------------------------
@@ -141,7 +154,6 @@ def run_command(params, operation):
                     file.close()
                     return line[:-1].strip('\u0000')
     return ''
-
 
 # Function that runs the main server code
 def run_server(HOST, PORT):
@@ -182,14 +194,24 @@ def run_server(HOST, PORT):
                         thread.start()
                         threads.append(thread)
 
-                    # Stop irrigate, webcam and sensor operation
-                    elif (operation == 'stop_irrigate' or operation == 'webcam' or operation == 'sensor') and device_id in accepted_devices:
+                    # Webcam operation
+                    elif operation == 'webcam':
+                        with open(get_image_name(), "rb") as image_file:
+                            image_base64 = base64.b64encode(image_file.read())
+
+                        #debug('{0} => image_base64: {1}'.format(datetime.datetime.now(), image_base64))
+
                         path = main_path + operation + '/' + device_id
                         params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']
-                            
                         response = run_command(params, operation)
-                            
-                        #output = subprocess.Popen(params, stdout = subprocess.PIPE ).communicate()[0]
+                        debug('{0} => operation: {1} SND: image_base64: {2}'.format(datetime.datetime.now(), operation, image_base64))
+                        _send(conn, { 'image_base64' : len(image_base64.decode("utf-8"))  })
+
+                    # Stop irrigate and sensor operation
+                    elif (operation == 'stop_irrigate' or operation == 'sensor') and device_id in accepted_devices:
+                        path = main_path + operation + '/' + device_id
+                        params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']                            
+                        response = run_command(params, operation)                                                
                         debug('{0} => operation: {1} SND: response: {2}'.format(datetime.datetime.now(), operation, response))
                         _send(conn, { 'response' : response })
 
@@ -264,9 +286,9 @@ def run_server(HOST, PORT):
 
                             else:
                                 debug('{0} => data: {1} error: Invalid rule condition params'.format(datetime.datetime.now(), data))      
+                                   
+                            debug('{0} => rules: {1}: '.format(datetime.datetime.now(), json.dumps(rules, sort_keys = True, indent = 4)))      
                                                   
-                            # Printing the rule dictionary
-                            debug(json.dumps( rules, sort_keys = True, indent = 4))
 
                         elif rule_type == '1': # rule_time_condition
                             rule_time_condition_id = data['rule_time_condition_id']
@@ -317,7 +339,7 @@ def run_server(HOST, PORT):
                                 }               
 
                             # Printing the rule dictionary             
-                            debug (json.dumps( rules, sort_keys = True, indent = 4))
+                            debug('{0} => rules: {1}: '.format(datetime.datetime.now(), json.dumps(rules, sort_keys = True, indent = 4)))      
 
                         else:
                             debug('{0} => rule_type: {1} error: Invalid rule_id'.format(datetime.datetime.now(), rule_type))
@@ -327,18 +349,47 @@ def run_server(HOST, PORT):
                     elif operation == 'modify_rule':
                         # TODO
                         # Podem eliminar l'anterior registre i crearlo de nou
-                        continue                
+                        continue              
 
                     # Delete rule operation
                     elif operation == 'delete_rule':
-                        # TODO
-                        # Eliminar la rule
-                        continue
+                        device_id = data['device_id']
+                        rule_id = data['device_id']
 
-                        #conn.send({ 'response' : 'Aqui aniria la resposta' })
+                        if device_id in rules.keys() and rule_id in rules[device_id].keys():
+                            rules[device_id].pop(rule_id)
+                            debug('{0} =>  info: Rule deleted succesfully rules: {1}: '.format(datetime.datetime.now(), json.dumps(rules, sort_keys = True, indent = 4)))
+                        else:
+                            debug('{0} => error: Non existing device_id nor rule_id'.format(datetime.datetime.now()))
+
+                    # Delete rule_condition operation
+                    elif operation == 'delete_rule_condition':
+                        device_id = data['device_id']
+                        rule_id = data['rule_id']
+                        rule_condition_id = data['rule_condition_id']
+
+                        if device_id in rules.keys() and rule_id in rules[device_id].keys() and 'rule_conditions' in rules[device_id][rule_id].keys() and rule_condition_id in rules[device_id][rule_id]['rule_conditions'].keys():
+                            rules[device_id][rule_id]['rule_conditions'].pop(rule_condition_id)
+                            debug('{0} =>  info: Rule Condition deleted succesfully rules: {1}: '.format(datetime.datetime.now(), json.dumps(rules, sort_keys = True, indent = 4)))
+                        else:
+                            debug('{0} device_id: {1} rule_id: {2} rule_condition_id: {3} => error: Non existing id'.format(datetime.datetime.now(), device_id, rule_id, rule_condition_id))    
+
+                        
+                    # Delete rule_time_condition operation
+                    elif operation == 'delete_rule_time_condition':
+                        device_id = data['device_id']
+                        rule_id = data['device_id']            
+                        rule_time_condition_id = data['rule_time_condition_id']                        
+
+                        if device_id in rules.keys() and rule_id in rules[device_id].keys() and 'rule_time_conditions' in rules[device_id][rule_id].keys() and rule_time_condition_id in rules[device_id][rule_id]['rule_time_conditions'].keys():
+                            rules[device_id][rule_id]['rule_time_conditions'].pop(rule_time_condition_id)
+                            debug('{0} =>  info: Rule Time Condition deleted succesfully rules: {1}: '.format(datetime.datetime.now(), json.dumps(rules, sort_keys = True, indent = 4)))
+                        else:
+                            debug('{0} device_id: {1} rule_id: {2} rule_time_condition_id: {3} => error: Non existing id'.format(datetime.datetime.now(), device_id, rule_id, rule_time_condition_id))    
+
                 else:
                     continue
-                    #conn.send({ 'response' : 'invalid device ' +  data })
+                    conn.send({ 'response' : 'invalid operation' })
 
         # Wait for all threads to complete
         for t in threads:
