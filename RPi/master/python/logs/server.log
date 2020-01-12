@@ -370,3 +370,47 @@
 2020-01-12 19:33:42.653653 =>  info: Rule deleted succesfully rules: {
     "13": {}
 }: 
+2020-01-12 19:55:18.451113 => Connected by: ('192.168.43.147', 55554)
+2020-01-12 19:55:18.561505 => RCV: data: {'rule_id': '13', 'rule_type': '0', 'rule_condition_id': '11', 'device_id': '13', 'rule_condition_type': '1', 'operation': 'create_rule', 'value': '30'}
+2020-01-12 19:55:18.562146 => rules: {
+    "13": {
+        "13": {
+            "rule_conditions": {
+                "11": [
+                    "30",
+                    "1"
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 19:57:18.624743 => Connected by: ('192.168.43.147', 55577)
+2020-01-12 20:08:02.716434 => Connected by: ('192.168.43.147', 55816)
+2020-01-12 20:20:02.216257 => Connected by: ('192.168.43.147', 56093)
+2020-01-12 20:20:02.453893 => RCV: data: {'rule_id': '14', 'rule_type': '0', 'rule_condition_id': '12', 'device_id': '13', 'rule_condition_type': '1', 'operation': 'create_rule', 'value': '30'}
+2020-01-12 20:20:02.454519 => rules: {
+    "13": {
+        "14": {
+            "rule_conditions": {
+                "12": [
+                    "30",
+                    "1"
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:20:14.164973 => Connected by: ('192.168.43.147', 56101)
+2020-01-12 20:20:14.365834 => RCV: data: {'rule_id': '14', 'rule_type': '0', 'rule_condition_id': '12', 'device_id': '13', 'rule_condition_type': '1', 'operation': 'create_rule', 'value': '15'}
+2020-01-12 20:20:14.366106 => rules: {
+    "13": {
+        "14": {
+            "rule_conditions": {
+                "12": [
+                    "15",
+                    "1"
+                ]
+            }
+        }
+    }
+}: 

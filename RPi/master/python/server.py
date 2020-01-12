@@ -195,12 +195,10 @@ def run_server(HOST, PORT):
                         threads.append(thread)
 
                     # Webcam operation
-                    elif operation == 'webcam':
+                    elif operation == 'webcam':                        
                         with open(get_image_name(), "rb") as image_file:
                             image_base64 = base64.b64encode(image_file.read())
-
                         #debug('{0} => image_base64: {1}'.format(datetime.datetime.now(), image_base64))
-
                         path = main_path + operation + '/' + device_id
                         params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']
                         response = run_command(params, operation)
@@ -232,7 +230,7 @@ def run_server(HOST, PORT):
                         debug('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices))
                         _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
-                    # Create rule operation
+                    # Create rule operation , also acts as a modify rule_condition and rule_time_condition
                     elif operation == 'create_rule':
                         rule_type = data['rule_type']    
                         rule_id = data['rule_id']
@@ -347,9 +345,28 @@ def run_server(HOST, PORT):
 
                     # Modify rule operation
                     elif operation == 'modify_rule':
-                        # TODO
-                        # Podem eliminar l'anterior registre i crearlo de nou
-                        continue              
+                        device_id = data['device_id']
+                        rule_type = data['rule_type']    
+                        rule_id = data['rule_id']
+
+                        if rule_type == '0' and device_id in rules.keys() and rule_id in rules[device_id].keys() and 'rule_conditions' in rules[device_id][rule_id].keys() and data['rule_condition_id'] in rules[device_id][rule_id]['rule_conditions'].keys(): # rule_condition
+                            rule_condition_id = data['rule_condition_id']
+                            value = data['value']
+                            rule_condition_type = data['rule_condition_type']
+
+                            rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
+
+                        elif rule_type == '1' and device_id in rules.keys() and rule_id in rules[device_id].keys() and 'rule_time_conditions' in rules[device_id][rule_id].keys() and data['rule_time_condition_id'] in rules[device_id][rule_id]['rule_time_conditions'].keys():
+                            rule_time_condition_id = data['rule_time_condition_id']
+                            start_time = data['start_time']
+                            end_time = data['end_time']
+                            weeks = data['weeks']
+                            months = data['months']
+                            specific_dates = data['specific_dates']  
+                            rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] = [ start_time, end_time, weeks, months, specific_dates] 
+
+                        else:
+                            debug('{0} => error: Invalid modify rule petition'.format(datetime.datetime.now()))
 
                     # Delete rule operation
                     elif operation == 'delete_rule':
