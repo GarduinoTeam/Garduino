@@ -24,9 +24,6 @@ threads = []
 # List to contol the rules
 rules = {}
 
-# Dict of all subscription processes
-#processes = {}
-
 '''
 rules = {
     '123' : {
@@ -42,6 +39,7 @@ rules = {
         }
     }
 }''' 
+
 
 # ----------------------------------------------------------------------------------------------
 #                                       Socket functions
@@ -78,6 +76,14 @@ def _send(conn, data):
 
 
 # ----------------------------------------------------------------------------------------------
+#                                       Debug functions
+# ----------------------------------------------------------------------------------------------
+
+def debug(line):
+    with open('server.log', 'a+') as file:  # Use file to refer to the file object
+        file.write(line + '\n')
+
+# ----------------------------------------------------------------------------------------------
 #                                       Thread functions
 # ----------------------------------------------------------------------------------------------
 
@@ -98,7 +104,7 @@ def irrigate_thread_func(irrigation_time, device_id):
     start_time = time.time()
     end_time = start_time + irrigation_time * 60
 
-    print('{0} => start_time: {1} end_time: {2} device_id: {3} info: starting irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
+    debug('{0} => start_time: {1} end_time: {2} device_id: {3} info: starting irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
 
     while(end_time > time.time()):
         time.sleep(5)
@@ -108,7 +114,7 @@ def irrigate_thread_func(irrigation_time, device_id):
     rc = run_command(params, 'stop_irrigate')                      
     accepted_devices[device_id] = 0
 
-    print('{0} => start_time: {1} end_time: {2} device_id: {3} info: stopping irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
+    debug('{0} => start_time: {1} end_time: {2} device_id: {3} info: stopping irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
     return 0
 
 # ----------------------------------------------------------------------------------------------
@@ -117,7 +123,7 @@ def irrigate_thread_func(irrigation_time, device_id):
 
 # Function to read the MQTT output
 def run_command(params, operation):
-    process = subprocess.Popen(params, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #process = subprocess.Popen(params, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
     """process = processes[device_id]
     print(process)
@@ -145,7 +151,8 @@ def run_server(HOST, PORT):
 
         # Subscribe to the topic for each device
         for dev in accepted_devices:
-            process = subprocess.Popen(['mosquitto_sub', '-h', 'localhost', '-t', 'house/response/' + dev])        
+            break
+            #process = subprocess.Popen(['mosquitto_sub', '-h', 'localhost', '-t', 'house/response/' + dev])        
             #processes[dev] = process
             
         # Create the thread to control rules
@@ -157,11 +164,11 @@ def run_server(HOST, PORT):
         while True:
             conn, addr = server.accept()
             with conn:
-                print('{0} => Connected by: {1}'.format(datetime.datetime.now(), addr))                
+                debug('{0} => Connected by: {1}'.format(datetime.datetime.now(), addr))                
                 data = _recv(conn)
 
                 # If accepted device ( {device_1}, {device_2}, ...)
-                print('{0} => RCV: data: {1}'.format(datetime.datetime.now(), data))
+                debug('{0} => RCV: data: {1}'.format(datetime.datetime.now(), data))
 
                 # If operation is valid
                 if data['operation'] in accepted_operations:                    
@@ -183,24 +190,24 @@ def run_server(HOST, PORT):
                         response = run_command(params, operation)
                             
                         #output = subprocess.Popen(params, stdout = subprocess.PIPE ).communicate()[0]
-                        print('{0} => operation: {1} SND: response: {2}'.format(datetime.datetime.now(), operation, response))
+                        debug('{0} => operation: {1} SND: response: {2}'.format(datetime.datetime.now(), operation, response))
                         _send(conn, { 'response' : response })
 
                     # Create device operation
                     elif operation == 'create_device':
                         accepted_devices[device_id] = 0
-                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices.keys()))
+                        debug('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices.keys()))
                         _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
                     # Delete device operation
                     elif operation == 'delete_device':
                         accepted_devices.pop(device_id)
-                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices.keys()))                        
+                        debug('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices.keys()))                        
                         _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
                     # List devices operation
                     elif operation == 'list_devices':
-                        print('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices))
+                        debug('{0} => devices: {1}'.format(datetime.datetime.now(), accepted_devices))
                         _send(conn, { 'response' : ' '.join(map(str, accepted_devices.keys())) })
 
                     # Create rule operation
@@ -256,10 +263,10 @@ def run_server(HOST, PORT):
                                     }                            
 
                             else:
-                                print('{0} => data: {1} error: Invalid rule condition params'.format(datetime.datetime.now(), data))      
+                                debug('{0} => data: {1} error: Invalid rule condition params'.format(datetime.datetime.now(), data))      
                                                   
                             # Printing the rule dictionary
-                            print (json.dumps( rules, sort_keys = True, indent = 4))
+                            debug(json.dumps( rules, sort_keys = True, indent = 4))
 
                         elif rule_type == '1': # rule_time_condition
                             rule_time_condition_id = data['rule_time_condition_id']
@@ -310,10 +317,10 @@ def run_server(HOST, PORT):
                                 }               
 
                             # Printing the rule dictionary             
-                            print (json.dumps( rules, sort_keys = True, indent = 4))
+                            debug (json.dumps( rules, sort_keys = True, indent = 4))
 
                         else:
-                            print('{0} => rule_type: {1} error: Invalid rule_id'.format(datetime.datetime.now(), rule_type))
+                            debug('{0} => rule_type: {1} error: Invalid rule_id'.format(datetime.datetime.now(), rule_type))
                             continue
 
                     # Modify rule operation
@@ -346,7 +353,7 @@ def main():
         run_server(HOST, PORT)
 
     else:
-        print('Usage: python server.py <host_ip> <port>')
+        debug('Usage: python server.py <host_ip> <port>')
         exit(0)
 
 
