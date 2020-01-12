@@ -5,156 +5,100 @@ import java.net.*;
 import java.io.*;
  
 public class Client 
-{ 
+{
     private static String hostname = "192.168.43.70";
     private static int port = 12346;
 
-    public static void main(String[] args) 
+    public static void main(String[] args) throws InterruptedException, JSONException, UnknownHostException, IOException
     {
         int argsLength = args.length;
-        int rc = 0;
 
-        if(argsLength == 2) // stop_irrigate, create_device, delete_device, list_device, sensor, webcam
-        {
-            System.out.println("Introduced : " + args[0] + " and " + args[1]);
-            rc = sendRequest(args[0], args[1], 0);
-        }
-        else if(argsLength == 3) // Irrigate
-        {
-            System.out.println("Introduced : " + args[0] + " and " + args[1] + " and " + args[2]);
-            rc = sendRequest(args[0], args[1], Integer.valueOf(args[2]));   
-        }
-        else{
-            System.out.println("Invalid number of paramaters");
-            System.exit(0);
+        try (Socket socket = new Socket(hostname, port)) 
+        {            
+            if(argsLength == 2) // stop_irrigate, create_device, delete_device, list_device, sensor, webcam
+            {
+                System.out.println("Introduced : " + args[0] + " and " + args[1]);
+                sendRequest(socket, args[0], args[1], 0);
+            }
+            else if(argsLength == 3) // Irrigate
+            {
+                System.out.println("Introduced : " + args[0] + " and " + args[1] + " and " + args[2]);
+                sendRequest(socket, args[0], args[1], Integer.valueOf(args[2]));   
+            }
+            else if(argsLength == 7) // Create rule
+            {
+                createRuleCondition(socket, args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+            }
+            else{
+                System.out.println("Invalid number of paramaters");
+                System.exit(0);
+            }
         }
     }
 
-    private static int sendRequest(String operation, String device_id, int irrigation_time)
+    private static void sendRequest(Socket socket, String operation, String device_id, int irrigation_time)
+    throws InterruptedException, JSONException, UnknownHostException, IOException
     {
-        // Send petition
-        try (Socket socket = new Socket(hostname, port)) 
-        {
-            JSONObject json = new JSONObject();
+        JSONObject json = new JSONObject();
 
-            if(operation != ""){
-                json.put("operation", operation);
-            }
-            else{
-                return -1;
-            }
+        if(operation != "") json.put("operation", operation); else System.exit(-1);
 
-            if(device_id != ""){
-                json.put("device_id", device_id);
-            }
-            else{
-                return -1;
-            }
-            
-            if(irrigation_time != 0){
-                json.put("irrigation_time", irrigation_time);
-            }
+        if(device_id != "") json.put("device_id", device_id); else System.exit(-1);
         
-            String jsonData = json.toString();
-            OutputStream output = socket.getOutputStream();
-            PrintWriter writer = new PrintWriter(output, true);
-            InputStream input = socket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        if(irrigation_time != 0) json.put("irrigation_time", irrigation_time);
+    
+        String jsonData = json.toString();
+        OutputStream output = socket.getOutputStream();
+        PrintWriter writer = new PrintWriter(output, true);
+        InputStream input = socket.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
-            // -------------- Send REQUEST --------------
-            // First send JSON data length
-            System.out.println(jsonData.length());
-            writer.println(String.valueOf(jsonData.length())); 
+        // -------------- Send REQUEST --------------
+        // First send JSON data length
+        System.out.println(jsonData.length());
+        writer.println(String.valueOf(jsonData.length())); 
 
-            Thread.sleep(200);
+        Thread.sleep(200);
 
-            // Send the JSON
-            System.out.println(jsonData);
-            writer.println(String.valueOf(jsonData)); 
-   
-            // -------------- Receive data --------------
-            String line;
-            System.out.println("Received: " + reader.readLine());
+        // Send the JSON
+        System.out.println(jsonData);
+        writer.println(String.valueOf(jsonData)); 
 
-
-        }
-        catch (InterruptedException ex) 
-        {
-            System.out.println("Thread exception error: " + ex.getMessage());
-            return -1;
-        }
-        catch (JSONException ex) 
-        {
-            System.out.println("Invalid JSON error: " + ex.getMessage());
-            return -1;
-        }
-        catch (UnknownHostException ex) 
-        {
-            System.out.println("Server not found: " + ex.getMessage());
-            return -1;
-        } 
-        catch (IOException ex) 
-        {
-            System.out.println("I/O error: " + ex.getMessage());
-            return -1;
-        }   
-
-        return 0;
+        // -------------- Receive data --------------
+        String line;
+        System.out.println("Received: " + reader.readLine());
     }
 
-    private static int createRuleCondition(String device_id, String rule_type, String rule_id, String rule_condition_id, String value, String type)
+    private static void createRuleCondition( Socket socket, String operation, String device_id, String rule_type, 
+                                            String rule_id, String rule_condition_id, String value, String rule_condition_type)
+    throws InterruptedException, JSONException, UnknownHostException, IOException
     {
-        // Send petition
-        try (Socket socket = new Socket(hostname, port)) 
-        {
-            JSONObject json = new JSONObject();
+        JSONObject json = new JSONObject();
 
-            json.put("operation", "create_rule");
-            json.put("rule_type", rule_type);
-            json.put("rule_id", rule_id);
-            json.put("rule_condition_id", rule_condition_id);
-            json.put("value", value);
-            json.put("type", type);
+        json.put("operation", operation);
+        json.put("device_id", device_id);
+        json.put("rule_type", rule_type);
+        json.put("rule_id", rule_id);
+        json.put("rule_condition_id", rule_condition_id);
+        json.put("value", value);
+        json.put("rule_condition_type", rule_condition_type);
 
-        
-            String jsonData = json.toString();
-            OutputStream output = socket.getOutputStream();
-            PrintWriter writer = new PrintWriter(output, true);
-            InputStream input = socket.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+    
+        String jsonData = json.toString();
+        OutputStream output = socket.getOutputStream();
+        PrintWriter writer = new PrintWriter(output, true);
+        InputStream input = socket.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
-            // -------------- Send REQUEST --------------
-            // First send JSON data length
-            System.out.println(jsonData.length());
-            writer.println(String.valueOf(jsonData.length())); 
+        // -------------- Send REQUEST --------------
+        // First send JSON data length
+        System.out.println(jsonData.length());
+        writer.println(String.valueOf(jsonData.length())); 
 
-            Thread.sleep(200);
+        Thread.sleep(200);
 
-            // Send the JSON
-            System.out.println(jsonData);
-            writer.println(String.valueOf(jsonData)); 
-        }
-        catch (InterruptedException ex) 
-        {
-            System.out.println("Thread exception error: " + ex.getMessage());
-            return -1;
-        }
-        catch (JSONException ex) 
-        {
-            System.out.println("Invalid JSON error: " + ex.getMessage());
-            return -1;
-        }
-        catch (UnknownHostException ex) 
-        {
-            System.out.println("Server not found: " + ex.getMessage());
-            return -1;
-        } 
-        catch (IOException ex) 
-        {
-            System.out.println("I/O error: " + ex.getMessage());
-            return -1;
-        }   
-
-        return 0;
+        // Send the JSON
+        System.out.println(jsonData);
+        writer.println(String.valueOf(jsonData));
     }
 }

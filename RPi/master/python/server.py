@@ -12,7 +12,7 @@ from threading import Thread
 # List of all accepted device and operations for that raspberry pi 
 # and a boolean to know if it's irrigating
 accepted_devices = { '123' : 0 , '124' : 0 }
-accepted_operations = [ 'sensor', 'webcam', 'irrigate', 'stop_irrigate', 'create_device', 'delete_device', 'list_devices' ]
+accepted_operations = [ 'sensor', 'webcam', 'irrigate', 'stop_irrigate', 'create_device', 'delete_device', 'list_devices', 'create_rule' ]
 
 # Irrigation paths
 main_path = 'house/'
@@ -205,13 +205,13 @@ def run_server(HOST, PORT):
                             if rule_condition_id != '' and value != '' and rule_condition_type != '':       
 
                                 # Si existeix el device_id                           
-                                if rules[device_id] in rules.keys():
+                                if device_id in rules.keys():
                                     
                                     # Si existeix el device_id i el rule_id
-                                    if rules[device_id][rule_id] in rules[device_id].keys(): 
+                                    if rule_id in rules[device_id].keys(): 
 
                                         # Si existeix el device_id, el rule_id i el rule_condition_id
-                                        if rules[device_id][rule_id]['rule_conditions'][rule_condition_id] in rules[device_id][rule_id]['rule_conditions'].keys():
+                                        if rule_condition_id in rules[device_id][rule_id]['rule_conditions'].keys():
                                             # Actualizem la informació
                                             rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
 
@@ -238,7 +238,10 @@ def run_server(HOST, PORT):
                                     }                            
 
                             else:
-                                print('{0} => data: {1} error: Invalid rule condition params'.format(datetime.datetime.now(), data))
+                                print('{0} => data: {1} error: Invalid rule condition params'.format(datetime.datetime.now(), data))      
+                                                  
+                            # Printing the rule dictionary
+                            print (json.dumps( rules, sort_keys = True, indent = 4))
 
                         elif rule_type == '1': # rule_time_condition
                             rule_time_condition_id = data['rule_time_condition_id']
@@ -279,8 +282,11 @@ def run_server(HOST, PORT):
                                             rule_time_condition_id : [ start_time, end_time, weeks, months, specific_dates]  
                                         }
                                     }
-                                }                            
-                  
+                                }               
+
+                            # Printing the rule dictionary             
+                            print (json.dumps( rules, sort_keys = True, indent = 4))
+
                         else:
                             print('{0} => rule_type: {1} error: Invalid rule_id'.format(datetime.datetime.now(), rule_type))
                             continue
