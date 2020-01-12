@@ -1,6 +1,7 @@
 package com.jboss.resteasy.resources;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -170,6 +171,38 @@ public class OperationResource {
 		return Response
 				.status(Status.CREATED)
 				.build();
+	}
+	@GET
+	@Path("/sensor")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Response getSensorData(Operation operation){
+		try{
+			JSONObject json = new JSONObject();
+			 json.put("operation", "sensor");
+			if(String.valueOf(operation.getDevice_id()) != ""){
+                json.put("device_id", String.valueOf(operation.getDevice_id()));
+            }
+            else{
+            	return Response
+        				.status(Status.INTERNAL_SERVER_ERROR)
+        				.build();
+            }
+			operationService.sendRequest(json);
+			operationService.receiveData();
+			return Response
+					.status(Status.CREATED)
+					.build();
+			
+		}
+		catch (JSONException ex) 
+        {
+            System.out.println("Invalid JSON error: " + ex.getMessage());
+            return Response
+    				.status(Status.INTERNAL_SERVER_ERROR)
+    				.build();
+        }
+		
 	}
 	
 }
