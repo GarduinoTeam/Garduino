@@ -24,6 +24,9 @@ threads = []
 # List to contol the rules
 rules = {}
 
+# Dict of all subscription processes
+#processes = {}
+
 '''
 rules = {
     '123' : {
@@ -89,7 +92,7 @@ def irrigate_thread_func(irrigation_time, device_id):
     
     # MQTT irrigate 
     params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/irrigate' + '/' + device_id, '-m', '']  
-    rc = run_command(params)
+    rc = run_command(params, 'irrigate')
     accepted_devices[device_id] = 1
 
     start_time = time.time()
@@ -102,7 +105,7 @@ def irrigate_thread_func(irrigation_time, device_id):
 
     # MQTT stop_irrigate
     params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/stop_irrigate' + '/' + device_id, '-m', '']  
-    rc = run_command(params)                      
+    rc = run_command(params, 'stop_irrigate')                      
     accepted_devices[device_id] = 0
 
     print('{0} => start_time: {1} end_time: {2} device_id: {3} info: stopping irrigation'.format(datetime.datetime.now(), start_time, end_time, device_id))
@@ -113,17 +116,25 @@ def irrigate_thread_func(irrigation_time, device_id):
 # ----------------------------------------------------------------------------------------------
 
 # Function to read the MQTT output
-def run_command(params):
-    process = subprocess.Popen(params, stdout = subprocess.PIPE)
-    '''while True:
-        output = process.stdout.readline()
-        if output == '' and process.poll() is not None:
-            break
-            if output:
-                print('output: ' + output.strip())        
-    rc = process.poll()
-    #print('Return code: ' + str(rc))'''
-    return 0
+def run_command(params, operation):
+    process = subprocess.Popen(params, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    """process = processes[device_id]
+    print(process)
+    data = process.stdout.readlines()
+    print("data:", data.rstrip())"""
+    
+    # Wait for sensor data
+    if operation == 'sensor':
+        file = open('output.txt', 'r+')
+        while True:
+            for line in file:
+                #print('line: {0}'.format(line))
+                if len(line.split(',')) == 3:                    
+                    file.truncate(0)
+                    file.close()
+                    return line[:-1].strip('\u0000')
+    return ''
 
 
 # Function that runs the main server code
@@ -134,8 +145,8 @@ def run_server(HOST, PORT):
 
         # Subscribe to the topic for each device
         for dev in accepted_devices:
-            #subprocess.Popen(['mosquitto_sub', '-h', 'localhost', '-t', 'house/response/' + dev])
-            break
+            process = subprocess.Popen(['mosquitto_sub', '-h', 'localhost', '-t', 'house/response/' + dev])        
+            #processes[dev] = process
             
         # Create the thread to control rules
         thread = Thread(target = rule_thread_func, args = ())
@@ -168,12 +179,12 @@ def run_server(HOST, PORT):
                     elif (operation == 'stop_irrigate' or operation == 'webcam' or operation == 'sensor') and device_id in accepted_devices:
                         path = main_path + operation + '/' + device_id
                         params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']
-                        
-                        rc = run_command(params)
+                            
+                        response = run_command(params, operation)
+                            
                         #output = subprocess.Popen(params, stdout = subprocess.PIPE ).communicate()[0]
-                        
-                        print('{0} => SND: output: {1}'.format(datetime.datetime.now(), rc))
-                        _send(conn, { 'response' : rc })
+                        print('{0} => operation: {1} SND: response: {2}'.format(datetime.datetime.now(), operation, response))
+                        _send(conn, { 'response' : response })
 
                     # Create device operation
                     elif operation == 'create_device':
