@@ -414,3 +414,173 @@
         }
     }
 }: 
+2020-01-12 20:29:00.695380 => Connected by: ('192.168.43.147', 56248)
+2020-01-12 20:29:01.026091 => RCV: data: {'rule_id': '14', 'start_time': '10:10', 'rule_type': '1', 'weeks': '0000000', 'months': '000000000000', 'device_id': '13', 'specific_dates': [None], 'end_time': '10:20', 'operation': 'create_rule', 'rule_time_condition_id': '14'}
+2020-01-12 20:29:01.026766 => rules: {
+    "13": {
+        "14": {
+            "rule_conditions": {
+                "12": [
+                    "15",
+                    "1"
+                ]
+            },
+            "rule_time_conditions": {
+                "14": [
+                    "10:10",
+                    "10:20",
+                    "0000000",
+                    "000000000000",
+                    [
+                        null
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:29:21.245543 => Connected by: ('192.168.43.147', 56258)
+2020-01-12 20:33:49.788503 => Connected by: ('192.168.43.147', 56459)
+2020-01-12 20:33:50.063710 => RCV: data: {'rule_id': '15', 'start_time': '10:10', 'rule_type': '1', 'weeks': '0000000', 'months': '000000000000', 'device_id': '13', 'specific_dates': ['2019-12-31'], 'end_time': '10:20', 'operation': 'create_rule', 'rule_time_condition_id': '14'}
+2020-01-12 20:33:50.064344 => rules: {
+    "13": {
+        "15": {
+            "rule_time_conditions": {
+                "14": [
+                    "10:10",
+                    "10:20",
+                    "0000000",
+                    "000000000000",
+                    [
+                        "2019-12-31"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:34:06.841383 => Connected by: ('192.168.43.147', 56470)
+2020-01-12 20:34:07.161533 => RCV: data: {'rule_id': '15', 'rule_type': '1', 'device_id': '13', 'operation': 'delete_rule_time_condition', 'rule_time_condition_id': '14'}
+2020-01-12 20:34:07.162165 device_id: 13 rule_id: 13 rule_time_condition_id: 14 => error: Non existing id
+2020-01-12 20:45:19.940073 => Connected by: ('192.168.43.147', 56761)
+2020-01-12 20:45:20.219725 => RCV: data: {'rule_id': '15', 'start_time': '10:10', 'rule_type': '1', 'weeks': '1000000', 'months': '000000000000', 'device_id': '13', 'specific_dates': ['2020-01-31'], 'end_time': '10:20', 'operation': 'create_rule', 'rule_time_condition_id': '14'}
+2020-01-12 20:45:20.220295 => rules: {
+    "13": {
+        "15": {
+            "rule_time_conditions": {
+                "14": [
+                    "10:10",
+                    "10:20",
+                    "1000000",
+                    "000000000000",
+                    [
+                        "2020-01-31"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:45:42.799908 => Connected by: ('192.168.43.147', 56770)
+2020-01-12 20:45:43.015183 => RCV: data: {'rule_id': '15', 'rule_type': '1', 'device_id': '13', 'operation': 'delete_rule_time_condition', 'rule_time_condition_id': '14'}
+2020-01-12 20:45:43.015850 =>  info: Rule Time Condition deleted succesfully rules: {
+    "13": {
+        "15": {
+            "rule_time_conditions": {}
+        }
+    }
+}: 
+2020-01-12 20:46:06.428380 => Connected by: ('192.168.43.147', 56782)
+2020-01-12 20:46:06.664059 => RCV: data: {'rule_id': '15', 'start_time': '10:20', 'rule_type': '1', 'weeks': '1110000', 'months': '100000000000', 'device_id': '13', 'specific_dates': ['2020-01-31'], 'end_time': '10:30', 'operation': 'create_rule', 'rule_time_condition_id': '14'}
+2020-01-12 20:46:06.664600 => rules: {
+    "13": {
+        "15": {
+            "rule_time_conditions": {
+                "14": [
+                    "10:20",
+                    "10:30",
+                    "1110000",
+                    "100000000000",
+                    [
+                        "2020-01-31"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:46:23.428161 => Connected by: ('192.168.43.147', 56792)
+2020-01-12 20:46:23.650261 => RCV: data: {'rule_id': '15', 'rule_type': '0', 'rule_condition_id': '13', 'device_id': '13', 'rule_condition_type': '1', 'operation': 'create_rule', 'value': '30'}
+2020-01-12 20:46:23.650749 => rules: {
+    "13": {
+        "15": {
+            "rule_conditions": {
+                "13": [
+                    "30",
+                    "1"
+                ]
+            },
+            "rule_time_conditions": {
+                "14": [
+                    "10:20",
+                    "10:30",
+                    "1110000",
+                    "100000000000",
+                    [
+                        "2020-01-31"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:46:41.447984 => Connected by: ('192.168.43.147', 56801)
+2020-01-12 20:46:41.651974 => RCV: data: {'rule_id': '15', 'rule_type': '0', 'rule_condition_id': '13', 'device_id': '13', 'rule_condition_type': '1', 'operation': 'create_rule', 'value': '30'}
+2020-01-12 20:46:41.652212 => rules: {
+    "13": {
+        "15": {
+            "rule_conditions": {
+                "13": [
+                    "30",
+                    "1"
+                ]
+            },
+            "rule_time_conditions": {
+                "14": [
+                    "10:20",
+                    "10:30",
+                    "1110000",
+                    "100000000000",
+                    [
+                        "2020-01-31"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:46:59.171919 => Connected by: ('192.168.43.147', 56807)
+2020-01-12 20:46:59.370057 => RCV: data: {'rule_id': '15', 'rule_type': '1', 'device_id': '13', 'operation': 'delete_rule_time_condition', 'rule_time_condition_id': '14'}
+2020-01-12 20:46:59.370495 =>  info: Rule Time Condition deleted succesfully rules: {
+    "13": {
+        "15": {
+            "rule_conditions": {
+                "13": [
+                    "30",
+                    "1"
+                ]
+            },
+            "rule_time_conditions": {}
+        }
+    }
+}: 
+2020-01-12 20:47:02.953465 => Connected by: ('192.168.43.147', 56814)
+2020-01-12 20:47:03.153721 => RCV: data: {'rule_id': '15', 'rule_condition_id': '13', 'device_id': '13', 'operation': 'delete_rule_condition'}
+2020-01-12 20:47:03.154210 =>  info: Rule Condition deleted succesfully rules: {
+    "13": {
+        "15": {
+            "rule_conditions": {},
+            "rule_time_conditions": {}
+        }
+    }
+}: 

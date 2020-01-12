@@ -1,3 +1,13 @@
+"""server.py: Server executed by the raspberry pi 3."""
+
+__author__      = "Roger Truchero Visa"
+__copyright__   = "Copyright 2020, Garduino Team"
+
+
+# ----------------------------------------------------------------------------------------------
+#                                           Imports
+# ----------------------------------------------------------------------------------------------
+
 import json, socket
 import subprocess
 import datetime
@@ -6,6 +16,7 @@ import sys
 import base64
 import random
 from threading import Thread
+
 
 # ----------------------------------------------------------------------------------------------
 #                                       Global variables
@@ -25,22 +36,6 @@ threads = []
 
 # List to contol the rules
 rules = {}
-
-'''
-rules = {
-    '123' : {
-        '1' : { # AND
-            'rule_conditions' : { # AND
-                '1'     : [ '25', '1' ], # temperature higher than 
-                '2'     : [ '15', '4' ]  # humidity lower than   
-            },
-            'rule_time_conditions' : { # OR
-                '1'     : [ '10:30', '10:40', '1001001' , '100000000100', ['2019-12-28', '2019-12-29' ] ], # OR
-                '2'     : [ '10:30', '10:40', '0110110' , '011111111011', ['2020-01-28', '2020-01-29' ] ], # OR
-            }
-        }
-    }
-}''' 
 
 
 # ----------------------------------------------------------------------------------------------
@@ -88,11 +83,16 @@ def debug(line):
 
 # Select random image path
 def get_image_name():
-    image_path = '../../../PlagueDetection/test_images/'
-    images = [ 'apple_black_rot.jpg', 'apple_healthy.jpg', 'corn_cercospora_leaf_spot.jpg', 'blueberry_healthy.jpg' ]
-    #debug('{0} => image_path: {1}'.format(datetime.datetime.now(), image_path + random.choice(images)))
+    images = [ 
+        'https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/train/Apple___Apple_scab/00075aa8-d81a-4184-8541-b692b78d398a___FREC_Scab%203335.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116630&Signature=tEEZsaP%2FD%2BXDEQtvkDrUCzs0AJJpGaiRcejEgMPRpA2qe6vBSeq%2BjfXHsQh3jNGODaE%2F0YEQ0MMSxtLRcNMm0UG7EddGC0HmGzDQ9ge7Cv%2FLhwrl9UmdeKgDtDQFgdzpWRDBKiIYUk7unVVnQ3LrB%2F8Ys3Yzl46EuQoWPztawJPkbYBtgPwjQRZu9UaETJLAEua3AFVXLfXmpLbwLXHeow6oAjDGjSUrZFl3nf9x1t57ukhqrrKmmj2AgPo7trsgh%2FtBMKXi4Hy%2Fqbbs8YhiJQ73A6XLj1Fb8epi2%2BYtPP6kyIxidHXg%2FmPyVhP7wRjRM7m5sekyM3oq9h73%2B%2Bf%2FLg%3D%3D',
+        'https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/train/Blueberry___healthy/00fee259-67b7-4dd7-8b36-12503bbdba14___RS_HL%202681_180deg.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116694&Signature=aUXFNnrLKaZTNeE%2BAuif56RADAQc%2Bb1uTNJjPoThAguMxa7yGEtnLg46K54XU%2F%2BrSG1VbaXMcdmvC%2Be9tK799%2Bg6ogoYiGS%2BRoriopwVTK%2BSA8GT%2FBBtDTmH9LhlMobS18EhQLbvdtjY2VOAEvkwx1xOScWO%2BwGYEcCLN0iZm24BrGnPZxJXdm0eO%2FUq07Z%2FLwep7Mw66V54VSBaHkVivyNLMv3Ubi7xJoDMJbTyIF4IZ3g%2FBt0kroVpjuPXwFP1wdzMpkDSuVfAcax66gnTGcttw5ZOd6VDxAwZpFc8V1tC81TOiTCF1xaDX9qQYwSbJ7pj7m45BC58VhKmVHwgHQ%3D%3D',
+        'https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/train/Cherry_%28including_sour%29___Powdery_mildew/00d12ac0-a293-47e0-a4c6-a80f37204c39___FREC_Pwd.M%204812.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116738&Signature=Ild2VORQjqcwUgD6ojFFwajPuZfhQnfPWaq%2FhKn5HjAMFgXnciKPM08964i6l3KAEMAH93QYFgwJ944OI%2B%2F9rf67q6pjOfWOYVE9jVNRnEI4M2PbWyGh1CyThQ7SCiIF%2FJnqgD6j8QvTcylrLWDpl4RA%2BnwaoDRUkk%2FL29VuQ4aqpmEjcXQki4DVsDVGxbANU0vrOt3NU917gBswgAl15WPRp1ctM%2Bt17xO52gHdfHfnn09pCQKWrjaavItSBOTQ%2FX0ZyoMXN6hVAfzPVT2IvYqrH3vkSV%2Fm2%2Bz5QElsVYVk0wVsEK79lhQRbSW1rhwtn78qDILv7DRDOVuxLX3BkQ%3D%3D',
+        'https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/valid/Apple___Cedar_apple_rust/0321e067-d13b-47d0-b3a6-76ba6f357d02___FREC_C.Rust%203667_270deg.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116759&Signature=OxDC2sLDx%2BcPAgjjpokPjhSbq2vW82MtuyREsFH9tglYwcFUhe9%2Fo76D4tQ%2FJUsmYE%2BMlAN5rb2ptPtcH9BnraXi4EnP8SVHRXHkSQunr1bPid3jJjooLa9L7IZHGBer8P8uRSIvb6m9Re3HVb5XhGLrHqQFmSVvoiznSZrEOjzVGdHLKsGX2Go7U1akOqMkZ4TLTpaCKEYAD6ehfhQI7MoUX5%2Bq2WP1i3sGxoPN1kTHHdKEH6qlSvofwe24%2B2tvgJ1DruhqrFUEPZT0Io3KhE4su46LJhqJq9v3QCUNUBjBhgoQl4MOPxwigwup9PDwJKt%2BSTN9fe2TkuDMC%2FsFzQ%3D%3D'            
+    ]
+    random_image = random.choice(images)
+    debug('{0} => random_image: {1}'.format(datetime.datetime.now(),  random_image))
 
-    return image_path + random.choice(images)
+    return random_image
 
 
 # ----------------------------------------------------------------------------------------------
@@ -196,14 +196,13 @@ def run_server(HOST, PORT):
 
                     # Webcam operation
                     elif operation == 'webcam':                        
-                        with open(get_image_name(), "rb") as image_file:
-                            image_base64 = base64.b64encode(image_file.read())
                         #debug('{0} => image_base64: {1}'.format(datetime.datetime.now(), image_base64))
-                        path = main_path + operation + '/' + device_id
-                        params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']
-                        response = run_command(params, operation)
-                        debug('{0} => operation: {1} SND: image_base64: {2}'.format(datetime.datetime.now(), operation, image_base64))
-                        _send(conn, { 'image_base64' : len(image_base64.decode("utf-8"))  })
+                        #path = main_path + operation + '/' + device_id
+                        #params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']
+                        #response = run_command(params, operation)
+                        image_base64_url = get_image_name()
+                        debug('{0} => operation: {1} image_base64_url: {2}'.format(datetime.datetime.now(), operation, image_base64_url))
+                        _send(conn, { 'image_base64' : image_base64_url })
 
                     # Stop irrigate and sensor operation
                     elif (operation == 'stop_irrigate' or operation == 'sensor') and device_id in accepted_devices:
@@ -371,7 +370,7 @@ def run_server(HOST, PORT):
                     # Delete rule operation
                     elif operation == 'delete_rule':
                         device_id = data['device_id']
-                        rule_id = data['device_id']
+                        rule_id = data['rule_id']
 
                         if device_id in rules.keys() and rule_id in rules[device_id].keys():
                             rules[device_id].pop(rule_id)
@@ -395,14 +394,14 @@ def run_server(HOST, PORT):
                     # Delete rule_time_condition operation
                     elif operation == 'delete_rule_time_condition':
                         device_id = data['device_id']
-                        rule_id = data['device_id']            
+                        rule_id = data['rule_id']            
                         rule_time_condition_id = data['rule_time_condition_id']                        
 
                         if device_id in rules.keys() and rule_id in rules[device_id].keys() and 'rule_time_conditions' in rules[device_id][rule_id].keys() and rule_time_condition_id in rules[device_id][rule_id]['rule_time_conditions'].keys():
                             rules[device_id][rule_id]['rule_time_conditions'].pop(rule_time_condition_id)
                             debug('{0} =>  info: Rule Time Condition deleted succesfully rules: {1}: '.format(datetime.datetime.now(), json.dumps(rules, sort_keys = True, indent = 4)))
                         else:
-                            debug('{0} device_id: {1} rule_id: {2} rule_time_condition_id: {3} => error: Non existing id'.format(datetime.datetime.now(), device_id, rule_id, rule_time_condition_id))    
+                            debug('{0} device_id: {1} rule_id: {2} rule_time_condition_id: {3} => error: Non existing id'.format(datetime.datetime.now(), device_id, rule_id, rule_time_condition_id))
 
                 else:
                     continue
