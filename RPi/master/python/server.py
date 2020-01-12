@@ -224,8 +224,7 @@ def run_server(HOST, PORT):
 
                                         # Si no existeix el creem per evitar petades
                                         else:
-                                            rules[device_id][rule_id]['rule_conditions'] = {}
-                                            rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
+                                            rules[device_id][rule_id]['rule_conditions'] = { rule_condition_id : [value, rule_condition_type] }
 
                                     # Si existeix el device_id pero no existeix el rule_id
                                     else:
@@ -279,8 +278,7 @@ def run_server(HOST, PORT):
 
                                     # Si no existeix el creem per evitar petades
                                     else:
-                                        rules[device_id][rule_id]['rule_time_conditions'] = {}
-                                        rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] = [ start_time, end_time, weeks, months, specific_dates] 
+                                        rules[device_id][rule_id]['rule_time_conditions'] = { rule_time_condition_id : [ start_time, end_time, weeks, months, specific_dates] }
 
                                 # Si existeix el device_id pero no existeix el rule_id
                                 else:
