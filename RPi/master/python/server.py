@@ -210,13 +210,21 @@ def run_server(HOST, PORT):
                                     # Si existeix el device_id i el rule_id
                                     if rule_id in rules[device_id].keys(): 
 
-                                        # Si existeix el device_id, el rule_id i el rule_condition_id
-                                        if rule_condition_id in rules[device_id][rule_id]['rule_conditions'].keys():
-                                            # Actualizem la informació
-                                            rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
+                                        # Si existeix el camp rule_conditions
+                                        if 'rule_conditions' in rules[device_id][rule_id].keys():
 
-                                        # Si existeix el device_id, el rule_id pero no existeix el rule_condition_id
+                                            # Si existeix el device_id, el rule_id i el rule_condition_id
+                                            if rule_condition_id in rules[device_id][rule_id]['rule_conditions'].keys():
+                                                # Actualizem la informació
+                                                rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
+
+                                            # Si existeix el device_id, el rule_id pero no existeix el rule_condition_id
+                                            else:
+                                                rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
+
+                                        # Si no existeix el creem per evitar petades
                                         else:
+                                            rules[device_id][rule_id]['rule_conditions'] = {}
                                             rules[device_id][rule_id]['rule_conditions'][rule_condition_id] = [ value, rule_condition_type ]
 
                                     # Si existeix el device_id pero no existeix el rule_id
@@ -247,23 +255,31 @@ def run_server(HOST, PORT):
                             rule_time_condition_id = data['rule_time_condition_id']
                             start_time = data['start_time']
                             end_time = data['end_time']
-                            weeks = data['week']
+                            weeks = data['weeks']
                             months = data['months']
                             specific_dates = data['specific_dates']                        
 
                             # Si existeix el device_id                           
-                            if rules[device_id] in rules.keys():
+                            if device_id in rules.keys():
                                 
                                 # Si existeix el device_id i el rule_id
-                                if rules[device_id][rule_id] in rules[device_id].keys(): 
+                                if rule_id in rules[device_id].keys(): 
 
-                                    # Si existeix el device_id, el rule_id i el rule_time_condition_id
-                                    if rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] in rules[device_id][rule_id]['rule_time_conditions'].keys():
-                                        # Actualizem la informació
-                                        rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] = [ start_time, end_time, weeks, months, specific_dates] 
+                                    # Si existeix el camp rule_time_conditions
+                                    if 'rule_time_conditions' in rules[device_id][rule_id].keys():
 
-                                    # Si existeix el device_id, el rule_id pero no existeix el rule_time_condition_id
+                                        # Si existeix el device_id, el rule_id i el rule_time_condition_id
+                                        if rule_time_condition_id in rules[device_id][rule_id]['rule_time_conditions'].keys():
+                                            # Actualizem la informació
+                                            rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] = [ start_time, end_time, weeks, months, specific_dates] 
+
+                                        # Si existeix el device_id, el rule_id pero no existeix el rule_time_condition_id
+                                        else:
+                                            rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] = [ start_time, end_time, weeks, months, specific_dates] 
+
+                                    # Si no existeix el creem per evitar petades
                                     else:
+                                        rules[device_id][rule_id]['rule_time_conditions'] = {}
                                         rules[device_id][rule_id]['rule_time_conditions'][rule_time_condition_id] = [ start_time, end_time, weeks, months, specific_dates] 
 
                                 # Si existeix el device_id pero no existeix el rule_id
