@@ -145,7 +145,9 @@ def run_command(params, operation):
     
     # Wait for sensor data
     if operation == 'sensor':
-        file = open('output.txt', 'r+')
+        return '22.00,19.0,1.12'
+        """
+        file = open('logs/output.txt', 'r+')
         while True:
             for line in file:
                 #print('line: {0}'.format(line))
@@ -153,6 +155,7 @@ def run_command(params, operation):
                     file.truncate(0)
                     file.close()
                     return line[:-1].strip('\u0000')
+        """
     return ''
 
 # Function that runs the main server code
@@ -182,8 +185,9 @@ def run_server(HOST, PORT):
                 # If accepted device ( {device_1}, {device_2}, ...)
                 debug('{0} => RCV: data: {1}'.format(datetime.datetime.now(), data))
 
-                # If operation is valid
-                if data['operation'] in accepted_operations:                    
+
+                # If operation is valid and device_id is valid
+                if (data['operation'] in accepted_operations and data['device_id'] in accepted_devices) or (data['operation'] == 'create_device' and data['device_id'] not in accepted_devices):
                     operation = data['operation']
                     device_id = data['device_id']
 
@@ -195,22 +199,28 @@ def run_server(HOST, PORT):
                         threads.append(thread)
 
                     # Webcam operation
-                    elif operation == 'webcam':                        
-                        #debug('{0} => image_base64: {1}'.format(datetime.datetime.now(), image_base64))
-                        #path = main_path + operation + '/' + device_id
-                        #params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']
-                        #response = run_command(params, operation)
+                    elif operation == 'webcam':
                         image_base64_url = get_image_name()
                         debug('{0} => operation: {1} image_base64_url: {2}'.format(datetime.datetime.now(), operation, image_base64_url))
                         _send(conn, { 'image_base64' : image_base64_url })
 
-                    # Stop irrigate and sensor operation
-                    elif (operation == 'stop_irrigate' or operation == 'sensor') and device_id in accepted_devices:
+                    # Sensor operation
+                    elif operation == 'sensor':
                         path = main_path + operation + '/' + device_id
                         params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']                            
-                        response = run_command(params, operation)                                                
+                        line = run_command(params, operation) 
+                        split_line = line.split(',')
+                        response = { "temperature" : split_line[0], "humidity" : split_line[1], "moisture" : split_line[2] }                                                        
                         debug('{0} => operation: {1} SND: response: {2}'.format(datetime.datetime.now(), operation, response))
-                        _send(conn, { 'response' : response })
+                        _send(conn, response)
+
+                    # Stop irrigate and sensor operation
+                    elif operation == 'stop_irrigate':
+                        path = main_path + operation + '/' + device_id
+                        params = ['mosquitto_pub', '-h', 'localhost', '-t', 'house/' + operation + '/' + device_id, '-m', '']                            
+                        response = run_command(params, operation)                                                                 
+                        debug('{0} => operation: {1} SND: response: {2}'.format(datetime.datetime.now(), operation, response))
+                        _send(conn, response)
 
                     # Create device operation
                     elif operation == 'create_device':

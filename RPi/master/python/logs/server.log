@@ -584,3 +584,75 @@
         }
     }
 }: 
+2020-01-12 20:52:54.381005 => Connected by: ('192.168.43.147', 56955)
+2020-01-12 20:52:54.719941 => RCV: data: {'rule_id': '15', 'start_time': '10:10', 'rule_type': '1', 'weeks': '0000000', 'months': '000000000000', 'device_id': '13', 'specific_dates': ['2020-01-18'], 'end_time': '10:20', 'operation': 'create_rule', 'rule_time_condition_id': '14'}
+2020-01-12 20:52:54.720541 => rules: {
+    "13": {
+        "15": {
+            "rule_conditions": {},
+            "rule_time_conditions": {
+                "14": [
+                    "10:10",
+                    "10:20",
+                    "0000000",
+                    "000000000000",
+                    [
+                        "2020-01-18"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:53:11.992298 => Connected by: ('192.168.43.147', 56963)
+2020-01-12 20:53:12.194671 => RCV: data: {'rule_id': '15', 'start_time': '10:10', 'rule_type': '1', 'weeks': '1111111', 'months': '000000000000', 'device_id': '13', 'specific_dates': ['2020-01-18'], 'end_time': '10:20', 'operation': 'create_rule', 'rule_time_condition_id': '14'}
+2020-01-12 20:53:12.195320 => rules: {
+    "13": {
+        "15": {
+            "rule_conditions": {},
+            "rule_time_conditions": {
+                "14": [
+                    "10:10",
+                    "10:20",
+                    "1111111",
+                    "000000000000",
+                    [
+                        "2020-01-18"
+                    ]
+                ]
+            }
+        }
+    }
+}: 
+2020-01-12 20:53:33.363293 => Connected by: ('192.168.43.147', 56971)
+2020-01-12 20:53:33.571623 => RCV: data: {'device_id': '123', 'operation': 'webcam'}
+2020-01-12 20:53:33.572192 => random_image: https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/valid/Apple___Cedar_apple_rust/0321e067-d13b-47d0-b3a6-76ba6f357d02___FREC_C.Rust%203667_270deg.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116759&Signature=OxDC2sLDx%2BcPAgjjpokPjhSbq2vW82MtuyREsFH9tglYwcFUhe9%2Fo76D4tQ%2FJUsmYE%2BMlAN5rb2ptPtcH9BnraXi4EnP8SVHRXHkSQunr1bPid3jJjooLa9L7IZHGBer8P8uRSIvb6m9Re3HVb5XhGLrHqQFmSVvoiznSZrEOjzVGdHLKsGX2Go7U1akOqMkZ4TLTpaCKEYAD6ehfhQI7MoUX5%2Bq2WP1i3sGxoPN1kTHHdKEH6qlSvofwe24%2B2tvgJ1DruhqrFUEPZT0Io3KhE4su46LJhqJq9v3QCUNUBjBhgoQl4MOPxwigwup9PDwJKt%2BSTN9fe2TkuDMC%2FsFzQ%3D%3D
+2020-01-12 20:53:33.572521 => operation: webcam image_base64_url: https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/valid/Apple___Cedar_apple_rust/0321e067-d13b-47d0-b3a6-76ba6f357d02___FREC_C.Rust%203667_270deg.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116759&Signature=OxDC2sLDx%2BcPAgjjpokPjhSbq2vW82MtuyREsFH9tglYwcFUhe9%2Fo76D4tQ%2FJUsmYE%2BMlAN5rb2ptPtcH9BnraXi4EnP8SVHRXHkSQunr1bPid3jJjooLa9L7IZHGBer8P8uRSIvb6m9Re3HVb5XhGLrHqQFmSVvoiznSZrEOjzVGdHLKsGX2Go7U1akOqMkZ4TLTpaCKEYAD6ehfhQI7MoUX5%2Bq2WP1i3sGxoPN1kTHHdKEH6qlSvofwe24%2B2tvgJ1DruhqrFUEPZT0Io3KhE4su46LJhqJq9v3QCUNUBjBhgoQl4MOPxwigwup9PDwJKt%2BSTN9fe2TkuDMC%2FsFzQ%3D%3D
+2020-01-12 20:54:43.208674 => Connected by: ('192.168.43.147', 56987)
+2020-01-12 20:54:43.409985 => RCV: data: {'device_id': '123', 'operation': 'webcam'}
+2020-01-12 20:54:43.410514 => random_image: https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/train/Apple___Apple_scab/00075aa8-d81a-4184-8541-b692b78d398a___FREC_Scab%203335.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116630&Signature=tEEZsaP%2FD%2BXDEQtvkDrUCzs0AJJpGaiRcejEgMPRpA2qe6vBSeq%2BjfXHsQh3jNGODaE%2F0YEQ0MMSxtLRcNMm0UG7EddGC0HmGzDQ9ge7Cv%2FLhwrl9UmdeKgDtDQFgdzpWRDBKiIYUk7unVVnQ3LrB%2F8Ys3Yzl46EuQoWPztawJPkbYBtgPwjQRZu9UaETJLAEua3AFVXLfXmpLbwLXHeow6oAjDGjSUrZFl3nf9x1t57ukhqrrKmmj2AgPo7trsgh%2FtBMKXi4Hy%2Fqbbs8YhiJQ73A6XLj1Fb8epi2%2BYtPP6kyIxidHXg%2FmPyVhP7wRjRM7m5sekyM3oq9h73%2B%2Bf%2FLg%3D%3D
+2020-01-12 20:54:43.410765 => operation: webcam image_base64_url: https://storage.googleapis.com/kagglesdsdata/datasets/78313/182633/New%20Plant%20Diseases%20Dataset%28Augmented%29/New%20Plant%20Diseases%20Dataset%28Augmented%29/train/Apple___Apple_scab/00075aa8-d81a-4184-8541-b692b78d398a___FREC_Scab%203335.JPG?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1579116630&Signature=tEEZsaP%2FD%2BXDEQtvkDrUCzs0AJJpGaiRcejEgMPRpA2qe6vBSeq%2BjfXHsQh3jNGODaE%2F0YEQ0MMSxtLRcNMm0UG7EddGC0HmGzDQ9ge7Cv%2FLhwrl9UmdeKgDtDQFgdzpWRDBKiIYUk7unVVnQ3LrB%2F8Ys3Yzl46EuQoWPztawJPkbYBtgPwjQRZu9UaETJLAEua3AFVXLfXmpLbwLXHeow6oAjDGjSUrZFl3nf9x1t57ukhqrrKmmj2AgPo7trsgh%2FtBMKXi4Hy%2Fqbbs8YhiJQ73A6XLj1Fb8epi2%2BYtPP6kyIxidHXg%2FmPyVhP7wRjRM7m5sekyM3oq9h73%2B%2Bf%2FLg%3D%3D
+2020-01-12 21:05:04.686444 => Connected by: ('192.168.43.147', 57075)
+2020-01-12 21:05:04.888114 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:05:04.888364 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '12.00', 'moisture': '9.12'}
+2020-01-12 21:05:32.538979 => Connected by: ('192.168.43.147', 57150)
+2020-01-12 21:05:32.939847 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:05:32.940387 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '12.00', 'moisture': '9.12'}
+2020-01-12 21:12:06.351021 => Connected by: ('192.168.43.147', 57270)
+2020-01-12 21:12:06.737646 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:12:06.738226 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '12.00', 'moisture': '9.12'}
+2020-01-12 21:15:48.137692 => Connected by: ('192.168.43.147', 57393)
+2020-01-12 21:15:48.547945 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:15:48.548210 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '12.00', 'moisture': '9.12'}
+2020-01-12 21:17:52.145648 => Connected by: ('192.168.43.147', 57478)
+2020-01-12 21:17:52.551799 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:17:52.552488 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '19.0', 'moisture': '1.12'}
+2020-01-12 21:20:18.991355 => Connected by: ('192.168.43.147', 57583)
+2020-01-12 21:20:19.807694 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:20:19.808305 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '19.0', 'moisture': '1.12'}
+2020-01-12 21:27:42.863196 => Connected by: ('192.168.43.147', 57706)
+2020-01-12 21:27:43.487234 => RCV: data: {'device_id': '123', 'operation': 'sensor'}
+2020-01-12 21:27:43.487924 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '19.0', 'moisture': '1.12'}
+2020-01-12 21:28:42.665533 => Connected by: ('192.168.43.147', 57725)
+2020-01-12 21:28:42.867034 => RCV: data: {'device_id': '13', 'operation': 'sensor'}
+2020-01-12 21:28:42.867566 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '19.0', 'moisture': '1.12'}
