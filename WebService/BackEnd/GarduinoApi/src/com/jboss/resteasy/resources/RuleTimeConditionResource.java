@@ -17,18 +17,24 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.json.JSONObject;
+
 import com.jboss.resteasy.beans.Rule;
 import com.jboss.resteasy.beans.RuleCondition;
 import com.jboss.resteasy.beans.RuleTimeCondition;
+import com.jboss.resteasy.services.OperationService;
+import com.jboss.resteasy.services.RuleService;
 import com.jboss.resteasy.services.RuleTimeConditionService;
 @Path("/ruletimeconditions")
 public class RuleTimeConditionResource {
 	private RuleTimeConditionService myRuleTimeConditionService=new RuleTimeConditionService();
+	private RuleService myRuleService= new RuleService();
 	@POST
 	@Path("/create_rule_time_condition")
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response createRuleTimeCondition(RuleTimeCondition ruletimecondition){
+		OperationService myOperationService= new OperationService();
 		ruletimecondition.setStatus(false);
 		
 		int status=myRuleTimeConditionService.createRuleTimeCondition(ruletimecondition);
@@ -40,6 +46,25 @@ public class RuleTimeConditionResource {
 		
 		}else{
 			ruletimecondition.setId(status);
+			Rule rule=myRuleService.getRule(ruletimecondition.getIdRule());
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "create_rule");
+		        json.put("device_id", String.valueOf(rule.getIdDevice()));
+		        json.put("rule_type", "1");
+		        json.put("rule_id", String.valueOf(rule.getId()));
+		        json.put("rule_time_condition_id", String.valueOf(status));
+		        json.put("start_time", ruletimecondition.getStartTime());
+		        json.put("end_time", ruletimecondition.getEndTime());
+		        json.put("weeks", ruletimecondition.getDaysOfWeek());
+		        json.put("months", ruletimecondition.getMonthsOfTheYear());
+		        json.put("specific_dates", ruletimecondition.getSpecificDates());
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+			
 			return Response
 					.status(Status.CREATED)
 					.build();
@@ -50,12 +75,28 @@ public class RuleTimeConditionResource {
 	@Consumes("application/json")
 	@Path("/delete_rule_time_condition/{id}")
 	public Response deleteRuleCondition(@PathParam("id") int id){
+		RuleTimeCondition ruleTimeCondition=myRuleTimeConditionService.getRuleTimeCondition(id);
 		int status=myRuleTimeConditionService.deleteRuleTimeCondition(id);
 		if(status==-1){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}else if(status==-2){
 			return Response.status(Status.NO_CONTENT).build();
 		}else{
+			OperationService myOperationService= new OperationService();
+			Rule rule=myRuleService.getRule(ruleTimeCondition.getIdRule());
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "delete_rule_time_condition");
+		        json.put("device_id", String.valueOf(rule.getIdDevice()));
+		        json.put("rule_type", "1");
+		        json.put("rule_id", String.valueOf(rule.getId()));
+		        json.put("rule_time_condition_id", String.valueOf(ruleTimeCondition.getId()));
+		        
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response.status(Status.OK).build();
 		}
 		
@@ -65,12 +106,32 @@ public class RuleTimeConditionResource {
 	@Consumes("application/json")
 	@Path("/update_rule_time_condition/{id}")
 	public Response updateRuleTimeCondition(@PathParam("id") int id,RuleTimeCondition ruletimecondition){
+		RuleTimeCondition ruleTimeCondition=myRuleTimeConditionService.getRuleTimeCondition(id);
+		Rule rule=myRuleService.getRule(ruleTimeCondition.getIdRule());
 		int status=myRuleTimeConditionService.updateRuleTimeCondition(id,ruletimecondition);
 		if(status==-1){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}else if(status==-2){
 			return Response.status(Status.NOT_FOUND).build();
 		}else{
+			OperationService myOperationService= new OperationService();
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "create_rule");
+		        json.put("device_id", String.valueOf(rule.getIdDevice()));
+		        json.put("rule_type", "1");
+		        json.put("rule_id", String.valueOf(rule.getId()));
+		        json.put("rule_time_condition_id", String.valueOf(ruleTimeCondition.getId()));
+		        json.put("start_time", ruletimecondition.getStartTime());
+		        json.put("end_time", ruletimecondition.getEndTime());
+		        json.put("weeks", ruletimecondition.getDaysOfWeek());
+		        json.put("months", ruletimecondition.getMonthsOfTheYear());
+		        json.put("specific_dates", ruletimecondition.getSpecificDates());
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response.status(Status.OK).build();
 		}
 		

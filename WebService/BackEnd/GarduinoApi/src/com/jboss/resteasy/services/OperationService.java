@@ -15,8 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OperationService {
-	//private static String hostname = "192.168.43.70";
-	private static String hostname = "192.168.43.147";
+	private static String hostname = "192.168.43.181";
+	//private static String hostname = "192.168.43.147";
     private static int port = 12346;
     private Socket socket;
     

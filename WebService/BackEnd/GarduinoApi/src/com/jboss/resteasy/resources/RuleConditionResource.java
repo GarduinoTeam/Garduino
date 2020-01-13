@@ -16,17 +16,23 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.json.JSONObject;
+
 import com.jboss.resteasy.beans.Condition;
 import com.jboss.resteasy.beans.Rule;
 import com.jboss.resteasy.beans.RuleCondition;
 import com.jboss.resteasy.services.ConditionService;
+import com.jboss.resteasy.services.OperationService;
 import com.jboss.resteasy.services.RuleConditionService;
+import com.jboss.resteasy.services.RuleService;
 
 
 @Path("/ruleconditions")
 public class RuleConditionResource {
 	private RuleConditionService myRuleConditionService=new RuleConditionService();
+	private RuleService myRuleService= new RuleService();
 	private ConditionService myConditionService=new ConditionService();
+	
 	@POST
 	@Path("/create_rule_condition")
 	@Produces("application/json")
@@ -41,7 +47,24 @@ public class RuleConditionResource {
 			return Response.status(Status.FORBIDDEN).build();
 		
 		}else{
+			OperationService myOperationService= new OperationService();
 			rulecondition.setId(status);
+			Rule rule=myRuleService.getRule(rulecondition.getIdRule());
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "create_rule");
+				json.put("device_id", String.valueOf(rule.getIdDevice()));
+				json.put("rule_type", "0");
+				System.out.println("Create Rule Condition Device Id"+rule.getIdDevice());
+		        json.put("rule_id", String.valueOf(rule.getId()));
+		        json.put("rule_condition_id",String.valueOf(status));
+		        json.put("value", String.valueOf(rulecondition.getConditionValue()));
+		        json.put("rule_condition_type", String.valueOf(rulecondition.getIdCondition()));
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response
 					.status(Status.CREATED)
 					.build();
@@ -53,12 +76,27 @@ public class RuleConditionResource {
 	@Consumes("application/json")
 	@Path("/delete_rule_condition/{id}")
 	public Response deleteRuleCondition(@PathParam("id") int id){
+		//
+		RuleCondition rulecondition=myRuleConditionService.getRuleCondition(id);
+		Rule rule=myRuleService.getRule(rulecondition.getIdRule());
 		int status=myRuleConditionService.deleteRuleCondition(id);
 		if(status==-1){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}else if(status==-2){
 			return Response.status(Status.NO_CONTENT).build();
 		}else{
+			OperationService myOperationService= new OperationService();
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "delete_rule_condition");
+				json.put("device_id", String.valueOf(rule.getIdDevice()));
+		        json.put("rule_id", String.valueOf(rule.getId()));
+		        json.put("rule_condition_id",String.valueOf(id));
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response.status(Status.OK).build();
 		}
 		
@@ -74,8 +112,27 @@ public class RuleConditionResource {
 		}else if(status==-2){
 			return Response.status(Status.NOT_FOUND).build();
 		}else{
+			try{
+				ruleCondition=myRuleConditionService.getRuleCondition(id);
+				Rule rule=myRuleService.getRule(ruleCondition.getIdRule());
+				OperationService myOperationService= new OperationService();
+				JSONObject json=new JSONObject();
+				json.put("operation", "create_rule");
+				json.put("device_id", String.valueOf(rule.getIdDevice()));
+				json.put("rule_type", "0");
+				System.out.println("Create Rule Condition Device Id"+rule.getIdDevice());
+		        json.put("rule_id", String.valueOf(ruleCondition.getIdRule()));
+		        json.put("rule_condition_id",String.valueOf(ruleCondition.getId()));
+		        json.put("value", String.valueOf(ruleCondition.getConditionValue()));
+		        json.put("rule_condition_type", String.valueOf(ruleCondition.getIdCondition()));
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response.status(Status.OK).build();
 		}
+		
 		
 	}
 	@GET

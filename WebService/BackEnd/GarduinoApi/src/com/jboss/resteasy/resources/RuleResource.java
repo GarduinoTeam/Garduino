@@ -16,9 +16,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.json.JSONObject;
+
 import com.jboss.resteasy.beans.Rule;
 import com.jboss.resteasy.beans.Sensor;
 import com.jboss.resteasy.beans.User;
+import com.jboss.resteasy.services.OperationService;
 import com.jboss.resteasy.services.RuleService;
 
 @Path("/rules")
@@ -50,12 +53,24 @@ public class RuleResource {
 	@Consumes("application/json")
 	@Path("/delete_rule/{id}")
 	public Response deleteRule(@PathParam("id") int id){
+		Rule rule=myRuleService.getRule(id);
 		int status=myRuleService.deleteRule(id);
 		if(status==-1){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}else if(status==-2){
 			return Response.status(Status.NO_CONTENT).build();
 		}else{
+			OperationService myOperationService= new OperationService();
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "delete_rule");
+				json.put("device_id", String.valueOf(rule.getIdDevice()));
+		        json.put("rule_id", String.valueOf(rule.getId()));
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response.status(Status.OK).build();
 		}
 		

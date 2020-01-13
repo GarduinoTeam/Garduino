@@ -20,12 +20,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.json.JSONObject;
 
 import com.jboss.resteasy.beans.Device;
 import com.jboss.resteasy.beans.Sensor;
 import com.jboss.resteasy.beans.User;
 import com.jboss.resteasy.services.DeviceService;
+import com.jboss.resteasy.services.OperationService;
 import com.jboss.resteasy.services.SensorService;
+
 @Path("/devices")
 public class DeviceResource {
 	private DeviceService myDeviceService=new DeviceService();
@@ -49,6 +52,17 @@ public class DeviceResource {
 			return Response.status(Status.FORBIDDEN).build();
 		
 		}else{
+			OperationService myOperationService=new OperationService();
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "create_device");
+				json.put("device_id", String.valueOf(status));
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+			
 			return Response.status(Status.CREATED).build();
 		}
 		
@@ -65,6 +79,16 @@ public class DeviceResource {
 		}else if(status==-2){
 			return Response.status(Status.NO_CONTENT).build();
 		}else{
+			OperationService myOperationService=new OperationService();
+			try{
+				JSONObject json=new JSONObject();
+				json.put("operation", "delete_device");
+				json.put("device_id", String.valueOf(id));
+				myOperationService.sendRequest(json);
+				
+			}catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
 			return Response.status(Status.OK).build();
 		}
 		
