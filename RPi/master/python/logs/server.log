@@ -656,3 +656,7 @@
 2020-01-12 21:28:42.665533 => Connected by: ('192.168.43.147', 57725)
 2020-01-12 21:28:42.867034 => RCV: data: {'device_id': '13', 'operation': 'sensor'}
 2020-01-12 21:28:42.867566 => operation: sensor SND: response: {'temperature': '22.00', 'humidity': '19.0', 'moisture': '1.12'}
+Usage: python server.py <host_ip> <port>
+Usage: python3.7 server.py <host_ip> <port>
+Usage: python3.7 server.py <host_ip> <port>
+Usage: python3.7 server.py <host_ip> <port>
