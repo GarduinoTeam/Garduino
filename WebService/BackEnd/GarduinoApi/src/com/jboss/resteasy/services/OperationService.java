@@ -11,7 +11,6 @@ import java.net.UnknownHostException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OperationService {

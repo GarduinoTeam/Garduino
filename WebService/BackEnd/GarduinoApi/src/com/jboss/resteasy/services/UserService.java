@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 import com.jboss.resteasy.beans.User;
 public class UserService {
-	private String serverHome="C:\\Users\\joanpau\\Desktop\\Servidor Web";
+	private String serverHome="/home/rochi/Escritorio/github/projects/Garduino/WebService/BackEnd/Users";
 	private static Statement stm;
 	private static Connection connection;
 	private static String consulta;
@@ -68,40 +68,40 @@ public class UserService {
 
 					consulta="insert into garduino.user (username,password,id,email,phone,admin) values ('"+user.getUsername()+"', '"+user.getPassword()+"',"+id+",'"+user.getEmail()+"','"+user.getPhone()+"','"+user.getAdmin()+"')";
 					stm.executeUpdate(consulta);
-					String newPath=serverHome+"\\"+id;
+					String newPath=serverHome + "/" + id;
 					File file = new File(newPath);
-			        if (!file.exists()) {
-			            if (file.mkdir()) {
-			                System.out.println("Directory is created!");
-			            } else {
-			                System.out.println("Failed to create directory!");
-			            }
+			        if (!file.exists()) 
+			        {
+			            if (file.mkdir())
+			                System.out.println("Directory " + newPath + " is created!");
+			            else
+			                System.out.println("Failed to create " + newPath + " directory!");
 			        }
-					
-					//System.out.println("\nfora:");
 				
 					connection.close();
-					stm.close();
-					//stm.close();				
+					stm.close();				
 					}
 				
 			}
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-			
 		}
+		catch(Exception e){
+			e.printStackTrace();	
+		}
+		
 		return id;
-		
-		
 	}
-	public int deleteUser(int id){
-		
-		try {
-			ctx= new InitialContext();
-			if(ctx!=null) {
-				ds=(DataSource) ctx.lookup("java:jboss/PostgresXA");
-				if(ds==null){
+	
+	public int deleteUser(int id)
+	{		
+		try 
+		{
+			ctx = new InitialContext();
+			if(ctx != null) 
+			{
+				ds = (DataSource) ctx.lookup("java:jboss/PostgresXA");
+				if(ds == null)
+				{
 					strEstat="Getting Error in Connection";
 					System.out.println(strEstat);
 					return -1; //Error Connecting The user
@@ -123,7 +123,7 @@ public class UserService {
 					consulta="delete from garduino.user where id='"+id+"'";
 					stm.executeUpdate(consulta);
 					
-					String newPath=serverHome+"\\"+id;
+					String newPath=serverHome + "/" + id;
 					File file = new File(newPath);
 			        if (file.exists()) {
 			           String [] content=file.list();
