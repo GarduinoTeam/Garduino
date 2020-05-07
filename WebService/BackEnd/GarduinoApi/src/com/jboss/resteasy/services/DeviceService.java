@@ -1,9 +1,7 @@
 package com.jboss.resteasy.services;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -12,7 +10,6 @@ import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import com.jboss.resteasy.beans.Device;
-import com.jboss.resteasy.beans.User;
 
 
 public class DeviceService 

@@ -1,36 +1,31 @@
 package com.jboss.resteasy.services;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.json.JSONObject;
 
-public class OperationService {
+
+public class OperationService 
+{
 	private static String hostname = "192.168.43.181";
-	//private static String hostname = "192.168.43.147";
     private static int port = 12346;
     private Socket socket;
     
     public OperationService()
     {
-    	try
-    	{
+    	try{
     		socket = new Socket(hostname, port);
     	}
-    	catch(Exception ex)
-    	{
+    	catch(Exception ex){
     		System.out.println(ex.getMessage());
     	}
     	
     }
+    
     
 	public int sendRequest(JSONObject json)
 	{
@@ -46,6 +41,7 @@ public class OperationService {
             //System.out.println(jsonData.length());
             writer.println(String.valueOf(jsonData.length())); 
             Thread.sleep(200);
+            
             // Send the JSON
             System.out.println(jsonData);
             writer.println(String.valueOf(jsonData));
@@ -61,7 +57,9 @@ public class OperationService {
 		return 0;
 	}
 	
-	public String receiveData(){
+	
+	public String receiveData()
+	{
 		String response;
 		try
         {           
@@ -78,5 +76,4 @@ public class OperationService {
 		
 		return response;
 	}
-
 }
