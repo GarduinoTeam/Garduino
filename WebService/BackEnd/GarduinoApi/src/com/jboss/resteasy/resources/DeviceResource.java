@@ -1,6 +1,5 @@
 package com.jboss.resteasy.resources;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.ws.rs.Consumes;
