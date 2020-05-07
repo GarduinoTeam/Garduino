@@ -1,40 +1,51 @@
 package com.jboss.resteasy.beans;
 
-public class Rule {
+public class Rule 
+{
 	private int id;
 	private int idDevice;
 	private boolean status;
 	private String name;
 	private int type;
-	public int getId() {
+
+	
+	public int getId(){
 		return id;
 	}
-	public void setId(int id) {
+	
+	public void setId(int id){
 		this.id = id;
 	}
-	public int getIdDevice() {
+	
+	public int getIdDevice(){
 		return idDevice;
 	}
-	public void setIdDevice(int idDevice) {
+	
+	public void setIdDevice(int idDevice){
 		this.idDevice = idDevice;
 	}
-	public boolean getStatus() {
+	
+	public boolean getStatus(){
 		return status;
 	}
-	public void setStatus(boolean status) {
+	
+	public void setStatus(boolean status){
 		this.status = status;
 	}
-	public String getName() {
+	
+	public String getName(){
 		return name;
 	}
-	public void setName(String name) {
+	
+	public void setName(String name){
 		this.name = name;
 	}
-	public int getType() {
+	
+	public int getType(){
 		return type;
 	}
-	public void setType(int type) {
+	
+	public void setType(int type){
 		this.type = type;
 	}
-
 }

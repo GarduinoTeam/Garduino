@@ -1,26 +1,33 @@
 package com.jboss.resteasy.beans;
 
-public class Operation {
+public class Operation 
+{
 	private String name;
 	private int device_id;
 	private int irrigationTime;
-	public String getName() {
+
+	
+	public String getName(){
 		return name;
 	}
-	public void setName(String name) {
+	
+	public void setName(String name){
 		this.name = name;
 	}
-	public int getDevice_id() {
+	
+	public int getDevice_id(){
 		return device_id;
 	}
-	public void setDevice_id(int device_id) {
+	
+	public void setDevice_id(int device_id){
 		this.device_id = device_id;
 	}
-	public int getIrrigationTime() {
+	
+	public int getIrrigationTime(){
 		return irrigationTime;
 	}
-	public void setIrrigationTime(int irrigationTime) {
+	
+	public void setIrrigationTime(int irrigationTime){
 		this.irrigationTime = irrigationTime;
 	}
-
 }

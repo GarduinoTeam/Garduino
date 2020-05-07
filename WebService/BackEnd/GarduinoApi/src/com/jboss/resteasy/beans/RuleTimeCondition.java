@@ -2,7 +2,8 @@ package com.jboss.resteasy.beans;
 
 import java.sql.Date;
 
-public class RuleTimeCondition {
+public class RuleTimeCondition 
+{
 	private int id;
 	private int idRule;
 	private boolean status;
@@ -11,54 +12,69 @@ public class RuleTimeCondition {
 	private String monthsOfTheYear;
 	private String daysOfWeek;
 	private Date [] specificDates;
-	public int getId() {
+
+	
+	public int getId(){
 		return id;
 	}
-	public void setId(int id) {
+	
+	public void setId(int id){
 		this.id = id;
 	}
-	public int getIdRule() {
+	
+	public int getIdRule(){
 		return idRule;
 	}
-	public void setIdRule(int id_rule) {
+	
+	public void setIdRule(int id_rule){
 		this.idRule = id_rule;
 	}
-	public boolean getStatus() {
+	
+	public boolean getStatus(){
 		return status;
 	}
-	public void setStatus(boolean status) {
+	
+	public void setStatus(boolean status){
 		this.status = status;
 	}
-	public String getStartTime() {
+	
+	public String getStartTime(){
 		return startTime;
 	}
-	public void setStartTime(String startTime) {
+	
+	public void setStartTime(String startTime){
 		this.startTime = startTime;
 	}
-	public String getEndTime() {
+	
+	public String getEndTime(){
 		return endTime;
 	}
-	public void setEndTime(String endTime) {
+	
+	public void setEndTime(String endTime){
 		this.endTime = endTime;
 	}
-	public String getMonthsOfTheYear() {
+	
+	public String getMonthsOfTheYear(){
 		return monthsOfTheYear;
 	}
-	public void setMonthsOfTheYear(String monthsOfTheYear) {
+	
+	public void setMonthsOfTheYear(String monthsOfTheYear){
 		this.monthsOfTheYear = monthsOfTheYear;
 	}
-	public String getDaysOfWeek() {
+	
+	public String getDaysOfWeek(){
 		return daysOfWeek;
 	}
-	public void setDaysOfWeek(String daysOfWeek) {
+	
+	public void setDaysOfWeek(String daysOfWeek){
 		this.daysOfWeek = daysOfWeek;
 	}
-	public Date[] getSpecificDates() {
+	
+	public Date[] getSpecificDates(){
 		return specificDates;
 	}
-	public void setSpecificDates(Date[] specificDates) {
+	
+	public void setSpecificDates(Date[] specificDates){
 		this.specificDates = specificDates;
 	}
-	
-
 }

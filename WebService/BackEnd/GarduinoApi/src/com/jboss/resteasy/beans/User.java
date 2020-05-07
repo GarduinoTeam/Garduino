@@ -1,47 +1,60 @@
 package com.jboss.resteasy.beans;
 
-public class User {
+public class User 
+{
 	private int id;
 	private String username;
 	private String password;
 	private String email;
 	private String phone;
 	private int admin;
-	public int getId() {
+
+	
+	public int getId(){
 		return id;
 	}
-	public void setId(int id) {
+	
+	public void setId(int id){
 		this.id = id;
 	}
-	public String getUsername() {
+	
+	public String getUsername(){
 		return username;
 	}
-	public void setUsername(String username) {
+	
+	public void setUsername(String username){
 		this.username = username;
 	}
-	public String getPassword() {
+	
+	public String getPassword(){
 		return password;
 	}
-	public void setPassword(String password) {
+	
+	public void setPassword(String password){
 		this.password = password;
 	}
-	public String getEmail() {
+	
+	public String getEmail(){
 		return email;
 	}
-	public void setEmail(String email) {
+	
+	public void setEmail(String email){
 		this.email = email;
 	}
-	public String getPhone() {
+	
+	public String getPhone(){
 		return phone;
 	}
-	public void setPhone(String phone) {
+	
+	public void setPhone(String phone){
 		this.phone = phone;
 	}
-	public int getAdmin() {
+	
+	public int getAdmin(){
 		return admin;
 	}
-	public void setAdmin(int admin) {
+	
+	public void setAdmin(int admin){
 		this.admin = admin;
 	}
-
 }
