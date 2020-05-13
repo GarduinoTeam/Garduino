@@ -25,8 +25,8 @@ import com.jboss.resteasy.services.SensorService;
 @Path("/devices")
 public class DeviceResource 
 {
-	private DeviceService myDeviceService=new DeviceService();
-	private SensorService mySensorService= new SensorService();
+	private DeviceService myDeviceService = new DeviceService();
+	private SensorService mySensorService = new SensorService();
 
 	
 	@POST
@@ -44,7 +44,7 @@ public class DeviceResource
 		if(status == -1){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();			
 		}
-		else if(status==-2){
+		else if(status == -2){
 			return Response.status(Status.FORBIDDEN).build();
 		}
 		else

@@ -14,7 +14,8 @@ import com.jboss.resteasy.beans.Device;
 
 public class DeviceService 
 {
-	private String serverHome = "/home/rochi/Escritorio/github/projects/Garduino/WebService/BackEnd";
+	private String serverHome = "/home/rochi/Escritorio/github/projects/Garduino/WebService/BackEnd/Users"; //Specify Path
+	private String pathDelim ="/";
 	private static Statement stm;
 	private static Connection connection;
 	private static String consulta;
@@ -63,13 +64,16 @@ public class DeviceService
 					rs = stm.executeQuery(consulta);				
 					while(rs.next()){
 						id = (int)rs.getInt("id");
-					}					
+					}
 					id += 1;
 
-					consulta = "insert into garduino.device (name,status,id,user_id) values ('" + device.getName() + "', '" + device.getStatus() + "'," + id+",'" + device.getUserId() + "')";
+					consulta = 	"insert into garduino.device (name, status, id, user_id) values ('" + device.getName() + "', '" + device.getStatus() + "'," + id + ",'" + device.getUserId() + "')";
 					System.out.println("\nsql:" + consulta);
 					stm.executeUpdate(consulta);
-					String fileName = serverHome + "/" + device.getUserId() + "/" + device.getName() + ".png";
+					
+					System.out.println("user_id: " + device.getUserId() + " device_name: " + device.getName());
+					
+					String fileName = serverHome + pathDelim + device.getUserId() + pathDelim + device.getName() + ".png";
 					try{
 						writeFile(device.getImage(), fileName);
 					} 
@@ -132,9 +136,9 @@ public class DeviceService
 					consulta = "delete from garduino.device where id='" + id + "'";
 					stm.executeUpdate(consulta);
 					
-					String newPath = serverHome + "/" + user_id + "/" + deviceName + ".png";
-					File file = new File(newPath);
+					String newPath = serverHome + pathDelim + user_id + pathDelim + deviceName + ".png";
 					
+					File file = new File(newPath);					
 			        if(file.exists()) 
 			        {
 			        	file.delete();
@@ -195,8 +199,8 @@ public class DeviceService
 					System.out.println("\n update:" + consulta);					
 					stm.executeUpdate(consulta);
 					
-					String storedFileName = serverHome + "/" + device.getUserId() + "/" + storedName + ".png";
-					String fileName = serverHome + "/" + device.getUserId() + "/" + device.getName() + ".png";					
+					String storedFileName = serverHome + pathDelim + device.getUserId() + pathDelim + storedName + ".png";
+					String fileName = serverHome + pathDelim + device.getUserId() + pathDelim + device.getName() + ".png";					
 					File file = new File(storedFileName);
 			        if(file.exists()) 
 			        {
@@ -262,8 +266,8 @@ public class DeviceService
 					System.out.println("\n update:" + consulta);
 					stm.executeUpdate(consulta);
 					
-					String storedFileName = serverHome + "/" + device.getUserId() + "/" + storedName + ".png";
-					String fileName = serverHome + "/" + device.getUserId() + "/" + device.getName() + ".png";
+					String storedFileName = serverHome + pathDelim + device.getUserId() + pathDelim + storedName + ".png";
+					String fileName = serverHome + pathDelim + device.getUserId() + pathDelim + device.getName() + ".png";
 					File file = new File(storedFileName);
 					File newFile = new File(fileName);
 			        if(file.exists())
@@ -401,15 +405,17 @@ public class DeviceService
 	
 	private void writeFile(byte[] content, String filename) throws IOException 
 	{
+		System.out.println("Filename: " + filename);
 		File file = new File(filename);
+		
 		if(!file.exists()){
 			file.createNewFile();
 		}
 
 		FileOutputStream fop = new FileOutputStream(file);
-
 		fop.write(content);
 		fop.flush();
 		fop.close();
+		System.out.println("Successfull created " + filename + " file");
 	}
 }

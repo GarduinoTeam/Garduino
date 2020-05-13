@@ -19,7 +19,7 @@ import com.jboss.resteasy.services.UserService;
 
 public class UserResource 
 {
-	private UserService myUserService=new UserService();
+	private UserService myUserService = new UserService();
 
 	
 	@GET
@@ -27,7 +27,7 @@ public class UserResource
 	@Produces("application/json")
 	@Consumes("application/json")
     public Response sayHello(){     
-        return Response.ok("Users ok",MediaType.APPLICATION_JSON).build();   
+        return Response.ok("Users ok", MediaType.APPLICATION_JSON).build();   
     }
 	
 	
@@ -77,7 +77,7 @@ public class UserResource
 		}
 	}
 
-	
+
 	@PUT
 	@Produces("application/json")
 	@Consumes("application/json")

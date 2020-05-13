@@ -11,8 +11,8 @@ import org.json.JSONObject;
 
 public class OperationService 
 {
-	private static String hostname = "192.168.43.181";
-    private static int port = 12346;
+	private static String hostname = "192.168.43.141";
+    private static int port = 12345;
     private Socket socket;
     
     public OperationService()

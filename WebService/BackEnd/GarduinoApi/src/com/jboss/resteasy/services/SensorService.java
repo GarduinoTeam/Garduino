@@ -45,10 +45,10 @@ public class SensorService
 						id = (int)rs.getInt("id");
 					}
 					id += 1;
-					System.out.println("\nsql:"+consulta);
+					System.out.println("\nsql:" + consulta);
 					System.out.println(strEstat);
 
-					consulta = "insert into garduino.sensor (id,typeid,deviceid,value,date) values ('"+id+"', '"+sensor.getSensorType()+"',"+sensor.getDeviceId()+",'"+sensor.getValue()+"','"+sensor.getDate()+"')";
+					consulta = "insert into garduino.sensor (id, typeid, deviceid, value, date) values ('" + id + "', '" + sensor.getSensorType() + "'," + sensor.getDeviceId() + ",'" + sensor.getValue() + "','" + sensor.getDate() + "')";
 					stm.executeUpdate(consulta);
 				
 					connection.close();

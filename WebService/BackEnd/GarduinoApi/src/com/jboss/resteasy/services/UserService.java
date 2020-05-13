@@ -12,6 +12,7 @@ import com.jboss.resteasy.beans.User;
 public class UserService 
 {
 	private String serverHome = "/home/rochi/Escritorio/github/projects/Garduino/WebService/BackEnd/Users";
+	private String pathDelim = "/";
 	private static Statement stm;
 	private static Connection connection;
 	private static String consulta;
@@ -79,7 +80,7 @@ public class UserService
 
 					consulta = "insert into garduino.user (username,password,id,email,phone,admin) values ('" + user.getUsername() + "', '" + user.getPassword()+"',"+id+",'"+user.getEmail()+"','"+user.getPhone()+"','"+user.getAdmin()+"')";
 					stm.executeUpdate(consulta);
-					String newPath = serverHome + "/" + id;
+					String newPath = serverHome + pathDelim + id;
 					File file = new File(newPath);
 			        if (!file.exists()) 
 			        {
@@ -135,7 +136,7 @@ public class UserService
 					consulta = "delete from garduino.user where id='" + id + "'";
 					stm.executeUpdate(consulta);
 					
-					String newPath=serverHome + "/" + id;
+					String newPath = serverHome + pathDelim + id;
 					File file = new File(newPath);
 			        if(file.exists()) 
 			        {
